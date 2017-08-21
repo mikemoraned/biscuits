@@ -20,6 +20,9 @@ stats = output[2]
 # The fourth cell is the centroid matrix
 centroids = output[3]
 
+for stat in stats:
+    cv2.rectangle(labels, (stat[0], stat[1]), (stat[2] + stat[0], stat[3] + stat[1]), (0, 255, 0), 3)
+
 for centroid in centroids:
     cv2.circle(labels, (int(centroid[0]), int(centroid[1])), 2, (255, 0, 0))
 
