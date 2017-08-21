@@ -20,4 +20,7 @@ stats = output[2]
 # The fourth cell is the centroid matrix
 centroids = output[3]
 
+for centroid in centroids:
+    cv2.circle(labels, (int(centroid[0]), int(centroid[1])), 2, (255, 0, 0))
+
 cv2.imwrite('edinburgh.labels.png', labels)
