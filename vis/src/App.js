@@ -22,13 +22,21 @@ class ConnectedComponents extends Component {
 
     render() {
         return (
-            <ul className="components">
+            <div className="components">
                 {
                     this.state.components.map((component) => {
-                        return <li>{ component.x }</li>
+                        const style = {
+                            left: component.x,
+                            top: component.y,
+                            height: component.height,
+                            width: component.width,
+                            backgroundPositionX: -component.x,
+                            backgroundPositionY: -component.y
+                        };
+                        return <div style={style}>&nbsp;</div>
                     })
                 }
-            </ul>
+            </div>
         );
     }
 }
