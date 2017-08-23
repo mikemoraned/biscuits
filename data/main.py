@@ -24,14 +24,22 @@ stats = output[2]
 centroids = output[3]
 
 data = []
-for stat in stats:
-    cv2.rectangle(labels, (stat[0], stat[1]), (stat[2] + stat[0], stat[3] + stat[1]), (0, 255, 0), 3)
+for index, stat in enumerate(stats):
+    x = stat[0]
+    y = stat[1]
+    width = stat[2]
+    height = stat[3]
+    cv2.rectangle(labels, (x, y), (x + width, y + height), (0, 255, 0), 3)
     data.append({
-        'x': np.asscalar(stat[0]),
-        'y': np.asscalar(stat[1]),
-        'width': np.asscalar(stat[2]),
-        'height': np.asscalar(stat[3]),
+        'x': np.asscalar(x),
+        'y': np.asscalar(y),
+        'width': np.asscalar(width),
+        'height': np.asscalar(height),
     })
+    label = src.copy()
+    label = label[y:(y + height), x:(x + width)]
+    cv2.imwrite('edinburgh.label_%s.png' % index, label)
+
 
 for centroid in centroids:
     cv2.circle(labels, (int(centroid[0]), int(centroid[1])), 2, (255, 0, 0))
