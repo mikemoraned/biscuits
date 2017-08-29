@@ -10,6 +10,7 @@ class ConnectedComponents extends Component {
         super();
 
         this.state = {
+            // name: "newyork",
             name: "edinburgh",
             components: [],
             t: 0.0,
@@ -32,9 +33,15 @@ class ConnectedComponents extends Component {
             .then((response) => response.json())
             .then((json) => {
                 this.setState({
-                    components: this.addInterpolations(this.layout(json))
+                    components: this.addInterpolations(this.layout(this.removeFullImage(json)))
                 })
             });
+    }
+
+    removeFullImage(components) {
+        const copy = components.slice(0);
+        copy.shift();
+        return copy;
     }
 
     addInterpolations(components) {
