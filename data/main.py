@@ -4,7 +4,7 @@ import json
 import numpy as np
 
 # Read the image you want connected components of
-src = cv2.imread('edinburgh.png')
+src = cv2.imread('newyork.png')
 # Convert to grayscale
 src_grey = cv2.cvtColor(src, cv2.COLOR_BGR2GRAY)
 # Threshold it so it becomes binary
@@ -39,13 +39,13 @@ for index, stat in enumerate(stats):
     })
     label = src.copy()
     label = label[y:(y + height), x:(x + width)]
-    cv2.imwrite('edinburgh.label_%s.png' % index, label)
+    cv2.imwrite('newyork.label_%s.png' % index, label)
 
 
 for centroid in centroids:
     cv2.circle(labels, (int(centroid[0]), int(centroid[1])), 2, (255, 0, 0))
 
-cv2.imwrite('edinburgh.labels.png', labels)
-with open('edinburgh.labels.json', 'w') as f:
+cv2.imwrite('newyork.labels.png', labels)
+with open('newyork.labels.json', 'w') as f:
     json.dump(data, f, indent=4)
 

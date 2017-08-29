@@ -10,9 +10,10 @@ class ConnectedComponents extends Component {
         super();
 
         this.state = {
+            name: "edinburgh",
             components: [],
             t: 0.0,
-            transitionDuration: 8000,
+            transitionDuration: 16000,
             ease: easeCubicInOut
         };
     }
@@ -27,7 +28,7 @@ class ConnectedComponents extends Component {
         }
         setT();
 
-        return fetch("edinburgh.labels.json")
+        return fetch(`${this.state.name}.labels.json`)
             .then((response) => response.json())
             .then((json) => {
                 this.setState({
@@ -87,7 +88,7 @@ class ConnectedComponents extends Component {
                             top: component.yInterpolator(this.t()),
                             height: component.heightInterpolator(this.t()),
                             width: component.widthInterpolator(this.t()),
-                            backgroundImage: `url('/edinburgh.label_${component.id}.png')`,
+                            backgroundImage: `url('/${this.state.name}.label_${component.id}.png')`,
                             backgroundRepeat: "no-repeat"
                         };
                         return <div style={style}>&nbsp;</div>
