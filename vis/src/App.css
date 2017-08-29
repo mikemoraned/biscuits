@@ -4,8 +4,6 @@
 
 .components div {
     position: absolute;
-    background-image: url("/edinburgh.png");
-    /*background-image: url("/edinburgh.labels.png");*/
     border: 1px solid black;
 }
 

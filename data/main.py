@@ -35,6 +35,7 @@ for index, stat in enumerate(stats):
         'y': np.asscalar(y),
         'width': np.asscalar(width),
         'height': np.asscalar(height),
+        'id': index,
     })
     label = src.copy()
     label = label[y:(y + height), x:(x + width)]

@@ -66,8 +66,8 @@ class ConnectedComponents extends Component {
            return {
                startX: xBucket * gridXStride,
                startY: yBucket * gridYStride,
-               startWidth: gridXStride,
-               startHeight: gridYStride,
+               startWidth: Math.min(gridXStride, c.width),
+               startHeight: Math.min(gridYStride, c.height),
                ...c
            }
         });
@@ -87,8 +87,8 @@ class ConnectedComponents extends Component {
                             top: component.yInterpolator(this.t()),
                             height: component.heightInterpolator(this.t()),
                             width: component.widthInterpolator(this.t()),
-                            backgroundPositionX: -component.x,
-                            backgroundPositionY: -component.y
+                            backgroundImage: `url('/edinburgh.label_${component.id}.png')`,
+                            backgroundRepeat: "no-repeat"
                         };
                         return <div style={style}>&nbsp;</div>
                     })
