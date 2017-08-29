@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import './App.css';
 import 'isomorphic-fetch';
 import { easeCubicInOut } from "d3-ease";
+import { interpolateNumber } from "d3-interpolate";
 
 class ConnectedComponents extends Component {
 
@@ -30,9 +31,19 @@ class ConnectedComponents extends Component {
             .then((response) => response.json())
             .then((json) => {
                 this.setState({
-                    components: json
+                    components: this.addInterpolations(json)
                 })
             });
+    }
+
+    addInterpolations(components) {
+        return components.map((c) => {
+            return {
+                xInterpolator: interpolateNumber(0, c.x),
+                yInterpolator: interpolateNumber(0, c.y),
+                ...c
+            }
+        });
     }
 
     t() {
@@ -45,8 +56,8 @@ class ConnectedComponents extends Component {
                 {
                     this.state.components.map((component) => {
                         const style = {
-                            left: this.t() * component.x,
-                            top: this.t() * component.y,
+                            left: component.xInterpolator(this.t()),
+                            top: component.yInterpolator(this.t()),
                             height: component.height,
                             width: component.width,
                             backgroundPositionX: -component.x,
