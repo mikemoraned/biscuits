@@ -61,17 +61,39 @@ class ConnectedComponents extends Component {
         const gridSideLength = Math.ceil(Math.sqrt(sortedBySize.length));
         const gridXStride = 100;
         const gridYStride = 100;
-        return sortedBySize.map((c, index) => {
-           const xBucket = index % gridSideLength;
-           const yBucket = Math.floor(index / gridSideLength);
-           return {
-               startX: xBucket * gridXStride,
-               startY: yBucket * gridYStride,
-               startWidth: Math.min(gridXStride, c.width),
-               startHeight: Math.min(gridYStride, c.height),
-               ...c
-           }
+        const grid = sortedBySize.reduce((grid, c, index) => {
+            const gridInsert = (array, x, y, value) => {
+                let row = array[y];
+                if (row == null) {
+                    row = [];
+                    array[y] = row;
+                }
+                row[x] = value;
+            }
+            const xBucket = index % gridSideLength;
+            const yBucket = Math.floor(index / gridSideLength);
+            gridInsert(grid, xBucket, yBucket, c);
+            return grid;
+        }, []);
+        let totalY = 0;
+        grid.forEach((row) => {
+            let totalX = 0;
+            let maxRowHeight = 0;
+            row.forEach(c => {
+                c.startX = totalX;
+                c.startY = totalY;
+                totalX += c.width;
+                maxRowHeight = Math.max(maxRowHeight, c.height);
+            });
+            totalY += maxRowHeight;
         });
+        const flattened = [];
+        grid.forEach((row) => {
+            row.forEach(c => {
+                flattened.push(c);
+            });
+        });
+        return flattened;
     }
 
     t() {
