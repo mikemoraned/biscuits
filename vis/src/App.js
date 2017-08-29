@@ -41,6 +41,8 @@ class ConnectedComponents extends Component {
             return {
                 xInterpolator: interpolateNumber(c.startX, c.x),
                 yInterpolator: interpolateNumber(c.startY, c.y),
+                widthInterpolator: interpolateNumber(c.startWidth, c.width),
+                heightInterpolator: interpolateNumber(c.startHeight, c.height),
                 ...c
             }
         });
@@ -64,6 +66,8 @@ class ConnectedComponents extends Component {
            return {
                startX: xBucket * gridXStride,
                startY: yBucket * gridYStride,
+               startWidth: gridXStride,
+               startHeight: gridYStride,
                ...c
            }
         });
@@ -81,8 +85,8 @@ class ConnectedComponents extends Component {
                         const style = {
                             left: component.xInterpolator(this.t()),
                             top: component.yInterpolator(this.t()),
-                            height: component.height,
-                            width: component.width,
+                            height: component.heightInterpolator(this.t()),
+                            width: component.widthInterpolator(this.t()),
                             backgroundPositionX: -component.x,
                             backgroundPositionY: -component.y
                         };
