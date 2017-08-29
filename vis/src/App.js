@@ -87,11 +87,10 @@ class ConnectedComponents extends Component {
                             left: component.xInterpolator(this.t()),
                             top: component.yInterpolator(this.t()),
                             height: component.heightInterpolator(this.t()),
-                            width: component.widthInterpolator(this.t()),
-                            backgroundImage: `url('/${this.state.name}.label_${component.id}.png')`,
-                            backgroundRepeat: "no-repeat"
+                            width: component.widthInterpolator(this.t())
                         };
-                        return <div style={style}>&nbsp;</div>
+                        const url = `/${this.state.name}.label_${component.id}.png`;
+                        return <img src={url} alt={`label_${component.id}`} style={style} />;
                     })
                 }
             </div>
