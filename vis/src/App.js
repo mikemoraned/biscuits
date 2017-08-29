@@ -31,7 +31,7 @@ class ConnectedComponents extends Component {
             .then((response) => response.json())
             .then((json) => {
                 this.setState({
-                    components: this.addInterpolations(json)
+                    components: this.addInterpolations(this.layout(json))
                 })
             });
     }
@@ -39,10 +39,33 @@ class ConnectedComponents extends Component {
     addInterpolations(components) {
         return components.map((c) => {
             return {
-                xInterpolator: interpolateNumber(0, c.x),
-                yInterpolator: interpolateNumber(0, c.y),
+                xInterpolator: interpolateNumber(c.startX, c.x),
+                yInterpolator: interpolateNumber(c.startY, c.y),
                 ...c
             }
+        });
+    }
+
+    layout(components) {
+        const sortedBySize = components.map((c) => {
+            return {
+                size: (c.width * c.height),
+                ...c
+            }
+        });
+        sortedBySize.sort((a, b) => (b.size - a.size));
+
+        const gridSideLength = Math.ceil(Math.sqrt(sortedBySize.length));
+        const gridXStride = 100;
+        const gridYStride = 100;
+        return sortedBySize.map((c, index) => {
+           const xBucket = index % gridSideLength;
+           const yBucket = Math.floor(index / gridSideLength);
+           return {
+               startX: xBucket * gridXStride,
+               startY: yBucket * gridYStride,
+               ...c
+           }
         });
     }
 
