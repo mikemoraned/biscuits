@@ -14,7 +14,7 @@ class ConnectedComponents extends Component {
             name: "edinburgh",
             components: [],
             t: 0.0,
-            transitionDuration: 16000,
+            transitionDuration: 32000,
             ease: easeCubicInOut
         };
     }
@@ -105,7 +105,7 @@ class ConnectedComponents extends Component {
     }
 
     t() {
-        return this.state.ease(this.state.t);
+        return this.state.t;
     }
 
     render() {
@@ -117,12 +117,19 @@ class ConnectedComponents extends Component {
                 <div className="components">
                     {
                         this.state.components.map((component, index) => {
-                            const style = {
-                                left: component.xInterpolator(this.t()),
-                                top: component.yInterpolator(this.t()),
-                                height: component.heightInterpolator(this.t()),
-                                width: component.widthInterpolator(this.t())
+                            const startStyle = {
+                                left: component.startX,
+                                top: component.startY,
+                                height: component.startHeight,
+                                width: component.startWidth,
                             };
+                            const endStyle = {
+                                left: component.x,
+                                top: component.y,
+                                height: component.height,
+                                width: component.width,
+                            };
+                            const style = this.t() < 0.5 ? startStyle: endStyle;
                             const url = `/${this.state.name}.label_${component.id}.png`;
                             return <img key={index} src={url} alt={`label_${component.id}`} style={style} />;
                         })

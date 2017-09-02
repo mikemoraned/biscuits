@@ -5,5 +5,6 @@
 .components img {
     position: absolute;
     border: 1px dashed black;
+    transition: width 16s, height 16s, left 16s, top 16s;
 }
 
