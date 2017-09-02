@@ -5,6 +5,7 @@
 .components img {
     position: absolute;
     border: 1px dashed black;
-    transition: width 5s, height 5s, left 5s, top 5s;
+    transition: width 10s, height 10s, left 10s, top 10s;
+    transition-timing-function: ease-in-out;
 }
 
