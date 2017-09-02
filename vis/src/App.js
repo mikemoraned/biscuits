@@ -33,7 +33,7 @@ class ConnectedComponents extends Component {
             .then((response) => response.json())
             .then((json) => {
                 this.setState({
-                    components: this.addInterpolations(this.layout(this.removeFullImage(json)))
+                    components: this.addInterpolations(this.layout(this.removeFullImage(json), 1400))
                 })
             });
     }
@@ -56,7 +56,7 @@ class ConnectedComponents extends Component {
         });
     }
 
-    layout(components) {
+    layout(components, startXOffset) {
         const sortedBySize = components.map((c) => {
             return {
                 size: (c.width * c.height),
@@ -66,8 +66,6 @@ class ConnectedComponents extends Component {
         sortedBySize.sort((a, b) => (b.size - a.size));
 
         const gridSideLength = Math.ceil(Math.sqrt(sortedBySize.length));
-        const gridXStride = 100;
-        const gridYStride = 100;
         const grid = sortedBySize.reduce((grid, c, index) => {
             const gridInsert = (array, x, y, value) => {
                 let row = array[y];
@@ -100,7 +98,13 @@ class ConnectedComponents extends Component {
                 flattened.push(c);
             });
         });
-        return flattened;
+        const withOffsets = flattened.map((c) => {
+            return {
+                ...c,
+                startX: (c.startX + startXOffset),
+            }
+        });
+        return withOffsets;
     }
 
     t() {
@@ -109,19 +113,24 @@ class ConnectedComponents extends Component {
 
     render() {
         return (
-            <div className="components">
-                {
-                    this.state.components.map((component) => {
-                        const style = {
-                            left: component.xInterpolator(this.t()),
-                            top: component.yInterpolator(this.t()),
-                            height: component.heightInterpolator(this.t()),
-                            width: component.widthInterpolator(this.t())
-                        };
-                        const url = `/${this.state.name}.label_${component.id}.png`;
-                        return <img src={url} alt={`label_${component.id}`} style={style} />;
-                    })
-                }
+            <div>
+                <div className="original">
+                    <img src={`/${this.state.name}.png`} />
+                </div>
+                <div className="components">
+                    {
+                        this.state.components.map((component) => {
+                            const style = {
+                                left: component.xInterpolator(this.t()),
+                                top: component.yInterpolator(this.t()),
+                                height: component.heightInterpolator(this.t()),
+                                width: component.widthInterpolator(this.t())
+                            };
+                            const url = `/${this.state.name}.label_${component.id}.png`;
+                            return <img src={url} alt={`label_${component.id}`} style={style} />;
+                        })
+                    }
+                </div>
             </div>
         );
     }
