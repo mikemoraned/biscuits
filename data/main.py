@@ -3,7 +3,7 @@ import cv2
 import json
 import numpy as np
 
-for city_name in ["edinburgh", "newyork"]:
+for city_name in ["edinburgh", "newyork", "budapest"]:
     print("Doing {}".format(city_name))
 
     # Read the image you want connected components of

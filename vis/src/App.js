@@ -9,7 +9,8 @@ class ConnectedComponents extends Component {
 
         this.state = {
             // name: "newyork",
-            name: "edinburgh",
+            // name: "edinburgh",
+            name: "budapest",
             components: [],
             showStart: true,
         };
