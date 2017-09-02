@@ -112,11 +112,11 @@ class ConnectedComponents extends Component {
         return (
             <div>
                 <div className="original">
-                    <img src={`/${this.state.name}.png`} />
+                    <img src={`/${this.state.name}.png`} alt="original"/>
                 </div>
                 <div className="components">
                     {
-                        this.state.components.map((component) => {
+                        this.state.components.map((component, index) => {
                             const style = {
                                 left: component.xInterpolator(this.t()),
                                 top: component.yInterpolator(this.t()),
@@ -124,7 +124,7 @@ class ConnectedComponents extends Component {
                                 width: component.widthInterpolator(this.t())
                             };
                             const url = `/${this.state.name}.label_${component.id}.png`;
-                            return <img src={url} alt={`label_${component.id}`} style={style} />;
+                            return <img key={index} src={url} alt={`label_${component.id}`} style={style} />;
                         })
                     }
                 </div>
