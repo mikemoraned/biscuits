@@ -1,8 +1,6 @@
 import React, { Component } from 'react';
 import './App.css';
 import 'isomorphic-fetch';
-import { easeCubicInOut } from "d3-ease";
-import { interpolateNumber } from "d3-interpolate";
 
 class ConnectedComponents extends Component {
 
@@ -13,41 +11,21 @@ class ConnectedComponents extends Component {
             // name: "newyork",
             name: "edinburgh",
             components: [],
-            t: 0.0,
-            transitionDuration: 32000,
-            ease: easeCubicInOut
+            showStart: true,
         };
+
+        this.toggle = this.toggle.bind(this);
     }
 
     componentDidMount() {
-
-        const setT = () => {
-            const currentDate = new Date();
-            const t = (currentDate.getTime() % this.state.transitionDuration) / this.state.transitionDuration;
-            this.setState({ t });
-            requestAnimationFrame(setT);
-        }
-        setT();
 
         return fetch(`${this.state.name}.labels.json`)
             .then((response) => response.json())
             .then((json) => {
                 this.setState({
-                    components: this.addInterpolations(this.layout(json))
+                    components: this.layout(json)
                 })
             });
-    }
-
-    addInterpolations(components) {
-        return components.map((c) => {
-            return {
-                xInterpolator: interpolateNumber(c.startX, c.x),
-                yInterpolator: interpolateNumber(c.startY, c.y),
-                widthInterpolator: interpolateNumber(c.startWidth, c.width),
-                heightInterpolator: interpolateNumber(c.startHeight, c.height),
-                ...c
-            }
-        });
     }
 
     layout(components) {
@@ -104,15 +82,17 @@ class ConnectedComponents extends Component {
         return withOffsets;
     }
 
-    t() {
-        return this.state.t;
+    toggle() {
+        this.setState({
+            showStart: !this.state.showStart
+        });
     }
 
     render() {
         return (
             <div>
                 <div className="original">
-                    <img src={`/${this.state.name}.png`} alt="original"/>
+                    <img src={`/${this.state.name}.png`} alt="original" onClick={this.toggle}/>
                 </div>
                 <div className="components">
                     {
@@ -129,9 +109,13 @@ class ConnectedComponents extends Component {
                                 height: component.height,
                                 width: component.width,
                             };
-                            const style = this.t() < 0.5 ? startStyle: endStyle;
+                            const style = this.state.showStart ? startStyle: endStyle;
                             const url = `/${this.state.name}.label_${component.id}.png`;
-                            return <img key={index} src={url} alt={`label_${component.id}`} style={style} />;
+                            return <img key={index}
+                                        src={url}
+                                        alt={`label_${component.id}`}
+                                        style={style}
+                                        onClick={this.toggle} />;
                         })
                     }
                 </div>
