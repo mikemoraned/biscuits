@@ -33,15 +33,9 @@ class ConnectedComponents extends Component {
             .then((response) => response.json())
             .then((json) => {
                 this.setState({
-                    components: this.addInterpolations(this.layout(this.removeFullImage(json), 1400))
+                    components: this.addInterpolations(this.layout(json))
                 })
             });
-    }
-
-    removeFullImage(components) {
-        const copy = components.slice(0);
-        copy.shift();
-        return copy;
     }
 
     addInterpolations(components) {
@@ -56,8 +50,11 @@ class ConnectedComponents extends Component {
         });
     }
 
-    layout(components, startXOffset) {
-        const sortedBySize = components.map((c) => {
+    layout(components) {
+        const withoutBackground = components.slice(0);
+        const background = withoutBackground.shift();
+
+        const sortedBySize = withoutBackground.map((c) => {
             return {
                 size: (c.width * c.height),
                 ...c
@@ -101,7 +98,7 @@ class ConnectedComponents extends Component {
         const withOffsets = flattened.map((c) => {
             return {
                 ...c,
-                startX: (c.startX + startXOffset),
+                startX: (c.startX + background.width),
             }
         });
         return withOffsets;
