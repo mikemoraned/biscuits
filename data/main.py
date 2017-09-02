@@ -4,7 +4,7 @@ import json
 import numpy as np
 
 # Read the image you want connected components of
-src = cv2.imread('newyork.png')
+src = cv2.imread('edinburgh.png')
 # Convert to grayscale
 src_grey = cv2.cvtColor(src, cv2.COLOR_BGR2GRAY)
 # Threshold it so it becomes binary
@@ -29,7 +29,6 @@ for index, stat in enumerate(stats):
     y = stat[1]
     width = stat[2]
     height = stat[3]
-    cv2.rectangle(labels, (x, y), (x + width, y + height), (0, 255, 0), 3)
     data.append({
         'x': np.asscalar(x),
         'y': np.asscalar(y),
@@ -39,13 +38,19 @@ for index, stat in enumerate(stats):
     })
     label = src.copy()
     label = label[y:(y + height), x:(x + width)]
-    cv2.imwrite('newyork.label_%s.png' % index, label)
+    label_masked = cv2.cvtColor(label, cv2.COLOR_BGR2BGRA)
+    label_mask = labels[y:(y + height), x:(x + width)]
+    black_transparent = np.array([0, 0, 0, 0])
+    black_opaque = np.array([0, 0, 0, 255])
+    for y in range(height):
+        for x in range(width):
+            if label_mask[y, x] != index:
+                label_masked[y, x] = black_transparent
+            else:
+                label_masked[y, x] = black_opaque
+    cv2.imwrite('edinburgh.label_%s.png' % index, label_masked)
 
-
-for centroid in centroids:
-    cv2.circle(labels, (int(centroid[0]), int(centroid[1])), 2, (255, 0, 0))
-
-cv2.imwrite('newyork.labels.png', labels)
-with open('newyork.labels.json', 'w') as f:
+cv2.imwrite('edinburgh.labels.png', labels)
+with open('edinburgh.labels.json', 'w') as f:
     json.dump(data, f, indent=4)
 
