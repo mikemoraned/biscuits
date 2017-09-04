@@ -77,14 +77,13 @@ class ConnectedComponents extends Component {
                 flattened.push(c);
             });
         });
-        const xScale = background.width / maxWidth;
         const yScale = background.height / maxHeight;
         const withOffsetsAndScaled = flattened.map((c) => {
             return {
                 ...c,
-                startX: ((xScale * c.startX) + background.width),
+                startX: ((yScale * c.startX) + background.width),
                 startY: (yScale * c.startY),
-                startWidth: (xScale * c.width),
+                startWidth: (yScale * c.width),
                 startHeight: (yScale * c.height),
             }
         });
