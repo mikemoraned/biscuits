@@ -57,6 +57,7 @@ class ConnectedComponents extends Component {
             return grid;
         }, []);
         let totalY = 0;
+        let maxWidth = 0;
         grid.forEach((row) => {
             let totalX = 0;
             let maxRowHeight = 0;
@@ -66,21 +67,28 @@ class ConnectedComponents extends Component {
                 totalX += c.width;
                 maxRowHeight = Math.max(maxRowHeight, c.height);
             });
+            maxWidth = Math.max(maxWidth, totalX);
             totalY += maxRowHeight;
         });
+        const maxHeight = totalY;
         const flattened = [];
         grid.forEach((row) => {
             row.forEach(c => {
                 flattened.push(c);
             });
         });
-        const withOffsets = flattened.map((c) => {
+        const xScale = background.width / maxWidth;
+        const yScale = background.height / maxHeight;
+        const withOffsetsAndScaled = flattened.map((c) => {
             return {
                 ...c,
-                startX: (c.startX + background.width),
+                startX: ((xScale * c.startX) + background.width),
+                startY: (yScale * c.startY),
+                startWidth: (xScale * c.width),
+                startHeight: (yScale * c.height),
             }
         });
-        return withOffsets;
+        return withOffsetsAndScaled;
     }
 
     toggle() {
