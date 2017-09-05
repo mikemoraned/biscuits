@@ -12,7 +12,8 @@ for city_name in ["jerusalem"]:
     # Convert to grayscale
     src_grey = cv2.cvtColor(src, cv2.COLOR_BGR2GRAY)
     # Threshold it so it becomes binary
-    ret, thresh = cv2.threshold(src_grey,0,255,cv2.THRESH_BINARY+cv2.THRESH_OTSU)
+    ret, thresh = cv2.threshold(src_grey, 0, 255,
+                                cv2.THRESH_BINARY + cv2.THRESH_OTSU)
     # You need to choose 4 or 8 for connectivity type
     connectivity = 4
     # Perform the operation
@@ -43,6 +44,7 @@ for city_name in ["jerusalem"]:
         label = src.copy()
         label = label[y:(y + height), x:(x + width)]
         label_masked = cv2.cvtColor(label, cv2.COLOR_BGR2BGRA)
+        label_filled = cv2.cvtColor(label, cv2.COLOR_BGR2GRAY)
         label_mask = labels[y:(y + height), x:(x + width)]
         black_transparent = np.array([0, 0, 0, 0])
         black_opaque = np.array([0, 0, 0, 255])
@@ -50,11 +52,25 @@ for city_name in ["jerusalem"]:
             for x in range(width):
                 if label_mask[y, x] != index:
                     label_masked[y, x] = black_transparent
+                    label_filled[y, x] = 0
                 else:
                     label_masked[y, x] = black_opaque
+                    label_filled[y, x] = 255
+
+        ret, thresh = cv2.threshold(label_filled, 0, 255,
+                                    cv2.THRESH_BINARY + cv2.THRESH_OTSU)
+        im2, contours, hierarchy = \
+            cv2.findContours(thresh,
+                             cv2.RETR_TREE,
+                             cv2.CHAIN_APPROX_SIMPLE)
+        if len(contours) > 0:
+            # print("found {} contours".format(len(contours)))
+            rect = cv2.minAreaRect(contours[0])
+            box = cv2.boxPoints(rect)
+            box = np.int0(box)
+            cv2.drawContours(label_masked, [box], 0, (0, 0, 255, 255), 2)
         cv2.imwrite("{}.label_{}.png".format(city_name, index), label_masked)
 
     cv2.imwrite("{}.labels.png".format(city_name), labels)
     with open("{}.labels.json".format(city_name), 'w') as f:
         json.dump(data, f, indent=4)
-
