@@ -101,7 +101,7 @@ class ConnectedComponents extends Component {
         return (
             <div>
                 <div className="original">
-                    <img src={`/${this.state.name}.png`} alt="original" onClick={this.toggle}/>
+                    {/*<img src={`/${this.state.name}.png`} alt="original" onClick={this.toggle}/>*/}
                 </div>
                 <div className="components">
                     {
