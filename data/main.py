@@ -34,13 +34,14 @@ for city_name in ["jerusalem"]:
         y = stat[1]
         width = stat[2]
         height = stat[3]
-        data.append({
+        label_data = {
             'x': np.asscalar(x),
             'y': np.asscalar(y),
             'width': np.asscalar(width),
             'height': np.asscalar(height),
+            'angle': 0.0,
             'id': index,
-        })
+        }
         label = src.copy()
         label = label[y:(y + height), x:(x + width)]
         label_masked = cv2.cvtColor(label, cv2.COLOR_BGR2BGRA)
@@ -69,7 +70,9 @@ for city_name in ["jerusalem"]:
             box = cv2.boxPoints(rect)
             box = np.int0(box)
             cv2.drawContours(label_masked, [box], 0, (0, 0, 255, 255), 2)
+            label_data["angle"] = rect[2]
         cv2.imwrite("{}.label_{}.png".format(city_name, index), label_masked)
+        data.append(label_data)
 
     cv2.imwrite("{}.labels.png".format(city_name), labels)
     with open("{}.labels.json".format(city_name), 'w') as f:

@@ -111,12 +111,14 @@ class ConnectedComponents extends Component {
                                 top: component.startY,
                                 height: component.startHeight,
                                 width: component.startWidth,
+                                transform: `rotate(${-1 * component.angle}deg)`
                             };
                             const endStyle = {
                                 left: component.x,
                                 top: component.y,
                                 height: component.height,
                                 width: component.width,
+                                transform: "rotate(0deg)"
                             };
                             const style = this.state.showStart ? startStyle: endStyle;
                             const url = `/${this.state.name}.label_${component.id}.png`;
