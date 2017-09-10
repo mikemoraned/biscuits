@@ -4,7 +4,8 @@ import json
 import numpy as np
 
 # for city_name in ["edinburgh", "newyork", "budapest"]:
-for city_name in ["jerusalem"]:
+# for city_name in ["jerusalem"]:
+for city_name in ["jerusalem", "edinburgh", "newyork", "budapest"]:
     print("Doing {}".format(city_name))
 
     # Read the image you want connected components of
@@ -69,7 +70,7 @@ for city_name in ["jerusalem"]:
             rect = cv2.minAreaRect(contours[0])
             box = cv2.boxPoints(rect)
             box = np.int0(box)
-            cv2.drawContours(label_masked, [box], 0, (0, 0, 255, 255), 2)
+            # cv2.drawContours(label_masked, [box], 0, (0, 0, 255, 255), 2)
             label_data["angle"] = rect[2]
         cv2.imwrite("{}.label_{}.png".format(city_name, index), label_masked)
         data.append(label_data)
