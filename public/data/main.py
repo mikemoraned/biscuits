@@ -77,4 +77,4 @@ for city_name in ["jerusalem", "edinburgh", "newyork", "budapest"]:
 
     cv2.imwrite("{}.labels.png".format(city_name), labels)
     with open("{}.labels.json".format(city_name), 'w') as f:
-        json.dump(data, f, indent=4)
+        json.dump(data, f, indent=4, sort_keys=True)
