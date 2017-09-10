@@ -138,7 +138,7 @@ class App extends Component {
       // const names = ["edinburgh", "budapest"];
       return (
           <div className="App">
-              <b>Zoom out to see</b>
+              <b>Instructions: Zoom out to see, click on shapes / city to animate</b>
               { names.map((name) => (
                   <div>
                       <h1>{name}</h1>
