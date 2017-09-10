@@ -4,14 +4,10 @@ import 'isomorphic-fetch';
 
 class ConnectedComponents extends Component {
 
-    constructor() {
-        super();
+    constructor(props) {
+        super(props);
 
         this.state = {
-            // name: "newyork",
-            // name: "edinburgh",
-            name: "budapest",
-            // name: "jerusalem",
             components: [],
             showStart: true,
         };
@@ -21,7 +17,7 @@ class ConnectedComponents extends Component {
 
     componentDidMount() {
 
-        return fetch(`${this.state.name}.labels.json`)
+        return fetch(`${this.props.name}.labels.json`)
             .then((response) => response.json())
             .then((json) => {
                 this.setState({
@@ -99,9 +95,9 @@ class ConnectedComponents extends Component {
 
     render() {
         return (
-            <div>
+            <div className="biscuits">
                 <div className="original">
-                    {/*<img src={`/${this.state.name}.png`} alt="original" onClick={this.toggle}/>*/}
+                    <img src={`/${this.props.name}.png`} alt="original" onClick={this.toggle}/>
                 </div>
                 <div className="components">
                     {
@@ -121,7 +117,7 @@ class ConnectedComponents extends Component {
                                 transform: "rotate(0deg)"
                             };
                             const style = this.state.showStart ? startStyle: endStyle;
-                            const url = `/${this.state.name}.label_${component.id}.png`;
+                            const url = `/${this.props.name}.label_${component.id}.png`;
                             return <img key={index}
                                         src={url}
                                         alt={`label_${component.id}`}
@@ -137,11 +133,20 @@ class ConnectedComponents extends Component {
 
 class App extends Component {
   render() {
-    return (
-      <div className="App">
-        <ConnectedComponents />
-      </div>
-    );
+      // const names = ["edinburgh", "budapest", "jerusalem",  "newyork" ];
+      const names = ["edinburgh", "budapest", "jerusalem" ];
+      // const names = ["edinburgh", "budapest"];
+      return (
+          <div className="App">
+              <b>Zoom out to see</b>
+              { names.map((name) => (
+                  <div>
+                      <h1>{name}</h1>
+                      <ConnectedComponents name={name} />
+                  </div>
+              ))}
+          </div>
+      );
   }
 }
 
