@@ -6,6 +6,8 @@ see http://www.armellecaron.fr/works/les-villes-rangees/.
 
 ## September 2017
 
+<img src="public/sept2017.jerusalem.png" />
+
 The overall strategy is:
 1. Manually construct an image of a city via a Grab of a Black and White
 map, from somewhere like [Snazzy Maps](https://snazzymaps.com/style/8007/black-and-white-without-labels),
