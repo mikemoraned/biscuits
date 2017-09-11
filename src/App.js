@@ -134,7 +134,8 @@ class ConnectedComponents extends Component {
 class App extends Component {
   render() {
       // const names = ["edinburgh", "budapest", "jerusalem",  "newyork" ];
-      const names = ["edinburgh", "budapest", "jerusalem" ];
+      // const names = ["edinburgh", "budapest", "jerusalem" ];
+      const names = ["budapest"];
       // const names = ["edinburgh", "budapest"];
       return (
           <div className="App">
