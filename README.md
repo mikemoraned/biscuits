@@ -14,10 +14,8 @@ map, from somewhere like [Snazzy Maps](https://snazzymaps.com/style/8007/black-a
 such there is a clear figure/ground delineation.
 2. Use OpenCV to extract and and dump:
   * basic labelled metadata (dimensions / positions) of connected components
-  * angle of bounding rectangle which minimises area (gives guidance as to
-  how it should be rotated to pack better)
   * connected components as separate images, rendered as a transparent png
   with area in black
-3. Use React + CSS animations to:
+3. Use React + Canvas rendering + d3 animations to:
   * sort and pack areas by size
   * animate the chunks into place over original image

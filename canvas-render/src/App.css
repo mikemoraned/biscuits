@@ -1,0 +1,12 @@
+.App > div {
+    border: 1px dashed;
+}
+
+.App .css_transition {
+    margin-bottom: 200px;
+}
+
+.App .css_transition .box {
+    position: absolute;
+    transition: width 2s, height 2s, left 2s, top 2s, background-color 2s, transform 2s;
+}
