@@ -78,7 +78,7 @@ for city_name in ["jerusalem", "edinburgh", "newyork", "budapest"]:
             box = np.int0(box)
             # cv2.drawContours(label_masked, [box], 0, (0, 0, 255, 255), 2)
             label_data["angle"] = rect[2]
-        cv2.imwrite("{}.label_{}.png".format(city_name, index), label_masked)
+        # cv2.imwrite("{}.label_{}.png".format(city_name, index), label_masked)
         sprite_image_data.append({
             'image': label_masked,
             'data': label_data
