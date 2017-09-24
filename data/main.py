@@ -5,6 +5,7 @@ import numpy as np
 
 # for city_name in ["edinburgh", "newyork", "budapest"]:
 # for city_name in ["jerusalem"]:
+# for city_name in ["edinburgh"]:
 for city_name in ["jerusalem", "edinburgh", "newyork", "budapest"]:
     print("Doing {}".format(city_name))
 
@@ -29,12 +30,18 @@ for city_name in ["jerusalem", "edinburgh", "newyork", "budapest"]:
     # The fourth cell is the centroid matrix
     centroids = output[3]
 
+    black_transparent = np.array([0, 0, 0, 0])
+    black_opaque = np.array([0, 0, 0, 255])
+
     data = []
+    sprite_image_data = []
+    max_sprite_height = 0
     for index, stat in enumerate(stats):
         x = stat[0]
         y = stat[1]
         width = stat[2]
         height = stat[3]
+        max_sprite_height = max(max_sprite_height, height)
         label_data = {
             'x': np.asscalar(x),
             'y': np.asscalar(y),
@@ -48,8 +55,7 @@ for city_name in ["jerusalem", "edinburgh", "newyork", "budapest"]:
         label_masked = cv2.cvtColor(label, cv2.COLOR_BGR2BGRA)
         label_filled = cv2.cvtColor(label, cv2.COLOR_BGR2GRAY)
         label_mask = labels[y:(y + height), x:(x + width)]
-        black_transparent = np.array([0, 0, 0, 0])
-        black_opaque = np.array([0, 0, 0, 255])
+
         for y in range(height):
             for x in range(width):
                 if label_mask[y, x] != index:
@@ -73,8 +79,32 @@ for city_name in ["jerusalem", "edinburgh", "newyork", "budapest"]:
             # cv2.drawContours(label_masked, [box], 0, (0, 0, 255, 255), 2)
             label_data["angle"] = rect[2]
         cv2.imwrite("{}.label_{}.png".format(city_name, index), label_masked)
+        sprite_image_data.append({
+            'image': label_masked,
+            'data': label_data
+        })
         data.append(label_data)
 
+    def resizeSpriteImageToMaxHeight(sprite_image, max_height):
+        height = sprite_image['data']['height']
+        bottom_border = max_height - height
+        return cv2.copyMakeBorder(sprite_image['image'],
+                                  0, bottom_border, 0, 0,
+                                  cv2.BORDER_WRAP)
+
+    sprite_image = resizeSpriteImageToMaxHeight(sprite_image_data[0],
+                                                max_sprite_height)
+    sprite_offset = 0
+    data[0]['sprite_offset'] = sprite_offset
+    sprite_offset += sprite_image_data[0]['data']['width']
+    for index in range(1, len(sprite_image_data)):
+        next_image = resizeSpriteImageToMaxHeight(sprite_image_data[index],
+                                                  max_sprite_height)
+        sprite_image = np.concatenate((sprite_image, next_image), axis=1)
+        data[index]['sprite_offset'] = sprite_offset
+        sprite_offset += sprite_image_data[index]['data']['width']
+
+    cv2.imwrite("{}.label_sprites.png".format(city_name), sprite_image)
     cv2.imwrite("{}.labels.png".format(city_name), labels)
     with open("{}.labels.json".format(city_name), 'w') as f:
         json.dump(data, f, indent=4, sort_keys=True)
