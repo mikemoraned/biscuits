@@ -5,8 +5,8 @@ import numpy as np
 
 # for city_name in ["edinburgh", "newyork", "budapest"]:
 # for city_name in ["jerusalem"]:
-# for city_name in ["edinburgh"]:
-for city_name in ["jerusalem", "edinburgh", "newyork", "budapest"]:
+for city_name in ["au"]:
+#for city_name in ["jerusalem", "edinburgh", "newyork", "budapest"]:
     print("Doing {}".format(city_name))
 
     # Read the image you want connected components of

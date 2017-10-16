@@ -281,7 +281,7 @@ class CanvasConnectedComponents extends Component {
 
 class App extends Component {
   render() {
-      const names = ["edinburgh", "budapest", "jerusalem",  "newyork" ];
+      const names = ["edinburgh", "budapest", "jerusalem",  "newyork", "au" ];
       // const names = ["edinburgh", "budapest", "jerusalem" ];
       // const names = ["budapest"];
       // const names = ["edinburgh"];
