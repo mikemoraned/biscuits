@@ -8,5 +8,5 @@
 
 .App .css_transition .box {
     position: absolute;
-    transition: width 2s, height 2s, left 2s, top 2s, background-color 2s, transform 2s;
+    transition: width 4s, height 4s, left 4s, top 4s, background-color 4s, transform 4s;
 }

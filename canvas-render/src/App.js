@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import './App.css';
 import { interpolate } from 'd3-interpolate';
 import _ from 'underscore';
+import { easeCubicInOut } from 'd3-ease';
 
 class Grid {
 
@@ -51,6 +52,66 @@ class Grid {
     }
 }
 
+class CSSTransition extends React.Component {
+
+    constructor(props) {
+        super(props);
+
+        this.state = {
+            toStart: true,
+        };
+
+        this.toggle = this.toggle.bind(this);
+        this.boxStyle = this.boxStyle.bind(this);
+        this.grid = props.grid;
+        this.colorInterpolate = interpolate("#0000FF","#FFCCCC");
+    }
+
+    toggle() {
+        this.setState({
+            toStart: !this.state.toStart
+        });
+    }
+
+    boxStyle(box, defaults) {
+        return {
+            ...defaults,
+            left: `${box.x}px`,
+            top: `${box.y}px`,
+            width: `${box.width}px`,
+            height: `${box.height}px`,
+        }
+    }
+
+    entryStyle(entry, index, entryCount) {
+        const color = this.colorInterpolate(index / entryCount);
+        if (this.state.toStart) {
+            return this.boxStyle(entry.start, {
+                backgroundColor: color
+            });
+        }
+        else {
+            return this.boxStyle(entry.end, {
+                backgroundColor: color,
+                transform: "rotate(180deg)"
+            });
+        }
+    }
+
+    render() {
+        const entries = this.props.grid.spreadOver(this.props.width, this.props.height);
+        return (
+            <div className="css_transition">
+                {
+                    entries.map((entry, index) => {
+                        return <div onClick={this.toggle} style={this.entryStyle(entry, index, entries.length)} className="box"></div>
+                    })
+                }
+            </div>
+        );
+    }
+}
+
 class CanvasTransition extends React.Component {
 
     constructor(props) {
@@ -65,6 +126,7 @@ class CanvasTransition extends React.Component {
         this.angleInterpolate = interpolate(0,180);
         this.colorInterpolate = interpolate("#0000FF","#FFCCCC");
         this.interpolations = this.buildInterpolations();
+        this.ease = easeCubicInOut;
 
         this.toggle = this.toggle.bind(this);
     }
@@ -84,7 +146,7 @@ class CanvasTransition extends React.Component {
                 requestAnimationFrame(step);
             }
             this.setState({
-                value: Math.max(0.0, Math.min(1.0, elapsed / this.duration))
+                value: this.ease(Math.max(0.0, Math.min(1.0, elapsed / this.duration)))
             })
         };
         requestAnimationFrame(step);
@@ -162,15 +224,25 @@ class App extends Component {
     constructor(props) {
         super(props);
 
-        this.grid = new Grid(4 * 50, 4 * 25);
+        // ok in both:
+        this.grid = new Grid(1 * 25, 1 * 12);
+
+        // starting to get chuggy in css:
+        // this.grid = new Grid(2 * 25, 2 * 12);
+
+        // chugtastic:
+        // this.grid = new Grid(3 * 25, 3 * 12);
+
+        // css transition kills chrome and computer:
+        // this.grid = new Grid(4 * 50, 4 * 25);
     }
 
     render() {
         return (
           <div className="App">
-              {/*<div>*/}
-                  {/*<CSSTransition grid={this.grid} />*/}
-              {/*</div>*/}
+              <div>
+                  <CSSTransition grid={this.grid} width={400} height={200}/>
+              </div>
               <div>
                   <CanvasTransition grid={this.grid} width={400} height={200}/>
               </div>
