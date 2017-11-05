@@ -1,60 +1,3 @@
-class TransitionToGridLayoutBuilder {
-    build(labels, background) {
-        const gridSideLength = Math.ceil(Math.sqrt(labels.length));
-        const grid = labels.reduce((grid, c, index) => {
-            const gridInsert = (array, x, y, value) => {
-                let row = array[y];
-                if (row == null) {
-                    row = [];
-                    array[y] = row;
-                }
-                row[x] = value;
-            }
-            const xBucket = index % gridSideLength;
-            const yBucket = Math.floor(index / gridSideLength);
-            gridInsert(grid, xBucket, yBucket, c);
-            return grid;
-        }, []);
-        let totalY = 0;
-        let maxWidth = 0;
-        grid.forEach((row) => {
-            let totalX = 0;
-            let maxRowHeight = 0;
-            row.forEach(c => {
-                c.startX = totalX;
-                c.startY = totalY;
-                totalX += c.width;
-                maxRowHeight = Math.max(maxRowHeight, c.height);
-            });
-            maxWidth = Math.max(maxWidth, totalX);
-            totalY += maxRowHeight;
-        });
-        const maxHeight = totalY;
-        const flattened = [];
-        grid.forEach((row) => {
-            row.forEach(c => {
-                flattened.push(c);
-            });
-        });
-        const yScale = background.height / maxHeight;
-        const withOffsetsAndScaled = flattened.map((c) => {
-            return {
-                ...c,
-                startX: (yScale * c.startX) + background.width,
-                startY: (yScale * c.startY),
-                startWidth: (yScale * c.width),
-                startHeight: (yScale * c.height),
-            }
-        });
-        return {
-            width: background.width + maxWidth,
-            height: background.height,
-            background,
-            transitions: withOffsetsAndScaled
-        };
-    }
-}
-
 class TransitionToFilledAreaBuilder {
     build(labels, background) {
         const widthBound = background.width;
@@ -67,17 +10,19 @@ class TransitionToFilledAreaBuilder {
         const labelsWithOffsets = labels.map((label) => {
             const labelWithOffsets = {
                 ...label,
+                angle: 0.0,
+                startAngle: label.min_area_rect.angle,
                 startX: nextX,
                 startY: nextY,
-                startWidth: label.width,
-                startHeight: label.height
+                startWidth: label.min_area_rect.width,
+                startHeight: label.min_area_rect.height
             };
 
-            maxHeight = Math.max(maxHeight, nextY + label.height);
-            maxWidth = Math.max(maxWidth, nextX + label.width);
+            maxHeight = Math.max(maxHeight, nextY + label.min_area_rect.height);
+            maxWidth = Math.max(maxWidth, nextX + label.min_area_rect.width);
 
-            maxRowHeight = Math.max(maxRowHeight, label.height);
-            nextX += label.width;
+            maxRowHeight = Math.max(maxRowHeight, label.min_area_rect.height);
+            nextX += label.min_area_rect.width;
 
             if (nextX >= widthBound) {
                 nextX = 0;
@@ -94,8 +39,8 @@ class TransitionToFilledAreaBuilder {
                 ...label,
                 startX: (yScale * label.startX) + background.width,
                 startY: (yScale * label.startY),
-                startWidth: (yScale * label.width),
-                startHeight: (yScale * label.height),
+                startWidth: (yScale * label.startWidth),
+                startHeight: (yScale * label.startHeight),
             }
         });
         return {

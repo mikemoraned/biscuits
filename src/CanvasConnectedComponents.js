@@ -67,6 +67,7 @@ class CanvasConnectedComponents extends Component {
         const interpolations = layout.transitions.map((entry) => {
             return {
                 ...entry,
+                angle: interpolate(entry.startAngle, entry.angle),
                 x: interpolate(entry.startX, entry.x),
                 y: interpolate(entry.startY, entry.y),
                 width: interpolate(entry.startWidth, entry.width),
@@ -113,13 +114,20 @@ class CanvasConnectedComponents extends Component {
             angle: 0,
             color: "green"});
         this.state.layout.interpolations.forEach((i) => {
+            // this.rect({ctx,
+            //     x: i.x(this.t()),
+            //     y: i.y(this.t()),
+            //     width: i.width(this.t()),
+            //     height: i.height(this.t()),
+            //     angle: i.angle(this.t()),
+            //     color: i.color});
             if (this.state.images[i.id]) {
                 this.image({ctx,
                     x: i.x(this.t()),
                     y: i.y(this.t()),
                     width: i.width(this.t()),
                     height: i.height(this.t()),
-                    angle: 0,
+                    angle: i.angle(this.t()),
                     imageBitmap: this.state.images[i.id]});
             }
             else {
@@ -128,7 +136,7 @@ class CanvasConnectedComponents extends Component {
                     y: i.y(this.t()),
                     width: i.width(this.t()),
                     height: i.height(this.t()),
-                    angle: 0,
+                    angle: i.angle(this.t()),
                     color: i.color});
             }
         });

@@ -3,10 +3,7 @@ import cv2
 import json
 import numpy as np
 
-# for city_name in ["edinburgh", "newyork", "budapest"]:
-# for city_name in ["jerusalem"]:
-for city_name in ["au"]:
-#for city_name in ["jerusalem", "edinburgh", "newyork", "budapest"]:
+for city_name in ["jerusalem", "edinburgh", "newyork", "budapest", "au"]:
     print("Doing {}".format(city_name))
 
     # Read the image you want connected components of
@@ -47,7 +44,7 @@ for city_name in ["au"]:
             'y': np.asscalar(y),
             'width': np.asscalar(width),
             'height': np.asscalar(height),
-            'angle': 0.0,
+            'min_area_rect_angle': 0.0,
             'id': index,
         }
         label = src.copy()
@@ -77,7 +74,14 @@ for city_name in ["au"]:
             box = cv2.boxPoints(rect)
             box = np.int0(box)
             # cv2.drawContours(label_masked, [box], 0, (0, 0, 255, 255), 2)
-            label_data["angle"] = rect[2]
+            label_data["min_area_rect_angle"] = rect[2]
+            label_data["min_area_rect"] = {
+                'x': rect[0][0] - (rect[1][0] / 2),
+                'y': rect[0][1] - (rect[1][1] / 2),
+                'width': rect[1][0],
+                'height': rect[1][1],
+                'angle': rect[2]
+            }
         # cv2.imwrite("{}.label_{}.png".format(city_name, index), label_masked)
         sprite_image_data.append({
             'image': label_masked,
