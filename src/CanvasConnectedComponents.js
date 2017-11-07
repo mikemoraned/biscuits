@@ -15,7 +15,8 @@ class CanvasConnectedComponents extends Component {
         this.imageResolver = new ImageResolver(props.name);
         this.state = {
             toStart: true,
-            value: 0.30,
+            becameVisible: false,
+            value: 1.0,
             layout: {
                 width: 100,
                 height: 100,
@@ -30,6 +31,7 @@ class CanvasConnectedComponents extends Component {
 
         this.toggle = this.toggle.bind(this);
         this.buildInterpolations = this.buildInterpolations.bind(this);
+        this.toggleWhenFirstVisible = this.toggleWhenFirstVisible.bind(this);
     }
 
     toggle() {
@@ -95,7 +97,24 @@ class CanvasConnectedComponents extends Component {
             .then((labels) => {
                 console.log("Got labels");
                 this.buildInterpolations(labels);
+
+                this.toggleWhenFirstVisible();
+                window.addEventListener('scroll', this.toggleWhenFirstVisible);
+                window.addEventListener('resize', this.toggleWhenFirstVisible);
             });
+    }
+
+    toggleWhenFirstVisible() {
+        const bounds = this.refs.canvas.getBoundingClientRect();
+        if (bounds.top <= (window.innerHeight - (bounds.height / 2)) && !this.state.becameVisible) {
+            window.removeEventListener('scroll', this.toggleWhenFirstVisible);
+            window.removeEventListener('resize', this.toggleWhenFirstVisible);
+
+            this.setState({
+                becameVisible: true,
+            });
+            this.toggle();
+        }
     }
 
     componentDidUpdate() {
