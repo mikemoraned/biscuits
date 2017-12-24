@@ -1,16 +1,7 @@
 from flask import Flask
 from flask_graphql import GraphQLView
-import graphene
+from schema import schema
 
-
-class Query(graphene.ObjectType):
-    hello = graphene.String(name=graphene.String(default_value="stranger"))
-
-    def resolve_hello(self, info, name):
-        return 'Hello ' + name
-
-
-schema = graphene.Schema(query=Query)
 
 app = Flask(__name__)
 app.debug = True
