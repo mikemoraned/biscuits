@@ -1,7 +1,14 @@
+click==6.7
+Flask==0.12.2
+Flask-GraphQL==1.4.1
 graphene==2.0.1
 graphql-core==2.0
 graphql-relay==0.4.5
+itsdangerous==0.24
+Jinja2==2.10
+MarkupSafe==1.0
 promise==2.1
 Rx==1.6.0
 six==1.11.0
 typing==3.6.2
+Werkzeug==0.13
