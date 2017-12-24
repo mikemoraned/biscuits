@@ -1,11 +1,18 @@
 import graphene
 
 
-class Query(graphene.ObjectType):
-    hello = graphene.String(name=graphene.String(default_value="stranger"))
+class FeatureCollection(graphene.ObjectType):
+    features = graphene.List(graphene.String)
 
-    def resolve_hello(self, info, name):
-        return 'Hello ' + name
+    def resolve_features(self, info):
+        return []
+
+
+class Query(graphene.ObjectType):
+    pieces = graphene.Field(FeatureCollection)
+
+    def resolve_pieces(self, info):
+        return FeatureCollection()
 
 
 schema = graphene.Schema(query=Query)

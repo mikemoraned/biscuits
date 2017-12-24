@@ -5,12 +5,14 @@ from schema import schema
 
 class TestSchema(unittest.TestCase):
 
-    def test_hello(self):
+    def test_pieces(self):
         client = Client(schema)
-        executed = client.execute('''{ hello }''')
+        executed = client.execute('''{ pieces { features } }''')
         self.assertEqual(executed, {
             'data': {
-                'hello': 'Hello stranger'
+                'pieces': {
+                    'features': []
+                }
             }
         })
 
