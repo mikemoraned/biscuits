@@ -1,0 +1,9164 @@
+[
+    {
+        "angle": -51.34019470214844,
+        "height": 678,
+        "id": 0,
+        "sprite_offset": 0,
+        "width": 649,
+        "x": 0,
+        "y": 0
+    },
+    {
+        "angle": 0.0,
+        "height": 1,
+        "id": 1,
+        "sprite_offset": 649,
+        "width": 3,
+        "x": 20,
+        "y": 0
+    },
+    {
+        "angle": 0.0,
+        "height": 3,
+        "id": 2,
+        "sprite_offset": 652,
+        "width": 16,
+        "x": 27,
+        "y": 0
+    },
+    {
+        "angle": -90.0,
+        "height": 4,
+        "id": 3,
+        "sprite_offset": 668,
+        "width": 23,
+        "x": 44,
+        "y": 0
+    },
+    {
+        "angle": -90.0,
+        "height": 7,
+        "id": 4,
+        "sprite_offset": 691,
+        "width": 19,
+        "x": 68,
+        "y": 0
+    },
+    {
+        "angle": -0.0,
+        "height": 14,
+        "id": 5,
+        "sprite_offset": 710,
+        "width": 11,
+        "x": 87,
+        "y": 0
+    },
+    {
+        "angle": -86.18592071533203,
+        "height": 16,
+        "id": 6,
+        "sprite_offset": 721,
+        "width": 15,
+        "x": 99,
+        "y": 0
+    },
+    {
+        "angle": -21.801410675048828,
+        "height": 19,
+        "id": 7,
+        "sprite_offset": 736,
+        "width": 10,
+        "x": 113,
+        "y": 0
+    },
+    {
+        "angle": 0.0,
+        "height": 1,
+        "id": 8,
+        "sprite_offset": 746,
+        "width": 2,
+        "x": 123,
+        "y": 0
+    },
+    {
+        "angle": -18.434947967529297,
+        "height": 14,
+        "id": 9,
+        "sprite_offset": 748,
+        "width": 16,
+        "x": 124,
+        "y": 0
+    },
+    {
+        "angle": -33.690067291259766,
+        "height": 10,
+        "id": 10,
+        "sprite_offset": 764,
+        "width": 11,
+        "x": 134,
+        "y": 0
+    },
+    {
+        "angle": -45.0,
+        "height": 2,
+        "id": 11,
+        "sprite_offset": 775,
+        "width": 2,
+        "x": 145,
+        "y": 0
+    },
+    {
+        "angle": -45.0,
+        "height": 8,
+        "id": 12,
+        "sprite_offset": 777,
+        "width": 7,
+        "x": 146,
+        "y": 0
+    },
+    {
+        "angle": 0.0,
+        "height": 1,
+        "id": 13,
+        "sprite_offset": 784,
+        "width": 5,
+        "x": 157,
+        "y": 0
+    },
+    {
+        "angle": -90.0,
+        "height": 8,
+        "id": 14,
+        "sprite_offset": 789,
+        "width": 11,
+        "x": 165,
+        "y": 0
+    },
+    {
+        "angle": -90.0,
+        "height": 12,
+        "id": 15,
+        "sprite_offset": 800,
+        "width": 33,
+        "x": 175,
+        "y": 0
+    },
+    {
+        "angle": -90.0,
+        "height": 3,
+        "id": 16,
+        "sprite_offset": 833,
+        "width": 6,
+        "x": 203,
+        "y": 0
+    },
+    {
+        "angle": -38.65980911254883,
+        "height": 5,
+        "id": 17,
+        "sprite_offset": 839,
+        "width": 7,
+        "x": 209,
+        "y": 0
+    },
+    {
+        "angle": 0.0,
+        "height": 1,
+        "id": 18,
+        "sprite_offset": 846,
+        "width": 2,
+        "x": 224,
+        "y": 0
+    },
+    {
+        "angle": -90.0,
+        "height": 2,
+        "id": 19,
+        "sprite_offset": 848,
+        "width": 8,
+        "x": 237,
+        "y": 0
+    },
+    {
+        "angle": -65.224853515625,
+        "height": 20,
+        "id": 20,
+        "sprite_offset": 856,
+        "width": 28,
+        "x": 245,
+        "y": 0
+    },
+    {
+        "angle": -90.0,
+        "height": 15,
+        "id": 21,
+        "sprite_offset": 884,
+        "width": 27,
+        "x": 266,
+        "y": 0
+    },
+    {
+        "angle": -90.0,
+        "height": 9,
+        "id": 22,
+        "sprite_offset": 911,
+        "width": 32,
+        "x": 284,
+        "y": 0
+    },
+    {
+        "angle": -90.0,
+        "height": 9,
+        "id": 23,
+        "sprite_offset": 943,
+        "width": 28,
+        "x": 327,
+        "y": 0
+    },
+    {
+        "angle": -34.38034439086914,
+        "height": 25,
+        "id": 24,
+        "sprite_offset": 971,
+        "width": 38,
+        "x": 350,
+        "y": 0
+    },
+    {
+        "angle": 0.0,
+        "height": 1,
+        "id": 25,
+        "sprite_offset": 1009,
+        "width": 2,
+        "x": 389,
+        "y": 0
+    },
+    {
+        "angle": -90.0,
+        "height": 11,
+        "id": 26,
+        "sprite_offset": 1011,
+        "width": 13,
+        "x": 392,
+        "y": 0
+    },
+    {
+        "angle": -0.0,
+        "height": 16,
+        "id": 27,
+        "sprite_offset": 1024,
+        "width": 22,
+        "x": 404,
+        "y": 0
+    },
+    {
+        "angle": -90.0,
+        "height": 3,
+        "id": 28,
+        "sprite_offset": 1046,
+        "width": 7,
+        "x": 422,
+        "y": 0
+    },
+    {
+        "angle": -61.38954162597656,
+        "height": 39,
+        "id": 29,
+        "sprite_offset": 1053,
+        "width": 23,
+        "x": 422,
+        "y": 1
+    },
+    {
+        "angle": 0.0,
+        "height": 1,
+        "id": 30,
+        "sprite_offset": 1076,
+        "width": 1,
+        "x": 443,
+        "y": 0
+    },
+    {
+        "angle": -22.98871612548828,
+        "height": 91,
+        "id": 31,
+        "sprite_offset": 1077,
+        "width": 85,
+        "x": 445,
+        "y": 0
+    },
+    {
+        "angle": -4.763641834259033,
+        "height": 25,
+        "id": 32,
+        "sprite_offset": 1162,
+        "width": 11,
+        "x": 515,
+        "y": 0
+    },
+    {
+        "angle": -85.91438293457031,
+        "height": 33,
+        "id": 33,
+        "sprite_offset": 1173,
+        "width": 34,
+        "x": 526,
+        "y": 0
+    },
+    {
+        "angle": -90.0,
+        "height": 5,
+        "id": 34,
+        "sprite_offset": 1207,
+        "width": 11,
+        "x": 553,
+        "y": 0
+    },
+    {
+        "angle": -57.425941467285156,
+        "height": 38,
+        "id": 35,
+        "sprite_offset": 1218,
+        "width": 45,
+        "x": 562,
+        "y": 0
+    },
+    {
+        "angle": -26.56505012512207,
+        "height": 24,
+        "id": 36,
+        "sprite_offset": 1263,
+        "width": 19,
+        "x": 608,
+        "y": 0
+    },
+    {
+        "angle": -38.65980529785156,
+        "height": 12,
+        "id": 37,
+        "sprite_offset": 1282,
+        "width": 10,
+        "x": 619,
+        "y": 0
+    },
+    {
+        "angle": -90.0,
+        "height": 2,
+        "id": 38,
+        "sprite_offset": 1292,
+        "width": 9,
+        "x": 630,
+        "y": 0
+    },
+    {
+        "angle": -0.0,
+        "height": 678,
+        "id": 39,
+        "sprite_offset": 1301,
+        "width": 443,
+        "x": 276,
+        "y": 0
+    },
+    {
+        "angle": -29.577836990356445,
+        "height": 57,
+        "id": 40,
+        "sprite_offset": 1744,
+        "width": 66,
+        "x": 196,
+        "y": 2
+    },
+    {
+        "angle": -45.0,
+        "height": 10,
+        "id": 41,
+        "sprite_offset": 1810,
+        "width": 14,
+        "x": 297,
+        "y": 3
+    },
+    {
+        "angle": -70.01689147949219,
+        "height": 81,
+        "id": 42,
+        "sprite_offset": 1824,
+        "width": 103,
+        "x": 296,
+        "y": 2
+    },
+    {
+        "angle": -75.96376037597656,
+        "height": 11,
+        "id": 43,
+        "sprite_offset": 1927,
+        "width": 7,
+        "x": 429,
+        "y": 3
+    },
+    {
+        "angle": -12.094757080078125,
+        "height": 17,
+        "id": 44,
+        "sprite_offset": 1934,
+        "width": 17,
+        "x": 595,
+        "y": 3
+    },
+    {
+        "angle": -90.0,
+        "height": 12,
+        "id": 45,
+        "sprite_offset": 1951,
+        "width": 11,
+        "x": 630,
+        "y": 2
+    },
+    {
+        "angle": -75.96376037597656,
+        "height": 15,
+        "id": 46,
+        "sprite_offset": 1962,
+        "width": 18,
+        "x": 0,
+        "y": 4
+    },
+    {
+        "angle": -75.96376037597656,
+        "height": 4,
+        "id": 47,
+        "sprite_offset": 1980,
+        "width": 14,
+        "x": 62,
+        "y": 4
+    },
+    {
+        "angle": -75.96376037597656,
+        "height": 36,
+        "id": 48,
+        "sprite_offset": 1994,
+        "width": 24,
+        "x": 142,
+        "y": 4
+    },
+    {
+        "angle": -90.0,
+        "height": 2,
+        "id": 49,
+        "sprite_offset": 2018,
+        "width": 7,
+        "x": 78,
+        "y": 7
+    },
+    {
+        "angle": -75.96376037597656,
+        "height": 14,
+        "id": 50,
+        "sprite_offset": 2025,
+        "width": 21,
+        "x": 182,
+        "y": 7
+    },
+    {
+        "angle": -57.80426788330078,
+        "height": 35,
+        "id": 51,
+        "sprite_offset": 2046,
+        "width": 36,
+        "x": 238,
+        "y": 6
+    },
+    {
+        "angle": -61.38954162597656,
+        "height": 18,
+        "id": 52,
+        "sprite_offset": 2082,
+        "width": 19,
+        "x": 17,
+        "y": 9
+    },
+    {
+        "angle": -60.01836013793945,
+        "height": 34,
+        "id": 53,
+        "sprite_offset": 2101,
+        "width": 32,
+        "x": 147,
+        "y": 8
+    },
+    {
+        "angle": -41.987213134765625,
+        "height": 55,
+        "id": 54,
+        "sprite_offset": 2133,
+        "width": 45,
+        "x": 369,
+        "y": 8
+    },
+    {
+        "angle": -7.125016689300537,
+        "height": 13,
+        "id": 55,
+        "sprite_offset": 2178,
+        "width": 19,
+        "x": 499,
+        "y": 8
+    },
+    {
+        "angle": -49.39870071411133,
+        "height": 11,
+        "id": 56,
+        "sprite_offset": 2197,
+        "width": 18,
+        "x": 34,
+        "y": 10
+    },
+    {
+        "angle": -66.03751373291016,
+        "height": 12,
+        "id": 57,
+        "sprite_offset": 2215,
+        "width": 16,
+        "x": 627,
+        "y": 11
+    },
+    {
+        "angle": -81.02737426757812,
+        "height": 16,
+        "id": 58,
+        "sprite_offset": 2231,
+        "width": 27,
+        "x": 55,
+        "y": 12
+    },
+    {
+        "angle": -14.03624439239502,
+        "height": 12,
+        "id": 59,
+        "sprite_offset": 2258,
+        "width": 9,
+        "x": 140,
+        "y": 12
+    },
+    {
+        "angle": 0.0,
+        "height": 1,
+        "id": 60,
+        "sprite_offset": 2267,
+        "width": 4,
+        "x": 291,
+        "y": 13
+    },
+    {
+        "angle": -45.0,
+        "height": 13,
+        "id": 61,
+        "sprite_offset": 2271,
+        "width": 11,
+        "x": 46,
+        "y": 14
+    },
+    {
+        "angle": -64.35899353027344,
+        "height": 13,
+        "id": 62,
+        "sprite_offset": 2282,
+        "width": 26,
+        "x": 101,
+        "y": 15
+    },
+    {
+        "angle": -19.653825759887695,
+        "height": 27,
+        "id": 63,
+        "sprite_offset": 2308,
+        "width": 15,
+        "x": 130,
+        "y": 14
+    },
+    {
+        "angle": -47.48955535888672,
+        "height": 17,
+        "id": 64,
+        "sprite_offset": 2323,
+        "width": 16,
+        "x": 179,
+        "y": 15
+    },
+    {
+        "angle": -42.51044845581055,
+        "height": 12,
+        "id": 65,
+        "sprite_offset": 2339,
+        "width": 16,
+        "x": 273,
+        "y": 14
+    },
+    {
+        "angle": -71.56505584716797,
+        "height": 12,
+        "id": 66,
+        "sprite_offset": 2355,
+        "width": 13,
+        "x": 409,
+        "y": 14
+    },
+    {
+        "angle": -0.0,
+        "height": 25,
+        "id": 67,
+        "sprite_offset": 2368,
+        "width": 12,
+        "x": 0,
+        "y": 17
+    },
+    {
+        "angle": -51.34019470214844,
+        "height": 19,
+        "id": 68,
+        "sprite_offset": 2380,
+        "width": 18,
+        "x": 30,
+        "y": 17
+    },
+    {
+        "angle": -0.0,
+        "height": 19,
+        "id": 69,
+        "sprite_offset": 2398,
+        "width": 23,
+        "x": 547,
+        "y": 16
+    },
+    {
+        "angle": -80.53767395019531,
+        "height": 18,
+        "id": 70,
+        "sprite_offset": 2421,
+        "width": 32,
+        "x": 588,
+        "y": 16
+    },
+    {
+        "angle": 0.0,
+        "height": 1,
+        "id": 71,
+        "sprite_offset": 2453,
+        "width": 1,
+        "x": 85,
+        "y": 18
+    },
+    {
+        "angle": -73.61045837402344,
+        "height": 36,
+        "id": 72,
+        "sprite_offset": 2454,
+        "width": 27,
+        "x": 429,
+        "y": 19
+    },
+    {
+        "angle": -4.085616588592529,
+        "height": 9,
+        "id": 73,
+        "sprite_offset": 2481,
+        "width": 16,
+        "x": 527,
+        "y": 18
+    },
+    {
+        "angle": -63.43495178222656,
+        "height": 15,
+        "id": 74,
+        "sprite_offset": 2497,
+        "width": 23,
+        "x": 84,
+        "y": 20
+    },
+    {
+        "angle": -75.46554565429688,
+        "height": 29,
+        "id": 75,
+        "sprite_offset": 2520,
+        "width": 14,
+        "x": 185,
+        "y": 21
+    },
+    {
+        "angle": -10.304845809936523,
+        "height": 19,
+        "id": 76,
+        "sprite_offset": 2534,
+        "width": 20,
+        "x": 277,
+        "y": 20
+    },
+    {
+        "angle": -53.13010025024414,
+        "height": 14,
+        "id": 77,
+        "sprite_offset": 2554,
+        "width": 10,
+        "x": 620,
+        "y": 20
+    },
+    {
+        "angle": -75.96376037597656,
+        "height": 21,
+        "id": 78,
+        "sprite_offset": 2564,
+        "width": 10,
+        "x": 8,
+        "y": 23
+    },
+    {
+        "angle": -60.2551155090332,
+        "height": 11,
+        "id": 79,
+        "sprite_offset": 2574,
+        "width": 21,
+        "x": 96,
+        "y": 22
+    },
+    {
+        "angle": -80.53767395019531,
+        "height": 20,
+        "id": 80,
+        "sprite_offset": 2595,
+        "width": 11,
+        "x": 16,
+        "y": 25
+    },
+    {
+        "angle": -45.0,
+        "height": 20,
+        "id": 81,
+        "sprite_offset": 2606,
+        "width": 13,
+        "x": 41,
+        "y": 27
+    },
+    {
+        "angle": -0.0,
+        "height": 7,
+        "id": 82,
+        "sprite_offset": 2619,
+        "width": 3,
+        "x": 55,
+        "y": 27
+    },
+    {
+        "angle": -80.53767395019531,
+        "height": 33,
+        "id": 83,
+        "sprite_offset": 2622,
+        "width": 27,
+        "x": 53,
+        "y": 27
+    },
+    {
+        "angle": -38.65980529785156,
+        "height": 29,
+        "id": 84,
+        "sprite_offset": 2649,
+        "width": 39,
+        "x": 152,
+        "y": 26
+    },
+    {
+        "angle": -0.0,
+        "height": 13,
+        "id": 85,
+        "sprite_offset": 2688,
+        "width": 7,
+        "x": 28,
+        "y": 31
+    },
+    {
+        "angle": -49.08561706542969,
+        "height": 22,
+        "id": 86,
+        "sprite_offset": 2695,
+        "width": 23,
+        "x": 82,
+        "y": 31
+    },
+    {
+        "angle": -81.8698959350586,
+        "height": 14,
+        "id": 87,
+        "sprite_offset": 2718,
+        "width": 33,
+        "x": 585,
+        "y": 31
+    },
+    {
+        "angle": -56.3099365234375,
+        "height": 8,
+        "id": 88,
+        "sprite_offset": 2751,
+        "width": 11,
+        "x": 112,
+        "y": 33
+    },
+    {
+        "angle": 0.0,
+        "height": 1,
+        "id": 89,
+        "sprite_offset": 2762,
+        "width": 6,
+        "x": 533,
+        "y": 33
+    },
+    {
+        "angle": -52.4314079284668,
+        "height": 14,
+        "id": 90,
+        "sprite_offset": 2768,
+        "width": 17,
+        "x": 107,
+        "y": 34
+    },
+    {
+        "angle": -71.56504821777344,
+        "height": 4,
+        "id": 91,
+        "sprite_offset": 2785,
+        "width": 7,
+        "x": 99,
+        "y": 36
+    },
+    {
+        "angle": -45.0,
+        "height": 3,
+        "id": 92,
+        "sprite_offset": 2792,
+        "width": 3,
+        "x": 124,
+        "y": 37
+    },
+    {
+        "angle": -2.8624050617218018,
+        "height": 8,
+        "id": 93,
+        "sprite_offset": 2795,
+        "width": 23,
+        "x": 277,
+        "y": 37
+    },
+    {
+        "angle": -88.49256896972656,
+        "height": 28,
+        "id": 94,
+        "sprite_offset": 2818,
+        "width": 44,
+        "x": 5,
+        "y": 38
+    },
+    {
+        "angle": -22.166345596313477,
+        "height": 38,
+        "id": 95,
+        "sprite_offset": 2862,
+        "width": 30,
+        "x": 404,
+        "y": 39
+    },
+    {
+        "angle": -0.0,
+        "height": 19,
+        "id": 96,
+        "sprite_offset": 2892,
+        "width": 23,
+        "x": 612,
+        "y": 39
+    },
+    {
+        "angle": -78.69007110595703,
+        "height": 24,
+        "id": 97,
+        "sprite_offset": 2915,
+        "width": 24,
+        "x": 79,
+        "y": 40
+    },
+    {
+        "angle": -45.0,
+        "height": 12,
+        "id": 98,
+        "sprite_offset": 2939,
+        "width": 14,
+        "x": 121,
+        "y": 41
+    },
+    {
+        "angle": -32.47119140625,
+        "height": 18,
+        "id": 99,
+        "sprite_offset": 2953,
+        "width": 18,
+        "x": 194,
+        "y": 41
+    },
+    {
+        "angle": -45.0,
+        "height": 5,
+        "id": 100,
+        "sprite_offset": 2971,
+        "width": 7,
+        "x": 263,
+        "y": 41
+    },
+    {
+        "angle": -14.782724380493164,
+        "height": 132,
+        "id": 101,
+        "sprite_offset": 2978,
+        "width": 76,
+        "x": 491,
+        "y": 40
+    },
+    {
+        "angle": -40.23636245727539,
+        "height": 60,
+        "id": 102,
+        "sprite_offset": 3054,
+        "width": 47,
+        "x": 543,
+        "y": 41
+    },
+    {
+        "angle": -45.0,
+        "height": 40,
+        "id": 103,
+        "sprite_offset": 3101,
+        "width": 36,
+        "x": 559,
+        "y": 40
+    },
+    {
+        "angle": -90.0,
+        "height": 24,
+        "id": 104,
+        "sprite_offset": 3137,
+        "width": 5,
+        "x": 0,
+        "y": 43
+    },
+    {
+        "angle": -79.69515228271484,
+        "height": 12,
+        "id": 105,
+        "sprite_offset": 3142,
+        "width": 14,
+        "x": 105,
+        "y": 43
+    },
+    {
+        "angle": 90.0,
+        "height": 2,
+        "id": 106,
+        "sprite_offset": 3156,
+        "width": 1,
+        "x": 132,
+        "y": 43
+    },
+    {
+        "angle": -45.0,
+        "height": 27,
+        "id": 107,
+        "sprite_offset": 3157,
+        "width": 29,
+        "x": 144,
+        "y": 43
+    },
+    {
+        "angle": -45.0,
+        "height": 3,
+        "id": 108,
+        "sprite_offset": 3186,
+        "width": 4,
+        "x": 268,
+        "y": 43
+    },
+    {
+        "angle": -80.53767395019531,
+        "height": 13,
+        "id": 109,
+        "sprite_offset": 3190,
+        "width": 9,
+        "x": 6,
+        "y": 44
+    },
+    {
+        "angle": -0.0,
+        "height": 13,
+        "id": 110,
+        "sprite_offset": 3199,
+        "width": 15,
+        "x": 14,
+        "y": 44
+    },
+    {
+        "angle": -90.0,
+        "height": 9,
+        "id": 111,
+        "sprite_offset": 3214,
+        "width": 16,
+        "x": 590,
+        "y": 45
+    },
+    {
+        "angle": -45.0,
+        "height": 14,
+        "id": 112,
+        "sprite_offset": 3230,
+        "width": 10,
+        "x": 121,
+        "y": 49
+    },
+    {
+        "angle": 0.0,
+        "height": 1,
+        "id": 113,
+        "sprite_offset": 3240,
+        "width": 1,
+        "x": 431,
+        "y": 49
+    },
+    {
+        "angle": -45.0,
+        "height": 18,
+        "id": 114,
+        "sprite_offset": 3241,
+        "width": 16,
+        "x": 48,
+        "y": 50
+    },
+    {
+        "angle": -0.0,
+        "height": 17,
+        "id": 115,
+        "sprite_offset": 3257,
+        "width": 28,
+        "x": 276,
+        "y": 50
+    },
+    {
+        "angle": -33.6900634765625,
+        "height": 6,
+        "id": 116,
+        "sprite_offset": 3285,
+        "width": 4,
+        "x": 432,
+        "y": 51
+    },
+    {
+        "angle": -32.0053825378418,
+        "height": 26,
+        "id": 117,
+        "sprite_offset": 3289,
+        "width": 24,
+        "x": 439,
+        "y": 51
+    },
+    {
+        "angle": -14.03624439239502,
+        "height": 11,
+        "id": 118,
+        "sprite_offset": 3313,
+        "width": 14,
+        "x": 126,
+        "y": 53
+    },
+    {
+        "angle": -14.03624439239502,
+        "height": 9,
+        "id": 119,
+        "sprite_offset": 3327,
+        "width": 11,
+        "x": 200,
+        "y": 53
+    },
+    {
+        "angle": -68.19859313964844,
+        "height": 15,
+        "id": 120,
+        "sprite_offset": 3338,
+        "width": 17,
+        "x": 103,
+        "y": 54
+    },
+    {
+        "angle": -17.650123596191406,
+        "height": 13,
+        "id": 121,
+        "sprite_offset": 3355,
+        "width": 26,
+        "x": 240,
+        "y": 55
+    },
+    {
+        "angle": 0.0,
+        "height": 9,
+        "id": 122,
+        "sprite_offset": 3381,
+        "width": 6,
+        "x": 265,
+        "y": 54
+    },
+    {
+        "angle": -6.709836959838867,
+        "height": 19,
+        "id": 123,
+        "sprite_offset": 3387,
+        "width": 8,
+        "x": 512,
+        "y": 55
+    },
+    {
+        "angle": 90.0,
+        "height": 2,
+        "id": 124,
+        "sprite_offset": 3395,
+        "width": 1,
+        "x": 610,
+        "y": 55
+    },
+    {
+        "angle": -90.0,
+        "height": 11,
+        "id": 125,
+        "sprite_offset": 3396,
+        "width": 26,
+        "x": 172,
+        "y": 57
+    },
+    {
+        "angle": -33.690067291259766,
+        "height": 14,
+        "id": 126,
+        "sprite_offset": 3422,
+        "width": 11,
+        "x": 434,
+        "y": 57
+    },
+    {
+        "angle": -56.3099365234375,
+        "height": 10,
+        "id": 127,
+        "sprite_offset": 3433,
+        "width": 10,
+        "x": 586,
+        "y": 57
+    },
+    {
+        "angle": -80.53767395019531,
+        "height": 18,
+        "id": 128,
+        "sprite_offset": 3443,
+        "width": 16,
+        "x": 595,
+        "y": 57
+    },
+    {
+        "angle": -4.763641834259033,
+        "height": 11,
+        "id": 129,
+        "sprite_offset": 3459,
+        "width": 23,
+        "x": 610,
+        "y": 57
+    },
+    {
+        "angle": -73.0724868774414,
+        "height": 22,
+        "id": 130,
+        "sprite_offset": 3482,
+        "width": 36,
+        "x": 77,
+        "y": 59
+    },
+    {
+        "angle": -90.0,
+        "height": 6,
+        "id": 131,
+        "sprite_offset": 3518,
+        "width": 12,
+        "x": 304,
+        "y": 58
+    },
+    {
+        "angle": -80.90972137451172,
+        "height": 16,
+        "id": 132,
+        "sprite_offset": 3530,
+        "width": 31,
+        "x": 15,
+        "y": 61
+    },
+    {
+        "angle": -32.47119140625,
+        "height": 13,
+        "id": 133,
+        "sprite_offset": 3561,
+        "width": 8,
+        "x": 146,
+        "y": 61
+    },
+    {
+        "angle": 0.0,
+        "height": 1,
+        "id": 134,
+        "sprite_offset": 3569,
+        "width": 4,
+        "x": 231,
+        "y": 60
+    },
+    {
+        "angle": 0.0,
+        "height": 1,
+        "id": 135,
+        "sprite_offset": 3573,
+        "width": 2,
+        "x": 237,
+        "y": 61
+    },
+    {
+        "angle": -18.43494987487793,
+        "height": 20,
+        "id": 136,
+        "sprite_offset": 3575,
+        "width": 14,
+        "x": 276,
+        "y": 61
+    },
+    {
+        "angle": -0.0,
+        "height": 6,
+        "id": 137,
+        "sprite_offset": 3589,
+        "width": 3,
+        "x": 319,
+        "y": 61
+    },
+    {
+        "angle": -78.69007110595703,
+        "height": 12,
+        "id": 138,
+        "sprite_offset": 3592,
+        "width": 10,
+        "x": 64,
+        "y": 62
+    },
+    {
+        "angle": -43.87669372558594,
+        "height": 42,
+        "id": 139,
+        "sprite_offset": 3602,
+        "width": 43,
+        "x": 198,
+        "y": 62
+    },
+    {
+        "angle": -14.03624439239502,
+        "height": 12,
+        "id": 140,
+        "sprite_offset": 3645,
+        "width": 15,
+        "x": 305,
+        "y": 62
+    },
+    {
+        "angle": -86.18592071533203,
+        "height": 12,
+        "id": 141,
+        "sprite_offset": 3660,
+        "width": 33,
+        "x": 323,
+        "y": 62
+    },
+    {
+        "angle": -63.43495178222656,
+        "height": 6,
+        "id": 142,
+        "sprite_offset": 3693,
+        "width": 9,
+        "x": 357,
+        "y": 63
+    },
+    {
+        "angle": -14.03624439239502,
+        "height": 15,
+        "id": 143,
+        "sprite_offset": 3702,
+        "width": 21,
+        "x": 123,
+        "y": 64
+    },
+    {
+        "angle": -5.710593223571777,
+        "height": 25,
+        "id": 144,
+        "sprite_offset": 3723,
+        "width": 9,
+        "x": 268,
+        "y": 64
+    },
+    {
+        "angle": -14.03624439239502,
+        "height": 13,
+        "id": 145,
+        "sprite_offset": 3732,
+        "width": 16,
+        "x": 290,
+        "y": 65
+    },
+    {
+        "angle": -84.80557250976562,
+        "height": 37,
+        "id": 146,
+        "sprite_offset": 3748,
+        "width": 19,
+        "x": 0,
+        "y": 67
+    },
+    {
+        "angle": -0.0,
+        "height": 6,
+        "id": 147,
+        "sprite_offset": 3767,
+        "width": 9,
+        "x": 53,
+        "y": 67
+    },
+    {
+        "angle": -0.0,
+        "height": 30,
+        "id": 148,
+        "sprite_offset": 3776,
+        "width": 30,
+        "x": 239,
+        "y": 66
+    },
+    {
+        "angle": -49.08561706542969,
+        "height": 22,
+        "id": 149,
+        "sprite_offset": 3806,
+        "width": 26,
+        "x": 352,
+        "y": 66
+    },
+    {
+        "angle": -0.0,
+        "height": 4,
+        "id": 150,
+        "sprite_offset": 3832,
+        "width": 5,
+        "x": 47,
+        "y": 68
+    },
+    {
+        "angle": -30.963754653930664,
+        "height": 29,
+        "id": 151,
+        "sprite_offset": 3837,
+        "width": 27,
+        "x": 108,
+        "y": 69
+    },
+    {
+        "angle": -0.0,
+        "height": 10,
+        "id": 152,
+        "sprite_offset": 3864,
+        "width": 13,
+        "x": 191,
+        "y": 69
+    },
+    {
+        "angle": -90.0,
+        "height": 14,
+        "id": 153,
+        "sprite_offset": 3877,
+        "width": 8,
+        "x": 610,
+        "y": 69
+    },
+    {
+        "angle": -85.60128784179688,
+        "height": 16,
+        "id": 154,
+        "sprite_offset": 3885,
+        "width": 14,
+        "x": 617,
+        "y": 68
+    },
+    {
+        "angle": -10.30484676361084,
+        "height": 40,
+        "id": 155,
+        "sprite_offset": 3899,
+        "width": 30,
+        "x": 401,
+        "y": 71
+    },
+    {
+        "angle": -45.0,
+        "height": 17,
+        "id": 156,
+        "sprite_offset": 3929,
+        "width": 17,
+        "x": 598,
+        "y": 71
+    },
+    {
+        "angle": -0.0,
+        "height": 5,
+        "id": 157,
+        "sprite_offset": 3946,
+        "width": 5,
+        "x": 46,
+        "y": 73
+    },
+    {
+        "angle": -81.8698959350586,
+        "height": 7,
+        "id": 158,
+        "sprite_offset": 3951,
+        "width": 18,
+        "x": 174,
+        "y": 73
+    },
+    {
+        "angle": -14.620874404907227,
+        "height": 38,
+        "id": 159,
+        "sprite_offset": 3969,
+        "width": 21,
+        "x": 308,
+        "y": 72
+    },
+    {
+        "angle": -35.53767776489258,
+        "height": 23,
+        "id": 160,
+        "sprite_offset": 3990,
+        "width": 22,
+        "x": 327,
+        "y": 72
+    },
+    {
+        "angle": -20.556045532226562,
+        "height": 9,
+        "id": 161,
+        "sprite_offset": 4012,
+        "width": 19,
+        "x": 422,
+        "y": 72
+    },
+    {
+        "angle": -33.6900634765625,
+        "height": 17,
+        "id": 162,
+        "sprite_offset": 4031,
+        "width": 16,
+        "x": 453,
+        "y": 72
+    },
+    {
+        "angle": -81.02737426757812,
+        "height": 28,
+        "id": 163,
+        "sprite_offset": 4047,
+        "width": 31,
+        "x": 19,
+        "y": 75
+    },
+    {
+        "angle": -80.53767395019531,
+        "height": 6,
+        "id": 164,
+        "sprite_offset": 4078,
+        "width": 8,
+        "x": 52,
+        "y": 74
+    },
+    {
+        "angle": -0.0,
+        "height": 6,
+        "id": 165,
+        "sprite_offset": 4086,
+        "width": 7,
+        "x": 62,
+        "y": 75
+    },
+    {
+        "angle": -63.43495178222656,
+        "height": 10,
+        "id": 166,
+        "sprite_offset": 4093,
+        "width": 16,
+        "x": 70,
+        "y": 74
+    },
+    {
+        "angle": -40.601295471191406,
+        "height": 17,
+        "id": 167,
+        "sprite_offset": 4109,
+        "width": 17,
+        "x": 151,
+        "y": 75
+    },
+    {
+        "angle": -45.0,
+        "height": 12,
+        "id": 168,
+        "sprite_offset": 4126,
+        "width": 15,
+        "x": 344,
+        "y": 75
+    },
+    {
+        "angle": -77.90524291992188,
+        "height": 21,
+        "id": 169,
+        "sprite_offset": 4141,
+        "width": 35,
+        "x": 125,
+        "y": 77
+    },
+    {
+        "angle": 0.0,
+        "height": 1,
+        "id": 170,
+        "sprite_offset": 4176,
+        "width": 1,
+        "x": 168,
+        "y": 77
+    },
+    {
+        "angle": -15.945395469665527,
+        "height": 20,
+        "id": 171,
+        "sprite_offset": 4177,
+        "width": 27,
+        "x": 283,
+        "y": 76
+    },
+    {
+        "angle": -17.52556800842285,
+        "height": 18,
+        "id": 172,
+        "sprite_offset": 4204,
+        "width": 25,
+        "x": 424,
+        "y": 77
+    },
+    {
+        "angle": -80.53767395019531,
+        "height": 3,
+        "id": 173,
+        "sprite_offset": 4229,
+        "width": 12,
+        "x": 176,
+        "y": 79
+    },
+    {
+        "angle": -21.801406860351562,
+        "height": 7,
+        "id": 174,
+        "sprite_offset": 4241,
+        "width": 10,
+        "x": 193,
+        "y": 78
+    },
+    {
+        "angle": -35.83765411376953,
+        "height": 31,
+        "id": 175,
+        "sprite_offset": 4251,
+        "width": 34,
+        "x": 211,
+        "y": 79
+    },
+    {
+        "angle": -49.398704528808594,
+        "height": 13,
+        "id": 176,
+        "sprite_offset": 4285,
+        "width": 15,
+        "x": 377,
+        "y": 79
+    },
+    {
+        "angle": -74.74488067626953,
+        "height": 28,
+        "id": 177,
+        "sprite_offset": 4300,
+        "width": 14,
+        "x": 45,
+        "y": 80
+    },
+    {
+        "angle": -49.398704528808594,
+        "height": 11,
+        "id": 178,
+        "sprite_offset": 4314,
+        "width": 13,
+        "x": 89,
+        "y": 81
+    },
+    {
+        "angle": -86.42366790771484,
+        "height": 32,
+        "id": 179,
+        "sprite_offset": 4327,
+        "width": 33,
+        "x": 165,
+        "y": 80
+    },
+    {
+        "angle": -90.0,
+        "height": 21,
+        "id": 180,
+        "sprite_offset": 4360,
+        "width": 17,
+        "x": 595,
+        "y": 80
+    },
+    {
+        "angle": -81.8698959350586,
+        "height": 36,
+        "id": 181,
+        "sprite_offset": 4377,
+        "width": 12,
+        "x": 56,
+        "y": 82
+    },
+    {
+        "angle": -83.6598129272461,
+        "height": 22,
+        "id": 182,
+        "sprite_offset": 4389,
+        "width": 20,
+        "x": 67,
+        "y": 83
+    },
+    {
+        "angle": -38.65980911254883,
+        "height": 25,
+        "id": 183,
+        "sprite_offset": 4409,
+        "width": 23,
+        "x": 97,
+        "y": 82
+    },
+    {
+        "angle": -29.744882583618164,
+        "height": 14,
+        "id": 184,
+        "sprite_offset": 4432,
+        "width": 16,
+        "x": 460,
+        "y": 82
+    },
+    {
+        "angle": -32.47119140625,
+        "height": 11,
+        "id": 185,
+        "sprite_offset": 4448,
+        "width": 17,
+        "x": 330,
+        "y": 85
+    },
+    {
+        "angle": -45.0,
+        "height": 17,
+        "id": 186,
+        "sprite_offset": 4465,
+        "width": 16,
+        "x": 351,
+        "y": 85
+    },
+    {
+        "angle": -49.398704528808594,
+        "height": 13,
+        "id": 187,
+        "sprite_offset": 4481,
+        "width": 17,
+        "x": 371,
+        "y": 84
+    },
+    {
+        "angle": -0.0,
+        "height": 26,
+        "id": 188,
+        "sprite_offset": 4498,
+        "width": 9,
+        "x": 87,
+        "y": 89
+    },
+    {
+        "angle": -78.69007110595703,
+        "height": 20,
+        "id": 189,
+        "sprite_offset": 4507,
+        "width": 18,
+        "x": 552,
+        "y": 89
+    },
+    {
+        "angle": -26.56505012512207,
+        "height": 18,
+        "id": 190,
+        "sprite_offset": 4525,
+        "width": 13,
+        "x": 280,
+        "y": 90
+    },
+    {
+        "angle": -24.443954467773438,
+        "height": 13,
+        "id": 191,
+        "sprite_offset": 4538,
+        "width": 17,
+        "x": 296,
+        "y": 91
+    },
+    {
+        "angle": -60.06848907470703,
+        "height": 34,
+        "id": 192,
+        "sprite_offset": 4555,
+        "width": 38,
+        "x": 330,
+        "y": 91
+    },
+    {
+        "angle": -48.8140754699707,
+        "height": 17,
+        "id": 193,
+        "sprite_offset": 4593,
+        "width": 19,
+        "x": 364,
+        "y": 91
+    },
+    {
+        "angle": -67.61986541748047,
+        "height": 22,
+        "id": 194,
+        "sprite_offset": 4612,
+        "width": 33,
+        "x": 430,
+        "y": 91
+    },
+    {
+        "angle": -68.74949645996094,
+        "height": 28,
+        "id": 195,
+        "sprite_offset": 4645,
+        "width": 18,
+        "x": 262,
+        "y": 93
+    },
+    {
+        "angle": -18.434947967529297,
+        "height": 15,
+        "id": 196,
+        "sprite_offset": 4663,
+        "width": 17,
+        "x": 485,
+        "y": 92
+    },
+    {
+        "angle": -81.46923065185547,
+        "height": 31,
+        "id": 197,
+        "sprite_offset": 4680,
+        "width": 19,
+        "x": 134,
+        "y": 95
+    },
+    {
+        "angle": -0.0,
+        "height": 4,
+        "id": 198,
+        "sprite_offset": 4699,
+        "width": 2,
+        "x": 394,
+        "y": 95
+    },
+    {
+        "angle": -45.0,
+        "height": 18,
+        "id": 199,
+        "sprite_offset": 4701,
+        "width": 13,
+        "x": 96,
+        "y": 96
+    },
+    {
+        "angle": -21.801406860351562,
+        "height": 17,
+        "id": 200,
+        "sprite_offset": 4714,
+        "width": 17,
+        "x": 470,
+        "y": 96
+    },
+    {
+        "angle": -0.0,
+        "height": 7,
+        "id": 201,
+        "sprite_offset": 4731,
+        "width": 13,
+        "x": 119,
+        "y": 99
+    },
+    {
+        "angle": -45.0,
+        "height": 25,
+        "id": 202,
+        "sprite_offset": 4744,
+        "width": 22,
+        "x": 151,
+        "y": 99
+    },
+    {
+        "angle": -80.53767395019531,
+        "height": 13,
+        "id": 203,
+        "sprite_offset": 4766,
+        "width": 10,
+        "x": 258,
+        "y": 98
+    },
+    {
+        "angle": -20.556045532226562,
+        "height": 11,
+        "id": 204,
+        "sprite_offset": 4776,
+        "width": 6,
+        "x": 279,
+        "y": 99
+    },
+    {
+        "angle": -45.0,
+        "height": 17,
+        "id": 205,
+        "sprite_offset": 4782,
+        "width": 18,
+        "x": 357,
+        "y": 98
+    },
+    {
+        "angle": -45.0,
+        "height": 6,
+        "id": 206,
+        "sprite_offset": 4800,
+        "width": 6,
+        "x": 390,
+        "y": 98
+    },
+    {
+        "angle": -0.0,
+        "height": 6,
+        "id": 207,
+        "sprite_offset": 4806,
+        "width": 18,
+        "x": 593,
+        "y": 99
+    },
+    {
+        "angle": -80.53767395019531,
+        "height": 10,
+        "id": 208,
+        "sprite_offset": 4824,
+        "width": 25,
+        "x": 18,
+        "y": 101
+    },
+    {
+        "angle": -4.763641834259033,
+        "height": 27,
+        "id": 209,
+        "sprite_offset": 4849,
+        "width": 19,
+        "x": 243,
+        "y": 100
+    },
+    {
+        "angle": -63.43495178222656,
+        "height": 9,
+        "id": 210,
+        "sprite_offset": 4868,
+        "width": 5,
+        "x": 569,
+        "y": 101
+    },
+    {
+        "angle": -0.0,
+        "height": 14,
+        "id": 211,
+        "sprite_offset": 4873,
+        "width": 28,
+        "x": 590,
+        "y": 100
+    },
+    {
+        "angle": -63.43495178222656,
+        "height": 28,
+        "id": 212,
+        "sprite_offset": 4901,
+        "width": 24,
+        "x": 97,
+        "y": 103
+    },
+    {
+        "angle": -18.43494987487793,
+        "height": 11,
+        "id": 213,
+        "sprite_offset": 4925,
+        "width": 12,
+        "x": 303,
+        "y": 102
+    },
+    {
+        "angle": -45.0,
+        "height": 12,
+        "id": 214,
+        "sprite_offset": 4937,
+        "width": 11,
+        "x": 381,
+        "y": 103
+    },
+    {
+        "angle": -71.56504821777344,
+        "height": 9,
+        "id": 215,
+        "sprite_offset": 4948,
+        "width": 10,
+        "x": 44,
+        "y": 105
+    },
+    {
+        "angle": -78.69007110595703,
+        "height": 18,
+        "id": 216,
+        "sprite_offset": 4958,
+        "width": 19,
+        "x": 65,
+        "y": 104
+    },
+    {
+        "angle": -4.398705005645752,
+        "height": 18,
+        "id": 217,
+        "sprite_offset": 4977,
+        "width": 17,
+        "x": 116,
+        "y": 104
+    },
+    {
+        "angle": -52.4314079284668,
+        "height": 23,
+        "id": 218,
+        "sprite_offset": 4994,
+        "width": 16,
+        "x": 228,
+        "y": 104
+    },
+    {
+        "angle": 90.0,
+        "height": 2,
+        "id": 219,
+        "sprite_offset": 5010,
+        "width": 1,
+        "x": 396,
+        "y": 105
+    },
+    {
+        "angle": -18.434947967529297,
+        "height": 23,
+        "id": 220,
+        "sprite_offset": 5011,
+        "width": 19,
+        "x": 490,
+        "y": 104
+    },
+    {
+        "angle": -9.462321281433105,
+        "height": 7,
+        "id": 221,
+        "sprite_offset": 5030,
+        "width": 13,
+        "x": 576,
+        "y": 105
+    },
+    {
+        "angle": -77.00537872314453,
+        "height": 12,
+        "id": 222,
+        "sprite_offset": 5043,
+        "width": 16,
+        "x": 0,
+        "y": 107
+    },
+    {
+        "angle": 90.0,
+        "height": 7,
+        "id": 223,
+        "sprite_offset": 5059,
+        "width": 1,
+        "x": 133,
+        "y": 107
+    },
+    {
+        "angle": -15.945395469665527,
+        "height": 8,
+        "id": 224,
+        "sprite_offset": 5060,
+        "width": 11,
+        "x": 286,
+        "y": 107
+    },
+    {
+        "angle": -17.354022979736328,
+        "height": 25,
+        "id": 225,
+        "sprite_offset": 5071,
+        "width": 18,
+        "x": 318,
+        "y": 107
+    },
+    {
+        "angle": -63.43495178222656,
+        "height": 8,
+        "id": 226,
+        "sprite_offset": 5089,
+        "width": 9,
+        "x": 337,
+        "y": 107
+    },
+    {
+        "angle": -10.30484676361084,
+        "height": 22,
+        "id": 227,
+        "sprite_offset": 5098,
+        "width": 10,
+        "x": 466,
+        "y": 106
+    },
+    {
+        "angle": -26.56505012512207,
+        "height": 16,
+        "id": 228,
+        "sprite_offset": 5108,
+        "width": 16,
+        "x": 205,
+        "y": 109
+    },
+    {
+        "angle": -0.0,
+        "height": 10,
+        "id": 229,
+        "sprite_offset": 5124,
+        "width": 11,
+        "x": 270,
+        "y": 108
+    },
+    {
+        "angle": -18.43494987487793,
+        "height": 19,
+        "id": 230,
+        "sprite_offset": 5135,
+        "width": 10,
+        "x": 332,
+        "y": 108
+    },
+    {
+        "angle": -45.0,
+        "height": 22,
+        "id": 231,
+        "sprite_offset": 5145,
+        "width": 16,
+        "x": 387,
+        "y": 108
+    },
+    {
+        "angle": -78.69007110595703,
+        "height": 12,
+        "id": 232,
+        "sprite_offset": 5161,
+        "width": 36,
+        "x": 16,
+        "y": 111
+    },
+    {
+        "angle": -71.56504821777344,
+        "height": 17,
+        "id": 233,
+        "sprite_offset": 5197,
+        "width": 14,
+        "x": 84,
+        "y": 110
+    },
+    {
+        "angle": -15.64224624633789,
+        "height": 45,
+        "id": 234,
+        "sprite_offset": 5211,
+        "width": 51,
+        "x": 173,
+        "y": 110
+    },
+    {
+        "angle": -90.0,
+        "height": 7,
+        "id": 235,
+        "sprite_offset": 5262,
+        "width": 6,
+        "x": 282,
+        "y": 111
+    },
+    {
+        "angle": -8.130102157592773,
+        "height": 21,
+        "id": 236,
+        "sprite_offset": 5268,
+        "width": 20,
+        "x": 301,
+        "y": 111
+    },
+    {
+        "angle": -41.18592834472656,
+        "height": 16,
+        "id": 237,
+        "sprite_offset": 5288,
+        "width": 12,
+        "x": 344,
+        "y": 111
+    },
+    {
+        "angle": -77.19573211669922,
+        "height": 23,
+        "id": 238,
+        "sprite_offset": 5300,
+        "width": 51,
+        "x": 411,
+        "y": 111
+    },
+    {
+        "angle": -20.556047439575195,
+        "height": 17,
+        "id": 239,
+        "sprite_offset": 5351,
+        "width": 17,
+        "x": 475,
+        "y": 110
+    },
+    {
+        "angle": -45.0,
+        "height": 9,
+        "id": 240,
+        "sprite_offset": 5368,
+        "width": 10,
+        "x": 374,
+        "y": 113
+    },
+    {
+        "angle": -80.53767395019531,
+        "height": 18,
+        "id": 241,
+        "sprite_offset": 5378,
+        "width": 14,
+        "x": 574,
+        "y": 112
+    },
+    {
+        "angle": -36.02737808227539,
+        "height": 14,
+        "id": 242,
+        "sprite_offset": 5392,
+        "width": 9,
+        "x": 134,
+        "y": 115
+    },
+    {
+        "angle": -72.89727020263672,
+        "height": 19,
+        "id": 243,
+        "sprite_offset": 5401,
+        "width": 21,
+        "x": 110,
+        "y": 116
+    },
+    {
+        "angle": -45.0,
+        "height": 11,
+        "id": 244,
+        "sprite_offset": 5422,
+        "width": 15,
+        "x": 165,
+        "y": 116
+    },
+    {
+        "angle": -81.8698959350586,
+        "height": 11,
+        "id": 245,
+        "sprite_offset": 5437,
+        "width": 21,
+        "x": 215,
+        "y": 117
+    },
+    {
+        "angle": -48.36646270751953,
+        "height": 17,
+        "id": 246,
+        "sprite_offset": 5458,
+        "width": 11,
+        "x": 355,
+        "y": 117
+    },
+    {
+        "angle": -45.0,
+        "height": 13,
+        "id": 247,
+        "sprite_offset": 5469,
+        "width": 12,
+        "x": 380,
+        "y": 117
+    },
+    {
+        "angle": -19.653823852539062,
+        "height": 17,
+        "id": 248,
+        "sprite_offset": 5481,
+        "width": 16,
+        "x": 288,
+        "y": 118
+    },
+    {
+        "angle": -36.869895935058594,
+        "height": 22,
+        "id": 249,
+        "sprite_offset": 5497,
+        "width": 15,
+        "x": 341,
+        "y": 119
+    },
+    {
+        "angle": -90.0,
+        "height": 21,
+        "id": 250,
+        "sprite_offset": 5512,
+        "width": 9,
+        "x": 271,
+        "y": 121
+    },
+    {
+        "angle": 0.0,
+        "height": 1,
+        "id": 251,
+        "sprite_offset": 5521,
+        "width": 1,
+        "x": 374,
+        "y": 121
+    },
+    {
+        "angle": -71.56504821777344,
+        "height": 2,
+        "id": 252,
+        "sprite_offset": 5522,
+        "width": 5,
+        "x": 54,
+        "y": 122
+    },
+    {
+        "angle": -80.53767395019531,
+        "height": 6,
+        "id": 253,
+        "sprite_offset": 5527,
+        "width": 8,
+        "x": 150,
+        "y": 123
+    },
+    {
+        "angle": -19.653823852539062,
+        "height": 20,
+        "id": 254,
+        "sprite_offset": 5535,
+        "width": 12,
+        "x": 264,
+        "y": 122
+    },
+    {
+        "angle": -45.0,
+        "height": 14,
+        "id": 255,
+        "sprite_offset": 5547,
+        "width": 14,
+        "x": 371,
+        "y": 123
+    },
+    {
+        "angle": -62.81888961791992,
+        "height": 57,
+        "id": 256,
+        "sprite_offset": 5561,
+        "width": 35,
+        "x": 399,
+        "y": 123
+    },
+    {
+        "angle": -90.0,
+        "height": 75,
+        "id": 257,
+        "sprite_offset": 5596,
+        "width": 19,
+        "x": 0,
+        "y": 125
+    },
+    {
+        "angle": -63.43495178222656,
+        "height": 14,
+        "id": 258,
+        "sprite_offset": 5615,
+        "width": 10,
+        "x": 127,
+        "y": 125
+    },
+    {
+        "angle": -0.0,
+        "height": 5,
+        "id": 259,
+        "sprite_offset": 5625,
+        "width": 2,
+        "x": 286,
+        "y": 124
+    },
+    {
+        "angle": -48.8140754699707,
+        "height": 37,
+        "id": 260,
+        "sprite_offset": 5627,
+        "width": 27,
+        "x": 380,
+        "y": 125
+    },
+    {
+        "angle": -80.53767395019531,
+        "height": 10,
+        "id": 261,
+        "sprite_offset": 5654,
+        "width": 14,
+        "x": 471,
+        "y": 125
+    },
+    {
+        "angle": -89.0759506225586,
+        "height": 80,
+        "id": 262,
+        "sprite_offset": 5668,
+        "width": 85,
+        "x": 6,
+        "y": 126
+    },
+    {
+        "angle": -71.56504821777344,
+        "height": 6,
+        "id": 263,
+        "sprite_offset": 5753,
+        "width": 14,
+        "x": 143,
+        "y": 127
+    },
+    {
+        "angle": -90.0,
+        "height": 8,
+        "id": 264,
+        "sprite_offset": 5767,
+        "width": 13,
+        "x": 213,
+        "y": 127
+    },
+    {
+        "angle": -82.87498474121094,
+        "height": 14,
+        "id": 265,
+        "sprite_offset": 5780,
+        "width": 24,
+        "x": 242,
+        "y": 126
+    },
+    {
+        "angle": -45.0,
+        "height": 9,
+        "id": 266,
+        "sprite_offset": 5804,
+        "width": 9,
+        "x": 335,
+        "y": 126
+    },
+    {
+        "angle": -81.8698959350586,
+        "height": 12,
+        "id": 267,
+        "sprite_offset": 5813,
+        "width": 9,
+        "x": 485,
+        "y": 127
+    },
+    {
+        "angle": -70.01689147949219,
+        "height": 12,
+        "id": 268,
+        "sprite_offset": 5822,
+        "width": 7,
+        "x": 503,
+        "y": 127
+    },
+    {
+        "angle": -74.05460357666016,
+        "height": 12,
+        "id": 269,
+        "sprite_offset": 5829,
+        "width": 20,
+        "x": 136,
+        "y": 129
+    },
+    {
+        "angle": -0.0,
+        "height": 9,
+        "id": 270,
+        "sprite_offset": 5849,
+        "width": 11,
+        "x": 163,
+        "y": 128
+    },
+    {
+        "angle": -85.60128784179688,
+        "height": 22,
+        "id": 271,
+        "sprite_offset": 5860,
+        "width": 11,
+        "x": 174,
+        "y": 128
+    },
+    {
+        "angle": -75.96376037597656,
+        "height": 8,
+        "id": 272,
+        "sprite_offset": 5871,
+        "width": 9,
+        "x": 226,
+        "y": 128
+    },
+    {
+        "angle": -90.0,
+        "height": 5,
+        "id": 273,
+        "sprite_offset": 5880,
+        "width": 6,
+        "x": 495,
+        "y": 129
+    },
+    {
+        "angle": -0.0,
+        "height": 10,
+        "id": 274,
+        "sprite_offset": 5886,
+        "width": 10,
+        "x": 284,
+        "y": 130
+    },
+    {
+        "angle": -50.19443130493164,
+        "height": 18,
+        "id": 275,
+        "sprite_offset": 5896,
+        "width": 16,
+        "x": 365,
+        "y": 131
+    },
+    {
+        "angle": -78.69007110595703,
+        "height": 6,
+        "id": 276,
+        "sprite_offset": 5912,
+        "width": 15,
+        "x": 430,
+        "y": 130
+    },
+    {
+        "angle": 45.0,
+        "height": 3,
+        "id": 277,
+        "sprite_offset": 5927,
+        "width": 3,
+        "x": 468,
+        "y": 130
+    },
+    {
+        "angle": -80.53767395019531,
+        "height": 6,
+        "id": 278,
+        "sprite_offset": 5930,
+        "width": 21,
+        "x": 61,
+        "y": 132
+    },
+    {
+        "angle": -45.0,
+        "height": 3,
+        "id": 279,
+        "sprite_offset": 5951,
+        "width": 3,
+        "x": 233,
+        "y": 133
+    },
+    {
+        "angle": -4.085616588592529,
+        "height": 7,
+        "id": 280,
+        "sprite_offset": 5954,
+        "width": 17,
+        "x": 446,
+        "y": 133
+    },
+    {
+        "angle": -75.46554565429688,
+        "height": 61,
+        "id": 281,
+        "sprite_offset": 5971,
+        "width": 33,
+        "x": 78,
+        "y": 135
+    },
+    {
+        "angle": -0.0,
+        "height": 15,
+        "id": 282,
+        "sprite_offset": 6004,
+        "width": 15,
+        "x": 308,
+        "y": 135
+    },
+    {
+        "angle": -45.0,
+        "height": 8,
+        "id": 283,
+        "sprite_offset": 6019,
+        "width": 7,
+        "x": 341,
+        "y": 134
+    },
+    {
+        "angle": -45.0,
+        "height": 7,
+        "id": 284,
+        "sprite_offset": 6026,
+        "width": 9,
+        "x": 466,
+        "y": 134
+    },
+    {
+        "angle": -80.53767395019531,
+        "height": 7,
+        "id": 285,
+        "sprite_offset": 6035,
+        "width": 13,
+        "x": 472,
+        "y": 134
+    },
+    {
+        "angle": -8.130102157592773,
+        "height": 16,
+        "id": 286,
+        "sprite_offset": 6048,
+        "width": 7,
+        "x": 495,
+        "y": 135
+    },
+    {
+        "angle": -80.53767395019531,
+        "height": 7,
+        "id": 287,
+        "sprite_offset": 6055,
+        "width": 19,
+        "x": 507,
+        "y": 135
+    },
+    {
+        "angle": -50.19443130493164,
+        "height": 8,
+        "id": 288,
+        "sprite_offset": 6074,
+        "width": 6,
+        "x": 156,
+        "y": 136
+    },
+    {
+        "angle": -84.2894058227539,
+        "height": 11,
+        "id": 289,
+        "sprite_offset": 6080,
+        "width": 13,
+        "x": 161,
+        "y": 137
+    },
+    {
+        "angle": -45.0,
+        "height": 2,
+        "id": 290,
+        "sprite_offset": 6093,
+        "width": 2,
+        "x": 295,
+        "y": 136
+    },
+    {
+        "angle": -0.0,
+        "height": 10,
+        "id": 291,
+        "sprite_offset": 6095,
+        "width": 7,
+        "x": 323,
+        "y": 137
+    },
+    {
+        "angle": -75.96376037597656,
+        "height": 4,
+        "id": 292,
+        "sprite_offset": 6102,
+        "width": 11,
+        "x": 136,
+        "y": 138
+    },
+    {
+        "angle": -0.0,
+        "height": 16,
+        "id": 293,
+        "sprite_offset": 6113,
+        "width": 13,
+        "x": 221,
+        "y": 138
+    },
+    {
+        "angle": -65.3764419555664,
+        "height": 74,
+        "id": 294,
+        "sprite_offset": 6126,
+        "width": 64,
+        "x": 279,
+        "y": 138
+    },
+    {
+        "angle": -33.690067291259766,
+        "height": 12,
+        "id": 295,
+        "sprite_offset": 6190,
+        "width": 12,
+        "x": 329,
+        "y": 138
+    },
+    {
+        "angle": -45.0,
+        "height": 10,
+        "id": 296,
+        "sprite_offset": 6202,
+        "width": 9,
+        "x": 359,
+        "y": 138
+    },
+    {
+        "angle": -74.05460357666016,
+        "height": 46,
+        "id": 297,
+        "sprite_offset": 6211,
+        "width": 40,
+        "x": 237,
+        "y": 140
+    },
+    {
+        "angle": -90.0,
+        "height": 2,
+        "id": 298,
+        "sprite_offset": 6251,
+        "width": 5,
+        "x": 286,
+        "y": 141
+    },
+    {
+        "angle": -63.43495178222656,
+        "height": 6,
+        "id": 299,
+        "sprite_offset": 6256,
+        "width": 6,
+        "x": 347,
+        "y": 140
+    },
+    {
+        "angle": -4.398705005645752,
+        "height": 20,
+        "id": 300,
+        "sprite_offset": 6262,
+        "width": 9,
+        "x": 503,
+        "y": 140
+    },
+    {
+        "angle": -0.0,
+        "height": 11,
+        "id": 301,
+        "sprite_offset": 6271,
+        "width": 24,
+        "x": 109,
+        "y": 143
+    },
+    {
+        "angle": 0.0,
+        "height": 1,
+        "id": 302,
+        "sprite_offset": 6295,
+        "width": 2,
+        "x": 148,
+        "y": 142
+    },
+    {
+        "angle": 0.0,
+        "height": 1,
+        "id": 303,
+        "sprite_offset": 6297,
+        "width": 2,
+        "x": 283,
+        "y": 142
+    },
+    {
+        "angle": -29.05460548400879,
+        "height": 10,
+        "id": 304,
+        "sprite_offset": 6299,
+        "width": 12,
+        "x": 288,
+        "y": 143
+    },
+    {
+        "angle": -83.6598129272461,
+        "height": 4,
+        "id": 305,
+        "sprite_offset": 6311,
+        "width": 14,
+        "x": 434,
+        "y": 143
+    },
+    {
+        "angle": -80.53767395019531,
+        "height": 4,
+        "id": 306,
+        "sprite_offset": 6325,
+        "width": 11,
+        "x": 252,
+        "y": 144
+    },
+    {
+        "angle": -53.13010025024414,
+        "height": 9,
+        "id": 307,
+        "sprite_offset": 6336,
+        "width": 11,
+        "x": 366,
+        "y": 144
+    },
+    {
+        "angle": -75.96376037597656,
+        "height": 5,
+        "id": 308,
+        "sprite_offset": 6347,
+        "width": 13,
+        "x": 264,
+        "y": 146
+    },
+    {
+        "angle": 0.0,
+        "height": 1,
+        "id": 309,
+        "sprite_offset": 6360,
+        "width": 1,
+        "x": 358,
+        "y": 147
+    },
+    {
+        "angle": -84.80557250976562,
+        "height": 12,
+        "id": 310,
+        "sprite_offset": 6361,
+        "width": 23,
+        "x": 428,
+        "y": 146
+    },
+    {
+        "angle": -48.01278305053711,
+        "height": 21,
+        "id": 311,
+        "sprite_offset": 6384,
+        "width": 24,
+        "x": 452,
+        "y": 147
+    },
+    {
+        "angle": -71.56504821777344,
+        "height": 8,
+        "id": 312,
+        "sprite_offset": 6408,
+        "width": 12,
+        "x": 482,
+        "y": 147
+    },
+    {
+        "angle": -90.0,
+        "height": 4,
+        "id": 313,
+        "sprite_offset": 6420,
+        "width": 10,
+        "x": 134,
+        "y": 149
+    },
+    {
+        "angle": -45.0,
+        "height": 6,
+        "id": 314,
+        "sprite_offset": 6430,
+        "width": 7,
+        "x": 340,
+        "y": 148
+    },
+    {
+        "angle": -41.987213134765625,
+        "height": 13,
+        "id": 315,
+        "sprite_offset": 6437,
+        "width": 15,
+        "x": 469,
+        "y": 148
+    },
+    {
+        "angle": -90.0,
+        "height": 3,
+        "id": 316,
+        "sprite_offset": 6452,
+        "width": 4,
+        "x": 477,
+        "y": 149
+    },
+    {
+        "angle": -51.34019470214844,
+        "height": 9,
+        "id": 317,
+        "sprite_offset": 6456,
+        "width": 11,
+        "x": 376,
+        "y": 151
+    },
+    {
+        "angle": -45.0,
+        "height": 8,
+        "id": 318,
+        "sprite_offset": 6467,
+        "width": 13,
+        "x": 354,
+        "y": 153
+    },
+    {
+        "angle": -68.74949645996094,
+        "height": 96,
+        "id": 319,
+        "sprite_offset": 6480,
+        "width": 93,
+        "x": 417,
+        "y": 152
+    },
+    {
+        "angle": -90.0,
+        "height": 6,
+        "id": 320,
+        "sprite_offset": 6573,
+        "width": 5,
+        "x": 485,
+        "y": 153
+    },
+    {
+        "angle": -81.02737426757812,
+        "height": 19,
+        "id": 321,
+        "sprite_offset": 6578,
+        "width": 24,
+        "x": 105,
+        "y": 154
+    },
+    {
+        "angle": -0.0,
+        "height": 19,
+        "id": 322,
+        "sprite_offset": 6602,
+        "width": 7,
+        "x": 130,
+        "y": 154
+    },
+    {
+        "angle": -83.2901611328125,
+        "height": 20,
+        "id": 323,
+        "sprite_offset": 6609,
+        "width": 10,
+        "x": 136,
+        "y": 154
+    },
+    {
+        "angle": -0.0,
+        "height": 22,
+        "id": 324,
+        "sprite_offset": 6619,
+        "width": 9,
+        "x": 150,
+        "y": 154
+    },
+    {
+        "angle": -90.0,
+        "height": 14,
+        "id": 325,
+        "sprite_offset": 6628,
+        "width": 10,
+        "x": 160,
+        "y": 155
+    },
+    {
+        "angle": -19.98310661315918,
+        "height": 12,
+        "id": 326,
+        "sprite_offset": 6638,
+        "width": 10,
+        "x": 165,
+        "y": 155
+    },
+    {
+        "angle": -80.53767395019531,
+        "height": 7,
+        "id": 327,
+        "sprite_offset": 6648,
+        "width": 11,
+        "x": 217,
+        "y": 155
+    },
+    {
+        "angle": -0.0,
+        "height": 7,
+        "id": 328,
+        "sprite_offset": 6659,
+        "width": 5,
+        "x": 228,
+        "y": 155
+    },
+    {
+        "angle": -71.56504821777344,
+        "height": 7,
+        "id": 329,
+        "sprite_offset": 6664,
+        "width": 7,
+        "x": 190,
+        "y": 157
+    },
+    {
+        "angle": -75.96376037597656,
+        "height": 10,
+        "id": 330,
+        "sprite_offset": 6671,
+        "width": 11,
+        "x": 197,
+        "y": 157
+    },
+    {
+        "angle": -9.462322235107422,
+        "height": 8,
+        "id": 331,
+        "sprite_offset": 6682,
+        "width": 4,
+        "x": 212,
+        "y": 156
+    },
+    {
+        "angle": 0.0,
+        "height": 1,
+        "id": 332,
+        "sprite_offset": 6686,
+        "width": 2,
+        "x": 215,
+        "y": 156
+    },
+    {
+        "angle": -57.90740966796875,
+        "height": 78,
+        "id": 333,
+        "sprite_offset": 6688,
+        "width": 93,
+        "x": 333,
+        "y": 156
+    },
+    {
+        "angle": -56.30992889404297,
+        "height": 14,
+        "id": 334,
+        "sprite_offset": 6781,
+        "width": 16,
+        "x": 363,
+        "y": 156
+    },
+    {
+        "angle": -0.0,
+        "height": 3,
+        "id": 335,
+        "sprite_offset": 6797,
+        "width": 6,
+        "x": 490,
+        "y": 156
+    },
+    {
+        "angle": 0.0,
+        "height": 1,
+        "id": 336,
+        "sprite_offset": 6803,
+        "width": 1,
+        "x": 187,
+        "y": 158
+    },
+    {
+        "angle": -45.0,
+        "height": 13,
+        "id": 337,
+        "sprite_offset": 6804,
+        "width": 11,
+        "x": 351,
+        "y": 159
+    },
+    {
+        "angle": -18.43494987487793,
+        "height": 4,
+        "id": 338,
+        "sprite_offset": 6815,
+        "width": 8,
+        "x": 542,
+        "y": 159
+    },
+    {
+        "angle": 0.0,
+        "height": 2,
+        "id": 339,
+        "sprite_offset": 6823,
+        "width": 4,
+        "x": 552,
+        "y": 158
+    },
+    {
+        "angle": -45.0,
+        "height": 7,
+        "id": 340,
+        "sprite_offset": 6827,
+        "width": 7,
+        "x": 175,
+        "y": 160
+    },
+    {
+        "angle": 0.0,
+        "height": 1,
+        "id": 341,
+        "sprite_offset": 6834,
+        "width": 1,
+        "x": 552,
+        "y": 161
+    },
+    {
+        "angle": -54.462318420410156,
+        "height": 15,
+        "id": 342,
+        "sprite_offset": 6835,
+        "width": 11,
+        "x": 558,
+        "y": 160
+    },
+    {
+        "angle": -78.69007110595703,
+        "height": 4,
+        "id": 343,
+        "sprite_offset": 6846,
+        "width": 9,
+        "x": 217,
+        "y": 162
+    },
+    {
+        "angle": -71.56504821777344,
+        "height": 6,
+        "id": 344,
+        "sprite_offset": 6855,
+        "width": 5,
+        "x": 227,
+        "y": 163
+    },
+    {
+        "angle": -23.198591232299805,
+        "height": 8,
+        "id": 345,
+        "sprite_offset": 6860,
+        "width": 7,
+        "x": 388,
+        "y": 162
+    },
+    {
+        "angle": 0.0,
+        "height": 1,
+        "id": 346,
+        "sprite_offset": 6867,
+        "width": 1,
+        "x": 495,
+        "y": 162
+    },
+    {
+        "angle": 0.0,
+        "height": 1,
+        "id": 347,
+        "sprite_offset": 6868,
+        "width": 2,
+        "x": 497,
+        "y": 162
+    },
+    {
+        "angle": -54.462318420410156,
+        "height": 6,
+        "id": 348,
+        "sprite_offset": 6870,
+        "width": 9,
+        "x": 499,
+        "y": 162
+    },
+    {
+        "angle": -26.56505012512207,
+        "height": 7,
+        "id": 349,
+        "sprite_offset": 6879,
+        "width": 5,
+        "x": 516,
+        "y": 163
+    },
+    {
+        "angle": -90.0,
+        "height": 3,
+        "id": 350,
+        "sprite_offset": 6884,
+        "width": 2,
+        "x": 332,
+        "y": 165
+    },
+    {
+        "angle": -39.80556869506836,
+        "height": 16,
+        "id": 351,
+        "sprite_offset": 6886,
+        "width": 9,
+        "x": 377,
+        "y": 164
+    },
+    {
+        "angle": -45.0,
+        "height": 14,
+        "id": 352,
+        "sprite_offset": 6895,
+        "width": 17,
+        "x": 394,
+        "y": 165
+    },
+    {
+        "angle": 90.0,
+        "height": 2,
+        "id": 353,
+        "sprite_offset": 6912,
+        "width": 1,
+        "x": 497,
+        "y": 164
+    },
+    {
+        "angle": -75.96376037597656,
+        "height": 16,
+        "id": 354,
+        "sprite_offset": 6913,
+        "width": 22,
+        "x": 172,
+        "y": 167
+    },
+    {
+        "angle": -78.69007110595703,
+        "height": 4,
+        "id": 355,
+        "sprite_offset": 6935,
+        "width": 8,
+        "x": 483,
+        "y": 166
+    },
+    {
+        "angle": 0.0,
+        "height": 3,
+        "id": 356,
+        "sprite_offset": 6943,
+        "width": 5,
+        "x": 545,
+        "y": 167
+    },
+    {
+        "angle": -90.0,
+        "height": 5,
+        "id": 357,
+        "sprite_offset": 6948,
+        "width": 7,
+        "x": 551,
+        "y": 167
+    },
+    {
+        "angle": -0.0,
+        "height": 11,
+        "id": 358,
+        "sprite_offset": 6955,
+        "width": 16,
+        "x": 160,
+        "y": 168
+    },
+    {
+        "angle": -80.53767395019531,
+        "height": 3,
+        "id": 359,
+        "sprite_offset": 6971,
+        "width": 9,
+        "x": 499,
+        "y": 168
+    },
+    {
+        "angle": -0.0,
+        "height": 11,
+        "id": 360,
+        "sprite_offset": 6980,
+        "width": 11,
+        "x": 561,
+        "y": 169
+    },
+    {
+        "angle": -82.87498474121094,
+        "height": 34,
+        "id": 361,
+        "sprite_offset": 6991,
+        "width": 47,
+        "x": 95,
+        "y": 170
+    },
+    {
+        "angle": 0.0,
+        "height": 1,
+        "id": 362,
+        "sprite_offset": 7038,
+        "width": 2,
+        "x": 509,
+        "y": 170
+    },
+    {
+        "angle": -82.87498474121094,
+        "height": 8,
+        "id": 363,
+        "sprite_offset": 7040,
+        "width": 10,
+        "x": 539,
+        "y": 170
+    },
+    {
+        "angle": -71.56504821777344,
+        "height": 16,
+        "id": 364,
+        "sprite_offset": 7050,
+        "width": 15,
+        "x": 193,
+        "y": 172
+    },
+    {
+        "angle": -90.0,
+        "height": 6,
+        "id": 365,
+        "sprite_offset": 7065,
+        "width": 5,
+        "x": 502,
+        "y": 173
+    },
+    {
+        "angle": 0.0,
+        "height": 1,
+        "id": 366,
+        "sprite_offset": 7070,
+        "width": 1,
+        "x": 528,
+        "y": 173
+    },
+    {
+        "angle": -0.0,
+        "height": 5,
+        "id": 367,
+        "sprite_offset": 7071,
+        "width": 8,
+        "x": 550,
+        "y": 172
+    },
+    {
+        "angle": -63.43495178222656,
+        "height": 9,
+        "id": 368,
+        "sprite_offset": 7079,
+        "width": 10,
+        "x": 208,
+        "y": 174
+    },
+    {
+        "angle": -60.945396423339844,
+        "height": 11,
+        "id": 369,
+        "sprite_offset": 7089,
+        "width": 11,
+        "x": 391,
+        "y": 174
+    },
+    {
+        "angle": -71.56504821777344,
+        "height": 10,
+        "id": 370,
+        "sprite_offset": 7100,
+        "width": 4,
+        "x": 507,
+        "y": 174
+    },
+    {
+        "angle": -71.56504821777344,
+        "height": 5,
+        "id": 371,
+        "sprite_offset": 7104,
+        "width": 4,
+        "x": 534,
+        "y": 175
+    },
+    {
+        "angle": -74.74488067626953,
+        "height": 15,
+        "id": 372,
+        "sprite_offset": 7108,
+        "width": 13,
+        "x": 145,
+        "y": 177
+    },
+    {
+        "angle": -58.24052047729492,
+        "height": 29,
+        "id": 373,
+        "sprite_offset": 7121,
+        "width": 25,
+        "x": 272,
+        "y": 176
+    },
+    {
+        "angle": -0.0,
+        "height": 5,
+        "id": 374,
+        "sprite_offset": 7146,
+        "width": 2,
+        "x": 328,
+        "y": 177
+    },
+    {
+        "angle": -77.47119140625,
+        "height": 14,
+        "id": 375,
+        "sprite_offset": 7148,
+        "width": 7,
+        "x": 515,
+        "y": 177
+    },
+    {
+        "angle": -14.03624439239502,
+        "height": 28,
+        "id": 376,
+        "sprite_offset": 7155,
+        "width": 28,
+        "x": 218,
+        "y": 178
+    },
+    {
+        "angle": -0.0,
+        "height": 14,
+        "id": 377,
+        "sprite_offset": 7183,
+        "width": 6,
+        "x": 520,
+        "y": 178
+    },
+    {
+        "angle": 0.0,
+        "height": 1,
+        "id": 378,
+        "sprite_offset": 7189,
+        "width": 1,
+        "x": 532,
+        "y": 178
+    },
+    {
+        "angle": -0.0,
+        "height": 5,
+        "id": 379,
+        "sprite_offset": 7190,
+        "width": 10,
+        "x": 159,
+        "y": 180
+    },
+    {
+        "angle": -75.96376037597656,
+        "height": 7,
+        "id": 380,
+        "sprite_offset": 7200,
+        "width": 14,
+        "x": 185,
+        "y": 180
+    },
+    {
+        "angle": -0.0,
+        "height": 8,
+        "id": 381,
+        "sprite_offset": 7214,
+        "width": 15,
+        "x": 399,
+        "y": 180
+    },
+    {
+        "angle": -90.0,
+        "height": 7,
+        "id": 382,
+        "sprite_offset": 7229,
+        "width": 6,
+        "x": 527,
+        "y": 180
+    },
+    {
+        "angle": -45.0,
+        "height": 2,
+        "id": 383,
+        "sprite_offset": 7235,
+        "width": 3,
+        "x": 534,
+        "y": 181
+    },
+    {
+        "angle": -77.47119140625,
+        "height": 22,
+        "id": 384,
+        "sprite_offset": 7238,
+        "width": 23,
+        "x": 167,
+        "y": 182
+    },
+    {
+        "angle": -80.53767395019531,
+        "height": 10,
+        "id": 385,
+        "sprite_offset": 7261,
+        "width": 15,
+        "x": 205,
+        "y": 183
+    },
+    {
+        "angle": -59.03623962402344,
+        "height": 8,
+        "id": 386,
+        "sprite_offset": 7276,
+        "width": 9,
+        "x": 260,
+        "y": 183
+    },
+    {
+        "angle": -77.47119140625,
+        "height": 27,
+        "id": 387,
+        "sprite_offset": 7285,
+        "width": 20,
+        "x": 149,
+        "y": 185
+    },
+    {
+        "angle": -26.56505012512207,
+        "height": 10,
+        "id": 388,
+        "sprite_offset": 7305,
+        "width": 8,
+        "x": 495,
+        "y": 185
+    },
+    {
+        "angle": -78.69007110595703,
+        "height": 19,
+        "id": 389,
+        "sprite_offset": 7313,
+        "width": 12,
+        "x": 190,
+        "y": 187
+    },
+    {
+        "angle": -80.31121826171875,
+        "height": 46,
+        "id": 390,
+        "sprite_offset": 7325,
+        "width": 12,
+        "x": 213,
+        "y": 186
+    },
+    {
+        "angle": -70.34617614746094,
+        "height": 37,
+        "id": 391,
+        "sprite_offset": 7337,
+        "width": 16,
+        "x": 318,
+        "y": 188
+    },
+    {
+        "angle": -63.43495178222656,
+        "height": 20,
+        "id": 392,
+        "sprite_offset": 7353,
+        "width": 29,
+        "x": 93,
+        "y": 191
+    },
+    {
+        "angle": -22.61986541748047,
+        "height": 18,
+        "id": 393,
+        "sprite_offset": 7382,
+        "width": 9,
+        "x": 305,
+        "y": 190
+    },
+    {
+        "angle": -11.309932708740234,
+        "height": 19,
+        "id": 394,
+        "sprite_offset": 7391,
+        "width": 9,
+        "x": 333,
+        "y": 190
+    },
+    {
+        "angle": -26.56505012512207,
+        "height": 3,
+        "id": 395,
+        "sprite_offset": 7400,
+        "width": 2,
+        "x": 514,
+        "y": 190
+    },
+    {
+        "angle": -75.96376037597656,
+        "height": 17,
+        "id": 396,
+        "sprite_offset": 7402,
+        "width": 10,
+        "x": 139,
+        "y": 192
+    },
+    {
+        "angle": -81.02737426757812,
+        "height": 29,
+        "id": 397,
+        "sprite_offset": 7412,
+        "width": 20,
+        "x": 198,
+        "y": 192
+    },
+    {
+        "angle": -56.3099365234375,
+        "height": 17,
+        "id": 398,
+        "sprite_offset": 7432,
+        "width": 18,
+        "x": 243,
+        "y": 192
+    },
+    {
+        "angle": -23.198591232299805,
+        "height": 22,
+        "id": 399,
+        "sprite_offset": 7450,
+        "width": 25,
+        "x": 285,
+        "y": 193
+    },
+    {
+        "angle": 0.0,
+        "height": 1,
+        "id": 400,
+        "sprite_offset": 7475,
+        "width": 1,
+        "x": 504,
+        "y": 195
+    },
+    {
+        "angle": -90.0,
+        "height": 68,
+        "id": 401,
+        "sprite_offset": 7476,
+        "width": 23,
+        "x": 0,
+        "y": 198
+    },
+    {
+        "angle": -80.53767395019531,
+        "height": 16,
+        "id": 402,
+        "sprite_offset": 7499,
+        "width": 59,
+        "x": 25,
+        "y": 198
+    },
+    {
+        "angle": -77.47119140625,
+        "height": 13,
+        "id": 403,
+        "sprite_offset": 7558,
+        "width": 22,
+        "x": 164,
+        "y": 201
+    },
+    {
+        "angle": -45.0,
+        "height": 28,
+        "id": 404,
+        "sprite_offset": 7580,
+        "width": 23,
+        "x": 122,
+        "y": 203
+    },
+    {
+        "angle": -79.3803482055664,
+        "height": 25,
+        "id": 405,
+        "sprite_offset": 7603,
+        "width": 15,
+        "x": 233,
+        "y": 203
+    },
+    {
+        "angle": -81.8698959350586,
+        "height": 28,
+        "id": 406,
+        "sprite_offset": 7618,
+        "width": 15,
+        "x": 219,
+        "y": 205
+    },
+    {
+        "angle": -56.3099365234375,
+        "height": 13,
+        "id": 407,
+        "sprite_offset": 7633,
+        "width": 13,
+        "x": 262,
+        "y": 205
+    },
+    {
+        "angle": -11.309932708740234,
+        "height": 26,
+        "id": 408,
+        "sprite_offset": 7646,
+        "width": 17,
+        "x": 337,
+        "y": 204
+    },
+    {
+        "angle": -63.43495178222656,
+        "height": 19,
+        "id": 409,
+        "sprite_offset": 7663,
+        "width": 12,
+        "x": 608,
+        "y": 204
+    },
+    {
+        "angle": -90.0,
+        "height": 2,
+        "id": 410,
+        "sprite_offset": 7675,
+        "width": 4,
+        "x": 85,
+        "y": 207
+    },
+    {
+        "angle": -77.47119140625,
+        "height": 12,
+        "id": 411,
+        "sprite_offset": 7679,
+        "width": 15,
+        "x": 183,
+        "y": 206
+    },
+    {
+        "angle": -80.53767395019531,
+        "height": 22,
+        "id": 412,
+        "sprite_offset": 7694,
+        "width": 17,
+        "x": 245,
+        "y": 207
+    },
+    {
+        "angle": -78.69007110595703,
+        "height": 6,
+        "id": 413,
+        "sprite_offset": 7711,
+        "width": 24,
+        "x": 92,
+        "y": 208
+    },
+    {
+        "angle": -0.0,
+        "height": 11,
+        "id": 414,
+        "sprite_offset": 7735,
+        "width": 19,
+        "x": 47,
+        "y": 210
+    },
+    {
+        "angle": -81.8698959350586,
+        "height": 14,
+        "id": 415,
+        "sprite_offset": 7754,
+        "width": 18,
+        "x": 65,
+        "y": 210
+    },
+    {
+        "angle": -77.90524291992188,
+        "height": 18,
+        "id": 416,
+        "sprite_offset": 7772,
+        "width": 35,
+        "x": 145,
+        "y": 211
+    },
+    {
+        "angle": -29.744882583618164,
+        "height": 16,
+        "id": 417,
+        "sprite_offset": 7807,
+        "width": 10,
+        "x": 253,
+        "y": 210
+    },
+    {
+        "angle": -63.43495178222656,
+        "height": 13,
+        "id": 418,
+        "sprite_offset": 7817,
+        "width": 8,
+        "x": 271,
+        "y": 211
+    },
+    {
+        "angle": -30.963756561279297,
+        "height": 7,
+        "id": 419,
+        "sprite_offset": 7825,
+        "width": 11,
+        "x": 302,
+        "y": 210
+    },
+    {
+        "angle": -11.309932708740234,
+        "height": 21,
+        "id": 420,
+        "sprite_offset": 7836,
+        "width": 14,
+        "x": 325,
+        "y": 211
+    },
+    {
+        "angle": -11.309932708740234,
+        "height": 18,
+        "id": 421,
+        "sprite_offset": 7850,
+        "width": 11,
+        "x": 596,
+        "y": 211
+    },
+    {
+        "angle": -84.2894058227539,
+        "height": 18,
+        "id": 422,
+        "sprite_offset": 7861,
+        "width": 27,
+        "x": 19,
+        "y": 213
+    },
+    {
+        "angle": -80.53767395019531,
+        "height": 14,
+        "id": 423,
+        "sprite_offset": 7888,
+        "width": 28,
+        "x": 83,
+        "y": 212
+    },
+    {
+        "angle": -63.43495178222656,
+        "height": 19,
+        "id": 424,
+        "sprite_offset": 7916,
+        "width": 15,
+        "x": 276,
+        "y": 214
+    },
+    {
+        "angle": -36.86989974975586,
+        "height": 16,
+        "id": 425,
+        "sprite_offset": 7931,
+        "width": 20,
+        "x": 413,
+        "y": 214
+    },
+    {
+        "angle": -79.99201965332031,
+        "height": 14,
+        "id": 426,
+        "sprite_offset": 7951,
+        "width": 30,
+        "x": 105,
+        "y": 218
+    },
+    {
+        "angle": -41.987213134765625,
+        "height": 26,
+        "id": 427,
+        "sprite_offset": 7981,
+        "width": 34,
+        "x": 160,
+        "y": 218
+    },
+    {
+        "angle": -45.0,
+        "height": 3,
+        "id": 428,
+        "sprite_offset": 8015,
+        "width": 2,
+        "x": 268,
+        "y": 219
+    },
+    {
+        "angle": -45.0,
+        "height": 5,
+        "id": 429,
+        "sprite_offset": 8017,
+        "width": 6,
+        "x": 314,
+        "y": 219
+    },
+    {
+        "angle": -0.0,
+        "height": 7,
+        "id": 430,
+        "sprite_offset": 8023,
+        "width": 3,
+        "x": 508,
+        "y": 219
+    },
+    {
+        "angle": -81.8698959350586,
+        "height": 8,
+        "id": 431,
+        "sprite_offset": 8026,
+        "width": 17,
+        "x": 46,
+        "y": 220
+    },
+    {
+        "angle": -80.53767395019531,
+        "height": 11,
+        "id": 432,
+        "sprite_offset": 8043,
+        "width": 19,
+        "x": 195,
+        "y": 220
+    },
+    {
+        "angle": -63.43495178222656,
+        "height": 17,
+        "id": 433,
+        "sprite_offset": 8062,
+        "width": 19,
+        "x": 282,
+        "y": 221
+    },
+    {
+        "angle": -80.53767395019531,
+        "height": 15,
+        "id": 434,
+        "sprite_offset": 8081,
+        "width": 8,
+        "x": 454,
+        "y": 221
+    },
+    {
+        "angle": -34.99202346801758,
+        "height": 24,
+        "id": 435,
+        "sprite_offset": 8089,
+        "width": 25,
+        "x": 57,
+        "y": 223
+    },
+    {
+        "angle": -45.0,
+        "height": 27,
+        "id": 436,
+        "sprite_offset": 8114,
+        "width": 34,
+        "x": 414,
+        "y": 223
+    },
+    {
+        "angle": -71.56504821777344,
+        "height": 19,
+        "id": 437,
+        "sprite_offset": 8148,
+        "width": 28,
+        "x": 139,
+        "y": 224
+    },
+    {
+        "angle": 0.0,
+        "height": 8,
+        "id": 438,
+        "sprite_offset": 8176,
+        "width": 6,
+        "x": 269,
+        "y": 225
+    },
+    {
+        "angle": -80.53767395019531,
+        "height": 12,
+        "id": 439,
+        "sprite_offset": 8182,
+        "width": 14,
+        "x": 44,
+        "y": 227
+    },
+    {
+        "angle": -90.0,
+        "height": 4,
+        "id": 440,
+        "sprite_offset": 8196,
+        "width": 11,
+        "x": 83,
+        "y": 226
+    },
+    {
+        "angle": -78.69007110595703,
+        "height": 8,
+        "id": 441,
+        "sprite_offset": 8207,
+        "width": 13,
+        "x": 231,
+        "y": 227
+    },
+    {
+        "angle": -75.96376037597656,
+        "height": 27,
+        "id": 442,
+        "sprite_offset": 8220,
+        "width": 11,
+        "x": 597,
+        "y": 227
+    },
+    {
+        "angle": -0.0,
+        "height": 9,
+        "id": 443,
+        "sprite_offset": 8231,
+        "width": 8,
+        "x": 36,
+        "y": 229
+    },
+    {
+        "angle": -81.25383758544922,
+        "height": 19,
+        "id": 444,
+        "sprite_offset": 8239,
+        "width": 20,
+        "x": 242,
+        "y": 229
+    },
+    {
+        "angle": -60.945396423339844,
+        "height": 18,
+        "id": 445,
+        "sprite_offset": 8259,
+        "width": 30,
+        "x": 301,
+        "y": 228
+    },
+    {
+        "angle": -63.43495178222656,
+        "height": 6,
+        "id": 446,
+        "sprite_offset": 8289,
+        "width": 12,
+        "x": 348,
+        "y": 229
+    },
+    {
+        "angle": -18.43494987487793,
+        "height": 8,
+        "id": 447,
+        "sprite_offset": 8301,
+        "width": 19,
+        "x": 395,
+        "y": 228
+    },
+    {
+        "angle": -0.0,
+        "height": 12,
+        "id": 448,
+        "sprite_offset": 8320,
+        "width": 19,
+        "x": 16,
+        "y": 231
+    },
+    {
+        "angle": 0.0,
+        "height": 11,
+        "id": 449,
+        "sprite_offset": 8339,
+        "width": 10,
+        "x": 84,
+        "y": 231
+    },
+    {
+        "angle": -80.53767395019531,
+        "height": 17,
+        "id": 450,
+        "sprite_offset": 8349,
+        "width": 16,
+        "x": 98,
+        "y": 230
+    },
+    {
+        "angle": 0.0,
+        "height": 18,
+        "id": 451,
+        "sprite_offset": 8365,
+        "width": 22,
+        "x": 183,
+        "y": 230
+    },
+    {
+        "angle": -77.7352294921875,
+        "height": 14,
+        "id": 452,
+        "sprite_offset": 8387,
+        "width": 32,
+        "x": 360,
+        "y": 230
+    },
+    {
+        "angle": -21.801410675048828,
+        "height": 12,
+        "id": 453,
+        "sprite_offset": 8419,
+        "width": 17,
+        "x": 67,
+        "y": 233
+    },
+    {
+        "angle": -78.69007110595703,
+        "height": 17,
+        "id": 454,
+        "sprite_offset": 8436,
+        "width": 18,
+        "x": 113,
+        "y": 232
+    },
+    {
+        "angle": -80.90972137451172,
+        "height": 36,
+        "id": 455,
+        "sprite_offset": 8454,
+        "width": 15,
+        "x": 201,
+        "y": 232
+    },
+    {
+        "angle": -87.1375961303711,
+        "height": 39,
+        "id": 456,
+        "sprite_offset": 8469,
+        "width": 23,
+        "x": 214,
+        "y": 232
+    },
+    {
+        "angle": -63.43495178222656,
+        "height": 4,
+        "id": 457,
+        "sprite_offset": 8492,
+        "width": 6,
+        "x": 267,
+        "y": 233
+    },
+    {
+        "angle": -75.96376037597656,
+        "height": 6,
+        "id": 458,
+        "sprite_offset": 8498,
+        "width": 15,
+        "x": 343,
+        "y": 233
+    },
+    {
+        "angle": -30.963754653930664,
+        "height": 17,
+        "id": 459,
+        "sprite_offset": 8513,
+        "width": 22,
+        "x": 394,
+        "y": 233
+    },
+    {
+        "angle": -0.0,
+        "height": 16,
+        "id": 460,
+        "sprite_offset": 8535,
+        "width": 7,
+        "x": 506,
+        "y": 233
+    },
+    {
+        "angle": -84.80557250976562,
+        "height": 39,
+        "id": 461,
+        "sprite_offset": 8542,
+        "width": 20,
+        "x": 596,
+        "y": 233
+    },
+    {
+        "angle": -23.198589324951172,
+        "height": 13,
+        "id": 462,
+        "sprite_offset": 8562,
+        "width": 17,
+        "x": 43,
+        "y": 235
+    },
+    {
+        "angle": 0.0,
+        "height": 7,
+        "id": 463,
+        "sprite_offset": 8579,
+        "width": 10,
+        "x": 129,
+        "y": 235
+    },
+    {
+        "angle": -80.53767395019531,
+        "height": 13,
+        "id": 464,
+        "sprite_offset": 8589,
+        "width": 13,
+        "x": 230,
+        "y": 234
+    },
+    {
+        "angle": 0.0,
+        "height": 1,
+        "id": 465,
+        "sprite_offset": 8602,
+        "width": 3,
+        "x": 276,
+        "y": 234
+    },
+    {
+        "angle": 0.0,
+        "height": 14,
+        "id": 466,
+        "sprite_offset": 8605,
+        "width": 3,
+        "x": 502,
+        "y": 234
+    },
+    {
+        "angle": -0.0,
+        "height": 11,
+        "id": 467,
+        "sprite_offset": 8608,
+        "width": 5,
+        "x": 267,
+        "y": 237
+    },
+    {
+        "angle": -75.57923126220703,
+        "height": 53,
+        "id": 468,
+        "sprite_offset": 8613,
+        "width": 39,
+        "x": 263,
+        "y": 236
+    },
+    {
+        "angle": -35.83765411376953,
+        "height": 15,
+        "id": 469,
+        "sprite_offset": 8652,
+        "width": 26,
+        "x": 431,
+        "y": 236
+    },
+    {
+        "angle": -77.47119140625,
+        "height": 26,
+        "id": 470,
+        "sprite_offset": 8678,
+        "width": 34,
+        "x": 13,
+        "y": 238
+    },
+    {
+        "angle": -0.0,
+        "height": 13,
+        "id": 471,
+        "sprite_offset": 8712,
+        "width": 7,
+        "x": 36,
+        "y": 238
+    },
+    {
+        "angle": 0.0,
+        "height": 1,
+        "id": 472,
+        "sprite_offset": 8719,
+        "width": 2,
+        "x": 328,
+        "y": 238
+    },
+    {
+        "angle": -90.0,
+        "height": 6,
+        "id": 473,
+        "sprite_offset": 8721,
+        "width": 7,
+        "x": 331,
+        "y": 239
+    },
+    {
+        "angle": 0.0,
+        "height": 1,
+        "id": 474,
+        "sprite_offset": 8728,
+        "width": 2,
+        "x": 359,
+        "y": 239
+    },
+    {
+        "angle": -63.43495178222656,
+        "height": 6,
+        "id": 475,
+        "sprite_offset": 8730,
+        "width": 7,
+        "x": 479,
+        "y": 239
+    },
+    {
+        "angle": -80.53767395019531,
+        "height": 14,
+        "id": 476,
+        "sprite_offset": 8737,
+        "width": 7,
+        "x": 524,
+        "y": 238
+    },
+    {
+        "angle": -59.03623962402344,
+        "height": 22,
+        "id": 477,
+        "sprite_offset": 8744,
+        "width": 17,
+        "x": 66,
+        "y": 241
+    },
+    {
+        "angle": -14.03624439239502,
+        "height": 11,
+        "id": 478,
+        "sprite_offset": 8761,
+        "width": 21,
+        "x": 125,
+        "y": 241
+    },
+    {
+        "angle": -11.309932708740234,
+        "height": 6,
+        "id": 479,
+        "sprite_offset": 8782,
+        "width": 7,
+        "x": 253,
+        "y": 241
+    },
+    {
+        "angle": -0.0,
+        "height": 6,
+        "id": 480,
+        "sprite_offset": 8789,
+        "width": 2,
+        "x": 261,
+        "y": 241
+    },
+    {
+        "angle": -90.0,
+        "height": 9,
+        "id": 481,
+        "sprite_offset": 8791,
+        "width": 5,
+        "x": 513,
+        "y": 241
+    },
+    {
+        "angle": -81.8698959350586,
+        "height": 25,
+        "id": 482,
+        "sprite_offset": 8796,
+        "width": 12,
+        "x": 81,
+        "y": 242
+    },
+    {
+        "angle": -14.03624439239502,
+        "height": 14,
+        "id": 483,
+        "sprite_offset": 8808,
+        "width": 11,
+        "x": 150,
+        "y": 242
+    },
+    {
+        "angle": -0.0,
+        "height": 13,
+        "id": 484,
+        "sprite_offset": 8819,
+        "width": 9,
+        "x": 161,
+        "y": 242
+    },
+    {
+        "angle": -77.47119140625,
+        "height": 14,
+        "id": 485,
+        "sprite_offset": 8828,
+        "width": 17,
+        "x": 339,
+        "y": 242
+    },
+    {
+        "angle": -66.03751373291016,
+        "height": 15,
+        "id": 486,
+        "sprite_offset": 8845,
+        "width": 8,
+        "x": 543,
+        "y": 243
+    },
+    {
+        "angle": -26.56505012512207,
+        "height": 11,
+        "id": 487,
+        "sprite_offset": 8853,
+        "width": 13,
+        "x": 44,
+        "y": 245
+    },
+    {
+        "angle": -39.80556869506836,
+        "height": 11,
+        "id": 488,
+        "sprite_offset": 8866,
+        "width": 13,
+        "x": 60,
+        "y": 245
+    },
+    {
+        "angle": -84.2894058227539,
+        "height": 26,
+        "id": 489,
+        "sprite_offset": 8879,
+        "width": 21,
+        "x": 96,
+        "y": 245
+    },
+    {
+        "angle": -78.69007110595703,
+        "height": 12,
+        "id": 490,
+        "sprite_offset": 8900,
+        "width": 10,
+        "x": 170,
+        "y": 244
+    },
+    {
+        "angle": -18.43494987487793,
+        "height": 7,
+        "id": 491,
+        "sprite_offset": 8910,
+        "width": 4,
+        "x": 301,
+        "y": 244
+    },
+    {
+        "angle": -81.25383758544922,
+        "height": 13,
+        "id": 492,
+        "sprite_offset": 8914,
+        "width": 25,
+        "x": 305,
+        "y": 244
+    },
+    {
+        "angle": -0.0,
+        "height": 7,
+        "id": 493,
+        "sprite_offset": 8939,
+        "width": 5,
+        "x": 331,
+        "y": 245
+    },
+    {
+        "angle": -26.56505012512207,
+        "height": 8,
+        "id": 494,
+        "sprite_offset": 8944,
+        "width": 6,
+        "x": 391,
+        "y": 245
+    },
+    {
+        "angle": -60.945396423339844,
+        "height": 21,
+        "id": 495,
+        "sprite_offset": 8950,
+        "width": 24,
+        "x": 459,
+        "y": 244
+    },
+    {
+        "angle": -45.0,
+        "height": 10,
+        "id": 496,
+        "sprite_offset": 8974,
+        "width": 8,
+        "x": 144,
+        "y": 247
+    },
+    {
+        "angle": -81.8698959350586,
+        "height": 20,
+        "id": 497,
+        "sprite_offset": 8982,
+        "width": 9,
+        "x": 194,
+        "y": 246
+    },
+    {
+        "angle": -78.69007110595703,
+        "height": 9,
+        "id": 498,
+        "sprite_offset": 8991,
+        "width": 12,
+        "x": 229,
+        "y": 246
+    },
+    {
+        "angle": -80.53767395019531,
+        "height": 23,
+        "id": 499,
+        "sprite_offset": 9003,
+        "width": 20,
+        "x": 239,
+        "y": 247
+    },
+    {
+        "angle": -66.03751373291016,
+        "height": 26,
+        "id": 500,
+        "sprite_offset": 9023,
+        "width": 29,
+        "x": 356,
+        "y": 246
+    },
+    {
+        "angle": -45.0,
+        "height": 3,
+        "id": 501,
+        "sprite_offset": 9052,
+        "width": 3,
+        "x": 489,
+        "y": 246
+    },
+    {
+        "angle": -27.7585391998291,
+        "height": 27,
+        "id": 502,
+        "sprite_offset": 9055,
+        "width": 22,
+        "x": 570,
+        "y": 246
+    },
+    {
+        "angle": -16.699241638183594,
+        "height": 21,
+        "id": 503,
+        "sprite_offset": 9077,
+        "width": 14,
+        "x": 583,
+        "y": 247
+    },
+    {
+        "angle": -63.43495178222656,
+        "height": 11,
+        "id": 504,
+        "sprite_offset": 9091,
+        "width": 12,
+        "x": 111,
+        "y": 249
+    },
+    {
+        "angle": -84.2894058227539,
+        "height": 16,
+        "id": 505,
+        "sprite_offset": 9103,
+        "width": 20,
+        "x": 175,
+        "y": 248
+    },
+    {
+        "angle": -75.96376037597656,
+        "height": 8,
+        "id": 506,
+        "sprite_offset": 9123,
+        "width": 7,
+        "x": 241,
+        "y": 248
+    },
+    {
+        "angle": -80.53767395019531,
+        "height": 22,
+        "id": 507,
+        "sprite_offset": 9130,
+        "width": 6,
+        "x": 256,
+        "y": 248
+    },
+    {
+        "angle": -0.0,
+        "height": 23,
+        "id": 508,
+        "sprite_offset": 9136,
+        "width": 13,
+        "x": 265,
+        "y": 249
+    },
+    {
+        "angle": -33.6900634765625,
+        "height": 12,
+        "id": 509,
+        "sprite_offset": 9149,
+        "width": 10,
+        "x": 402,
+        "y": 249
+    },
+    {
+        "angle": -68.96248626708984,
+        "height": 21,
+        "id": 510,
+        "sprite_offset": 9159,
+        "width": 15,
+        "x": 407,
+        "y": 248
+    },
+    {
+        "angle": -68.19859313964844,
+        "height": 14,
+        "id": 511,
+        "sprite_offset": 9174,
+        "width": 14,
+        "x": 443,
+        "y": 249
+    },
+    {
+        "angle": -53.13010025024414,
+        "height": 15,
+        "id": 512,
+        "sprite_offset": 9188,
+        "width": 17,
+        "x": 119,
+        "y": 251
+    },
+    {
+        "angle": -81.8698959350586,
+        "height": 10,
+        "id": 513,
+        "sprite_offset": 9205,
+        "width": 10,
+        "x": 329,
+        "y": 251
+    },
+    {
+        "angle": -45.0,
+        "height": 23,
+        "id": 514,
+        "sprite_offset": 9215,
+        "width": 19,
+        "x": 562,
+        "y": 250
+    },
+    {
+        "angle": -45.0,
+        "height": 20,
+        "id": 515,
+        "sprite_offset": 9234,
+        "width": 16,
+        "x": 44,
+        "y": 252
+    },
+    {
+        "angle": -53.13010025024414,
+        "height": 31,
+        "id": 516,
+        "sprite_offset": 9250,
+        "width": 36,
+        "x": 121,
+        "y": 252
+    },
+    {
+        "angle": -69.44395446777344,
+        "height": 13,
+        "id": 517,
+        "sprite_offset": 9286,
+        "width": 13,
+        "x": 226,
+        "y": 253
+    },
+    {
+        "angle": -45.0,
+        "height": 14,
+        "id": 518,
+        "sprite_offset": 9299,
+        "width": 12,
+        "x": 377,
+        "y": 253
+    },
+    {
+        "angle": -39.80556869506836,
+        "height": 17,
+        "id": 519,
+        "sprite_offset": 9311,
+        "width": 15,
+        "x": 453,
+        "y": 253
+    },
+    {
+        "angle": -45.0,
+        "height": 7,
+        "id": 520,
+        "sprite_offset": 9326,
+        "width": 7,
+        "x": 481,
+        "y": 253
+    },
+    {
+        "angle": -90.0,
+        "height": 5,
+        "id": 521,
+        "sprite_offset": 9333,
+        "width": 3,
+        "x": 501,
+        "y": 252
+    },
+    {
+        "angle": 0.0,
+        "height": 6,
+        "id": 522,
+        "sprite_offset": 9336,
+        "width": 8,
+        "x": 504,
+        "y": 252
+    },
+    {
+        "angle": -63.43495178222656,
+        "height": 5,
+        "id": 523,
+        "sprite_offset": 9344,
+        "width": 4,
+        "x": 513,
+        "y": 252
+    },
+    {
+        "angle": -14.03624439239502,
+        "height": 5,
+        "id": 524,
+        "sprite_offset": 9348,
+        "width": 8,
+        "x": 552,
+        "y": 253
+    },
+    {
+        "angle": -45.0,
+        "height": 14,
+        "id": 525,
+        "sprite_offset": 9356,
+        "width": 13,
+        "x": 54,
+        "y": 255
+    },
+    {
+        "angle": -81.8698959350586,
+        "height": 20,
+        "id": 526,
+        "sprite_offset": 9369,
+        "width": 17,
+        "x": 304,
+        "y": 255
+    },
+    {
+        "angle": -45.0,
+        "height": 4,
+        "id": 527,
+        "sprite_offset": 9386,
+        "width": 5,
+        "x": 324,
+        "y": 255
+    },
+    {
+        "angle": -81.25383758544922,
+        "height": 19,
+        "id": 528,
+        "sprite_offset": 9391,
+        "width": 15,
+        "x": 339,
+        "y": 254
+    },
+    {
+        "angle": -0.0,
+        "height": 13,
+        "id": 529,
+        "sprite_offset": 9406,
+        "width": 10,
+        "x": 432,
+        "y": 255
+    },
+    {
+        "angle": 90.0,
+        "height": 2,
+        "id": 530,
+        "sprite_offset": 9416,
+        "width": 1,
+        "x": 493,
+        "y": 255
+    },
+    {
+        "angle": -26.56505012512207,
+        "height": 3,
+        "id": 531,
+        "sprite_offset": 9417,
+        "width": 4,
+        "x": 495,
+        "y": 254
+    },
+    {
+        "angle": 90.0,
+        "height": 3,
+        "id": 532,
+        "sprite_offset": 9421,
+        "width": 1,
+        "x": 524,
+        "y": 255
+    },
+    {
+        "angle": -71.56504821777344,
+        "height": 14,
+        "id": 533,
+        "sprite_offset": 9422,
+        "width": 24,
+        "x": 13,
+        "y": 257
+    },
+    {
+        "angle": -80.53767395019531,
+        "height": 9,
+        "id": 534,
+        "sprite_offset": 9446,
+        "width": 7,
+        "x": 74,
+        "y": 256
+    },
+    {
+        "angle": -0.0,
+        "height": 8,
+        "id": 535,
+        "sprite_offset": 9453,
+        "width": 6,
+        "x": 156,
+        "y": 256
+    },
+    {
+        "angle": -90.0,
+        "height": 7,
+        "id": 536,
+        "sprite_offset": 9459,
+        "width": 5,
+        "x": 163,
+        "y": 256
+    },
+    {
+        "angle": -90.0,
+        "height": 5,
+        "id": 537,
+        "sprite_offset": 9464,
+        "width": 4,
+        "x": 169,
+        "y": 257
+    },
+    {
+        "angle": -45.0,
+        "height": 4,
+        "id": 538,
+        "sprite_offset": 9468,
+        "width": 4,
+        "x": 397,
+        "y": 256
+    },
+    {
+        "angle": 0.0,
+        "height": 6,
+        "id": 539,
+        "sprite_offset": 9472,
+        "width": 11,
+        "x": 420,
+        "y": 256
+    },
+    {
+        "angle": -57.9946174621582,
+        "height": 13,
+        "id": 540,
+        "sprite_offset": 9483,
+        "width": 14,
+        "x": 477,
+        "y": 256
+    },
+    {
+        "angle": -90.0,
+        "height": 3,
+        "id": 541,
+        "sprite_offset": 9497,
+        "width": 4,
+        "x": 488,
+        "y": 256
+    },
+    {
+        "angle": -18.434947967529297,
+        "height": 11,
+        "id": 542,
+        "sprite_offset": 9501,
+        "width": 7,
+        "x": 495,
+        "y": 257
+    },
+    {
+        "angle": -33.690067291259766,
+        "height": 7,
+        "id": 543,
+        "sprite_offset": 9508,
+        "width": 9,
+        "x": 525,
+        "y": 256
+    },
+    {
+        "angle": 90.0,
+        "height": 2,
+        "id": 544,
+        "sprite_offset": 9517,
+        "width": 1,
+        "x": 535,
+        "y": 257
+    },
+    {
+        "angle": -28.300758361816406,
+        "height": 10,
+        "id": 545,
+        "sprite_offset": 9518,
+        "width": 18,
+        "x": 525,
+        "y": 257
+    },
+    {
+        "angle": -79.11447143554688,
+        "height": 16,
+        "id": 546,
+        "sprite_offset": 9536,
+        "width": 30,
+        "x": 9,
+        "y": 259
+    },
+    {
+        "angle": -82.40535736083984,
+        "height": 21,
+        "id": 547,
+        "sprite_offset": 9566,
+        "width": 9,
+        "x": 319,
+        "y": 258
+    },
+    {
+        "angle": -3.3664605617523193,
+        "height": 15,
+        "id": 548,
+        "sprite_offset": 9575,
+        "width": 19,
+        "x": 353,
+        "y": 258
+    },
+    {
+        "angle": -45.0,
+        "height": 12,
+        "id": 549,
+        "sprite_offset": 9594,
+        "width": 12,
+        "x": 381,
+        "y": 259
+    },
+    {
+        "angle": -33.6900634765625,
+        "height": 7,
+        "id": 550,
+        "sprite_offset": 9606,
+        "width": 6,
+        "x": 399,
+        "y": 259
+    },
+    {
+        "angle": -71.56504821777344,
+        "height": 18,
+        "id": 551,
+        "sprite_offset": 9612,
+        "width": 9,
+        "x": 498,
+        "y": 259
+    },
+    {
+        "angle": -63.43495178222656,
+        "height": 9,
+        "id": 552,
+        "sprite_offset": 9621,
+        "width": 7,
+        "x": 509,
+        "y": 258
+    },
+    {
+        "angle": -48.8140754699707,
+        "height": 21,
+        "id": 553,
+        "sprite_offset": 9628,
+        "width": 29,
+        "x": 551,
+        "y": 258
+    },
+    {
+        "angle": -81.8698959350586,
+        "height": 20,
+        "id": 554,
+        "sprite_offset": 9657,
+        "width": 11,
+        "x": 326,
+        "y": 261
+    },
+    {
+        "angle": -23.198591232299805,
+        "height": 9,
+        "id": 555,
+        "sprite_offset": 9668,
+        "width": 7,
+        "x": 490,
+        "y": 260
+    },
+    {
+        "angle": -21.801406860351562,
+        "height": 17,
+        "id": 556,
+        "sprite_offset": 9675,
+        "width": 23,
+        "x": 529,
+        "y": 260
+    },
+    {
+        "angle": -45.0,
+        "height": 15,
+        "id": 557,
+        "sprite_offset": 9698,
+        "width": 17,
+        "x": 54,
+        "y": 263
+    },
+    {
+        "angle": -56.3099365234375,
+        "height": 11,
+        "id": 558,
+        "sprite_offset": 9715,
+        "width": 12,
+        "x": 113,
+        "y": 263
+    },
+    {
+        "angle": -11.309932708740234,
+        "height": 12,
+        "id": 559,
+        "sprite_offset": 9727,
+        "width": 12,
+        "x": 158,
+        "y": 263
+    },
+    {
+        "angle": -0.0,
+        "height": 6,
+        "id": 560,
+        "sprite_offset": 9739,
+        "width": 12,
+        "x": 420,
+        "y": 262
+    },
+    {
+        "angle": -81.8698959350586,
+        "height": 5,
+        "id": 561,
+        "sprite_offset": 9751,
+        "width": 9,
+        "x": 442,
+        "y": 262
+    },
+    {
+        "angle": -0.0,
+        "height": 5,
+        "id": 562,
+        "sprite_offset": 9760,
+        "width": 9,
+        "x": 471,
+        "y": 263
+    },
+    {
+        "angle": -63.43495178222656,
+        "height": 22,
+        "id": 563,
+        "sprite_offset": 9769,
+        "width": 25,
+        "x": 167,
+        "y": 264
+    },
+    {
+        "angle": -82.87498474121094,
+        "height": 12,
+        "id": 564,
+        "sprite_offset": 9794,
+        "width": 16,
+        "x": 178,
+        "y": 264
+    },
+    {
+        "angle": -33.690067291259766,
+        "height": 11,
+        "id": 565,
+        "sprite_offset": 9810,
+        "width": 12,
+        "x": 387,
+        "y": 265
+    },
+    {
+        "angle": -63.43495178222656,
+        "height": 10,
+        "id": 566,
+        "sprite_offset": 9822,
+        "width": 13,
+        "x": 404,
+        "y": 265
+    },
+    {
+        "angle": -50.194427490234375,
+        "height": 19,
+        "id": 567,
+        "sprite_offset": 9835,
+        "width": 25,
+        "x": 34,
+        "y": 266
+    },
+    {
+        "angle": 0.0,
+        "height": 7,
+        "id": 568,
+        "sprite_offset": 9860,
+        "width": 11,
+        "x": 68,
+        "y": 266
+    },
+    {
+        "angle": -78.69007110595703,
+        "height": 8,
+        "id": 569,
+        "sprite_offset": 9871,
+        "width": 11,
+        "x": 79,
+        "y": 267
+    },
+    {
+        "angle": -0.0,
+        "height": 9,
+        "id": 570,
+        "sprite_offset": 9882,
+        "width": 10,
+        "x": 194,
+        "y": 266
+    },
+    {
+        "angle": -0.0,
+        "height": 6,
+        "id": 571,
+        "sprite_offset": 9892,
+        "width": 10,
+        "x": 440,
+        "y": 267
+    },
+    {
+        "angle": -0.0,
+        "height": 6,
+        "id": 572,
+        "sprite_offset": 9902,
+        "width": 8,
+        "x": 451,
+        "y": 266
+    },
+    {
+        "angle": 0.0,
+        "height": 2,
+        "id": 573,
+        "sprite_offset": 9910,
+        "width": 3,
+        "x": 467,
+        "y": 267
+    },
+    {
+        "angle": -71.56504821777344,
+        "height": 4,
+        "id": 574,
+        "sprite_offset": 9913,
+        "width": 7,
+        "x": 508,
+        "y": 266
+    },
+    {
+        "angle": -0.0,
+        "height": 8,
+        "id": 575,
+        "sprite_offset": 9920,
+        "width": 6,
+        "x": 95,
+        "y": 269
+    },
+    {
+        "angle": -81.8698959350586,
+        "height": 9,
+        "id": 576,
+        "sprite_offset": 9926,
+        "width": 9,
+        "x": 204,
+        "y": 268
+    },
+    {
+        "angle": -80.53767395019531,
+        "height": 11,
+        "id": 577,
+        "sprite_offset": 9935,
+        "width": 13,
+        "x": 213,
+        "y": 269
+    },
+    {
+        "angle": -81.25383758544922,
+        "height": 25,
+        "id": 578,
+        "sprite_offset": 9948,
+        "width": 23,
+        "x": 236,
+        "y": 269
+    },
+    {
+        "angle": -9.462321281433105,
+        "height": 7,
+        "id": 579,
+        "sprite_offset": 9971,
+        "width": 13,
+        "x": 419,
+        "y": 269
+    },
+    {
+        "angle": -0.0,
+        "height": 5,
+        "id": 580,
+        "sprite_offset": 9984,
+        "width": 7,
+        "x": 433,
+        "y": 268
+    },
+    {
+        "angle": -80.53767395019531,
+        "height": 11,
+        "id": 581,
+        "sprite_offset": 9991,
+        "width": 8,
+        "x": 507,
+        "y": 269
+    },
+    {
+        "angle": -68.19859313964844,
+        "height": 9,
+        "id": 582,
+        "sprite_offset": 9999,
+        "width": 16,
+        "x": 524,
+        "y": 269
+    },
+    {
+        "angle": -59.036251068115234,
+        "height": 6,
+        "id": 583,
+        "sprite_offset": 10015,
+        "width": 4,
+        "x": 0,
+        "y": 270
+    },
+    {
+        "angle": -81.8698959350586,
+        "height": 19,
+        "id": 584,
+        "sprite_offset": 10019,
+        "width": 13,
+        "x": 0,
+        "y": 270
+    },
+    {
+        "angle": -78.69007110595703,
+        "height": 7,
+        "id": 585,
+        "sprite_offset": 10032,
+        "width": 9,
+        "x": 101,
+        "y": 271
+    },
+    {
+        "angle": -78.69007110595703,
+        "height": 13,
+        "id": 586,
+        "sprite_offset": 10041,
+        "width": 12,
+        "x": 226,
+        "y": 270
+    },
+    {
+        "angle": -71.56504821777344,
+        "height": 2,
+        "id": 587,
+        "sprite_offset": 10053,
+        "width": 5,
+        "x": 379,
+        "y": 271
+    },
+    {
+        "angle": -0.0,
+        "height": 6,
+        "id": 588,
+        "sprite_offset": 10058,
+        "width": 10,
+        "x": 489,
+        "y": 270
+    },
+    {
+        "angle": -63.43495178222656,
+        "height": 33,
+        "id": 589,
+        "sprite_offset": 10068,
+        "width": 40,
+        "x": 12,
+        "y": 273
+    },
+    {
+        "angle": -78.69007110595703,
+        "height": 10,
+        "id": 590,
+        "sprite_offset": 10108,
+        "width": 11,
+        "x": 61,
+        "y": 273
+    },
+    {
+        "angle": -80.53767395019531,
+        "height": 7,
+        "id": 591,
+        "sprite_offset": 10119,
+        "width": 10,
+        "x": 109,
+        "y": 273
+    },
+    {
+        "angle": -74.74488067626953,
+        "height": 18,
+        "id": 592,
+        "sprite_offset": 10129,
+        "width": 11,
+        "x": 192,
+        "y": 273
+    },
+    {
+        "angle": 0.0,
+        "height": 1,
+        "id": 593,
+        "sprite_offset": 10140,
+        "width": 1,
+        "x": 373,
+        "y": 272
+    },
+    {
+        "angle": -14.03624439239502,
+        "height": 8,
+        "id": 594,
+        "sprite_offset": 10141,
+        "width": 14,
+        "x": 468,
+        "y": 273
+    },
+    {
+        "angle": -78.69007110595703,
+        "height": 9,
+        "id": 595,
+        "sprite_offset": 10155,
+        "width": 3,
+        "x": 514,
+        "y": 272
+    },
+    {
+        "angle": 0.0,
+        "height": 5,
+        "id": 596,
+        "sprite_offset": 10158,
+        "width": 9,
+        "x": 591,
+        "y": 272
+    },
+    {
+        "angle": -0.0,
+        "height": 8,
+        "id": 597,
+        "sprite_offset": 10167,
+        "width": 18,
+        "x": 599,
+        "y": 272
+    },
+    {
+        "angle": -80.53767395019531,
+        "height": 10,
+        "id": 598,
+        "sprite_offset": 10185,
+        "width": 17,
+        "x": 72,
+        "y": 274
+    },
+    {
+        "angle": -80.53767395019531,
+        "height": 19,
+        "id": 599,
+        "sprite_offset": 10202,
+        "width": 15,
+        "x": 336,
+        "y": 275
+    },
+    {
+        "angle": -69.44395446777344,
+        "height": 17,
+        "id": 600,
+        "sprite_offset": 10217,
+        "width": 17,
+        "x": 525,
+        "y": 274
+    },
+    {
+        "angle": -18.434947967529297,
+        "height": 2,
+        "id": 601,
+        "sprite_offset": 10234,
+        "width": 4,
+        "x": 581,
+        "y": 274
+    },
+    {
+        "angle": -79.69515228271484,
+        "height": 26,
+        "id": 602,
+        "sprite_offset": 10238,
+        "width": 10,
+        "x": 289,
+        "y": 276
+    },
+    {
+        "angle": -80.53767395019531,
+        "height": 37,
+        "id": 603,
+        "sprite_offset": 10248,
+        "width": 17,
+        "x": 300,
+        "y": 276
+    },
+    {
+        "angle": -16.699241638183594,
+        "height": 14,
+        "id": 604,
+        "sprite_offset": 10265,
+        "width": 23,
+        "x": 350,
+        "y": 276
+    },
+    {
+        "angle": -63.43495178222656,
+        "height": 6,
+        "id": 605,
+        "sprite_offset": 10288,
+        "width": 11,
+        "x": 403,
+        "y": 276
+    },
+    {
+        "angle": -12.52880573272705,
+        "height": 5,
+        "id": 606,
+        "sprite_offset": 10299,
+        "width": 15,
+        "x": 453,
+        "y": 276
+    },
+    {
+        "angle": -45.0,
+        "height": 7,
+        "id": 607,
+        "sprite_offset": 10314,
+        "width": 11,
+        "x": 480,
+        "y": 277
+    },
+    {
+        "angle": 0.0,
+        "height": 2,
+        "id": 608,
+        "sprite_offset": 10325,
+        "width": 6,
+        "x": 547,
+        "y": 277
+    },
+    {
+        "angle": -74.05460357666016,
+        "height": 9,
+        "id": 609,
+        "sprite_offset": 10331,
+        "width": 5,
+        "x": 585,
+        "y": 276
+    },
+    {
+        "angle": -80.53767395019531,
+        "height": 8,
+        "id": 610,
+        "sprite_offset": 10336,
+        "width": 6,
+        "x": 94,
+        "y": 278
+    },
+    {
+        "angle": -78.69007110595703,
+        "height": 8,
+        "id": 611,
+        "sprite_offset": 10342,
+        "width": 8,
+        "x": 100,
+        "y": 279
+    },
+    {
+        "angle": 0.0,
+        "height": 1,
+        "id": 612,
+        "sprite_offset": 10350,
+        "width": 1,
+        "x": 118,
+        "y": 279
+    },
+    {
+        "angle": -71.56504821777344,
+        "height": 8,
+        "id": 613,
+        "sprite_offset": 10351,
+        "width": 13,
+        "x": 118,
+        "y": 279
+    },
+    {
+        "angle": -80.53767395019531,
+        "height": 15,
+        "id": 614,
+        "sprite_offset": 10364,
+        "width": 11,
+        "x": 200,
+        "y": 278
+    },
+    {
+        "angle": -80.53767395019531,
+        "height": 16,
+        "id": 615,
+        "sprite_offset": 10375,
+        "width": 15,
+        "x": 210,
+        "y": 279
+    },
+    {
+        "angle": -21.250505447387695,
+        "height": 27,
+        "id": 616,
+        "sprite_offset": 10390,
+        "width": 15,
+        "x": 310,
+        "y": 279
+    },
+    {
+        "angle": -3.5763344764709473,
+        "height": 34,
+        "id": 617,
+        "sprite_offset": 10405,
+        "width": 13,
+        "x": 375,
+        "y": 278
+    },
+    {
+        "angle": -11.309932708740234,
+        "height": 8,
+        "id": 618,
+        "sprite_offset": 10418,
+        "width": 16,
+        "x": 418,
+        "y": 279
+    },
+    {
+        "angle": -0.0,
+        "height": 8,
+        "id": 619,
+        "sprite_offset": 10434,
+        "width": 17,
+        "x": 435,
+        "y": 278
+    },
+    {
+        "angle": -45.0,
+        "height": 3,
+        "id": 620,
+        "sprite_offset": 10451,
+        "width": 4,
+        "x": 491,
+        "y": 278
+    },
+    {
+        "angle": -0.0,
+        "height": 4,
+        "id": 621,
+        "sprite_offset": 10455,
+        "width": 5,
+        "x": 498,
+        "y": 279
+    },
+    {
+        "angle": -0.0,
+        "height": 6,
+        "id": 622,
+        "sprite_offset": 10460,
+        "width": 9,
+        "x": 575,
+        "y": 279
+    },
+    {
+        "angle": -78.69007110595703,
+        "height": 10,
+        "id": 623,
+        "sprite_offset": 10469,
+        "width": 13,
+        "x": 589,
+        "y": 278
+    },
+    {
+        "angle": -56.3099365234375,
+        "height": 5,
+        "id": 624,
+        "sprite_offset": 10482,
+        "width": 6,
+        "x": 57,
+        "y": 281
+    },
+    {
+        "angle": -0.0,
+        "height": 8,
+        "id": 625,
+        "sprite_offset": 10488,
+        "width": 8,
+        "x": 108,
+        "y": 280
+    },
+    {
+        "angle": -32.0053825378418,
+        "height": 63,
+        "id": 626,
+        "sprite_offset": 10496,
+        "width": 59,
+        "x": 117,
+        "y": 281
+    },
+    {
+        "angle": -35.53767395019531,
+        "height": 23,
+        "id": 627,
+        "sprite_offset": 10555,
+        "width": 26,
+        "x": 387,
+        "y": 280
+    },
+    {
+        "angle": -0.0,
+        "height": 4,
+        "id": 628,
+        "sprite_offset": 10581,
+        "width": 2,
+        "x": 504,
+        "y": 280
+    },
+    {
+        "angle": -0.0,
+        "height": 9,
+        "id": 629,
+        "sprite_offset": 10583,
+        "width": 9,
+        "x": 506,
+        "y": 281
+    },
+    {
+        "angle": -15.52410888671875,
+        "height": 27,
+        "id": 630,
+        "sprite_offset": 10592,
+        "width": 32,
+        "x": 528,
+        "y": 280
+    },
+    {
+        "angle": -82.40535736083984,
+        "height": 10,
+        "id": 631,
+        "sprite_offset": 10624,
+        "width": 19,
+        "x": 556,
+        "y": 280
+    },
+    {
+        "angle": -78.69007110595703,
+        "height": 5,
+        "id": 632,
+        "sprite_offset": 10643,
+        "width": 7,
+        "x": 64,
+        "y": 283
+    },
+    {
+        "angle": -75.96376037597656,
+        "height": 12,
+        "id": 633,
+        "sprite_offset": 10650,
+        "width": 17,
+        "x": 71,
+        "y": 282
+    },
+    {
+        "angle": 0.0,
+        "height": 6,
+        "id": 634,
+        "sprite_offset": 10667,
+        "width": 12,
+        "x": 130,
+        "y": 283
+    },
+    {
+        "angle": -48.8140754699707,
+        "height": 26,
+        "id": 635,
+        "sprite_offset": 10679,
+        "width": 32,
+        "x": 163,
+        "y": 282
+    },
+    {
+        "angle": -80.53767395019531,
+        "height": 9,
+        "id": 636,
+        "sprite_offset": 10711,
+        "width": 10,
+        "x": 225,
+        "y": 283
+    },
+    {
+        "angle": -0.0,
+        "height": 6,
+        "id": 637,
+        "sprite_offset": 10721,
+        "width": 9,
+        "x": 445,
+        "y": 282
+    },
+    {
+        "angle": -0.0,
+        "height": 10,
+        "id": 638,
+        "sprite_offset": 10730,
+        "width": 16,
+        "x": 453,
+        "y": 282
+    },
+    {
+        "angle": -15.945395469665527,
+        "height": 14,
+        "id": 639,
+        "sprite_offset": 10746,
+        "width": 24,
+        "x": 469,
+        "y": 282
+    },
+    {
+        "angle": 90.0,
+        "height": 2,
+        "id": 640,
+        "sprite_offset": 10770,
+        "width": 1,
+        "x": 523,
+        "y": 282
+    },
+    {
+        "angle": -90.0,
+        "height": 2,
+        "id": 641,
+        "sprite_offset": 10771,
+        "width": 7,
+        "x": 116,
+        "y": 285
+    },
+    {
+        "angle": -82.87498474121094,
+        "height": 12,
+        "id": 642,
+        "sprite_offset": 10778,
+        "width": 12,
+        "x": 261,
+        "y": 284
+    },
+    {
+        "angle": -45.0,
+        "height": 17,
+        "id": 643,
+        "sprite_offset": 10790,
+        "width": 16,
+        "x": 274,
+        "y": 284
+    },
+    {
+        "angle": -90.0,
+        "height": 2,
+        "id": 644,
+        "sprite_offset": 10806,
+        "width": 5,
+        "x": 434,
+        "y": 285
+    },
+    {
+        "angle": -75.96376037597656,
+        "height": 7,
+        "id": 645,
+        "sprite_offset": 10811,
+        "width": 10,
+        "x": 495,
+        "y": 284
+    },
+    {
+        "angle": -80.53767395019531,
+        "height": 7,
+        "id": 646,
+        "sprite_offset": 10821,
+        "width": 12,
+        "x": 575,
+        "y": 285
+    },
+    {
+        "angle": -30.25643539428711,
+        "height": 13,
+        "id": 647,
+        "sprite_offset": 10833,
+        "width": 15,
+        "x": 46,
+        "y": 286
+    },
+    {
+        "angle": -78.69007110595703,
+        "height": 7,
+        "id": 648,
+        "sprite_offset": 10848,
+        "width": 6,
+        "x": 92,
+        "y": 286
+    },
+    {
+        "angle": -14.03624439239502,
+        "height": 3,
+        "id": 649,
+        "sprite_offset": 10854,
+        "width": 6,
+        "x": 99,
+        "y": 287
+    },
+    {
+        "angle": -63.43495178222656,
+        "height": 2,
+        "id": 650,
+        "sprite_offset": 10860,
+        "width": 3,
+        "x": 125,
+        "y": 287
+    },
+    {
+        "angle": -51.34019088745117,
+        "height": 16,
+        "id": 651,
+        "sprite_offset": 10863,
+        "width": 22,
+        "x": 179,
+        "y": 287
+    },
+    {
+        "angle": -0.0,
+        "height": 12,
+        "id": 652,
+        "sprite_offset": 10885,
+        "width": 9,
+        "x": 325,
+        "y": 286
+    },
+    {
+        "angle": -86.98721313476562,
+        "height": 32,
+        "id": 653,
+        "sprite_offset": 10894,
+        "width": 17,
+        "x": 361,
+        "y": 287
+    },
+    {
+        "angle": -45.0,
+        "height": 17,
+        "id": 654,
+        "sprite_offset": 10911,
+        "width": 27,
+        "x": 395,
+        "y": 287
+    },
+    {
+        "angle": -77.47119140625,
+        "height": 12,
+        "id": 655,
+        "sprite_offset": 10938,
+        "width": 13,
+        "x": 587,
+        "y": 287
+    },
+    {
+        "angle": -90.0,
+        "height": 10,
+        "id": 656,
+        "sprite_offset": 10951,
+        "width": 9,
+        "x": 1,
+        "y": 289
+    },
+    {
+        "angle": -56.3099365234375,
+        "height": 26,
+        "id": 657,
+        "sprite_offset": 10960,
+        "width": 22,
+        "x": 54,
+        "y": 289
+    },
+    {
+        "angle": -14.03624439239502,
+        "height": 31,
+        "id": 658,
+        "sprite_offset": 10982,
+        "width": 39,
+        "x": 87,
+        "y": 289
+    },
+    {
+        "angle": -90.0,
+        "height": 2,
+        "id": 659,
+        "sprite_offset": 11021,
+        "width": 3,
+        "x": 129,
+        "y": 289
+    },
+    {
+        "angle": -75.96376037597656,
+        "height": 4,
+        "id": 660,
+        "sprite_offset": 11024,
+        "width": 8,
+        "x": 444,
+        "y": 288
+    },
+    {
+        "angle": -0.0,
+        "height": 11,
+        "id": 661,
+        "sprite_offset": 11032,
+        "width": 5,
+        "x": 521,
+        "y": 288
+    },
+    {
+        "angle": -77.47119140625,
+        "height": 15,
+        "id": 662,
+        "sprite_offset": 11037,
+        "width": 17,
+        "x": 555,
+        "y": 288
+    },
+    {
+        "angle": -81.8698959350586,
+        "height": 10,
+        "id": 663,
+        "sprite_offset": 11054,
+        "width": 8,
+        "x": 10,
+        "y": 291
+    },
+    {
+        "angle": -80.53767395019531,
+        "height": 16,
+        "id": 664,
+        "sprite_offset": 11062,
+        "width": 14,
+        "x": 220,
+        "y": 291
+    },
+    {
+        "angle": -0.0,
+        "height": 20,
+        "id": 665,
+        "sprite_offset": 11076,
+        "width": 11,
+        "x": 349,
+        "y": 291
+    },
+    {
+        "angle": -75.96376037597656,
+        "height": 7,
+        "id": 666,
+        "sprite_offset": 11087,
+        "width": 8,
+        "x": 504,
+        "y": 291
+    },
+    {
+        "angle": -90.0,
+        "height": 3,
+        "id": 667,
+        "sprite_offset": 11095,
+        "width": 2,
+        "x": 571,
+        "y": 291
+    },
+    {
+        "angle": -4.969740867614746,
+        "height": 36,
+        "id": 668,
+        "sprite_offset": 11097,
+        "width": 17,
+        "x": 67,
+        "y": 293
+    },
+    {
+        "angle": -78.69007110595703,
+        "height": 7,
+        "id": 669,
+        "sprite_offset": 11114,
+        "width": 8,
+        "x": 201,
+        "y": 293
+    },
+    {
+        "angle": -80.53767395019531,
+        "height": 17,
+        "id": 670,
+        "sprite_offset": 11122,
+        "width": 22,
+        "x": 234,
+        "y": 292
+    },
+    {
+        "angle": -90.0,
+        "height": 2,
+        "id": 671,
+        "sprite_offset": 11144,
+        "width": 2,
+        "x": 428,
+        "y": 293
+    },
+    {
+        "angle": -67.38013458251953,
+        "height": 10,
+        "id": 672,
+        "sprite_offset": 11146,
+        "width": 20,
+        "x": 431,
+        "y": 293
+    },
+    {
+        "angle": -11.309932708740234,
+        "height": 6,
+        "id": 673,
+        "sprite_offset": 11166,
+        "width": 10,
+        "x": 477,
+        "y": 293
+    },
+    {
+        "angle": -45.0,
+        "height": 8,
+        "id": 674,
+        "sprite_offset": 11176,
+        "width": 9,
+        "x": 486,
+        "y": 293
+    },
+    {
+        "angle": -90.0,
+        "height": 6,
+        "id": 675,
+        "sprite_offset": 11185,
+        "width": 8,
+        "x": 496,
+        "y": 292
+    },
+    {
+        "angle": -0.0,
+        "height": 4,
+        "id": 676,
+        "sprite_offset": 11193,
+        "width": 2,
+        "x": 512,
+        "y": 293
+    },
+    {
+        "angle": -0.0,
+        "height": 11,
+        "id": 677,
+        "sprite_offset": 11195,
+        "width": 12,
+        "x": 574,
+        "y": 292
+    },
+    {
+        "angle": -90.0,
+        "height": 7,
+        "id": 678,
+        "sprite_offset": 11207,
+        "width": 4,
+        "x": 19,
+        "y": 295
+    },
+    {
+        "angle": -0.0,
+        "height": 8,
+        "id": 679,
+        "sprite_offset": 11211,
+        "width": 10,
+        "x": 209,
+        "y": 294
+    },
+    {
+        "angle": -7.125016689300537,
+        "height": 19,
+        "id": 680,
+        "sprite_offset": 11221,
+        "width": 9,
+        "x": 341,
+        "y": 294
+    },
+    {
+        "angle": -66.80140686035156,
+        "height": 12,
+        "id": 681,
+        "sprite_offset": 11230,
+        "width": 5,
+        "x": 415,
+        "y": 295
+    },
+    {
+        "angle": -85.2363510131836,
+        "height": 16,
+        "id": 682,
+        "sprite_offset": 11235,
+        "width": 8,
+        "x": 419,
+        "y": 294
+    },
+    {
+        "angle": -72.89727020263672,
+        "height": 15,
+        "id": 683,
+        "sprite_offset": 11243,
+        "width": 16,
+        "x": 466,
+        "y": 294
+    },
+    {
+        "angle": -78.69007110595703,
+        "height": 8,
+        "id": 684,
+        "sprite_offset": 11259,
+        "width": 11,
+        "x": 24,
+        "y": 297
+    },
+    {
+        "angle": -78.69007110595703,
+        "height": 7,
+        "id": 685,
+        "sprite_offset": 11270,
+        "width": 6,
+        "x": 261,
+        "y": 296
+    },
+    {
+        "angle": -3.814074993133545,
+        "height": 23,
+        "id": 686,
+        "sprite_offset": 11276,
+        "width": 16,
+        "x": 327,
+        "y": 297
+    },
+    {
+        "angle": -53.13010025024414,
+        "height": 12,
+        "id": 687,
+        "sprite_offset": 11292,
+        "width": 13,
+        "x": 428,
+        "y": 297
+    },
+    {
+        "angle": -18.434947967529297,
+        "height": 16,
+        "id": 688,
+        "sprite_offset": 11305,
+        "width": 10,
+        "x": 455,
+        "y": 297
+    },
+    {
+        "angle": -51.34019088745117,
+        "height": 26,
+        "id": 689,
+        "sprite_offset": 11315,
+        "width": 17,
+        "x": 441,
+        "y": 298
+    },
+    {
+        "angle": 0.0,
+        "height": 6,
+        "id": 690,
+        "sprite_offset": 11332,
+        "width": 5,
+        "x": 498,
+        "y": 299
+    },
+    {
+        "angle": -90.0,
+        "height": 4,
+        "id": 691,
+        "sprite_offset": 11337,
+        "width": 3,
+        "x": 504,
+        "y": 298
+    },
+    {
+        "angle": -79.69515228271484,
+        "height": 19,
+        "id": 692,
+        "sprite_offset": 11340,
+        "width": 13,
+        "x": 500,
+        "y": 298
+    },
+    {
+        "angle": -83.6598129272461,
+        "height": 15,
+        "id": 693,
+        "sprite_offset": 11353,
+        "width": 10,
+        "x": 519,
+        "y": 299
+    },
+    {
+        "angle": -79.69515228271484,
+        "height": 14,
+        "id": 694,
+        "sprite_offset": 11363,
+        "width": 9,
+        "x": 0,
+        "y": 300
+    },
+    {
+        "angle": -0.0,
+        "height": 14,
+        "id": 695,
+        "sprite_offset": 11372,
+        "width": 8,
+        "x": 8,
+        "y": 301
+    },
+    {
+        "angle": -80.53767395019531,
+        "height": 8,
+        "id": 696,
+        "sprite_offset": 11380,
+        "width": 18,
+        "x": 269,
+        "y": 300
+    },
+    {
+        "angle": -53.13010025024414,
+        "height": 10,
+        "id": 697,
+        "sprite_offset": 11398,
+        "width": 9,
+        "x": 478,
+        "y": 300
+    },
+    {
+        "angle": -45.0,
+        "height": 14,
+        "id": 698,
+        "sprite_offset": 11407,
+        "width": 15,
+        "x": 482,
+        "y": 301
+    },
+    {
+        "angle": -78.69007110595703,
+        "height": 18,
+        "id": 699,
+        "sprite_offset": 11422,
+        "width": 10,
+        "x": 571,
+        "y": 300
+    },
+    {
+        "angle": -90.0,
+        "height": 12,
+        "id": 700,
+        "sprite_offset": 11432,
+        "width": 4,
+        "x": 18,
+        "y": 303
+    },
+    {
+        "angle": -0.0,
+        "height": 13,
+        "id": 701,
+        "sprite_offset": 11436,
+        "width": 12,
+        "x": 36,
+        "y": 302
+    },
+    {
+        "angle": -90.0,
+        "height": 6,
+        "id": 702,
+        "sprite_offset": 11448,
+        "width": 7,
+        "x": 288,
+        "y": 303
+    },
+    {
+        "angle": -45.0,
+        "height": 24,
+        "id": 703,
+        "sprite_offset": 11455,
+        "width": 18,
+        "x": 311,
+        "y": 303
+    },
+    {
+        "angle": -0.0,
+        "height": 12,
+        "id": 704,
+        "sprite_offset": 11473,
+        "width": 7,
+        "x": 427,
+        "y": 302
+    },
+    {
+        "angle": -41.18592834472656,
+        "height": 11,
+        "id": 705,
+        "sprite_offset": 11480,
+        "width": 11,
+        "x": 437,
+        "y": 302
+    },
+    {
+        "angle": -0.0,
+        "height": 9,
+        "id": 706,
+        "sprite_offset": 11491,
+        "width": 17,
+        "x": 542,
+        "y": 303
+    },
+    {
+        "angle": -0.0,
+        "height": 9,
+        "id": 707,
+        "sprite_offset": 11508,
+        "width": 11,
+        "x": 560,
+        "y": 303
+    },
+    {
+        "angle": -0.0,
+        "height": 11,
+        "id": 708,
+        "sprite_offset": 11519,
+        "width": 13,
+        "x": 22,
+        "y": 304
+    },
+    {
+        "angle": -26.56505012512207,
+        "height": 3,
+        "id": 709,
+        "sprite_offset": 11532,
+        "width": 3,
+        "x": 51,
+        "y": 305
+    },
+    {
+        "angle": -75.96376037597656,
+        "height": 21,
+        "id": 710,
+        "sprite_offset": 11535,
+        "width": 47,
+        "x": 178,
+        "y": 304
+    },
+    {
+        "angle": -63.43495178222656,
+        "height": 23,
+        "id": 711,
+        "sprite_offset": 11582,
+        "width": 26,
+        "x": 530,
+        "y": 304
+    },
+    {
+        "angle": -26.56505012512207,
+        "height": 13,
+        "id": 712,
+        "sprite_offset": 11608,
+        "width": 22,
+        "x": 170,
+        "y": 307
+    },
+    {
+        "angle": -84.80557250976562,
+        "height": 22,
+        "id": 713,
+        "sprite_offset": 11630,
+        "width": 21,
+        "x": 265,
+        "y": 306
+    },
+    {
+        "angle": -8.746162414550781,
+        "height": 19,
+        "id": 714,
+        "sprite_offset": 11651,
+        "width": 12,
+        "x": 355,
+        "y": 306
+    },
+    {
+        "angle": -6.340191841125488,
+        "height": 11,
+        "id": 715,
+        "sprite_offset": 11663,
+        "width": 23,
+        "x": 391,
+        "y": 306
+    },
+    {
+        "angle": -45.0,
+        "height": 24,
+        "id": 716,
+        "sprite_offset": 11686,
+        "width": 25,
+        "x": 37,
+        "y": 309
+    },
+    {
+        "angle": -0.0,
+        "height": 8,
+        "id": 717,
+        "sprite_offset": 11711,
+        "width": 4,
+        "x": 518,
+        "y": 308
+    },
+    {
+        "angle": -87.79740142822266,
+        "height": 16,
+        "id": 718,
+        "sprite_offset": 11715,
+        "width": 30,
+        "x": 225,
+        "y": 311
+    },
+    {
+        "angle": -0.0,
+        "height": 12,
+        "id": 719,
+        "sprite_offset": 11745,
+        "width": 8,
+        "x": 254,
+        "y": 310
+    },
+    {
+        "angle": -85.2363510131836,
+        "height": 17,
+        "id": 720,
+        "sprite_offset": 11753,
+        "width": 8,
+        "x": 286,
+        "y": 310
+    },
+    {
+        "angle": -42.51044845581055,
+        "height": 17,
+        "id": 721,
+        "sprite_offset": 11761,
+        "width": 31,
+        "x": 375,
+        "y": 310
+    },
+    {
+        "angle": -45.0,
+        "height": 12,
+        "id": 722,
+        "sprite_offset": 11792,
+        "width": 14,
+        "x": 409,
+        "y": 310
+    },
+    {
+        "angle": -56.3099365234375,
+        "height": 23,
+        "id": 723,
+        "sprite_offset": 11806,
+        "width": 24,
+        "x": 462,
+        "y": 310
+    },
+    {
+        "angle": -63.43495178222656,
+        "height": 7,
+        "id": 724,
+        "sprite_offset": 11830,
+        "width": 4,
+        "x": 493,
+        "y": 311
+    },
+    {
+        "angle": 0.0,
+        "height": 4,
+        "id": 725,
+        "sprite_offset": 11834,
+        "width": 4,
+        "x": 566,
+        "y": 310
+    },
+    {
+        "angle": -0.0,
+        "height": 24,
+        "id": 726,
+        "sprite_offset": 11838,
+        "width": 6,
+        "x": 0,
+        "y": 312
+    },
+    {
+        "angle": -45.0,
+        "height": 6,
+        "id": 727,
+        "sprite_offset": 11844,
+        "width": 7,
+        "x": 59,
+        "y": 312
+    },
+    {
+        "angle": -41.18592834472656,
+        "height": 12,
+        "id": 728,
+        "sprite_offset": 11851,
+        "width": 12,
+        "x": 299,
+        "y": 312
+    },
+    {
+        "angle": -9.462322235107422,
+        "height": 17,
+        "id": 729,
+        "sprite_offset": 11863,
+        "width": 9,
+        "x": 345,
+        "y": 312
+    },
+    {
+        "angle": -45.0,
+        "height": 5,
+        "id": 730,
+        "sprite_offset": 11872,
+        "width": 5,
+        "x": 433,
+        "y": 312
+    },
+    {
+        "angle": -90.0,
+        "height": 6,
+        "id": 731,
+        "sprite_offset": 11877,
+        "width": 12,
+        "x": 546,
+        "y": 313
+    },
+    {
+        "angle": -68.19859313964844,
+        "height": 9,
+        "id": 732,
+        "sprite_offset": 11889,
+        "width": 10,
+        "x": 558,
+        "y": 312
+    },
+    {
+        "angle": -45.0,
+        "height": 9,
+        "id": 733,
+        "sprite_offset": 11899,
+        "width": 11,
+        "x": 418,
+        "y": 314
+    },
+    {
+        "angle": -45.0,
+        "height": 6,
+        "id": 734,
+        "sprite_offset": 11910,
+        "width": 6,
+        "x": 438,
+        "y": 315
+    },
+    {
+        "angle": -39.80556869506836,
+        "height": 14,
+        "id": 735,
+        "sprite_offset": 11916,
+        "width": 15,
+        "x": 448,
+        "y": 314
+    },
+    {
+        "angle": -12.528807640075684,
+        "height": 26,
+        "id": 736,
+        "sprite_offset": 11931,
+        "width": 19,
+        "x": 515,
+        "y": 314
+    },
+    {
+        "angle": -81.02737426757812,
+        "height": 27,
+        "id": 737,
+        "sprite_offset": 11950,
+        "width": 17,
+        "x": 4,
+        "y": 316
+    },
+    {
+        "angle": -63.43495178222656,
+        "height": 14,
+        "id": 738,
+        "sprite_offset": 11967,
+        "width": 21,
+        "x": 22,
+        "y": 316
+    },
+    {
+        "angle": -26.56505012512207,
+        "height": 17,
+        "id": 739,
+        "sprite_offset": 11988,
+        "width": 16,
+        "x": 331,
+        "y": 316
+    },
+    {
+        "angle": -51.34019470214844,
+        "height": 12,
+        "id": 740,
+        "sprite_offset": 12004,
+        "width": 10,
+        "x": 425,
+        "y": 317
+    },
+    {
+        "angle": -56.30992889404297,
+        "height": 16,
+        "id": 741,
+        "sprite_offset": 12014,
+        "width": 12,
+        "x": 478,
+        "y": 316
+    },
+    {
+        "angle": -80.53767395019531,
+        "height": 20,
+        "id": 742,
+        "sprite_offset": 12026,
+        "width": 17,
+        "x": 493,
+        "y": 316
+    },
+    {
+        "angle": -78.69007110595703,
+        "height": 7,
+        "id": 743,
+        "sprite_offset": 12043,
+        "width": 13,
+        "x": 567,
+        "y": 317
+    },
+    {
+        "angle": -75.3236083984375,
+        "height": 38,
+        "id": 744,
+        "sprite_offset": 12056,
+        "width": 53,
+        "x": 168,
+        "y": 319
+    },
+    {
+        "angle": -29.744882583618164,
+        "height": 13,
+        "id": 745,
+        "sprite_offset": 12109,
+        "width": 12,
+        "x": 302,
+        "y": 319
+    },
+    {
+        "angle": -65.55604553222656,
+        "height": 15,
+        "id": 746,
+        "sprite_offset": 12121,
+        "width": 10,
+        "x": 485,
+        "y": 318
+    },
+    {
+        "angle": -33.023868560791016,
+        "height": 22,
+        "id": 747,
+        "sprite_offset": 12131,
+        "width": 28,
+        "x": 43,
+        "y": 321
+    },
+    {
+        "angle": -77.47119140625,
+        "height": 27,
+        "id": 748,
+        "sprite_offset": 12159,
+        "width": 40,
+        "x": 97,
+        "y": 320
+    },
+    {
+        "angle": -71.56504821777344,
+        "height": 22,
+        "id": 749,
+        "sprite_offset": 12199,
+        "width": 17,
+        "x": 394,
+        "y": 320
+    },
+    {
+        "angle": -66.80140686035156,
+        "height": 15,
+        "id": 750,
+        "sprite_offset": 12216,
+        "width": 14,
+        "x": 431,
+        "y": 320
+    },
+    {
+        "angle": 0.0,
+        "height": 1,
+        "id": 751,
+        "sprite_offset": 12230,
+        "width": 1,
+        "x": 444,
+        "y": 321
+    },
+    {
+        "angle": -0.0,
+        "height": 8,
+        "id": 752,
+        "sprite_offset": 12231,
+        "width": 10,
+        "x": 556,
+        "y": 321
+    },
+    {
+        "angle": -0.0,
+        "height": 22,
+        "id": 753,
+        "sprite_offset": 12241,
+        "width": 25,
+        "x": 18,
+        "y": 322
+    },
+    {
+        "angle": -0.0,
+        "height": 16,
+        "id": 754,
+        "sprite_offset": 12266,
+        "width": 14,
+        "x": 247,
+        "y": 323
+    },
+    {
+        "angle": -18.43494987487793,
+        "height": 6,
+        "id": 755,
+        "sprite_offset": 12280,
+        "width": 9,
+        "x": 322,
+        "y": 323
+    },
+    {
+        "angle": -41.18592834472656,
+        "height": 11,
+        "id": 756,
+        "sprite_offset": 12289,
+        "width": 11,
+        "x": 410,
+        "y": 322
+    },
+    {
+        "angle": -78.69007110595703,
+        "height": 9,
+        "id": 757,
+        "sprite_offset": 12300,
+        "width": 12,
+        "x": 566,
+        "y": 323
+    },
+    {
+        "angle": -0.0,
+        "height": 7,
+        "id": 758,
+        "sprite_offset": 12312,
+        "width": 8,
+        "x": 90,
+        "y": 325
+    },
+    {
+        "angle": -0.0,
+        "height": 12,
+        "id": 759,
+        "sprite_offset": 12320,
+        "width": 13,
+        "x": 135,
+        "y": 325
+    },
+    {
+        "angle": -82.87498474121094,
+        "height": 14,
+        "id": 760,
+        "sprite_offset": 12333,
+        "width": 12,
+        "x": 211,
+        "y": 325
+    },
+    {
+        "angle": -84.2894058227539,
+        "height": 19,
+        "id": 761,
+        "sprite_offset": 12345,
+        "width": 14,
+        "x": 363,
+        "y": 324
+    },
+    {
+        "angle": -80.53767395019531,
+        "height": 17,
+        "id": 762,
+        "sprite_offset": 12359,
+        "width": 20,
+        "x": 534,
+        "y": 324
+    },
+    {
+        "angle": -80.53767395019531,
+        "height": 11,
+        "id": 763,
+        "sprite_offset": 12379,
+        "width": 12,
+        "x": 71,
+        "y": 327
+    },
+    {
+        "angle": -80.53767395019531,
+        "height": 16,
+        "id": 764,
+        "sprite_offset": 12391,
+        "width": 18,
+        "x": 223,
+        "y": 326
+    },
+    {
+        "angle": -3.1798300743103027,
+        "height": 25,
+        "id": 765,
+        "sprite_offset": 12409,
+        "width": 26,
+        "x": 262,
+        "y": 327
+    },
+    {
+        "angle": -26.56505012512207,
+        "height": 5,
+        "id": 766,
+        "sprite_offset": 12435,
+        "width": 7,
+        "x": 315,
+        "y": 326
+    },
+    {
+        "angle": -4.085616588592529,
+        "height": 17,
+        "id": 767,
+        "sprite_offset": 12442,
+        "width": 21,
+        "x": 376,
+        "y": 326
+    },
+    {
+        "angle": -33.6900634765625,
+        "height": 15,
+        "id": 768,
+        "sprite_offset": 12463,
+        "width": 21,
+        "x": 410,
+        "y": 326
+    },
+    {
+        "angle": -16.821407318115234,
+        "height": 29,
+        "id": 769,
+        "sprite_offset": 12484,
+        "width": 61,
+        "x": 386,
+        "y": 327
+    },
+    {
+        "angle": -11.309932708740234,
+        "height": 33,
+        "id": 770,
+        "sprite_offset": 12545,
+        "width": 54,
+        "x": 428,
+        "y": 327
+    },
+    {
+        "angle": -82.87498474121094,
+        "height": 17,
+        "id": 771,
+        "sprite_offset": 12599,
+        "width": 8,
+        "x": 240,
+        "y": 329
+    },
+    {
+        "angle": -45.0,
+        "height": 7,
+        "id": 772,
+        "sprite_offset": 12607,
+        "width": 6,
+        "x": 288,
+        "y": 328
+    },
+    {
+        "angle": -18.434947967529297,
+        "height": 12,
+        "id": 773,
+        "sprite_offset": 12613,
+        "width": 18,
+        "x": 317,
+        "y": 329
+    },
+    {
+        "angle": -26.56505012512207,
+        "height": 4,
+        "id": 774,
+        "sprite_offset": 12631,
+        "width": 4,
+        "x": 359,
+        "y": 329
+    },
+    {
+        "angle": -75.96376037597656,
+        "height": 13,
+        "id": 775,
+        "sprite_offset": 12635,
+        "width": 11,
+        "x": 553,
+        "y": 329
+    },
+    {
+        "angle": -26.56505012512207,
+        "height": 5,
+        "id": 776,
+        "sprite_offset": 12646,
+        "width": 10,
+        "x": 305,
+        "y": 330
+    },
+    {
+        "angle": -26.56505012512207,
+        "height": 5,
+        "id": 777,
+        "sprite_offset": 12656,
+        "width": 5,
+        "x": 335,
+        "y": 331
+    },
+    {
+        "angle": -0.0,
+        "height": 10,
+        "id": 778,
+        "sprite_offset": 12661,
+        "width": 9,
+        "x": 88,
+        "y": 332
+    },
+    {
+        "angle": -26.56505012512207,
+        "height": 9,
+        "id": 779,
+        "sprite_offset": 12670,
+        "width": 13,
+        "x": 287,
+        "y": 332
+    },
+    {
+        "angle": -26.56505012512207,
+        "height": 12,
+        "id": 780,
+        "sprite_offset": 12683,
+        "width": 14,
+        "x": 306,
+        "y": 333
+    },
+    {
+        "angle": -26.56505012512207,
+        "height": 14,
+        "id": 781,
+        "sprite_offset": 12697,
+        "width": 17,
+        "x": 344,
+        "y": 333
+    },
+    {
+        "angle": -0.0,
+        "height": 4,
+        "id": 782,
+        "sprite_offset": 12714,
+        "width": 3,
+        "x": 361,
+        "y": 333
+    },
+    {
+        "angle": -78.69007110595703,
+        "height": 15,
+        "id": 783,
+        "sprite_offset": 12717,
+        "width": 18,
+        "x": 559,
+        "y": 332
+    },
+    {
+        "angle": -71.56504821777344,
+        "height": 13,
+        "id": 784,
+        "sprite_offset": 12735,
+        "width": 10,
+        "x": 478,
+        "y": 335
+    },
+    {
+        "angle": -0.0,
+        "height": 7,
+        "id": 785,
+        "sprite_offset": 12745,
+        "width": 9,
+        "x": 61,
+        "y": 337
+    },
+    {
+        "angle": -0.0,
+        "height": 7,
+        "id": 786,
+        "sprite_offset": 12754,
+        "width": 9,
+        "x": 139,
+        "y": 337
+    },
+    {
+        "angle": -79.69515228271484,
+        "height": 15,
+        "id": 787,
+        "sprite_offset": 12763,
+        "width": 15,
+        "x": 489,
+        "y": 336
+    },
+    {
+        "angle": -81.8698959350586,
+        "height": 8,
+        "id": 788,
+        "sprite_offset": 12778,
+        "width": 11,
+        "x": 71,
+        "y": 338
+    },
+    {
+        "angle": 0.0,
+        "height": 7,
+        "id": 789,
+        "sprite_offset": 12789,
+        "width": 13,
+        "x": 125,
+        "y": 338
+    },
+    {
+        "angle": -78.69007110595703,
+        "height": 15,
+        "id": 790,
+        "sprite_offset": 12802,
+        "width": 11,
+        "x": 246,
+        "y": 339
+    },
+    {
+        "angle": -18.434946060180664,
+        "height": 11,
+        "id": 791,
+        "sprite_offset": 12813,
+        "width": 14,
+        "x": 290,
+        "y": 338
+    },
+    {
+        "angle": -47.72631072998047,
+        "height": 17,
+        "id": 792,
+        "sprite_offset": 12827,
+        "width": 18,
+        "x": 495,
+        "y": 339
+    },
+    {
+        "angle": -81.8698959350586,
+        "height": 12,
+        "id": 793,
+        "sprite_offset": 12845,
+        "width": 25,
+        "x": 221,
+        "y": 341
+    },
+    {
+        "angle": -20.323135375976562,
+        "height": 24,
+        "id": 794,
+        "sprite_offset": 12870,
+        "width": 33,
+        "x": 313,
+        "y": 340
+    },
+    {
+        "angle": -53.13010025024414,
+        "height": 8,
+        "id": 795,
+        "sprite_offset": 12903,
+        "width": 10,
+        "x": 541,
+        "y": 341
+    },
+    {
+        "angle": -3.5763344764709473,
+        "height": 8,
+        "id": 796,
+        "sprite_offset": 12913,
+        "width": 19,
+        "x": 272,
+        "y": 343
+    },
+    {
+        "angle": -75.25643920898438,
+        "height": 24,
+        "id": 797,
+        "sprite_offset": 12932,
+        "width": 24,
+        "x": 511,
+        "y": 342
+    },
+    {
+        "angle": -80.53767395019531,
+        "height": 16,
+        "id": 798,
+        "sprite_offset": 12956,
+        "width": 25,
+        "x": 551,
+        "y": 343
+    },
+    {
+        "angle": -0.0,
+        "height": 25,
+        "id": 799,
+        "sprite_offset": 12981,
+        "width": 12,
+        "x": 0,
+        "y": 345
+    },
+    {
+        "angle": -78.69007110595703,
+        "height": 8,
+        "id": 800,
+        "sprite_offset": 12993,
+        "width": 7,
+        "x": 12,
+        "y": 345
+    },
+    {
+        "angle": -80.53767395019531,
+        "height": 11,
+        "id": 801,
+        "sprite_offset": 13000,
+        "width": 26,
+        "x": 54,
+        "y": 345
+    },
+    {
+        "angle": -63.43495178222656,
+        "height": 17,
+        "id": 802,
+        "sprite_offset": 13026,
+        "width": 18,
+        "x": 83,
+        "y": 345
+    },
+    {
+        "angle": -14.03624439239502,
+        "height": 10,
+        "id": 803,
+        "sprite_offset": 13044,
+        "width": 14,
+        "x": 364,
+        "y": 344
+    },
+    {
+        "angle": -3.012787342071533,
+        "height": 30,
+        "id": 804,
+        "sprite_offset": 13058,
+        "width": 52,
+        "x": 431,
+        "y": 345
+    },
+    {
+        "angle": -11.309932708740234,
+        "height": 12,
+        "id": 805,
+        "sprite_offset": 13110,
+        "width": 9,
+        "x": 538,
+        "y": 344
+    },
+    {
+        "angle": -2.12109637260437,
+        "height": 29,
+        "id": 806,
+        "sprite_offset": 13119,
+        "width": 35,
+        "x": 19,
+        "y": 346
+    },
+    {
+        "angle": 0.0,
+        "height": 7,
+        "id": 807,
+        "sprite_offset": 13154,
+        "width": 15,
+        "x": 348,
+        "y": 347
+    },
+    {
+        "angle": -33.690067291259766,
+        "height": 11,
+        "id": 808,
+        "sprite_offset": 13169,
+        "width": 19,
+        "x": 367,
+        "y": 346
+    },
+    {
+        "angle": -75.96376037597656,
+        "height": 19,
+        "id": 809,
+        "sprite_offset": 13188,
+        "width": 7,
+        "x": 531,
+        "y": 347
+    },
+    {
+        "angle": 0.0,
+        "height": 27,
+        "id": 810,
+        "sprite_offset": 13195,
+        "width": 45,
+        "x": 133,
+        "y": 349
+    },
+    {
+        "angle": -75.96376037597656,
+        "height": 6,
+        "id": 811,
+        "sprite_offset": 13240,
+        "width": 10,
+        "x": 476,
+        "y": 348
+    },
+    {
+        "angle": -0.0,
+        "height": 13,
+        "id": 812,
+        "sprite_offset": 13250,
+        "width": 17,
+        "x": 111,
+        "y": 351
+    },
+    {
+        "angle": -81.8698959350586,
+        "height": 14,
+        "id": 813,
+        "sprite_offset": 13267,
+        "width": 9,
+        "x": 128,
+        "y": 350
+    },
+    {
+        "angle": -81.8698959350586,
+        "height": 19,
+        "id": 814,
+        "sprite_offset": 13276,
+        "width": 14,
+        "x": 135,
+        "y": 350
+    },
+    {
+        "angle": -80.53767395019531,
+        "height": 5,
+        "id": 815,
+        "sprite_offset": 13290,
+        "width": 8,
+        "x": 406,
+        "y": 350
+    },
+    {
+        "angle": -90.0,
+        "height": 6,
+        "id": 816,
+        "sprite_offset": 13298,
+        "width": 6,
+        "x": 488,
+        "y": 350
+    },
+    {
+        "angle": -28.610462188720703,
+        "height": 12,
+        "id": 817,
+        "sprite_offset": 13304,
+        "width": 12,
+        "x": 97,
+        "y": 353
+    },
+    {
+        "angle": -0.0,
+        "height": 10,
+        "id": 818,
+        "sprite_offset": 13316,
+        "width": 17,
+        "x": 172,
+        "y": 352
+    },
+    {
+        "angle": -69.44395446777344,
+        "height": 17,
+        "id": 819,
+        "sprite_offset": 13333,
+        "width": 29,
+        "x": 189,
+        "y": 353
+    },
+    {
+        "angle": -81.8698959350586,
+        "height": 9,
+        "id": 820,
+        "sprite_offset": 13362,
+        "width": 18,
+        "x": 221,
+        "y": 352
+    },
+    {
+        "angle": -0.0,
+        "height": 18,
+        "id": 821,
+        "sprite_offset": 13380,
+        "width": 18,
+        "x": 293,
+        "y": 352
+    },
+    {
+        "angle": -23.198589324951172,
+        "height": 16,
+        "id": 822,
+        "sprite_offset": 13398,
+        "width": 32,
+        "x": 317,
+        "y": 352
+    },
+    {
+        "angle": -14.620874404907227,
+        "height": 19,
+        "id": 823,
+        "sprite_offset": 13430,
+        "width": 27,
+        "x": 552,
+        "y": 353
+    },
+    {
+        "angle": -31.82744789123535,
+        "height": 23,
+        "id": 824,
+        "sprite_offset": 13457,
+        "width": 35,
+        "x": 42,
+        "y": 354
+    },
+    {
+        "angle": -0.0,
+        "height": 14,
+        "id": 825,
+        "sprite_offset": 13492,
+        "width": 9,
+        "x": 284,
+        "y": 355
+    },
+    {
+        "angle": -14.03624439239502,
+        "height": 5,
+        "id": 826,
+        "sprite_offset": 13501,
+        "width": 15,
+        "x": 349,
+        "y": 355
+    },
+    {
+        "angle": 0.0,
+        "height": 3,
+        "id": 827,
+        "sprite_offset": 13516,
+        "width": 11,
+        "x": 383,
+        "y": 354
+    },
+    {
+        "angle": -63.43495178222656,
+        "height": 11,
+        "id": 828,
+        "sprite_offset": 13527,
+        "width": 24,
+        "x": 259,
+        "y": 357
+    },
+    {
+        "angle": 0.0,
+        "height": 9,
+        "id": 829,
+        "sprite_offset": 13551,
+        "width": 18,
+        "x": 266,
+        "y": 356
+    },
+    {
+        "angle": -78.69007110595703,
+        "height": 12,
+        "id": 830,
+        "sprite_offset": 13569,
+        "width": 12,
+        "x": 538,
+        "y": 357
+    },
+    {
+        "angle": -90.0,
+        "height": 5,
+        "id": 831,
+        "sprite_offset": 13581,
+        "width": 10,
+        "x": 244,
+        "y": 359
+    },
+    {
+        "angle": -0.0,
+        "height": 12,
+        "id": 832,
+        "sprite_offset": 13591,
+        "width": 11,
+        "x": 12,
+        "y": 360
+    },
+    {
+        "angle": -33.6900634765625,
+        "height": 5,
+        "id": 833,
+        "sprite_offset": 13602,
+        "width": 6,
+        "x": 237,
+        "y": 360
+    },
+    {
+        "angle": 0.0,
+        "height": 8,
+        "id": 834,
+        "sprite_offset": 13608,
+        "width": 15,
+        "x": 180,
+        "y": 363
+    },
+    {
+        "angle": -4.23639440536499,
+        "height": 16,
+        "id": 835,
+        "sprite_offset": 13623,
+        "width": 30,
+        "x": 372,
+        "y": 362
+    },
+    {
+        "angle": -90.0,
+        "height": 2,
+        "id": 836,
+        "sprite_offset": 13653,
+        "width": 4,
+        "x": 402,
+        "y": 362
+    },
+    {
+        "angle": -6.34019136428833,
+        "height": 4,
+        "id": 837,
+        "sprite_offset": 13657,
+        "width": 11,
+        "x": 405,
+        "y": 362
+    },
+    {
+        "angle": -56.3099365234375,
+        "height": 18,
+        "id": 838,
+        "sprite_offset": 13668,
+        "width": 27,
+        "x": 489,
+        "y": 363
+    },
+    {
+        "angle": -90.0,
+        "height": 6,
+        "id": 839,
+        "sprite_offset": 13695,
+        "width": 14,
+        "x": 121,
+        "y": 365
+    },
+    {
+        "angle": -0.0,
+        "height": 18,
+        "id": 840,
+        "sprite_offset": 13709,
+        "width": 18,
+        "x": 352,
+        "y": 364
+    },
+    {
+        "angle": -45.0,
+        "height": 11,
+        "id": 841,
+        "sprite_offset": 13727,
+        "width": 9,
+        "x": 520,
+        "y": 364
+    },
+    {
+        "angle": -45.0,
+        "height": 14,
+        "id": 842,
+        "sprite_offset": 13736,
+        "width": 16,
+        "x": 57,
+        "y": 367
+    },
+    {
+        "angle": -51.34019088745117,
+        "height": 19,
+        "id": 843,
+        "sprite_offset": 13752,
+        "width": 20,
+        "x": 422,
+        "y": 367
+    },
+    {
+        "angle": -78.69007110595703,
+        "height": 9,
+        "id": 844,
+        "sprite_offset": 13772,
+        "width": 7,
+        "x": 528,
+        "y": 367
+    },
+    {
+        "angle": -53.13010025024414,
+        "height": 8,
+        "id": 845,
+        "sprite_offset": 13779,
+        "width": 12,
+        "x": 573,
+        "y": 367
+    },
+    {
+        "angle": -81.67434692382812,
+        "height": 52,
+        "id": 846,
+        "sprite_offset": 13791,
+        "width": 52,
+        "x": 41,
+        "y": 368
+    },
+    {
+        "angle": -18.43494987487793,
+        "height": 5,
+        "id": 847,
+        "sprite_offset": 13843,
+        "width": 8,
+        "x": 343,
+        "y": 369
+    },
+    {
+        "angle": -62.241458892822266,
+        "height": 20,
+        "id": 848,
+        "sprite_offset": 13851,
+        "width": 21,
+        "x": 391,
+        "y": 368
+    },
+    {
+        "angle": -75.96376037597656,
+        "height": 15,
+        "id": 849,
+        "sprite_offset": 13872,
+        "width": 12,
+        "x": 411,
+        "y": 368
+    },
+    {
+        "angle": -0.0,
+        "height": 11,
+        "id": 850,
+        "sprite_offset": 13884,
+        "width": 16,
+        "x": 536,
+        "y": 368
+    },
+    {
+        "angle": -81.8698959350586,
+        "height": 19,
+        "id": 851,
+        "sprite_offset": 13900,
+        "width": 10,
+        "x": 0,
+        "y": 370
+    },
+    {
+        "angle": -79.3803482055664,
+        "height": 8,
+        "id": 852,
+        "sprite_offset": 13910,
+        "width": 27,
+        "x": 95,
+        "y": 370
+    },
+    {
+        "angle": 0.0,
+        "height": 3,
+        "id": 853,
+        "sprite_offset": 13937,
+        "width": 5,
+        "x": 213,
+        "y": 370
+    },
+    {
+        "angle": -90.0,
+        "height": 4,
+        "id": 854,
+        "sprite_offset": 13942,
+        "width": 10,
+        "x": 219,
+        "y": 371
+    },
+    {
+        "angle": -8.130102157592773,
+        "height": 14,
+        "id": 855,
+        "sprite_offset": 13952,
+        "width": 15,
+        "x": 231,
+        "y": 371
+    },
+    {
+        "angle": -90.0,
+        "height": 10,
+        "id": 856,
+        "sprite_offset": 13967,
+        "width": 6,
+        "x": 246,
+        "y": 371
+    },
+    {
+        "angle": -22.61986541748047,
+        "height": 11,
+        "id": 857,
+        "sprite_offset": 13973,
+        "width": 24,
+        "x": 320,
+        "y": 370
+    },
+    {
+        "angle": -63.43495178222656,
+        "height": 13,
+        "id": 858,
+        "sprite_offset": 13997,
+        "width": 19,
+        "x": 369,
+        "y": 370
+    },
+    {
+        "angle": -78.11134338378906,
+        "height": 35,
+        "id": 859,
+        "sprite_offset": 14016,
+        "width": 24,
+        "x": 505,
+        "y": 370
+    },
+    {
+        "angle": -3.5763344764709473,
+        "height": 9,
+        "id": 860,
+        "sprite_offset": 14040,
+        "width": 17,
+        "x": 554,
+        "y": 370
+    },
+    {
+        "angle": -53.13010025024414,
+        "height": 10,
+        "id": 861,
+        "sprite_offset": 14057,
+        "width": 8,
+        "x": 571,
+        "y": 371
+    },
+    {
+        "angle": -86.18592071533203,
+        "height": 20,
+        "id": 862,
+        "sprite_offset": 14065,
+        "width": 14,
+        "x": 8,
+        "y": 372
+    },
+    {
+        "angle": -78.69007110595703,
+        "height": 6,
+        "id": 863,
+        "sprite_offset": 14079,
+        "width": 16,
+        "x": 202,
+        "y": 373
+    },
+    {
+        "angle": -5.19442892074585,
+        "height": 36,
+        "id": 864,
+        "sprite_offset": 14095,
+        "width": 24,
+        "x": 257,
+        "y": 372
+    },
+    {
+        "angle": -11.309932708740234,
+        "height": 14,
+        "id": 865,
+        "sprite_offset": 14119,
+        "width": 28,
+        "x": 325,
+        "y": 373
+    },
+    {
+        "angle": -31.82744598388672,
+        "height": 30,
+        "id": 866,
+        "sprite_offset": 14147,
+        "width": 26,
+        "x": 480,
+        "y": 372
+    },
+    {
+        "angle": -37.87498474121094,
+        "height": 20,
+        "id": 867,
+        "sprite_offset": 14173,
+        "width": 17,
+        "x": 491,
+        "y": 373
+    },
+    {
+        "angle": -78.69007110595703,
+        "height": 7,
+        "id": 868,
+        "sprite_offset": 14190,
+        "width": 3,
+        "x": 29,
+        "y": 375
+    },
+    {
+        "angle": -18.434946060180664,
+        "height": 7,
+        "id": 869,
+        "sprite_offset": 14193,
+        "width": 12,
+        "x": 32,
+        "y": 375
+    },
+    {
+        "angle": 0.0,
+        "height": 303,
+        "id": 870,
+        "sprite_offset": 14205,
+        "width": 217,
+        "x": 0,
+        "y": 375
+    },
+    {
+        "angle": -78.69007110595703,
+        "height": 6,
+        "id": 871,
+        "sprite_offset": 14422,
+        "width": 10,
+        "x": 218,
+        "y": 375
+    },
+    {
+        "angle": -3.1798300743103027,
+        "height": 28,
+        "id": 872,
+        "sprite_offset": 14432,
+        "width": 33,
+        "x": 178,
+        "y": 377
+    },
+    {
+        "angle": -81.8698959350586,
+        "height": 10,
+        "id": 873,
+        "sprite_offset": 14465,
+        "width": 9,
+        "x": 281,
+        "y": 377
+    },
+    {
+        "angle": -90.0,
+        "height": 4,
+        "id": 874,
+        "sprite_offset": 14474,
+        "width": 22,
+        "x": 293,
+        "y": 377
+    },
+    {
+        "angle": -0.0,
+        "height": 9,
+        "id": 875,
+        "sprite_offset": 14496,
+        "width": 9,
+        "x": 230,
+        "y": 378
+    },
+    {
+        "angle": -26.56505012512207,
+        "height": 11,
+        "id": 876,
+        "sprite_offset": 14505,
+        "width": 8,
+        "x": 248,
+        "y": 379
+    },
+    {
+        "angle": -90.0,
+        "height": 5,
+        "id": 877,
+        "sprite_offset": 14513,
+        "width": 14,
+        "x": 291,
+        "y": 379
+    },
+    {
+        "angle": -90.0,
+        "height": 18,
+        "id": 878,
+        "sprite_offset": 14527,
+        "width": 10,
+        "x": 530,
+        "y": 379
+    },
+    {
+        "angle": -4.763641834259033,
+        "height": 14,
+        "id": 879,
+        "sprite_offset": 14537,
+        "width": 14,
+        "x": 540,
+        "y": 379
+    },
+    {
+        "angle": -90.0,
+        "height": 11,
+        "id": 880,
+        "sprite_offset": 14551,
+        "width": 13,
+        "x": 556,
+        "y": 378
+    },
+    {
+        "angle": -23.198591232299805,
+        "height": 15,
+        "id": 881,
+        "sprite_offset": 14564,
+        "width": 30,
+        "x": 33,
+        "y": 380
+    },
+    {
+        "angle": -0.0,
+        "height": 12,
+        "id": 882,
+        "sprite_offset": 14594,
+        "width": 5,
+        "x": 123,
+        "y": 381
+    },
+    {
+        "angle": -4.820766448974609,
+        "height": 182,
+        "id": 883,
+        "sprite_offset": 14599,
+        "width": 112,
+        "x": 134,
+        "y": 380
+    },
+    {
+        "angle": -77.47119140625,
+        "height": 13,
+        "id": 884,
+        "sprite_offset": 14711,
+        "width": 17,
+        "x": 211,
+        "y": 380
+    },
+    {
+        "angle": -41.18592834472656,
+        "height": 11,
+        "id": 885,
+        "sprite_offset": 14728,
+        "width": 11,
+        "x": 311,
+        "y": 381
+    },
+    {
+        "angle": -63.43495178222656,
+        "height": 23,
+        "id": 886,
+        "sprite_offset": 14739,
+        "width": 14,
+        "x": 108,
+        "y": 383
+    },
+    {
+        "angle": -11.309932708740234,
+        "height": 17,
+        "id": 887,
+        "sprite_offset": 14753,
+        "width": 28,
+        "x": 290,
+        "y": 382
+    },
+    {
+        "angle": -63.43495178222656,
+        "height": 12,
+        "id": 888,
+        "sprite_offset": 14781,
+        "width": 13,
+        "x": 407,
+        "y": 383
+    },
+    {
+        "angle": -14.931416511535645,
+        "height": 11,
+        "id": 889,
+        "sprite_offset": 14794,
+        "width": 19,
+        "x": 230,
+        "y": 384
+    },
+    {
+        "angle": -34.69515609741211,
+        "height": 20,
+        "id": 890,
+        "sprite_offset": 14813,
+        "width": 22,
+        "x": 354,
+        "y": 384
+    },
+    {
+        "angle": -90.0,
+        "height": 5,
+        "id": 891,
+        "sprite_offset": 14835,
+        "width": 11,
+        "x": 373,
+        "y": 385
+    },
+    {
+        "angle": -38.65980911254883,
+        "height": 18,
+        "id": 892,
+        "sprite_offset": 14846,
+        "width": 15,
+        "x": 384,
+        "y": 385
+    },
+    {
+        "angle": -71.56504821777344,
+        "height": 15,
+        "id": 893,
+        "sprite_offset": 14861,
+        "width": 15,
+        "x": 419,
+        "y": 385
+    },
+    {
+        "angle": -45.0,
+        "height": 2,
+        "id": 894,
+        "sprite_offset": 14876,
+        "width": 2,
+        "x": 287,
+        "y": 386
+    },
+    {
+        "angle": -36.869895935058594,
+        "height": 22,
+        "id": 895,
+        "sprite_offset": 14878,
+        "width": 25,
+        "x": 337,
+        "y": 386
+    },
+    {
+        "angle": -30.963754653930664,
+        "height": 12,
+        "id": 896,
+        "sprite_offset": 14903,
+        "width": 15,
+        "x": 52,
+        "y": 389
+    },
+    {
+        "angle": -83.6598129272461,
+        "height": 16,
+        "id": 897,
+        "sprite_offset": 14918,
+        "width": 14,
+        "x": 242,
+        "y": 389
+    },
+    {
+        "angle": -82.87498474121094,
+        "height": 16,
+        "id": 898,
+        "sprite_offset": 14932,
+        "width": 17,
+        "x": 278,
+        "y": 388
+    },
+    {
+        "angle": -36.25383377075195,
+        "height": 20,
+        "id": 899,
+        "sprite_offset": 14949,
+        "width": 20,
+        "x": 329,
+        "y": 389
+    },
+    {
+        "angle": -0.0,
+        "height": 5,
+        "id": 900,
+        "sprite_offset": 14969,
+        "width": 3,
+        "x": 29,
+        "y": 390
+    },
+    {
+        "angle": -35.53767776489258,
+        "height": 19,
+        "id": 901,
+        "sprite_offset": 14972,
+        "width": 16,
+        "x": 376,
+        "y": 391
+    },
+    {
+        "angle": -30.963754653930664,
+        "height": 6,
+        "id": 902,
+        "sprite_offset": 14988,
+        "width": 4,
+        "x": 397,
+        "y": 390
+    },
+    {
+        "angle": -0.0,
+        "height": 6,
+        "id": 903,
+        "sprite_offset": 14992,
+        "width": 15,
+        "x": 541,
+        "y": 391
+    },
+    {
+        "angle": -80.53767395019531,
+        "height": 7,
+        "id": 904,
+        "sprite_offset": 15007,
+        "width": 17,
+        "x": 210,
+        "y": 392
+    },
+    {
+        "angle": -37.87498474121094,
+        "height": 15,
+        "id": 905,
+        "sprite_offset": 15024,
+        "width": 13,
+        "x": 321,
+        "y": 392
+    },
+    {
+        "angle": -0.0,
+        "height": 15,
+        "id": 906,
+        "sprite_offset": 15037,
+        "width": 9,
+        "x": 407,
+        "y": 393
+    },
+    {
+        "angle": -80.53767395019531,
+        "height": 27,
+        "id": 907,
+        "sprite_offset": 15046,
+        "width": 29,
+        "x": 179,
+        "y": 395
+    },
+    {
+        "angle": -82.40535736083984,
+        "height": 30,
+        "id": 908,
+        "sprite_offset": 15075,
+        "width": 26,
+        "x": 227,
+        "y": 395
+    },
+    {
+        "angle": -74.74488067626953,
+        "height": 11,
+        "id": 909,
+        "sprite_offset": 15101,
+        "width": 19,
+        "x": 308,
+        "y": 395
+    },
+    {
+        "angle": 0.0,
+        "height": 7,
+        "id": 910,
+        "sprite_offset": 15120,
+        "width": 10,
+        "x": 529,
+        "y": 395
+    },
+    {
+        "angle": -90.0,
+        "height": 25,
+        "id": 911,
+        "sprite_offset": 15130,
+        "width": 19,
+        "x": 0,
+        "y": 396
+    },
+    {
+        "angle": -75.96376037597656,
+        "height": 23,
+        "id": 912,
+        "sprite_offset": 15149,
+        "width": 14,
+        "x": 206,
+        "y": 397
+    },
+    {
+        "angle": -0.0,
+        "height": 11,
+        "id": 913,
+        "sprite_offset": 15163,
+        "width": 19,
+        "x": 542,
+        "y": 397
+    },
+    {
+        "angle": -82.87498474121094,
+        "height": 18,
+        "id": 914,
+        "sprite_offset": 15182,
+        "width": 9,
+        "x": 217,
+        "y": 399
+    },
+    {
+        "angle": -75.96376037597656,
+        "height": 7,
+        "id": 915,
+        "sprite_offset": 15191,
+        "width": 4,
+        "x": 398,
+        "y": 399
+    },
+    {
+        "angle": -69.44395446777344,
+        "height": 12,
+        "id": 916,
+        "sprite_offset": 15195,
+        "width": 14,
+        "x": 414,
+        "y": 399
+    },
+    {
+        "angle": -45.0,
+        "height": 5,
+        "id": 917,
+        "sprite_offset": 15209,
+        "width": 4,
+        "x": 27,
+        "y": 400
+    },
+    {
+        "angle": -32.82854461669922,
+        "height": 34,
+        "id": 918,
+        "sprite_offset": 15213,
+        "width": 45,
+        "x": 299,
+        "y": 400
+    },
+    {
+        "angle": -45.0,
+        "height": 5,
+        "id": 919,
+        "sprite_offset": 15258,
+        "width": 4,
+        "x": 394,
+        "y": 401
+    },
+    {
+        "angle": -67.5430679321289,
+        "height": 109,
+        "id": 920,
+        "sprite_offset": 15262,
+        "width": 149,
+        "x": 221,
+        "y": 403
+    },
+    {
+        "angle": -35.53767776489258,
+        "height": 14,
+        "id": 921,
+        "sprite_offset": 15411,
+        "width": 17,
+        "x": 350,
+        "y": 403
+    },
+    {
+        "angle": -80.53767395019531,
+        "height": 11,
+        "id": 922,
+        "sprite_offset": 15428,
+        "width": 15,
+        "x": 524,
+        "y": 402
+    },
+    {
+        "angle": -62.52556610107422,
+        "height": 57,
+        "id": 923,
+        "sprite_offset": 15443,
+        "width": 58,
+        "x": 0,
+        "y": 405
+    },
+    {
+        "angle": -26.56505012512207,
+        "height": 10,
+        "id": 924,
+        "sprite_offset": 15501,
+        "width": 12,
+        "x": 366,
+        "y": 404
+    },
+    {
+        "angle": -30.963754653930664,
+        "height": 9,
+        "id": 925,
+        "sprite_offset": 15513,
+        "width": 12,
+        "x": 383,
+        "y": 405
+    },
+    {
+        "angle": -81.46923065185547,
+        "height": 28,
+        "id": 926,
+        "sprite_offset": 15525,
+        "width": 17,
+        "x": 542,
+        "y": 404
+    },
+    {
+        "angle": -0.0,
+        "height": 9,
+        "id": 927,
+        "sprite_offset": 15542,
+        "width": 11,
+        "x": 276,
+        "y": 406
+    },
+    {
+        "angle": -78.69007110595703,
+        "height": 9,
+        "id": 928,
+        "sprite_offset": 15553,
+        "width": 5,
+        "x": 396,
+        "y": 407
+    },
+    {
+        "angle": -14.03624439239502,
+        "height": 9,
+        "id": 929,
+        "sprite_offset": 15558,
+        "width": 25,
+        "x": 362,
+        "y": 410
+    },
+    {
+        "angle": -45.0,
+        "height": 5,
+        "id": 930,
+        "sprite_offset": 15583,
+        "width": 5,
+        "x": 346,
+        "y": 413
+    },
+    {
+        "angle": -78.69007110595703,
+        "height": 12,
+        "id": 931,
+        "sprite_offset": 15588,
+        "width": 15,
+        "x": 403,
+        "y": 413
+    },
+    {
+        "angle": -90.0,
+        "height": 4,
+        "id": 932,
+        "sprite_offset": 15603,
+        "width": 2,
+        "x": 276,
+        "y": 415
+    },
+    {
+        "angle": -26.56505012512207,
+        "height": 9,
+        "id": 933,
+        "sprite_offset": 15605,
+        "width": 11,
+        "x": 387,
+        "y": 414
+    },
+    {
+        "angle": -0.0,
+        "height": 10,
+        "id": 934,
+        "sprite_offset": 15616,
+        "width": 9,
+        "x": 532,
+        "y": 415
+    },
+    {
+        "angle": -48.8140754699707,
+        "height": 29,
+        "id": 935,
+        "sprite_offset": 15625,
+        "width": 23,
+        "x": 35,
+        "y": 416
+    },
+    {
+        "angle": -83.9909896850586,
+        "height": 20,
+        "id": 936,
+        "sprite_offset": 15648,
+        "width": 25,
+        "x": 203,
+        "y": 417
+    },
+    {
+        "angle": 0.0,
+        "height": 1,
+        "id": 937,
+        "sprite_offset": 15673,
+        "width": 3,
+        "x": 357,
+        "y": 416
+    },
+    {
+        "angle": -74.05460357666016,
+        "height": 10,
+        "id": 938,
+        "sprite_offset": 15676,
+        "width": 8,
+        "x": 417,
+        "y": 416
+    },
+    {
+        "angle": -33.690067291259766,
+        "height": 25,
+        "id": 939,
+        "sprite_offset": 15684,
+        "width": 16,
+        "x": 351,
+        "y": 419
+    },
+    {
+        "angle": -34.99202346801758,
+        "height": 22,
+        "id": 940,
+        "sprite_offset": 15700,
+        "width": 25,
+        "x": 354,
+        "y": 418
+    },
+    {
+        "angle": -36.869895935058594,
+        "height": 14,
+        "id": 941,
+        "sprite_offset": 15725,
+        "width": 15,
+        "x": 374,
+        "y": 418
+    },
+    {
+        "angle": -45.0,
+        "height": 18,
+        "id": 942,
+        "sprite_offset": 15740,
+        "width": 15,
+        "x": 0,
+        "y": 422
+    },
+    {
+        "angle": 0.0,
+        "height": 7,
+        "id": 943,
+        "sprite_offset": 15755,
+        "width": 6,
+        "x": 395,
+        "y": 423
+    },
+    {
+        "angle": -81.8698959350586,
+        "height": 21,
+        "id": 944,
+        "sprite_offset": 15761,
+        "width": 12,
+        "x": 404,
+        "y": 424
+    },
+    {
+        "angle": -75.0685806274414,
+        "height": 20,
+        "id": 945,
+        "sprite_offset": 15773,
+        "width": 8,
+        "x": 414,
+        "y": 426
+    },
+    {
+        "angle": -78.69007110595703,
+        "height": 14,
+        "id": 946,
+        "sprite_offset": 15781,
+        "width": 16,
+        "x": 386,
+        "y": 429
+    },
+    {
+        "angle": -0.0,
+        "height": 8,
+        "id": 947,
+        "sprite_offset": 15797,
+        "width": 10,
+        "x": 549,
+        "y": 431
+    },
+    {
+        "angle": -79.82449340820312,
+        "height": 76,
+        "id": 948,
+        "sprite_offset": 15807,
+        "width": 34,
+        "x": 362,
+        "y": 438
+    },
+    {
+        "angle": -80.53767395019531,
+        "height": 20,
+        "id": 949,
+        "sprite_offset": 15841,
+        "width": 14,
+        "x": 34,
+        "y": 444
+    },
+    {
+        "angle": -63.43495178222656,
+        "height": 28,
+        "id": 950,
+        "sprite_offset": 15855,
+        "width": 15,
+        "x": 385,
+        "y": 445
+    },
+    {
+        "angle": -75.96376037597656,
+        "height": 10,
+        "id": 951,
+        "sprite_offset": 15870,
+        "width": 13,
+        "x": 399,
+        "y": 446
+    },
+    {
+        "angle": -80.53767395019531,
+        "height": 9,
+        "id": 952,
+        "sprite_offset": 15883,
+        "width": 5,
+        "x": 412,
+        "y": 448
+    },
+    {
+        "angle": -0.0,
+        "height": 43,
+        "id": 953,
+        "sprite_offset": 15888,
+        "width": 20,
+        "x": 0,
+        "y": 450
+    },
+    {
+        "angle": -63.43495178222656,
+        "height": 21,
+        "id": 954,
+        "sprite_offset": 15908,
+        "width": 22,
+        "x": 40,
+        "y": 452
+    },
+    {
+        "angle": -71.56504821777344,
+        "height": 13,
+        "id": 955,
+        "sprite_offset": 15930,
+        "width": 14,
+        "x": 30,
+        "y": 458
+    },
+    {
+        "angle": -78.69007110595703,
+        "height": 3,
+        "id": 956,
+        "sprite_offset": 15944,
+        "width": 9,
+        "x": 398,
+        "y": 458
+    },
+    {
+        "angle": -90.0,
+        "height": 3,
+        "id": 957,
+        "sprite_offset": 15953,
+        "width": 9,
+        "x": 408,
+        "y": 459
+    },
+    {
+        "angle": -80.53767395019531,
+        "height": 19,
+        "id": 958,
+        "sprite_offset": 15962,
+        "width": 17,
+        "x": 390,
+        "y": 461
+    },
+    {
+        "angle": -90.0,
+        "height": 4,
+        "id": 959,
+        "sprite_offset": 15979,
+        "width": 5,
+        "x": 25,
+        "y": 463
+    },
+    {
+        "angle": -49.398704528808594,
+        "height": 37,
+        "id": 960,
+        "sprite_offset": 15984,
+        "width": 30,
+        "x": 0,
+        "y": 464
+    },
+    {
+        "angle": -36.86989212036133,
+        "height": 16,
+        "id": 961,
+        "sprite_offset": 16014,
+        "width": 17,
+        "x": 313,
+        "y": 469
+    },
+    {
+        "angle": -18.434947967529297,
+        "height": 6,
+        "id": 962,
+        "sprite_offset": 16031,
+        "width": 2,
+        "x": 305,
+        "y": 479
+    },
+    {
+        "angle": -90.0,
+        "height": 17,
+        "id": 963,
+        "sprite_offset": 16033,
+        "width": 11,
+        "x": 294,
+        "y": 483
+    },
+    {
+        "angle": -60.945396423339844,
+        "height": 14,
+        "id": 964,
+        "sprite_offset": 16044,
+        "width": 13,
+        "x": 299,
+        "y": 486
+    },
+    {
+        "angle": 0.0,
+        "height": 1,
+        "id": 965,
+        "sprite_offset": 16057,
+        "width": 1,
+        "x": 313,
+        "y": 486
+    },
+    {
+        "angle": -11.309932708740234,
+        "height": 12,
+        "id": 966,
+        "sprite_offset": 16058,
+        "width": 12,
+        "x": 358,
+        "y": 488
+    },
+    {
+        "angle": -40.60129928588867,
+        "height": 32,
+        "id": 967,
+        "sprite_offset": 16070,
+        "width": 35,
+        "x": 295,
+        "y": 491
+    },
+    {
+        "angle": -0.0,
+        "height": 20,
+        "id": 968,
+        "sprite_offset": 16105,
+        "width": 14,
+        "x": 343,
+        "y": 490
+    },
+    {
+        "angle": -6.709836483001709,
+        "height": 26,
+        "id": 969,
+        "sprite_offset": 16119,
+        "width": 12,
+        "x": 285,
+        "y": 492
+    },
+    {
+        "angle": -0.0,
+        "height": 3,
+        "id": 970,
+        "sprite_offset": 16131,
+        "width": 2,
+        "x": 344,
+        "y": 493
+    },
+    {
+        "angle": -77.73522186279297,
+        "height": 11,
+        "id": 971,
+        "sprite_offset": 16133,
+        "width": 29,
+        "x": 219,
+        "y": 500
+    },
+    {
+        "angle": 0.0,
+        "height": 10,
+        "id": 972,
+        "sprite_offset": 16162,
+        "width": 3,
+        "x": 359,
+        "y": 501
+    },
+    {
+        "angle": -45.0,
+        "height": 6,
+        "id": 973,
+        "sprite_offset": 16165,
+        "width": 5,
+        "x": 338,
+        "y": 502
+    },
+    {
+        "angle": -6.34019136428833,
+        "height": 13,
+        "id": 974,
+        "sprite_offset": 16170,
+        "width": 21,
+        "x": 359,
+        "y": 507
+    },
+    {
+        "angle": -80.53767395019531,
+        "height": 12,
+        "id": 975,
+        "sprite_offset": 16191,
+        "width": 9,
+        "x": 332,
+        "y": 509
+    },
+    {
+        "angle": -43.111812591552734,
+        "height": 93,
+        "id": 976,
+        "sprite_offset": 16200,
+        "width": 115,
+        "x": 168,
+        "y": 510
+    },
+    {
+        "angle": -80.53767395019531,
+        "height": 13,
+        "id": 977,
+        "sprite_offset": 16315,
+        "width": 16,
+        "x": 341,
+        "y": 510
+    },
+    {
+        "angle": -80.53767395019531,
+        "height": 6,
+        "id": 978,
+        "sprite_offset": 16331,
+        "width": 22,
+        "x": 294,
+        "y": 520
+    },
+    {
+        "angle": 0.0,
+        "height": 8,
+        "id": 979,
+        "sprite_offset": 16353,
+        "width": 10,
+        "x": 329,
+        "y": 521
+    },
+    {
+        "angle": -90.0,
+        "height": 5,
+        "id": 980,
+        "sprite_offset": 16363,
+        "width": 12,
+        "x": 359,
+        "y": 521
+    },
+    {
+        "angle": -0.0,
+        "height": 7,
+        "id": 981,
+        "sprite_offset": 16375,
+        "width": 6,
+        "x": 371,
+        "y": 520
+    },
+    {
+        "angle": -32.00538635253906,
+        "height": 9,
+        "id": 982,
+        "sprite_offset": 16381,
+        "width": 11,
+        "x": 243,
+        "y": 523
+    },
+    {
+        "angle": -45.0,
+        "height": 6,
+        "id": 983,
+        "sprite_offset": 16392,
+        "width": 5,
+        "x": 324,
+        "y": 522
+    },
+    {
+        "angle": -81.8698959350586,
+        "height": 8,
+        "id": 984,
+        "sprite_offset": 16397,
+        "width": 16,
+        "x": 339,
+        "y": 524
+    },
+    {
+        "angle": -90.0,
+        "height": 3,
+        "id": 985,
+        "sprite_offset": 16413,
+        "width": 2,
+        "x": 284,
+        "y": 526
+    },
+    {
+        "angle": -66.80140686035156,
+        "height": 6,
+        "id": 986,
+        "sprite_offset": 16415,
+        "width": 10,
+        "x": 288,
+        "y": 527
+    },
+    {
+        "angle": -56.3099365234375,
+        "height": 6,
+        "id": 987,
+        "sprite_offset": 16425,
+        "width": 10,
+        "x": 354,
+        "y": 527
+    },
+    {
+        "angle": -90.0,
+        "height": 4,
+        "id": 988,
+        "sprite_offset": 16435,
+        "width": 5,
+        "x": 364,
+        "y": 528
+    },
+    {
+        "angle": -78.69007110595703,
+        "height": 7,
+        "id": 989,
+        "sprite_offset": 16440,
+        "width": 6,
+        "x": 370,
+        "y": 529
+    },
+    {
+        "angle": 0.0,
+        "height": 7,
+        "id": 990,
+        "sprite_offset": 16446,
+        "width": 24,
+        "x": 303,
+        "y": 530
+    },
+    {
+        "angle": -81.8698959350586,
+        "height": 8,
+        "id": 991,
+        "sprite_offset": 16470,
+        "width": 9,
+        "x": 328,
+        "y": 531
+    },
+    {
+        "angle": -72.89727020263672,
+        "height": 21,
+        "id": 992,
+        "sprite_offset": 16479,
+        "width": 21,
+        "x": 377,
+        "y": 530
+    },
+    {
+        "angle": -31.607501983642578,
+        "height": 12,
+        "id": 993,
+        "sprite_offset": 16500,
+        "width": 14,
+        "x": 283,
+        "y": 533
+    },
+    {
+        "angle": -81.8698959350586,
+        "height": 9,
+        "id": 994,
+        "sprite_offset": 16514,
+        "width": 14,
+        "x": 338,
+        "y": 532
+    },
+    {
+        "angle": -80.53767395019531,
+        "height": 11,
+        "id": 995,
+        "sprite_offset": 16528,
+        "width": 16,
+        "x": 352,
+        "y": 533
+    },
+    {
+        "angle": -63.43495178222656,
+        "height": 9,
+        "id": 996,
+        "sprite_offset": 16544,
+        "width": 12,
+        "x": 367,
+        "y": 537
+    },
+    {
+        "angle": -80.53767395019531,
+        "height": 11,
+        "id": 997,
+        "sprite_offset": 16556,
+        "width": 3,
+        "x": 278,
+        "y": 539
+    },
+    {
+        "angle": -79.3803482055664,
+        "height": 9,
+        "id": 998,
+        "sprite_offset": 16559,
+        "width": 24,
+        "x": 326,
+        "y": 540
+    },
+    {
+        "angle": -71.56504821777344,
+        "height": 16,
+        "id": 999,
+        "sprite_offset": 16583,
+        "width": 20,
+        "x": 398,
+        "y": 542
+    },
+    {
+        "angle": -81.8698959350586,
+        "height": 19,
+        "id": 1000,
+        "sprite_offset": 16603,
+        "width": 19,
+        "x": 411,
+        "y": 542
+    },
+    {
+        "angle": -79.69515228271484,
+        "height": 15,
+        "id": 1001,
+        "sprite_offset": 16622,
+        "width": 26,
+        "x": 383,
+        "y": 550
+    },
+    {
+        "angle": -0.0,
+        "height": 6,
+        "id": 1002,
+        "sprite_offset": 16648,
+        "width": 14,
+        "x": 409,
+        "y": 559
+    },
+    {
+        "angle": -75.96376037597656,
+        "height": 9,
+        "id": 1003,
+        "sprite_offset": 16662,
+        "width": 8,
+        "x": 212,
+        "y": 564
+    },
+    {
+        "angle": -11.309932708740234,
+        "height": 12,
+        "id": 1004,
+        "sprite_offset": 16670,
+        "width": 5,
+        "x": 424,
+        "y": 564
+    },
+    {
+        "angle": 0.0,
+        "height": 108,
+        "id": 1005,
+        "sprite_offset": 16675,
+        "width": 107,
+        "x": 195,
+        "y": 570
+    },
+    {
+        "angle": -71.56504821777344,
+        "height": 7,
+        "id": 1006,
+        "sprite_offset": 16782,
+        "width": 11,
+        "x": 210,
+        "y": 572
+    },
+    {
+        "angle": -0.0,
+        "height": 18,
+        "id": 1007,
+        "sprite_offset": 16793,
+        "width": 3,
+        "x": 0,
+        "y": 577
+    },
+    {
+        "angle": -45.0,
+        "height": 4,
+        "id": 1008,
+        "sprite_offset": 16796,
+        "width": 3,
+        "x": 325,
+        "y": 576
+    },
+    {
+        "angle": -4.763641834259033,
+        "height": 20,
+        "id": 1009,
+        "sprite_offset": 16799,
+        "width": 8,
+        "x": 421,
+        "y": 576
+    },
+    {
+        "angle": -8.130102157592773,
+        "height": 10,
+        "id": 1010,
+        "sprite_offset": 16807,
+        "width": 11,
+        "x": 210,
+        "y": 578
+    },
+    {
+        "angle": -0.0,
+        "height": 4,
+        "id": 1011,
+        "sprite_offset": 16818,
+        "width": 3,
+        "x": 222,
+        "y": 581
+    },
+    {
+        "angle": -45.0,
+        "height": 2,
+        "id": 1012,
+        "sprite_offset": 16821,
+        "width": 2,
+        "x": 226,
+        "y": 583
+    },
+    {
+        "angle": -60.2551155090332,
+        "height": 10,
+        "id": 1013,
+        "sprite_offset": 16823,
+        "width": 9,
+        "x": 213,
+        "y": 586
+    },
+    {
+        "angle": 0.0,
+        "height": 1,
+        "id": 1014,
+        "sprite_offset": 16832,
+        "width": 1,
+        "x": 223,
+        "y": 587
+    },
+    {
+        "angle": -71.56504821777344,
+        "height": 5,
+        "id": 1015,
+        "sprite_offset": 16833,
+        "width": 2,
+        "x": 218,
+        "y": 593
+    },
+    {
+        "angle": -0.0,
+        "height": 6,
+        "id": 1016,
+        "sprite_offset": 16835,
+        "width": 8,
+        "x": 425,
+        "y": 617
+    },
+    {
+        "angle": 0.0,
+        "height": 3,
+        "id": 1017,
+        "sprite_offset": 16843,
+        "width": 9,
+        "x": 295,
+        "y": 675
+    }
+]
