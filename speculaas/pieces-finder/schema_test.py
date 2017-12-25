@@ -20,6 +20,13 @@ class TestSchema(unittest.TestCase):
                                   { 
                                     pieces { 
                                       id
+                                      bitmapImage {
+                                        data
+                                        x
+                                        y
+                                        width
+                                        height
+                                      }
                                     } 
                                   }''',
                                   context_value={
@@ -29,7 +36,17 @@ class TestSchema(unittest.TestCase):
             'data': OrderedDict([
                 ('pieces', [
                     OrderedDict([
-                        ('id', '0')
+                        ('id', '0'),
+                        ('bitmapImage', OrderedDict([
+                            (
+                            'data', "data:image/png;base64,iVBORw0KGgoAAAANSUh"
+                                    "EUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mNk"
+                                    "YPhfDwAChwGA60e6kgAAAABJRU5ErkJggg=="),
+                            ('x', 0),
+                            ('y', 0),
+                            ('width', 100),
+                            ('height', 200)]
+                        ))
                     ])
                 ])
             ])
@@ -39,3 +56,4 @@ class TestSchema(unittest.TestCase):
 
 if __name__ == '__main__':
     unittest.main()
+
