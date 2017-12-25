@@ -18,7 +18,7 @@ class Query(graphene.ObjectType):
     pieces = graphene.List(Piece)
 
     def resolve_pieces(self, info):
-        return info.context.get('splitter').split()
+        return self.split()
 
 
 schema = graphene.Schema(query=Query)

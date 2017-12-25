@@ -16,6 +16,14 @@ class TestSchema(unittest.TestCase):
 
     def test_full(self):
         client = Client(schema)
+        dummy_pieces = [
+            {
+                "x": 10,
+                "y": 20,
+                "height": 882,
+                "width": 1350
+            }
+        ]
         executed = client.execute('''
                                   { 
                                     pieces { 
@@ -29,9 +37,7 @@ class TestSchema(unittest.TestCase):
                                       }
                                     } 
                                   }''',
-                                  context_value={
-                                      'splitter': DummySplitter()
-                                  })
+                                  root_value=DummySplitter(dummy_pieces))
         expected = {
             'data': OrderedDict([
                 ('pieces', [
@@ -42,10 +48,10 @@ class TestSchema(unittest.TestCase):
                             'data', "data:image/png;base64,iVBORw0KGgoAAAANSUh"
                                     "EUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mNk"
                                     "YPhfDwAChwGA60e6kgAAAABJRU5ErkJggg=="),
-                            ('x', 0),
-                            ('y', 0),
-                            ('width', 100),
-                            ('height', 200)]
+                            ('x', 10),
+                            ('y', 20),
+                            ('width', 1350),
+                            ('height', 882)]
                         ))
                     ])
                 ])
