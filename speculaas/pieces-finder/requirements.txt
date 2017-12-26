@@ -1,5 +1,6 @@
 click==6.7
 Flask==0.12.2
+Flask-Cors==3.0.3
 Flask-GraphQL==1.4.1
 graphene==2.0.1
 graphql-core==2.0
