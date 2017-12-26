@@ -8,7 +8,18 @@ app = Flask(__name__)
 CORS(app)
 app.debug = True
 
-splitter = PreComputedLookupSplitter.from_dir('./precomputed')
+splitter = PreComputedLookupSplitter.from_dir('./precomputed');
+
+
+@app.route('/healthcheck/alive')
+def alive():
+    return "Alive"
+
+
+@app.route('/healthcheck/ready')
+def ready():
+    return "Ready"
+
 
 app.add_url_rule(
     '/graphql',

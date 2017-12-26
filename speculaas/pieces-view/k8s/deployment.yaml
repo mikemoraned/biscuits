@@ -1,0 +1,45 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: pieces-view
+  namespace: speculaas
+spec:
+  replicas: 1
+  strategy:
+    type: RollingUpdate
+  selector:
+    matchLabels:
+      app: pieces-view
+  template:
+    metadata:
+      labels:
+        app: pieces-view
+    spec:
+      containers:
+      - name: pieces-view
+        image: speculaas-pieces-view:2
+        env:
+          - name: GRAPHQL_URL
+            value: "http://pieces-finder-service/"
+        resources: 
+          limits:
+            cpu: 100m
+            memory: 250Mi
+          requests:
+            cpu: 10m
+            memory: 125Mi
+        ports:
+        - name: http
+          containerPort: 3000
+        livenessProbe:
+          httpGet:
+            path: /healthcheck/alive
+            port: 3000
+          initialDelaySeconds: 15
+          timeoutSeconds: 1
+        readinessProbe:
+          httpGet:
+            path: /healthcheck/ready
+            port: 3000
+          initialDelaySeconds: 0
+          timeoutSeconds: 1

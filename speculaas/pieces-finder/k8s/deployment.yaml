@@ -1,0 +1,42 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: pieces-finder
+  namespace: speculaas
+spec:
+  replicas: 1
+  strategy:
+    type: RollingUpdate
+  selector:
+    matchLabels:
+      app: pieces-finder
+  template:
+    metadata:
+      labels:
+        app: pieces-finder
+    spec:
+      containers:
+      - name: pieces-finder
+        image: speculaas-pieces-finder:1
+        resources: 
+          limits:
+            cpu: 100m
+            memory: 250Mi
+          requests:
+            cpu: 10m
+            memory: 125Mi
+        ports:
+        - name: http
+          containerPort: 5000
+        livenessProbe:
+          httpGet:
+            path: /healthcheck/alive
+            port: 5000
+          initialDelaySeconds: 15
+          timeoutSeconds: 1
+        readinessProbe:
+          httpGet:
+            path: /healthcheck/ready
+            port: 5000
+          initialDelaySeconds: 0
+          timeoutSeconds: 1
