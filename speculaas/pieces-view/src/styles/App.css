@@ -1,16 +1,12 @@
 .App .PlaceList {
-  overflow-x: scroll;
-  overflow-y: hidden;
-  white-space: nowrap;
+  display: flex;
+  flex-wrap: nowrap;
+  overflow-x: auto;
 }
 
 .App .Place {
   border: 1px solid;
-  display: inline-block;
+  flex: 0 0 auto;
   width: 90%;
   margin-right: 5%;
-}
-
-.App .Place .Pieces {
-  white-space: normal;
 }
