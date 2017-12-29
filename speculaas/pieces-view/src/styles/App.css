@@ -1,28 +1,56 @@
-.App {
-  text-align: center;
+/*
+  On portrait, show places left to right, scrolling horizontally
+  on landscape, top to bottom, scrolling vertically
+ */
+@media (orientation: portrait) {
+  html, body, #root, .App {
+    height: 100%;
+  }
+
+  .App {
+    display: flex;
+    flex-flow: column;
+  }
+
+  .App .PlaceList {
+    flex-grow: 2;
+  }
+
+  .App .PlaceList {
+    display: flex;
+    flex-flow: row;
+    flex-wrap: nowrap;
+    overflow-x: auto;
+  }
+
+  .App .PlaceList .Place {
+    flex-shrink: 0;
+    flex-grow: 0;
+    flex-basis: auto;
+    width: 90%;
+    margin-right: 5%;
+  }
 }
 
-.App-logo {
-  animation: App-logo-spin infinite 20s linear;
-  height: 80px;
+@media (orientation: landscape) {
+  .App .PlaceList {
+    display: flex;
+    flex-flow: column;
+    align-content: stretch;
+  }
+
+  .App .PlaceList .Place {
+    flex-basis: 450px;
+  }
 }
 
-.App-header {
-  background-color: #222;
-  height: 150px;
-  padding: 20px;
-  color: white;
+.App .PlaceList .Place {
+  display: flex;
+  flex-flow: column;
 }
 
-.App-title {
-  font-size: 1.5em;
+.CanvasContainer {
+  flex-grow: 2;
+  background-color: #888;
 }
 
-.App-intro {
-  font-size: large;
-}
-
-@keyframes App-logo-spin {
-  from { transform: rotate(0deg); }
-  to { transform: rotate(360deg); }
-}

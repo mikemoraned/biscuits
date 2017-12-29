@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { graphql } from 'react-apollo';
 import gql from 'graphql-tag';
+import ResponsiveCanvas from "./ResponsiveCanvas";
 
 const ALL_PIECES_QUERY = gql`
   query AllPiecesQuery($id: String!) {
@@ -16,7 +17,8 @@ class Place extends Component {
         return (
             <div className="Place">
                 <h1>{ this.props.id }</h1>
-                { this.renderPieces(this.props.allPiecesQuery) }
+                <ResponsiveCanvas />
+                {/*{ this.renderPieces(this.props.allPiecesQuery) }*/}
             </div>
         );
     }
@@ -32,7 +34,7 @@ class Place extends Component {
 
         const pieces = allPiecesQuery.pieces;
 
-        return <div>
+        return <div className="Pieces">
             { pieces.map(piece => (
                 <span key={piece.id}>{ piece.id } </span>
             ))}
