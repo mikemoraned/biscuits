@@ -3,25 +3,11 @@
 
 .App .PlaceList {
   display: grid;
-  /*grid-template-columns: [content] 1fr 1fr [content] 1fr 1fr;*/
   grid-auto-columns: 90%;
   grid-auto-flow: column;
-}
-
-.App .PlaceList ul {
-  display: contents;
 }
 
 .App .Place {
   border: 1px solid;
   margin-right: 5%;
 }
-
-/*@media screen and (min-aspect-ratio: 8/4) {*/
-  /*.App {*/
-    /*grid-template-columns: 1fr 1fr;*/
-    /*grid-template-areas:*/
-      /*"s c"*/
-      /*"p p";*/
-  /*}*/
-/*}*/
