@@ -6,6 +6,8 @@ class App extends Component {
   render() {
     return (
       <div className="App">
+        <div className="Search">Search</div>
+        <div className="Control">Control</div>
         <PlaceList placeIds={['edinburgh', 'jerusalem']}/>
       </div>
     );
