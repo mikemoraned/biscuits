@@ -1,13 +1,16 @@
-.App {
-}
-
 .App .PlaceList {
-  display: grid;
-  grid-auto-columns: 90%;
-  grid-auto-flow: column;
+  overflow-x: scroll;
+  overflow-y: hidden;
+  white-space: nowrap;
 }
 
 .App .Place {
   border: 1px solid;
+  display: inline-block;
+  width: 90%;
   margin-right: 5%;
+}
+
+.App .Place .Pieces {
+  white-space: normal;
 }

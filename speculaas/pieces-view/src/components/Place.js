@@ -32,7 +32,7 @@ class Place extends Component {
 
         const pieces = allPiecesQuery.pieces;
 
-        return <div>
+        return <div className="Pieces">
             { pieces.map(piece => (
                 <span key={piece.id}>{ piece.id } </span>
             ))}
