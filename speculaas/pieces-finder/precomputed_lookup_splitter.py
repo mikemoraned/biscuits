@@ -1,12 +1,9 @@
-import fnmatch
+import base64
 import glob
-import re
 import json
+import re
 
-from schema import Piece, BitmapImage
-
-DUMMY_PNG = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfF" \
-            "cSJAAAADUlEQVR42mNkYPhfDwAChwGA60e6kgAAAABJRU5ErkJggg=="
+from schema import Piece, BitmapImage, Place, SpriteOffset, Sprite
 
 
 class PreComputedLookupSplitter:
@@ -21,21 +18,35 @@ class PreComputedLookupSplitter:
 
     def split(self, place_id):
         if place_id in self.place_ids:
-            pieces = self.load_pieces_from_file(place_id)
-            return list([Piece(id="{}_{}".format(place_id, index),
-                               bitmap_image=BitmapImage(
-                                   data=DUMMY_PNG,
-                                   x=entry['x'],
-                                   y=entry['y'],
-                                   width=entry['width'],
-                                   height=entry['height'])
-                               ) for index, entry in enumerate(pieces)])
+            pieces = self.filter_out_background(
+                self.load_pieces_from_file(place_id))
+            sprite = self.load_sprite_from_file(place_id)
+            return Place(id=place_id,
+                         sprite=sprite,
+                         pieces=list([Piece(id="{}_{}".format(place_id, index),
+                                            bitmap_image=BitmapImage(
+                                                x=entry['x'],
+                                                y=entry['y'],
+                                                width=entry['width'],
+                                                height=entry['height'],
+                                                sprite_offset=SpriteOffset(
+                                                    x=entry['sprite_offset'],
+                                                    y=0
+                                                ))
+                                            ) for index, entry in
+                                      enumerate(pieces)]))
         else:
-            []
+            None
 
     def load_pieces_from_file(self, place_id):
         with open("{}/{}.labels.json".format(self.dir_name, place_id)) as file:
             return json.load(file)
+
+    def load_sprite_from_file(self, place_id):
+        with open("{}/{}.label_sprites.png".format(self.dir_name, place_id),
+                  "rb") as file:
+            encoded = base64.b64encode(file.read()).decode('utf8')
+            return Sprite(data_url="data:image/png;base64,{}".format(encoded))
 
     @classmethod
     def place_ids_in_dir(cls, dir_name):
@@ -43,3 +54,8 @@ class PreComputedLookupSplitter:
             match = re.search("./{}/(.+).labels.json".format(dir_name), file)
             if match:
                 yield match.group(1)
+
+    def filter_out_background(self, pieces):
+        def is_background(piece):
+            return piece['x'] == 0 and piece['sprite_offset'] == 0
+        return list(filter(lambda p: not is_background(p), pieces))

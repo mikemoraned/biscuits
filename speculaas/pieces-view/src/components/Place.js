@@ -3,15 +3,25 @@ import { graphql } from 'react-apollo';
 import gql from 'graphql-tag';
 import ResponsiveCanvas from "./ResponsiveCanvas";
 
-const ALL_PIECES_QUERY = gql`
-  query AllPiecesQuery($id: String!) {
-  pieces: piecesByPlaceId(id: $id) {
+const PLACE_QUERY = gql`
+query PlaceQuery($id: String!) {
+  place: placeById(id: $id) {
     id
-    bitmapImage {
-      x
-      y
-      width
-      height
+    sprite {
+      dataURL
+    }
+    pieces {
+      id
+      bitmapImage {
+        x
+        y
+        width
+        height,
+        spriteOffset {
+          x
+          y
+        }
+      }
     }
   }
 }
@@ -23,26 +33,26 @@ class Place extends Component {
         return (
             <div className="Place">
                 <h1>{ this.props.id }</h1>
-                {this.renderPieces(this.props.allPiecesQuery)}
+                {this.renderPieces(this.props.placeQuery)}
             </div>
         );
     }
 
-    renderPieces(allPiecesQuery) {
-        if (allPiecesQuery.loading) {
+    renderPieces(placeQuery) {
+        if (placeQuery.loading) {
             return <div>Loading</div>
         }
 
-        if (allPiecesQuery.error) {
+        if (placeQuery.error) {
             return <div>Error</div>
         }
 
-        const pieces = allPiecesQuery.pieces;
+        const place = placeQuery.place;
 
-        return <ResponsiveCanvas pieces={pieces}/>;
+        return <ResponsiveCanvas place={place}/>;
     }
 }
 
-export default graphql(ALL_PIECES_QUERY, {
-    name: 'allPiecesQuery'
+export default graphql(PLACE_QUERY, {
+    name: 'placeQuery'
 }) ( Place );

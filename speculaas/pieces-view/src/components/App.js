@@ -9,6 +9,7 @@ class App extends Component {
         <PlaceList placeIds={['edinburgh', 'jerusalem', 'au', 'newyork', 'budapest']}/>
         {/*<PlaceList placeIds={['edinburgh']}/>*/}
         {/*<PlaceList placeIds={['edinburgh','budapest']}/>*/}
+        {/*<PlaceList placeIds={['jerusalem']}/>*/}
       </div>
     );
   }
