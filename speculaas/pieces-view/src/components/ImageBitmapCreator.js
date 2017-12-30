@@ -2,7 +2,8 @@ class Batch {
   constructor(imageBitmapBatchComplete, sharedCache) {
     this.imageBitmapBatchComplete = imageBitmapBatchComplete;
     this.sharedCache = sharedCache;
-    this.outstanding = 0;
+    this.outstandingFetchCount = 0;
+    this.outstandingFetches = {};
   }
 
   create(cacheId, data) {
@@ -11,18 +12,29 @@ class Batch {
       return cached;
     }
     else {
-      this.outstanding++;
-      fetch(data)
-        .then((resp) => resp.blob())
-        .then((blob) => window.createImageBitmap(blob))
-        .then((bitmap) => this.onBitmapCreated(cacheId, bitmap))
+      const waiting = this.outstandingFetches[cacheId];
+      if (waiting) {
+        console.log("Eliding ", cacheId);
+        this.outstandingFetches[cacheId] = waiting + 1;
+      }
+      else {
+        this.outstandingFetches[cacheId] = 1;
+        this.outstandingFetchCount++;
+        console.log("Fetching ", cacheId);
+        fetch(data)
+          .then((resp) => resp.blob())
+          .then((blob) => window.createImageBitmap(blob))
+          .then((bitmap) => this.onBitmapCreated(cacheId, bitmap));
+      }
       return null;
     }
   }
 
   onBitmapCreated(cacheId, bitmap) {
+    console.log("Fetched ", cacheId);
     this.sharedCache[cacheId] = bitmap;
-    if (--this.outstanding === 0) {
+    if (--this.outstandingFetchCount === 0) {
+      console.log("Fetched ", cacheId);
       this.imageBitmapBatchComplete();
     }
   }

@@ -20,11 +20,11 @@ function maxDimensions(dimensionsList) {
 }
 
 const Renderer = (bgColor) => {
-  return (context, dimensions, pieces, imageBitmapCreatorBatch) => {
+  return (context, dimensions, place, imageBitmapCreatorBatch) => {
     context.fillStyle = bgColor;
     context.fillRect(0, 0, dimensions.width, dimensions.height);
 
-    const bitmapImages = pieces.map(p => p.bitmapImage);
+    const bitmapImages = place.pieces.map(p => p.bitmapImage);
     const max = maxDimensions(bitmapImages);
     context.save();
     context.scale(
@@ -36,20 +36,22 @@ const Renderer = (bgColor) => {
       context.strokeRect(bitmapImage.x, bitmapImage.y, bitmapImage.width, bitmapImage.height);
     });
 
-    const dummyBitmapImage = pieces[0].bitmapImage;
-    const image = imageBitmapCreatorBatch.create(pieces[0].id, dummyBitmapImage.data);
+    const spriteImage = imageBitmapCreatorBatch.create(place.id, place.sprite.dataURL);
 
-    if (image) {
-      pieces.forEach(piece => {
+    if (spriteImage) {
+      place.pieces.forEach(piece => {
         const bitmapImage = piece.bitmapImage;
-        context.drawImage(image, bitmapImage.x, bitmapImage.y, bitmapImage.width, bitmapImage.height);
+        const spriteOffset = bitmapImage.spriteOffset;
+        context.drawImage(spriteImage,
+          spriteOffset.x, spriteOffset.y, bitmapImage.width, bitmapImage.height,
+          bitmapImage.x, bitmapImage.y, bitmapImage.width, bitmapImage.height);
       });
     }
     context.restore();
 
     context.fillStyle = 'green';
     context.font = '20px sans-serif';
-    context.fillText(`pieces: ${pieces.length}`, 10, dimensions.height - 10);
+    context.fillText(`pieces: ${place.pieces.length}`, 10, dimensions.height - 10);
   }
 };
 
@@ -94,7 +96,7 @@ class FixedSizeCanvas extends Component {
     context.clearRect(0,0, this.state.dimensions.width, this.state.dimensions.height);
     context.save();
     const batch = this.imageBitmapCreator.newBatch();
-    this.props.rendererFn(context, this.state.dimensions, this.props.pieces, batch);
+    this.props.rendererFn(context, this.state.dimensions, this.props.place, batch);
     context.restore();
   }
 
@@ -166,14 +168,14 @@ class ResponsiveCanvas extends Component {
       return <FixedSizeCanvas
         containerDimensions={dimensions}
         rendererFn={LandscapeRenderer}
-        pieces={this.props.pieces}
+        place={this.props.place}
       />;
     }
     else {
       return <FixedSizeCanvas
         containerDimensions={dimensions}
         rendererFn={PortraitRenderer}
-        pieces={this.props.pieces}
+        place={this.props.place}
       />;
     }
   }
