@@ -22,7 +22,7 @@ class PreComputedLookupSplitter:
     def split(self, place_id):
         if place_id in self.place_ids:
             pieces = self.load_pieces_from_file(place_id)
-            return list([Piece(id=str(index),
+            return list([Piece(id="{}_{}".format(place_id, index),
                                bitmap_image=BitmapImage(
                                    data=DUMMY_PNG,
                                    x=entry['x'],
