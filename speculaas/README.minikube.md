@@ -19,14 +19,14 @@ Use minikube docker registry and switch to speculaas context:
 ## Build and start piece-finder
 
     docker build -t speculaas-pieces-finder ./pieces-finder
-    docker tag speculaas-pieces-finder houseofmoran/speculaas-pieces-finder:1 
+    docker tag speculaas-pieces-finder houseofmoran/speculaas-pieces-finder:2 
     kubectl apply -f ./pieces-finder/k8s/deployment.yaml
     kubectl apply -f ./pieces-finder/k8s/service.yaml
 
 ## Build and start piece-view
 
     docker build -t speculaas-pieces-view ./pieces-view
-    docker tag speculaas-pieces-view houseofmoran/speculaas-pieces-view:2 
+    docker tag speculaas-pieces-view houseofmoran/speculaas-pieces-view:3 
     kubectl apply -f ./pieces-view/k8s/deployment.yaml
     kubectl apply -f ./pieces-view/k8s/service.yaml
 
