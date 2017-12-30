@@ -5,44 +5,43 @@ import ImageBitmapCreator from './ImageBitmapCreator';
 const LANDSCAPE = 'landscape';
 const PORTRAIT = 'portrait';
 
-function maxDimensions(dimensionsList) {
-  let max = {
-    width: dimensionsList[0].width,
-    height: dimensionsList[0].height,
+function maxXY(dimensionsList) {
+  const first = dimensionsList[0];
+  const max = {
+    x: first.x + first.width,
+    y: first.y + first.height,
   };
   const reducer = (accum, entry) => {
     return {
-      width: Math.max(accum.width, entry.width),
-      height: Math.max(accum.height, entry.height),
+      x: Math.max(accum.x, entry.x + entry.width),
+      y: Math.max(accum.y, entry.y + entry.height),
     }
   };
   return dimensionsList.reduce(reducer, max);
 }
 
 const Renderer = (bgColor) => {
-  return (context, dimensions, place, imageBitmapCreatorBatch) => {
+  return (context, dimensions, place, spriteBitmap) => {
     context.fillStyle = bgColor;
     context.fillRect(0, 0, dimensions.width, dimensions.height);
 
     const bitmapImages = place.pieces.map(p => p.bitmapImage);
-    const max = maxDimensions(bitmapImages);
+    const max = maxXY(bitmapImages);
     context.save();
     context.scale(
-      dimensions.width / max.width,
-      dimensions.height / max.height
+      dimensions.width / max.x,
+      dimensions.height / max.y
     );
     context.strokeStyle = 'black';
     bitmapImages.forEach(bitmapImage => {
       context.strokeRect(bitmapImage.x, bitmapImage.y, bitmapImage.width, bitmapImage.height);
     });
 
-    const spriteImage = imageBitmapCreatorBatch.create(place.id, place.sprite.dataURL);
-
-    if (spriteImage) {
+    if (spriteBitmap !== null) {
       place.pieces.forEach(piece => {
         const bitmapImage = piece.bitmapImage;
         const spriteOffset = bitmapImage.spriteOffset;
-        context.drawImage(spriteImage,
+        context.drawImage(spriteBitmap,
           spriteOffset.x, spriteOffset.y, bitmapImage.width, bitmapImage.height,
           bitmapImage.x, bitmapImage.y, bitmapImage.width, bitmapImage.height);
       });
@@ -64,17 +63,11 @@ class FixedSizeCanvas extends Component {
     super(props);
 
     this.state = ({
-      dimensions: this.dimensionsFromContainerDimensions(props.containerDimensions)
+      dimensions: this.dimensionsFromContainerDimensions(props.containerDimensions),
+      spriteBitmap: null
     });
 
     this.dimensionsFromContainerDimensions = this.dimensionsFromContainerDimensions.bind(this);
-    this.imageBitmapBatchComplete = this.imageBitmapBatchComplete.bind(this);
-
-    this.imageBitmapCreator = new ImageBitmapCreator(this.imageBitmapBatchComplete);
-  }
-
-  imageBitmapBatchComplete() {
-    this.setState({latestBatchId: this.latestBatchId + 1});
   }
 
   componentWillReceiveProps(nextProps) {
@@ -84,19 +77,31 @@ class FixedSizeCanvas extends Component {
   }
 
   componentDidMount() {
+    this.fetchImages();
     this.updateCanvas();
   }
 
   componentDidUpdate() {
+    this.fetchImages();
     this.updateCanvas();
+  }
+
+  fetchImages() {
+    if (this.state.spriteBitmap == null) {
+      const { id, sprite } = this.props.place;
+      console.log("Fetching bitmap for", id);
+      new ImageBitmapCreator()
+        .create(id, sprite.dataURL)
+        .then(bitmap => this.setState({spriteBitmap:bitmap}))
+        .then(() => console.log("Fetched bitmap for", id));
+    }
   }
 
   updateCanvas() {
     const context = this.refs.canvas.getContext('2d');
     context.clearRect(0,0, this.state.dimensions.width, this.state.dimensions.height);
     context.save();
-    const batch = this.imageBitmapCreator.newBatch();
-    this.props.rendererFn(context, this.state.dimensions, this.props.place, batch);
+    this.props.rendererFn(context, this.state.dimensions, this.props.place, this.state.spriteBitmap);
     context.restore();
   }
 

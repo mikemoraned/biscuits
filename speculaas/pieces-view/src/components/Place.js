@@ -19,6 +19,7 @@ query PlaceQuery($id: String!) {
         height,
         spriteOffset {
           x
+          y
         }
       }
     }
