@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import Measure from 'react-measure';
+import ImageBitmapCreator from './ImageBitmapCreator';
 
 const LANDSCAPE = 'landscape';
 const PORTRAIT = 'portrait';
@@ -19,7 +20,7 @@ function maxDimensions(dimensionsList) {
 }
 
 const Renderer = (bgColor) => {
-  return (context, dimensions, pieces) => {
+  return (context, dimensions, pieces, imageBitmapCreatorBatch) => {
     context.fillStyle = bgColor;
     context.fillRect(0, 0, dimensions.width, dimensions.height);
 
@@ -33,6 +34,14 @@ const Renderer = (bgColor) => {
     context.strokeStyle = 'black';
     bitmapImages.forEach(bitmapImage => {
       context.strokeRect(bitmapImage.x, bitmapImage.y, bitmapImage.width, bitmapImage.height);
+    });
+
+    pieces.forEach(piece => {
+      const bitmapImage = piece.bitmapImage;
+      const image = imageBitmapCreatorBatch.create(piece.id, bitmapImage.data);
+      if (image) {
+        context.drawImage(image, bitmapImage.x, bitmapImage.y, bitmapImage.width, bitmapImage.height);
+      }
     });
     context.restore();
 
@@ -55,6 +64,13 @@ class FixedSizeCanvas extends Component {
     });
 
     this.dimensionsFromContainerDimensions = this.dimensionsFromContainerDimensions.bind(this);
+    this.imageBitmapBatchComplete = this.imageBitmapBatchComplete.bind(this);
+
+    this.imageBitmapCreator = new ImageBitmapCreator(this.imageBitmapBatchComplete);
+  }
+
+  imageBitmapBatchComplete() {
+    this.setState({latestBatchId: this.latestBatchId + 1});
   }
 
   componentWillReceiveProps(nextProps) {
@@ -75,7 +91,8 @@ class FixedSizeCanvas extends Component {
     const context = this.refs.canvas.getContext('2d');
     context.clearRect(0,0, this.state.dimensions.width, this.state.dimensions.height);
     context.save();
-    this.props.rendererFn(context, this.state.dimensions, this.props.pieces);
+    const batch = this.imageBitmapCreator.newBatch();
+    this.props.rendererFn(context, this.state.dimensions, this.props.pieces, batch);
     context.restore();
   }
 

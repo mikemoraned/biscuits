@@ -8,6 +8,7 @@ const ALL_PIECES_QUERY = gql`
   pieces: piecesByPlaceId(id: $id) {
     id
     bitmapImage {
+      data
       x
       y
       width

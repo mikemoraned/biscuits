@@ -6,9 +6,10 @@ class App extends Component {
   render() {
     return (
       <div className="App">
-        <PlaceList placeIds={['edinburgh', 'jerusalem', 'au', 'newyork', 'budapest']}/>
+        {/*<PlaceList placeIds={['edinburgh', 'jerusalem', 'au', 'newyork', 'budapest']}/>*/}
         {/*<PlaceList placeIds={['edinburgh']}/>*/}
         {/*<PlaceList placeIds={['edinburgh','budapest']}/>*/}
+        <PlaceList placeIds={['jerusalem']}/>
       </div>
     );
   }
