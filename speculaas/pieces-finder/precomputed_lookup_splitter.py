@@ -18,7 +18,8 @@ class PreComputedLookupSplitter:
 
     def split(self, place_id):
         if place_id in self.place_ids:
-            pieces = self.load_pieces_from_file(place_id)
+            pieces = self.filter_out_background(
+                self.load_pieces_from_file(place_id))
             sprite = self.load_sprite_from_file(place_id)
             return Place(id=place_id,
                          sprite=sprite,
@@ -53,3 +54,8 @@ class PreComputedLookupSplitter:
             match = re.search("./{}/(.+).labels.json".format(dir_name), file)
             if match:
                 yield match.group(1)
+
+    def filter_out_background(self, pieces):
+        def is_background(piece):
+            return piece['x'] == 0 and piece['sprite_offset'] == 0
+        return list(filter(lambda p: not is_background(p), pieces))

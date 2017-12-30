@@ -38,6 +38,21 @@ class TestPreComputedLookupSplitter(unittest.TestCase):
                                    height=131,
                                    sprite_offset=SpriteOffset(x=1350, y=0))))
 
+    def test_ignores_background_in_sprite(self):
+        splitter = PreComputedLookupSplitter.from_dir("precomputed_test")
+        place = splitter.split('edinburgh_withbackground')
+        self.assertEqual(place.id, 'edinburgh_withbackground')
+        self.assertEqual(place.sprite, Sprite(data_url=DUMMY_PNG))
+        self.assertEqual(len(place.pieces), 1)
+        self.assertEqual(place.pieces[0],
+                         Piece(id='edinburgh_withbackground_0',
+                               bitmap_image=BitmapImage(
+                                   x=0,
+                                   y=0,
+                                   width=77,
+                                   height=131,
+                                   sprite_offset=SpriteOffset(x=1350, y=0))))
+
     @staticmethod
     def idsOf(place):
         return list(map(lambda p: p.id, place.pieces))
