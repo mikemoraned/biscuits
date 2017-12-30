@@ -36,13 +36,15 @@ const Renderer = (bgColor) => {
       context.strokeRect(bitmapImage.x, bitmapImage.y, bitmapImage.width, bitmapImage.height);
     });
 
-    pieces.forEach(piece => {
-      const bitmapImage = piece.bitmapImage;
-      const image = imageBitmapCreatorBatch.create(piece.id, bitmapImage.data);
-      if (image) {
+    const dummyBitmapImage = pieces[0].bitmapImage;
+    const image = imageBitmapCreatorBatch.create(pieces[0].id, dummyBitmapImage.data);
+
+    if (image) {
+      pieces.forEach(piece => {
+        const bitmapImage = piece.bitmapImage;
         context.drawImage(image, bitmapImage.x, bitmapImage.y, bitmapImage.width, bitmapImage.height);
-      }
-    });
+      });
+    }
     context.restore();
 
     context.fillStyle = 'green';
