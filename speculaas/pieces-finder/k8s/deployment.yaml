@@ -17,7 +17,7 @@ spec:
     spec:
       containers:
       - name: pieces-finder
-        image: houseofmoran/speculaas-pieces-finder:2
+        image: houseofmoran/speculaas-pieces-finder:3
         resources: 
           limits:
             cpu: 100m
