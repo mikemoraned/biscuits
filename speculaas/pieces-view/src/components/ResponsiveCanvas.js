@@ -4,15 +4,47 @@ import Measure from 'react-measure';
 const LANDSCAPE = 'landscape';
 const PORTRAIT = 'portrait';
 
-const LandscapeRenderer = (context, dimensions) => {
-  context.fillStyle = 'red';
-  context.fillRect(0,0, dimensions.width, dimensions.height);
+function maxDimensions(dimensionsList) {
+  let max = {
+    width: dimensionsList[0].width,
+    height: dimensionsList[0].height,
+  };
+  const reducer = (accum, entry) => {
+    return {
+      width: Math.max(accum.width, entry.width),
+      height: Math.max(accum.height, entry.height),
+    }
+  };
+  return dimensionsList.reduce(reducer, max);
+}
+
+const Renderer = (bgColor) => {
+  return (context, dimensions, pieces) => {
+    context.fillStyle = bgColor;
+    context.fillRect(0, 0, dimensions.width, dimensions.height);
+
+    const bitmapImages = pieces.map(p => p.bitmapImage);
+    const max = maxDimensions(bitmapImages);
+    context.save();
+    context.scale(
+      dimensions.width / max.width,
+      dimensions.height / max.height
+    );
+    context.strokeStyle = 'black';
+    bitmapImages.forEach(bitmapImage => {
+      context.strokeRect(bitmapImage.x, bitmapImage.y, bitmapImage.width, bitmapImage.height);
+    });
+    context.restore();
+
+    context.fillStyle = 'green';
+    context.font = '20px sans-serif';
+    context.fillText(`pieces: ${pieces.length}`, 10, dimensions.height - 10);
+  }
 };
 
-const PortraitRenderer = (context, dimensions) => {
-  context.fillStyle = 'blue';
-  context.fillRect(0,0, dimensions.width, dimensions.height);
-};
+const LandscapeRenderer = Renderer('red');
+
+const PortraitRenderer = Renderer('blue');
 
 class FixedSizeCanvas extends Component {
   constructor(props) {
@@ -42,7 +74,9 @@ class FixedSizeCanvas extends Component {
   updateCanvas() {
     const context = this.refs.canvas.getContext('2d');
     context.clearRect(0,0, this.state.dimensions.width, this.state.dimensions.height);
-    this.props.rendererFn(context, this.state.dimensions);
+    context.save();
+    this.props.rendererFn(context, this.state.dimensions, this.props.pieces);
+    context.restore();
   }
 
   render() {
@@ -110,10 +144,18 @@ class ResponsiveCanvas extends Component {
 
   canvasForOrientation(orientation, dimensions) {
     if (orientation === LANDSCAPE) {
-      return <FixedSizeCanvas containerDimensions={dimensions} rendererFn={LandscapeRenderer}/>;
+      return <FixedSizeCanvas
+        containerDimensions={dimensions}
+        rendererFn={LandscapeRenderer}
+        pieces={this.props.pieces}
+      />;
     }
     else {
-      return <FixedSizeCanvas containerDimensions={dimensions} rendererFn={PortraitRenderer}/>;
+      return <FixedSizeCanvas
+        containerDimensions={dimensions}
+        rendererFn={PortraitRenderer}
+        pieces={this.props.pieces}
+      />;
     }
   }
 

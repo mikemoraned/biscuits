@@ -5,10 +5,16 @@ import ResponsiveCanvas from "./ResponsiveCanvas";
 
 const ALL_PIECES_QUERY = gql`
   query AllPiecesQuery($id: String!) {
-    pieces: piecesByPlaceId(id: $id) {
-      id
+  pieces: piecesByPlaceId(id: $id) {
+    id
+    bitmapImage {
+      x
+      y
+      width
+      height
     }
   }
+}
 `;
 
 class Place extends Component {
@@ -17,8 +23,7 @@ class Place extends Component {
         return (
             <div className="Place">
                 <h1>{ this.props.id }</h1>
-                <ResponsiveCanvas />
-                {/*{ this.renderPieces(this.props.allPiecesQuery) }*/}
+                {this.renderPieces(this.props.allPiecesQuery)}
             </div>
         );
     }
@@ -34,11 +39,7 @@ class Place extends Component {
 
         const pieces = allPiecesQuery.pieces;
 
-        return <div className="Pieces">
-            { pieces.map(piece => (
-                <span key={piece.id}>{ piece.id } </span>
-            ))}
-        </div>;
+        return <ResponsiveCanvas pieces={pieces}/>;
     }
 }
 
