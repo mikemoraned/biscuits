@@ -1,4 +1,4 @@
-from schema import Piece, BitmapImage, Place, SpriteOffset
+from schema import Piece, BitmapImage, Place, SpriteOffset, Sprite
 
 DUMMY_PNG = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfF" \
             "cSJAAAADUlEQVR42mNkYPhfDwAChwGA60e6kgAAAABJRU5ErkJggg=="
@@ -22,6 +22,8 @@ class DummySplitter:
                                          y=0
                                      ))
                                  ) for index, entry in enumerate(place)])
-            return Place(id=place_id, pieces=pieces)
+            return Place(id=place_id,
+                         sprite=Sprite(data_url=DUMMY_PNG),
+                         pieces=pieces)
         else:
             None

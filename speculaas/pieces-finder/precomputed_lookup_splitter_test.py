@@ -1,9 +1,11 @@
 import unittest
 from precomputed_lookup_splitter import PreComputedLookupSplitter
-from schema import Piece, BitmapImage, SpriteOffset
+from schema import Piece, BitmapImage, SpriteOffset, Sprite
 
 unittest.util._MAX_LENGTH = 2000
 
+DUMMY_PNG = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfF" \
+            "cSJAAAADUlEQVR42mNkYPhfDwAChwGA60e6kgAAAABJRU5ErkJggg=="
 
 class TestPreComputedLookupSplitter(unittest.TestCase):
     def __init__(self, method_name):
@@ -25,6 +27,7 @@ class TestPreComputedLookupSplitter(unittest.TestCase):
         splitter = PreComputedLookupSplitter.from_dir("precomputed_test")
         place = splitter.split('edinburgh')
         self.assertEqual(place.id, 'edinburgh')
+        self.assertEqual(place.sprite, Sprite(data_url=DUMMY_PNG))
         self.assertEqual(len(place.pieces), 1)
         self.assertEqual(place.pieces[0],
                          Piece(id='edinburgh_0',

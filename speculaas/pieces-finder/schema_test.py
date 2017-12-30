@@ -47,6 +47,9 @@ class TestSchema(unittest.TestCase):
                                   { 
                                     placeById(id: "edinburgh") { 
                                       id
+                                      sprite {
+                                        dataURL
+                                      }
                                       pieces {
                                         id
                                         bitmapImage {
@@ -66,24 +69,30 @@ class TestSchema(unittest.TestCase):
         expected = {
             'data': OrderedDict([
                 ('placeById',
-                    OrderedDict([
-                        ('id', 'edinburgh'),
-                        ('pieces', [
-                            OrderedDict([
-                                ('id', 'edinburgh_0'),
-                                ('bitmapImage', OrderedDict([
-                                    ('x', 10),
-                                    ('y', 20),
-                                    ('width', 1350),
-                                    ('height', 882),
-                                    ('spriteOffset', OrderedDict([
-                                        ('x', 200),
-                                        ('y', 0)]
-                                    ))
-                                ]))
-                            ])
-                        ])
-                    ])
+                 OrderedDict([
+                     ('id', 'edinburgh'),
+                     ('sprite', OrderedDict([
+                         ('dataURL',
+                          "data:image/png;base64,iVBORw0KGgoAAAANSUh"
+                          "EUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mNk"
+                          "YPhfDwAChwGA60e6kgAAAABJRU5ErkJggg==")
+                     ])),
+                     ('pieces', [
+                         OrderedDict([
+                             ('id', 'edinburgh_0'),
+                             ('bitmapImage', OrderedDict([
+                                 ('x', 10),
+                                 ('y', 20),
+                                 ('width', 1350),
+                                 ('height', 882),
+                                 ('spriteOffset', OrderedDict([
+                                     ('x', 200),
+                                     ('y', 0)]
+                                 ))
+                             ]))
+                         ])
+                     ])
+                 ])
                  )])
         }
         self.assertEqual(executed, expected)
