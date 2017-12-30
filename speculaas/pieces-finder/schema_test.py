@@ -19,7 +19,8 @@ class TestSchema(unittest.TestCase):
                     "x": 10,
                     "y": 20,
                     "height": 882,
-                    "width": 1350
+                    "width": 1350,
+                    "sprite_offset": 200
                 }
             ]
         }
@@ -28,57 +29,65 @@ class TestSchema(unittest.TestCase):
         client = Client(schema)
         executed = client.execute('''
                                   { 
-                                    piecesByPlaceId(id: "glasgow") { 
+                                    placeById(id: "glasgow") { 
                                       id
                                     } 
                                   }''',
                                   root_value=DummySplitter(self.dummy_pieces))
         expected = {
             'data': OrderedDict([
-                ('piecesByPlaceId', None)
+                ('placeById', None)
             ])
         }
         self.assertEqual(executed, expected)
-
 
     def test_piecesByPlaceId_all_fields_for_known_id(self):
         client = Client(schema)
         executed = client.execute('''
                                   { 
-                                    piecesByPlaceId(id: "edinburgh") { 
+                                    placeById(id: "edinburgh") { 
                                       id
-                                      bitmapImage {
-                                        data
-                                        x
-                                        y
-                                        width
-                                        height
+                                      pieces {
+                                        id
+                                        bitmapImage {
+                                          x
+                                          y
+                                          width
+                                          height
+                                          spriteOffset {
+                                            x
+                                            y
+                                          }
+                                        }
                                       }
                                     } 
                                   }''',
                                   root_value=DummySplitter(self.dummy_pieces))
         expected = {
             'data': OrderedDict([
-                ('piecesByPlaceId', [
+                ('placeById',
                     OrderedDict([
-                        ('id', '0'),
-                        ('bitmapImage', OrderedDict([
-                            (
-                            'data', "data:image/png;base64,iVBORw0KGgoAAAANSUh"
-                                    "EUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mNk"
-                                    "YPhfDwAChwGA60e6kgAAAABJRU5ErkJggg=="),
-                            ('x', 10),
-                            ('y', 20),
-                            ('width', 1350),
-                            ('height', 882)]
-                        ))
+                        ('id', 'edinburgh'),
+                        ('pieces', [
+                            OrderedDict([
+                                ('id', 'edinburgh_0'),
+                                ('bitmapImage', OrderedDict([
+                                    ('x', 10),
+                                    ('y', 20),
+                                    ('width', 1350),
+                                    ('height', 882),
+                                    ('spriteOffset', OrderedDict([
+                                        ('x', 200),
+                                        ('y', 0)]
+                                    ))
+                                ]))
+                            ])
+                        ])
                     ])
-                ])
-            ])
+                 )])
         }
         self.assertEqual(executed, expected)
 
 
 if __name__ == '__main__':
     unittest.main()
-

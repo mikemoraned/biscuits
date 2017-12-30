@@ -1,23 +1,27 @@
-from schema import Piece, BitmapImage
+from schema import Piece, BitmapImage, Place, SpriteOffset
 
 DUMMY_PNG = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfF" \
             "cSJAAAADUlEQVR42mNkYPhfDwAChwGA60e6kgAAAABJRU5ErkJggg=="
 
 
 class DummySplitter:
-    def __init__(self, pieces_by_place_id):
-        self.pieces_by_place_id = pieces_by_place_id
+    def __init__(self, place_by_id):
+        self.place_by_id = place_by_id
 
     def split(self, place_id):
-        if place_id in self.pieces_by_place_id:
-            pieces = self.pieces_by_place_id[place_id]
-            return list([Piece(id=str(index),
-                               bitmap_image=BitmapImage(
-                                   data=DUMMY_PNG,
-                                   x=entry['x'],
-                                   y=entry['y'],
-                                   width=entry['width'],
-                                   height=entry['height'])
-                               ) for index, entry in enumerate(pieces)])
+        if place_id in self.place_by_id:
+            place = self.place_by_id[place_id]
+            pieces = list([Piece(id="{}_{}".format(place_id, index),
+                                 bitmap_image=BitmapImage(
+                                     x=entry['x'],
+                                     y=entry['y'],
+                                     width=entry['width'],
+                                     height=entry['height'],
+                                     sprite_offset=SpriteOffset(
+                                         x=entry['sprite_offset'],
+                                         y=0
+                                     ))
+                                 ) for index, entry in enumerate(place)])
+            return Place(id=place_id, pieces=pieces)
         else:
-            []
+            None

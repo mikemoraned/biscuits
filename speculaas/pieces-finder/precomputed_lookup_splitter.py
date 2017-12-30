@@ -3,7 +3,7 @@ import glob
 import re
 import json
 
-from schema import Piece, BitmapImage
+from schema import Piece, BitmapImage, Place, SpriteOffset
 
 DUMMY_PNG = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfF" \
             "cSJAAAADUlEQVR42mNkYPhfDwAChwGA60e6kgAAAABJRU5ErkJggg=="
@@ -22,16 +22,21 @@ class PreComputedLookupSplitter:
     def split(self, place_id):
         if place_id in self.place_ids:
             pieces = self.load_pieces_from_file(place_id)
-            return list([Piece(id="{}_{}".format(place_id, index),
-                               bitmap_image=BitmapImage(
-                                   data=DUMMY_PNG,
-                                   x=entry['x'],
-                                   y=entry['y'],
-                                   width=entry['width'],
-                                   height=entry['height'])
-                               ) for index, entry in enumerate(pieces)])
+            return Place(id=place_id,
+                         pieces=list([Piece(id="{}_{}".format(place_id, index),
+                                            bitmap_image=BitmapImage(
+                                                x=entry['x'],
+                                                y=entry['y'],
+                                                width=entry['width'],
+                                                height=entry['height'],
+                                                sprite_offset=SpriteOffset(
+                                                    x=entry['sprite_offset'],
+                                                    y=0
+                                                ))
+                                            ) for index, entry in
+                                      enumerate(pieces)]))
         else:
-            []
+            None
 
     def load_pieces_from_file(self, place_id):
         with open("{}/{}.labels.json".format(self.dir_name, place_id)) as file:

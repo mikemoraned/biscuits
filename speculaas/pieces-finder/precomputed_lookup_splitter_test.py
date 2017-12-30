@@ -1,6 +1,6 @@
 import unittest
 from precomputed_lookup_splitter import PreComputedLookupSplitter
-from schema import Piece, BitmapImage
+from schema import Piece, BitmapImage, SpriteOffset
 
 unittest.util._MAX_LENGTH = 2000
 
@@ -23,23 +23,21 @@ class TestPreComputedLookupSplitter(unittest.TestCase):
 
     def test_finds_and_loads_edinburgh(self):
         splitter = PreComputedLookupSplitter.from_dir("precomputed_test")
-        pieces = splitter.split('edinburgh')
-        self.assertEqual(len(pieces), 1)
-        self.assertEqual(pieces[0],
+        place = splitter.split('edinburgh')
+        self.assertEqual(place.id, 'edinburgh')
+        self.assertEqual(len(place.pieces), 1)
+        self.assertEqual(place.pieces[0],
                          Piece(id='edinburgh_0',
                                bitmap_image=BitmapImage(
-                                   data="data:image/png;base64,iVBORw0KGgoA"
-                                        "AAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAA"
-                                        "AADUlEQVR42mNkYPhfDwAChwGA60e6kgAA"
-                                        "AABJRU5ErkJggg==",
                                    x=0,
                                    y=0,
                                    width=77,
-                                   height=131)))
+                                   height=131,
+                                   sprite_offset=SpriteOffset(x=1350, y=0))))
 
     @staticmethod
-    def idsOf(pieces):
-        return list(map(lambda p: p.id, pieces))
+    def idsOf(place):
+        return list(map(lambda p: p.id, place.pieces))
 
 
 if __name__ == '__main__':
