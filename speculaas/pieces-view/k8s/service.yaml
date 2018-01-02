@@ -2,8 +2,11 @@ kind: Service
 apiVersion: v1
 metadata:
   name: pieces-view-service
+  namespace: speculaas
+  annotations:
+    external-dns.alpha.kubernetes.io/hostname: speculaas.houseofmoran.io.
 spec:
-  type: NodePort
+  type: LoadBalancer
   selector:
     app: pieces-view
   ports:

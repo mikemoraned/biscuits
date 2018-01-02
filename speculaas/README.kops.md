@@ -62,19 +62,21 @@ Ensure choices from one-off setup are used
     export AWS_PROFILE=kops
     export STATE_STORE_BUCKET=houseofmoran-com-kops-state-store
     
-Names for this cluster
+Choices for this cluster
 
-    export NAME=testcluster.k8s.local
+    export NAME=app.houseofmoran.io
     export KOPS_STATE_STORE=s3://$STATE_STORE_BUCKET
+    export TOPOLOGY=private
+    export NETWORKING=flannel-vxlan
 
 Create cluster:
     
-    kops create cluster --zones us-west-2a ${NAME}
+    kops create cluster --zones us-west-2a ${NAME} --topology ${TOPOLOGY} --networking ${NETWORKING}
     kops update cluster ${NAME} --yes
     
 ... then wait a few minutes to check if it is working (5 mins or more)
 
-    kops validate cluster
+    watch -n 30 kops validate cluster
     kubectl get nodes --show-labels
     
 ... note that following doesn't seem to work
@@ -86,6 +88,49 @@ Create cluster:
     export MASTER=...
     ssh -i ~/.ssh/id_rsa admin@${MASTER}
     
+... install addons:
+
+    kubectl create -f https://raw.githubusercontent.com/kubernetes/kops/master/addons/kubernetes-dashboard/v1.8.1.yaml
+    
+based on https://github.com/kubernetes/dashboard/wiki/Accessing-Dashboard---1.7.X-and-above, the ui can then be
+accessed at http://localhost:8001/api/v1/namespaces/kube-system/services/https:kubernetes-dashboard:/proxy/
+    
+## External DNS
+
+Note: following requires assigning the same IAM permissions to all nodes; https://github.com/jtblin/kube2iam may
+be a better way to restrict this in the future
+
+    kops edit cluster ${NAME}
+
+Add following under "additionalPolicies", or add at end under "spec" (replace ZONE_ID with route 53 Zone Id that
+NAME belongs to)
+
+    additionalPolicies:
+      node: |
+        [
+          {
+            "Effect": "Allow",
+            "Action": ["route53:ChangeResourceRecordSets"],
+            "Resource": ["arn:aws:route53:::hostedzone/ZONE_ID"]
+          },
+          {
+            "Effect": "Allow",
+            "Action": ["route53:ListHostedZones","route53:ListResourceRecordSets"],
+            "Resource": ["*"]
+          }
+        ]
+      
+Then see the changes and apply them
+
+    kops update cluster ${NAME}
+    kops update cluster ${NAME} --yes
+    kops rolling-update cluster ${NAME} # there should be no changes required, but in-case there are, do following
+    kops rolling-update cluster ${NAME} --yes
+
+Install the [ExternalDNS](https://github.com/kubernetes-incubator/external-dns/blob/master/docs/tutorials/aws.md) pod
+
+    kubectl apply -f k8s/externalDNS.yaml
+
 ## Delete the cluster
 
     kops delete cluster --name ${NAME} # dry run
@@ -106,19 +151,18 @@ Use docker hub and switch to speculaas-kops context:
     docker login
     kubectl config use-context speculaas-kops
     
-## Build, push and start piece-finder
+## Build and push
 
-    docker build -t speculaas-pieces-finder ./pieces-finder
-    docker tag speculaas-pieces-finder houseofmoran/speculaas-pieces-finder:4
-    docker push houseofmoran/speculaas-pieces-finder:2
+    docker build -t houseofmoran/speculaas-pieces-finder:4 ./pieces-finder
+    docker build -t houseofmoran/speculaas-pieces-view:5 ./pieces-view
+    
+    docker push houseofmoran/speculaas-pieces-finder:4
+    docker push houseofmoran/speculaas-pieces-view:5
+        
+## Startup
+
     kubectl apply -f ./pieces-finder/k8s/deployment.yaml
     kubectl apply -f ./pieces-finder/k8s/service.yaml
-
-## Build, push and start piece-view
-
-    docker build -t speculaas-pieces-view ./pieces-view
-    docker tag speculaas-pieces-view houseofmoran/speculaas-pieces-view:5
-    docker push houseofmoran/speculaas-pieces-view:3
     kubectl apply -f ./pieces-view/k8s/deployment.yaml
     kubectl apply -f ./pieces-view/k8s/service.yaml
 
