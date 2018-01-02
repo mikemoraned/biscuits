@@ -95,6 +95,41 @@ Create cluster:
 based on https://github.com/kubernetes/dashboard/wiki/Accessing-Dashboard---1.7.X-and-above, the ui can then be
 accessed at http://localhost:8001/api/v1/namespaces/kube-system/services/https:kubernetes-dashboard:/proxy/
     
+## External DNS
+
+Note: following requires assigning the same IAM permissions to all noodes; https://github.com/jtblin/kube2iam may
+be a better way to restrict this in the future
+
+    kops edit cluster ${NAME}
+
+Add following under "additionalPolicies", or add at end under "spec" (replace ZONE_ID with route 53 Zone Id of NAME)
+
+    additionalPolicies:
+      node: |
+        [
+          {
+            "Effect": "Allow",
+            "Action": ["route53:ChangeResourceRecordSets"],
+            "Resource": ["arn:aws:route53:::hostedzone/ZONE_ID"]
+          },
+          {
+            "Effect": "Allow",
+            "Action": ["route53:ListHostedZones","route53:ListResourceRecordSets"],
+            "Resource": ["*"]
+          }
+        ]
+      
+Then see the changes and apply them
+
+    kops update cluster ${NAME}
+    kops update cluster ${NAME} --yes
+    kops rolling-update cluster ${NAME} # there should be no changes required, but in-case there are, do following
+    kops rolling-update cluster ${NAME} --yes
+
+Install the ExternalDNS pod
+
+    kubectl apply -f k8s/externalDNS.yaml
+
 ## Delete the cluster
 
     kops delete cluster --name ${NAME} # dry run
