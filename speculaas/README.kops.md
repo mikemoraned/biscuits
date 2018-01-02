@@ -62,19 +62,21 @@ Ensure choices from one-off setup are used
     export AWS_PROFILE=kops
     export STATE_STORE_BUCKET=houseofmoran-com-kops-state-store
     
-Names for this cluster
+Choices for this cluster
 
-    export NAME=testcluster.k8s.local
+    export NAME=app.houseofmoran.com
     export KOPS_STATE_STORE=s3://$STATE_STORE_BUCKET
+    export TOPOLOGY=private
+    export NETWORKING=flannel-vxlan
 
 Create cluster:
     
-    kops create cluster --zones us-west-2a ${NAME}
+    kops create cluster --zones us-west-2a ${NAME} --topology ${TOPOLOGY} --networking ${NETWORKING}
     kops update cluster ${NAME} --yes
     
 ... then wait a few minutes to check if it is working (5 mins or more)
 
-    kops validate cluster
+    watch -n 30 kops validate cluster
     kubectl get nodes --show-labels
     
 ... note that following doesn't seem to work
