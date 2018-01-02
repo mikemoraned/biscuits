@@ -64,7 +64,7 @@ Ensure choices from one-off setup are used
     
 Choices for this cluster
 
-    export NAME=app.houseofmoran.com
+    export NAME=app.houseofmoran.io
     export KOPS_STATE_STORE=s3://$STATE_STORE_BUCKET
     export TOPOLOGY=private
     export NETWORKING=flannel-vxlan
@@ -88,6 +88,13 @@ Create cluster:
     export MASTER=...
     ssh -i ~/.ssh/id_rsa admin@${MASTER}
     
+... install addons:
+
+    kubectl create -f https://raw.githubusercontent.com/kubernetes/kops/master/addons/kubernetes-dashboard/v1.8.1.yaml
+    
+based on https://github.com/kubernetes/dashboard/wiki/Accessing-Dashboard---1.7.X-and-above, the ui can then be
+accessed at http://localhost:8001/api/v1/namespaces/kube-system/services/https:kubernetes-dashboard:/proxy/
+    
 ## Delete the cluster
 
     kops delete cluster --name ${NAME} # dry run
@@ -108,19 +115,18 @@ Use docker hub and switch to speculaas-kops context:
     docker login
     kubectl config use-context speculaas-kops
     
-## Build, push and start piece-finder
+## Build and push
 
-    docker build -t speculaas-pieces-finder ./pieces-finder
-    docker tag speculaas-pieces-finder houseofmoran/speculaas-pieces-finder:4
-    docker push houseofmoran/speculaas-pieces-finder:2
+    docker build -t houseofmoran/speculaas-pieces-finder:4 ./pieces-finder
+    docker build -t houseofmoran/speculaas-pieces-view:5 ./pieces-view
+    
+    docker push houseofmoran/speculaas-pieces-finder:4
+    docker push houseofmoran/speculaas-pieces-view:5
+        
+## Startup
+
     kubectl apply -f ./pieces-finder/k8s/deployment.yaml
     kubectl apply -f ./pieces-finder/k8s/service.yaml
-
-## Build, push and start piece-view
-
-    docker build -t speculaas-pieces-view ./pieces-view
-    docker tag speculaas-pieces-view houseofmoran/speculaas-pieces-view:5
-    docker push houseofmoran/speculaas-pieces-view:3
     kubectl apply -f ./pieces-view/k8s/deployment.yaml
     kubectl apply -f ./pieces-view/k8s/service.yaml
 

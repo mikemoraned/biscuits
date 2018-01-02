@@ -1,0 +1,39 @@
+Routing tables
+
+Internet:
+Destination        Gateway            Flags        Refs      Use   Netif Expire
+default            192.168.178.1      UGSc          214        9     en0
+127                127.0.0.1          UCS             1        0     lo0
+127.0.0.1          127.0.0.1          UH             10   483456     lo0
+169.254            link#4             UCS             1        0     en0
+192.168.99         link#10            UC              4        0 vboxnet
+192.168.99.100     8:0:27:28:41:5a    UHLWIi          1    34305 vboxnet   1142
+192.168.99.255     link#10            UHLWbI          1      587 vboxnet
+192.168.178        link#4             UCS             6        0     en0
+192.168.178.1/32   link#4             UCS             3        0     en0
+192.168.178.1      8:96:d7:29:c9:5b   UHLWIir       213     1528     en0   1198
+192.168.178.29     0:1f:3f:49:e1:d3   UHLWIi          2       11     en0    948
+192.168.178.38/32  link#4             UCS             1        0     en0
+192.168.178.50     60:2:b4:fb:aa:4f   UHLWIi          1       23     en0   1059
+192.168.178.61     34:d2:70:34:30:e1  UHLWIi          1      580     en0   1185
+192.168.178.255    link#4             UHLWbI          1      564     en0
+224.0.0            link#4             UmCS            2        0     en0
+224.0.0.251        1:0:5e:0:0:fb      UHmLWI          1        0     en0
+255.255.255.255/32 link#4             UCS             2        0     en0
+255.255.255.255    link#4             UHLWbI          1      216     en0
+
+Internet6:
+Destination                             Gateway                         Flags         Netif Expire
+::1                                     ::1                             UHL             lo0
+fe80::%lo0/64                           fe80::1%lo0                     UcI             lo0
+fe80::1%lo0                             link#1                          UHLI            lo0
+fe80::%en0/64                           link#4                          UCI             en0
+fe80::6203:8ff:fe98:37da%en0            60:3:8:98:37:da                 UHLI            lo0
+fe80::%awdl0/64                         link#8                          UCI           awdl0
+fe80::104c:78ff:feab:6e2f%awdl0         12:4c:78:ab:6e:2f               UHLI            lo0
+ff01::%lo0/32                           ::1                             UmCI            lo0
+ff01::%en0/32                           link#4                          UmCI            en0
+ff01::%awdl0/32                         link#8                          UmCI          awdl0
+ff02::%lo0/32                           ::1                             UmCI            lo0
+ff02::%en0/32                           link#4                          UmCI            en0
+ff02::%awdl0/32                         link#8                          UmCI          awdl0
