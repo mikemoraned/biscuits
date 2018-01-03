@@ -4,7 +4,7 @@ metadata:
   name: pieces-view-service
   namespace: speculaas
   annotations:
-    external-dns.alpha.kubernetes.io/hostname: speculaas.app.houseofmoran.io.
+    external-dns.alpha.kubernetes.io/hostname: speculaas.houseofmoran.io.
 spec:
   type: LoadBalancer
   selector:

@@ -110,7 +110,7 @@ Add following under "additionalPolicies", or add at end under "spec" (replace ZO
           {
             "Effect": "Allow",
             "Action": ["route53:ChangeResourceRecordSets"],
-            "Resource": ["arn:aws:route53:::hostedzone/ZONE_ID"]
+            "Resource": ["arn:aws:route53:::hostedzone/*"]
           },
           {
             "Effect": "Allow",
