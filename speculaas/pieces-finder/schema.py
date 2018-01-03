@@ -1,8 +1,13 @@
 import graphene
-
+import base64
 
 class Sprite(graphene.ObjectType):
     data_url = graphene.String(name='dataURL')
+
+    @classmethod
+    def from_byte_stream(cls, byte_stream):
+        encoded = base64.b64encode(byte_stream).decode('utf8')
+        return Sprite(data_url="data:image/png;base64,{}".format(encoded))
 
     def __eq__(self, other):
         if isinstance(self, other.__class__):

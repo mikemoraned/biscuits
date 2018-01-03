@@ -1,4 +1,3 @@
-import base64
 import glob
 import json
 import re
@@ -45,8 +44,7 @@ class PreComputedLookupSplitter:
     def load_sprite_from_file(self, place_id):
         with open("{}/{}.label_sprites.png".format(self.dir_name, place_id),
                   "rb") as file:
-            encoded = base64.b64encode(file.read()).decode('utf8')
-            return Sprite(data_url="data:image/png;base64,{}".format(encoded))
+            return Sprite.from_byte_stream(file.read())
 
     @classmethod
     def place_ids_in_dir(cls, dir_name):
