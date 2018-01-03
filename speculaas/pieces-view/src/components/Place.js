@@ -4,10 +4,10 @@ import gql from 'graphql-tag';
 import ResponsiveCanvas from "./ResponsiveCanvas";
 
 const PLACE_QUERY = gql`
-query PlaceQuery($id: String!) {
+query PlaceQuery($id: String!, $shallowRender: Boolean!) {
   place: placeById(id: $id) {
     id
-    sprite {
+    sprite @skip(if: $shallowRender) {
       dataURL
     }
     pieces {
@@ -29,30 +29,46 @@ query PlaceQuery($id: String!) {
 
 class Place extends Component {
 
-    render() {
-        return (
-            <div className="Place">
-                <h1>{ this.props.id }</h1>
-                {this.renderPieces(this.props.placeQuery)}
-            </div>
-        );
+  constructor(props) {
+    super(props);
+
+    this.prevLoaded = false;
+  }
+
+  componentDidUpdate(prevProps) {
+    if (!this.prevLoaded) {
+      const loaded = !(prevProps.placeQuery.loading || prevProps.placeQuery.error);
+      if (loaded) {
+        this.prevLoaded = loaded;
+        this.props.onLoad();
+      }
+    }
+  }
+
+  render() {
+    return (
+      <div className="Place">
+        <h1>{ this.props.id }</h1>
+        {this.renderPieces(this.props.placeQuery)}
+      </div>
+    );
+  }
+
+  renderPieces(placeQuery) {
+    if (placeQuery.loading) {
+      return <div>Loading</div>
     }
 
-    renderPieces(placeQuery) {
-        if (placeQuery.loading) {
-            return <div>Loading</div>
-        }
-
-        if (placeQuery.error) {
-            return <div>Error</div>
-        }
-
-        const place = placeQuery.place;
-
-        return <ResponsiveCanvas place={place}/>;
+    if (placeQuery.error) {
+      return <div>Error</div>
     }
+
+    const place = placeQuery.place;
+
+    return <ResponsiveCanvas place={place}/>;
+  }
 }
 
 export default graphql(PLACE_QUERY, {
-    name: 'placeQuery'
+  name: 'placeQuery'
 }) ( Place );

@@ -88,12 +88,14 @@ class FixedSizeCanvas extends Component {
 
   fetchImages() {
     if (this.state.spriteBitmap == null) {
-      const { id, sprite } = this.props.place;
-      console.log("Fetching bitmap for", id);
-      new ImageBitmapCreator()
-        .create(id, sprite.dataURL)
-        .then(bitmap => this.setState({spriteBitmap:bitmap}))
-        .then(() => console.log("Fetched bitmap for", id));
+      const {id, sprite} = this.props.place;
+      if (sprite) {
+        console.log("Fetching bitmap for", id);
+        new ImageBitmapCreator()
+          .create(id, sprite.dataURL)
+          .then(bitmap => this.setState({spriteBitmap: bitmap}))
+          .then(() => console.log("Fetched bitmap for", id));
+      }
     }
   }
 
