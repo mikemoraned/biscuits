@@ -1,4 +1,6 @@
 import sys
+from math import sqrt
+
 from rectpack import newPacker
 import cv2
 import numpy as np
@@ -34,12 +36,20 @@ def repack(splitter, place_id):
     sprite_image_map = build_sprite_image_map(place)
 
     packer = newPacker(rotation=False)
+    area = 0
     for piece in place.pieces:
         packer.add_rect(width=piece.bitmap_image.width,
                         height=piece.bitmap_image.height,
                         rid=piece.id)
+        area += piece.bitmap_image.width * piece.bitmap_image.height
 
-    packer.add_bin(width=10000, height=10000)
+    area_expansion = 1.5
+    bin_area = area * area_expansion
+    bin_side_length = int(sqrt(bin_area))
+    print("Using bin of size {} x {} = {}".format(bin_side_length,
+                                                  bin_side_length,
+                                                  bin_area))
+    packer.add_bin(width=bin_side_length, height=bin_side_length)
 
     packer.pack()
     cv2_rects = list(convert_binned_to_cv2_rectangles(packer.rect_list()))
