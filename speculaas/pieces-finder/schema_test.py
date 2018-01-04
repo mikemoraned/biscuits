@@ -24,6 +24,7 @@ class TestSchema(unittest.TestCase):
                 }
             ]
         }
+        self.dummy_splitter = DummySplitter(self.dummy_pieces)
 
     def test_piecesByPlaceId_min_fields_for_unknown_id(self):
         client = Client(schema)
@@ -33,7 +34,7 @@ class TestSchema(unittest.TestCase):
                                       id
                                     } 
                                   }''',
-                                  root_value=DummySplitter(self.dummy_pieces))
+                                  root_value=self.dummy_splitter)
         expected = {
             'data': OrderedDict([
                 ('placeById', None)
@@ -65,17 +66,14 @@ class TestSchema(unittest.TestCase):
                                       }
                                     } 
                                   }''',
-                                  root_value=DummySplitter(self.dummy_pieces))
+                                  root_value=self.dummy_splitter)
         expected = {
             'data': OrderedDict([
                 ('placeById',
                  OrderedDict([
                      ('id', 'edinburgh'),
                      ('sprite', OrderedDict([
-                         ('dataURL',
-                          "data:image/png;base64,iVBORw0KGgoAAAANSUh"
-                          "EUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mNk"
-                          "YPhfDwAChwGA60e6kgAAAABJRU5ErkJggg==")
+                         ('dataURL', self.dummy_splitter.data_url)
                      ])),
                      ('pieces', [
                          OrderedDict([

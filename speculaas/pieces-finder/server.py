@@ -10,8 +10,6 @@ CORS(app)
 
 precomputed_dir = sys.argv[1]
 splitter = PreComputedLookupSplitter.from_dir(precomputed_dir)
-print ("Loaded {} ids from {}".format(len(splitter.place_ids),
-                                      precomputed_dir))
 
 @app.route('/healthcheck/alive')
 def alive():

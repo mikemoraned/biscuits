@@ -9,4 +9,4 @@ RUN mkdir /app
 COPY --from=build /target /app
 COPY . /app
 
-CMD [ "python", "/app/server.py", "/app/precomputed" ]
+CMD [ "python", "/app/server.py", "/app/precomputed_repacked" ]

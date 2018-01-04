@@ -1,12 +1,11 @@
 from schema import Piece, BitmapImage, Place, SpriteOffset, Sprite
-
-DUMMY_PNG = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfF" \
-            "cSJAAAADUlEQVR42mNkYPhfDwAChwGA60e6kgAAAABJRU5ErkJggg=="
+from test_images import transparent_image, transparent_image_data_url
 
 
 class DummySplitter:
     def __init__(self, place_by_id):
         self.place_by_id = place_by_id
+        self.data_url = transparent_image_data_url;
 
     def split(self, place_id):
         if place_id in self.place_by_id:
@@ -23,7 +22,7 @@ class DummySplitter:
                                      ))
                                  ) for index, entry in enumerate(place)])
             return Place(id=place_id,
-                         sprite=Sprite(data_url=DUMMY_PNG),
+                         sprite=Sprite(image=transparent_image),
                          pieces=pieces)
         else:
             None
