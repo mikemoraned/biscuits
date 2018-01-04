@@ -20,9 +20,9 @@ def build_sprite_image_map(place):
                                            dtype=np.uint8),
                                 cv2.IMREAD_UNCHANGED)
     for piece in place.pieces:
-        x_min = piece.bitmap_image.x
+        x_min = piece.bitmap_image.sprite_offset.x
         x_max = x_min + piece.bitmap_image.width
-        y_min = piece.bitmap_image.y
+        y_min = piece.bitmap_image.sprite_offset.y
         y_max = y_min + piece.bitmap_image.height
         image_for_id[piece.id] = sprite_image[y_min:y_max, x_min:x_max]
     return image_for_id
