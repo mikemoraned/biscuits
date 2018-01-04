@@ -12,10 +12,15 @@ class Sprite(graphene.ObjectType):
     def __init__(self, image):
         self.image = image
         self.signature = signature(image)
+        self.data_url = self.create_data_url(image)
 
     def resolve_data_url(self, info):
+        return self.data_url
+
+    @staticmethod
+    def create_data_url(image):
         bytes_io = io.BytesIO()
-        self.image.save(bytes_io, format='png', transparent=1)
+        image.save(bytes_io, format='png', transparent=1)
         image_bytes = bytes_io.getvalue()
         encoded = base64.b64encode(image_bytes).decode('utf8')
         return "data:image/png;base64,{}".format(encoded)
@@ -47,7 +52,6 @@ class Sprite(graphene.ObjectType):
         return "Sprite(signature={})".format(
             self.signature
         )
-
 
 class SpriteOffset(graphene.ObjectType):
     x = graphene.Int()

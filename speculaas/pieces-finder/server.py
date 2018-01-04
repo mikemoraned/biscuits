@@ -5,11 +5,16 @@ from precomputed_lookup_splitter import PreComputedLookupSplitter
 from schema import schema
 from flask_cors import CORS
 
+from splitter_cache import SplitterCache
+
 app = Flask(__name__)
 CORS(app)
 
 precomputed_dir = sys.argv[1]
-splitter = PreComputedLookupSplitter.from_dir(precomputed_dir)
+splitter = SplitterCache.from_precomputed(
+    PreComputedLookupSplitter.from_dir(precomputed_dir),
+    pre_cache=True)
+
 
 @app.route('/healthcheck/alive')
 def alive():
