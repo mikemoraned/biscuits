@@ -17,7 +17,7 @@ spec:
     spec:
       containers:
       - name: pieces-view
-        image: houseofmoran/speculaas-pieces-view:5
+        image: houseofmoran/speculaas-pieces-view:6
         env:
           - name: GRAPHQL_URL
             value: "http://pieces-finder-service/"

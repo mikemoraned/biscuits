@@ -153,11 +153,11 @@ Use docker hub and switch to speculaas-kops context:
     
 ## Build and push
 
-    docker build -t houseofmoran/speculaas-pieces-finder:4 ./pieces-finder
-    docker build -t houseofmoran/speculaas-pieces-view:5 ./pieces-view
+    docker build -t houseofmoran/speculaas-pieces-finder:8 ./pieces-finder
+    docker build -t houseofmoran/speculaas-pieces-view:6 ./pieces-view
     
-    docker push houseofmoran/speculaas-pieces-finder:4
-    docker push houseofmoran/speculaas-pieces-view:5
+    docker push houseofmoran/speculaas-pieces-finder:8
+    docker push houseofmoran/speculaas-pieces-view:6
         
 ## Startup
 

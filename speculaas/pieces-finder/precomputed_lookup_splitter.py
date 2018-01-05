@@ -1,6 +1,7 @@
 import glob
 import json
 import re
+import logging
 
 from schema import Piece, BitmapImage, Place, SpriteOffset, Sprite
 
@@ -10,8 +11,8 @@ class PreComputedLookupSplitter:
         self.has_background = has_background
         self.dir_name = dir_name
         self.place_ids = place_ids
-        print("Loaded {} ids from {}".format(len(self.place_ids),
-                                             dir_name))
+        logging.info("loaded {} ids from {}".format(len(self.place_ids),
+                                                    dir_name))
 
     @classmethod
     def from_dir(cls, dir_name, has_background=False):
@@ -37,12 +38,12 @@ class PreComputedLookupSplitter:
 
         image_file_name = "{}/{}.label_sprites.png".format(dir_name, place.id)
         place.sprite.save_to_filename(image_file_name)
-        print("Saved image to {}".format(image_file_name))
+        logging.info("saved image to {}".format(image_file_name))
 
         json_file_name = "{}/{}.labels.json".format(dir_name, place.id)
         with open(json_file_name, 'w') as out:
             json.dump(collapsed, out, indent=True)
-        print("Saved {} pieces to {}".format(len(collapsed), json_file_name))
+        logging.info("saved {} pieces to {}".format(len(collapsed), json_file_name))
 
     def split(self, place_id):
         if place_id in self.place_ids:

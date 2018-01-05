@@ -15,18 +15,16 @@ Use minikube docker registry and switch to speculaas context:
 
     eval $(minikube docker-env)
     kubectl config use-context speculaas-minikube
-    
-## Build and start piece-finder
 
-    docker build -t speculaas-pieces-finder ./pieces-finder
-    docker tag speculaas-pieces-finder houseofmoran/speculaas-pieces-finder:4
+## Build
+
+    docker build -t houseofmoran/speculaas-pieces-finder:8 ./pieces-finder
+    docker build -t houseofmoran/speculaas-pieces-view:6 ./pieces-view
+    
+## Startup
+
     kubectl apply -f ./pieces-finder/k8s/deployment.yaml
     kubectl apply -f ./pieces-finder/k8s/service.yaml
-
-## Build and start piece-view
-
-    docker build -t speculaas-pieces-view ./pieces-view
-    docker tag speculaas-pieces-view houseofmoran/speculaas-pieces-view:5
     kubectl apply -f ./pieces-view/k8s/deployment.yaml
     kubectl apply -f ./pieces-view/k8s/service.yaml
 

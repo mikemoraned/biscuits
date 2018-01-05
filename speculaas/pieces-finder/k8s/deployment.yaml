@@ -17,13 +17,13 @@ spec:
     spec:
       containers:
       - name: pieces-finder
-        image: houseofmoran/speculaas-pieces-finder:4
+        image: houseofmoran/speculaas-pieces-finder:8
         resources: 
           limits:
-            cpu: 100m
+            cpu: 1
             memory: 250Mi
           requests:
-            cpu: 10m
+            cpu: 0.5
             memory: 125Mi
         ports:
         - name: http
@@ -32,11 +32,13 @@ spec:
           httpGet:
             path: /healthcheck/alive
             port: 5000
-          initialDelaySeconds: 15
+          initialDelaySeconds: 60
+          periodSeconds: 5
           timeoutSeconds: 1
         readinessProbe:
           httpGet:
             path: /healthcheck/ready
             port: 5000
           initialDelaySeconds: 0
-          timeoutSeconds: 1
+          periodSeconds: 10
+          timeoutSeconds: 60

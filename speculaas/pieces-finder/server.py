@@ -1,3 +1,4 @@
+import logging
 import sys
 from flask import Flask
 from flask_graphql import GraphQLView
@@ -10,10 +11,11 @@ from splitter_cache import SplitterCache
 app = Flask(__name__)
 CORS(app)
 
+logging.basicConfig(level=logging.DEBUG)
+
 precomputed_dir = sys.argv[1]
-splitter = SplitterCache.from_precomputed(
-    PreComputedLookupSplitter.from_dir(precomputed_dir),
-    pre_cache=True)
+splitter = SplitterCache(PreComputedLookupSplitter.from_dir(precomputed_dir))
+pre_cache_completed = False
 
 
 @app.route('/healthcheck/alive')
@@ -23,6 +25,7 @@ def alive():
 
 @app.route('/healthcheck/ready')
 def ready():
+    splitter.pre_cache_all_place_ids()
     return "Ready"
 
 
