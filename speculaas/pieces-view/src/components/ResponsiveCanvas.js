@@ -5,8 +5,8 @@ import ImageBitmapCreator from './ImageBitmapCreator';
 const LANDSCAPE = 'landscape';
 const PORTRAIT = 'portrait';
 
-function maxXY(dimensionsList) {
-  const first = dimensionsList[0];
+function maxBitmapImagesXY(bitmapImages) {
+  const first = bitmapImages[0];
   const max = {
     x: first.x + first.width,
     y: first.y + first.height,
@@ -17,7 +17,22 @@ function maxXY(dimensionsList) {
       y: Math.max(accum.y, entry.y + entry.height),
     }
   };
-  return dimensionsList.reduce(reducer, max);
+  return bitmapImages.reduce(reducer, max);
+}
+
+function maxSpritesXY(bitmapImages) {
+  const first = bitmapImages[0];
+  const max = {
+    x: first.spriteOffset.x + first.width,
+    y: first.spriteOffset.y + first.height,
+  };
+  const reducer = (accum, entry) => {
+    return {
+      x: Math.max(accum.x, entry.spriteOffset.x + entry.width),
+      y: Math.max(accum.y, entry.spriteOffset.y + entry.height),
+    }
+  };
+  return bitmapImages.reduce(reducer, max);
 }
 
 function drawBoundingBoxes(bitmapImages, context) {
@@ -36,19 +51,28 @@ function drawSprites(context, place, spriteBitmap) {
   });
 };
 
+function drawSpriteBoundingBoxes(context, place, spriteBitmap) {
+  place.pieces.forEach(piece => {
+    const bitmapImage = piece.bitmapImage;
+    const spriteOffset = bitmapImage.spriteOffset;
+    context.drawImage(spriteBitmap,
+      spriteOffset.x, spriteOffset.y, bitmapImage.width, bitmapImage.height,
+      spriteOffset.x, spriteOffset.y, bitmapImage.width, bitmapImage.height);
+  });
+};
+
 const Renderer = (bgColor, scaleFn) => {
   return (context, dimensions, place, spriteBitmap) => {
     context.fillStyle = bgColor;
     context.fillRect(0, 0, dimensions.width, dimensions.height);
 
     const bitmapImages = place.pieces.map(p => p.bitmapImage);
-    const max = maxXY(bitmapImages);
 
     context.strokeStyle = 'black';
-    const scale = scaleFn(max, dimensions);
 
     context.save();
-    context.scale(scale, scale);
+    const scaleBitmapImages = scaleFn(maxBitmapImagesXY(bitmapImages), dimensions);
+    context.scale(scaleBitmapImages, scaleBitmapImages);
     drawBoundingBoxes(bitmapImages, context);
 
     if (spriteBitmap !== null) {
@@ -58,10 +82,12 @@ const Renderer = (bgColor, scaleFn) => {
 
     context.save();
     context.translate(dimensions.width / 2, 0);
-    context.scale(scale, scale);
+    const scaleSprites = scaleFn(maxSpritesXY(bitmapImages), dimensions);
+    context.scale(scaleSprites, scaleSprites);
     context.strokeStyle = 'white';
-    drawBoundingBoxes(bitmapImages, context);
-
+    if (spriteBitmap !== null) {
+      drawSpriteBoundingBoxes(context, place, spriteBitmap);
+    }
     context.restore();
 
     context.fillStyle = 'green';
