@@ -36,24 +36,32 @@ function drawSprites(context, place, spriteBitmap) {
   });
 };
 
-const Renderer = (bgColor) => {
+const Renderer = (bgColor, scaleFn) => {
   return (context, dimensions, place, spriteBitmap) => {
     context.fillStyle = bgColor;
     context.fillRect(0, 0, dimensions.width, dimensions.height);
 
     const bitmapImages = place.pieces.map(p => p.bitmapImage);
     const max = maxXY(bitmapImages);
-    context.save();
-    context.scale(
-      dimensions.width / max.x,
-      dimensions.height / max.y
-    );
+
     context.strokeStyle = 'black';
+    const scale = scaleFn(max, dimensions);
+
+    context.save();
+    context.scale(scale, scale);
     drawBoundingBoxes(bitmapImages, context);
 
     if (spriteBitmap !== null) {
       drawSprites(context, place, spriteBitmap);
     }
+    context.restore();
+
+    context.save();
+    context.translate(dimensions.width / 2, 0);
+    context.scale(scale, scale);
+    context.strokeStyle = 'white';
+    drawBoundingBoxes(bitmapImages, context);
+
     context.restore();
 
     context.fillStyle = 'green';
@@ -62,9 +70,9 @@ const Renderer = (bgColor) => {
   }
 };
 
-const LandscapeRenderer = Renderer('red');
+const LandscapeRenderer = Renderer('red', (max, dimensions) => dimensions.height / max.y);
 
-const PortraitRenderer = Renderer('blue');
+const PortraitRenderer = Renderer('blue', (max, dimensions) => dimensions.width / max.x);
 
 class FixedSizeCanvas extends Component {
   constructor(props) {
