@@ -4,7 +4,7 @@ RUN mkdir /target
 COPY requirements.txt ./
 RUN pip install --target /target --no-cache-dir -r requirements.txt
 
-FROM python:3.5-alpine
+FROM python:3.5-slim
 RUN mkdir /app
 COPY --from=build /target /app
 COPY . /app
