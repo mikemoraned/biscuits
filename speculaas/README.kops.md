@@ -131,7 +131,11 @@ Install the [ExternalDNS](https://github.com/kubernetes-incubator/external-dns/b
 
     kubectl apply -f k8s/externalDNS.yaml
 
-## Delete the cluster
+## Adding monitoring
+
+    kubectl create -f https://raw.githubusercontent.com/kubernetes/kops/master/addons/monitoring-standalone/v1.7.0.yaml
+
+## Deleting the cluster
 
     kops delete cluster --name ${NAME} # dry run
     kops delete cluster --name ${NAME} --yes # for real
