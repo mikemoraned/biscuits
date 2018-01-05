@@ -68,10 +68,11 @@ Choices for this cluster
     export KOPS_STATE_STORE=s3://$STATE_STORE_BUCKET
     export TOPOLOGY=private
     export NETWORKING=flannel-vxlan
+    export NODE_SIZE=t2.small
 
 Create cluster:
     
-    kops create cluster --zones us-west-2a ${NAME} --topology ${TOPOLOGY} --networking ${NETWORKING}
+    kops create cluster --zones us-west-2a ${NAME} --topology ${TOPOLOGY} --networking ${NETWORKING} --node-size ${NODE_SIZE}
     kops update cluster ${NAME} --yes
     
 ... then wait a few minutes to check if it is working (5 mins or more)
@@ -134,6 +135,28 @@ Install the [ExternalDNS](https://github.com/kubernetes-incubator/external-dns/b
 ## Adding monitoring
 
     kubectl create -f https://raw.githubusercontent.com/kubernetes/kops/master/addons/monitoring-standalone/v1.7.0.yaml
+
+## Changing instance type
+
+Change "machineType" using:
+
+    kops edit ig nodes
+
+Preview changes to cluster:
+
+    kops update cluster
+    
+Apply changes to cluster:
+
+    kops update cluster --yes
+
+Preview changes to nodes:
+
+    kops rolling-update cluster
+    
+Apply changes to nodes:
+
+    kops rolling-update cluster --yes
 
 ## Deleting the cluster
 
