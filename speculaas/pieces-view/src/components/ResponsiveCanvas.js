@@ -20,6 +20,22 @@ function maxXY(dimensionsList) {
   return dimensionsList.reduce(reducer, max);
 }
 
+function drawBoundingBoxes(bitmapImages, context) {
+  bitmapImages.forEach(bitmapImage => {
+    context.strokeRect(bitmapImage.x, bitmapImage.y, bitmapImage.width, bitmapImage.height);
+  });
+};
+
+function drawSprites(context, place, spriteBitmap) {
+  place.pieces.forEach(piece => {
+    const bitmapImage = piece.bitmapImage;
+    const spriteOffset = bitmapImage.spriteOffset;
+    context.drawImage(spriteBitmap,
+      spriteOffset.x, spriteOffset.y, bitmapImage.width, bitmapImage.height,
+      bitmapImage.x, bitmapImage.y, bitmapImage.width, bitmapImage.height);
+  });
+};
+
 const Renderer = (bgColor) => {
   return (context, dimensions, place, spriteBitmap) => {
     context.fillStyle = bgColor;
@@ -33,18 +49,10 @@ const Renderer = (bgColor) => {
       dimensions.height / max.y
     );
     context.strokeStyle = 'black';
-    bitmapImages.forEach(bitmapImage => {
-      context.strokeRect(bitmapImage.x, bitmapImage.y, bitmapImage.width, bitmapImage.height);
-    });
+    drawBoundingBoxes(bitmapImages, context);
 
     if (spriteBitmap !== null) {
-      place.pieces.forEach(piece => {
-        const bitmapImage = piece.bitmapImage;
-        const spriteOffset = bitmapImage.spriteOffset;
-        context.drawImage(spriteBitmap,
-          spriteOffset.x, spriteOffset.y, bitmapImage.width, bitmapImage.height,
-          bitmapImage.x, bitmapImage.y, bitmapImage.width, bitmapImage.height);
-      });
+      drawSprites(context, place, spriteBitmap);
     }
     context.restore();
 
