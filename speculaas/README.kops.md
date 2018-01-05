@@ -158,6 +158,10 @@ Apply changes to nodes:
 
     kops rolling-update cluster --yes
 
+## Dumping config
+
+    kops get --name $NAME -o yaml > $NAME.spec.yaml
+
 ## Deleting the cluster
 
     kops delete cluster --name ${NAME} # dry run
