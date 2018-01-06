@@ -1,11 +1,9 @@
 import tempfile
 import unittest
 
-from PIL import Image
-
+from images_for_tests import transparent_image
 from precomputed_lookup_splitter import PreComputedLookupSplitter
 from schema import Piece, BitmapImage, SpriteOffset, Sprite
-from test_images import transparent_image
 
 unittest.util._MAX_LENGTH = 2000
 
@@ -76,7 +74,6 @@ class TestPreComputedLookupSplitter(unittest.TestCase):
         input_dir_name = 'precomputed_test'
         place_id = 'edinburgh'
         with tempfile.TemporaryDirectory() as temp_dir_name:
-            print(temp_dir_name)
             splitter = PreComputedLookupSplitter.from_dir(input_dir_name,
                                                           has_background=True)
             place_before = splitter.split(place_id)

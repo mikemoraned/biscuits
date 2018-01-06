@@ -28,10 +28,13 @@ class TestSpritePacker(unittest.TestCase):
 
     def test_sprite_content_equal(self):
         input_dir_name = 'precomputed_test'
-        edinburgh = self.sprite_content('edinburgh_real', input_dir_name)
-        edinburgh_same = self.sprite_content('edinburgh_real', input_dir_name)
+        edinburgh = self.sprite_content('edinburgh_real', input_dir_name,
+                                        has_background=True)
+        edinburgh_same = self.sprite_content('edinburgh_real', input_dir_name,
+                                             has_background=True)
         self.assertEqual(edinburgh, edinburgh_same)
-        budapest = self.sprite_content('budapest', input_dir_name)
+        budapest = self.sprite_content('budapest', input_dir_name,
+                                       has_background=True)
         self.assertNotEqual(edinburgh, budapest)
 
     @staticmethod

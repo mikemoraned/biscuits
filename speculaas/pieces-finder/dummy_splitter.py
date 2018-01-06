@@ -1,5 +1,5 @@
+from images_for_tests import transparent_image, transparent_image_data_url
 from schema import Piece, BitmapImage, Place, SpriteOffset, Sprite
-from test_images import transparent_image, transparent_image_data_url
 
 
 class DummySplitter:

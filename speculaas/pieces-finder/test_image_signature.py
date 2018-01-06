@@ -1,7 +1,7 @@
 import unittest
 
 from image_signature import signature
-from test_images import transparent_image
+from images_for_tests import transparent_image
 
 
 class TestSignature(unittest.TestCase):

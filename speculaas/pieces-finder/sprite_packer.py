@@ -1,3 +1,4 @@
+import logging
 from math import sqrt
 
 import sys
@@ -35,9 +36,9 @@ class SpritePacker:
 
         bounds = self.find_min_bounds(rect_list)
 
-        print("{}: {} rects, bounds={}".format(place_id,
-                                               len(rect_list),
-                                               bounds))
+        logging.info("{}: {} rects, bounds={}".format(place_id,
+                                                      len(rect_list),
+                                                      bounds))
 
         rect_by_id = {}
         for rect in rect_list:
@@ -45,7 +46,6 @@ class SpritePacker:
             rect_by_id[rid] = rect
 
         repacked_place = self.repack_place(place, bounds, rect_by_id)
-        print(repacked_place)
 
         PreComputedLookupSplitter.save_to_dir(repacked_place,
                                               self.packed_dir_name)
@@ -61,9 +61,9 @@ class SpritePacker:
 
         bin_area = area * self.area_expansion
         bin_side_length = int(sqrt(bin_area))
-        print("Using bin of size {} x {} = {}".format(bin_side_length,
-                                                      bin_side_length,
-                                                      bin_area))
+        logging.info("Using bin of size {} x {} = {}".format(bin_side_length,
+                                                             bin_side_length,
+                                                             bin_area))
         packer.add_bin(width=bin_side_length, height=bin_side_length)
         return packer
 
