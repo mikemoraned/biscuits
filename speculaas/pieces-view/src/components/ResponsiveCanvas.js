@@ -1,62 +1,7 @@
 import React, { Component } from 'react';
 import Measure from 'react-measure';
 import ImageBitmapCreator from './ImageBitmapCreator';
-
-const LANDSCAPE = 'landscape';
-const PORTRAIT = 'portrait';
-
-function maxXY(dimensionsList) {
-  const first = dimensionsList[0];
-  const max = {
-    x: first.x + first.width,
-    y: first.y + first.height,
-  };
-  const reducer = (accum, entry) => {
-    return {
-      x: Math.max(accum.x, entry.x + entry.width),
-      y: Math.max(accum.y, entry.y + entry.height),
-    }
-  };
-  return dimensionsList.reduce(reducer, max);
-}
-
-const Renderer = (bgColor) => {
-  return (context, dimensions, place, spriteBitmap) => {
-    context.fillStyle = bgColor;
-    context.fillRect(0, 0, dimensions.width, dimensions.height);
-
-    const bitmapImages = place.pieces.map(p => p.bitmapImage);
-    const max = maxXY(bitmapImages);
-    context.save();
-    context.scale(
-      dimensions.width / max.x,
-      dimensions.height / max.y
-    );
-    context.strokeStyle = 'black';
-    bitmapImages.forEach(bitmapImage => {
-      context.strokeRect(bitmapImage.x, bitmapImage.y, bitmapImage.width, bitmapImage.height);
-    });
-
-    if (spriteBitmap !== null) {
-      place.pieces.forEach(piece => {
-        const bitmapImage = piece.bitmapImage;
-        const spriteOffset = bitmapImage.spriteOffset;
-        context.drawImage(spriteBitmap,
-          spriteOffset.x, spriteOffset.y, bitmapImage.width, bitmapImage.height,
-          bitmapImage.x, bitmapImage.y, bitmapImage.width, bitmapImage.height);
-      });
-    }
-    context.restore();
-
-    context.fillStyle = 'green';
-    context.font = '20px sans-serif';
-    context.fillText(`pieces: ${place.pieces.length}`, 10, dimensions.height - 10);
-  }
-};
-
-const LandscapeRenderer = Renderer('red');
-
-const PortraitRenderer = Renderer('blue');
+import {LANDSCAPE, orientation} from "./Orientation";
 
 class FixedSizeCanvas extends Component {
   constructor(props) {
@@ -86,25 +31,16 @@ class FixedSizeCanvas extends Component {
     this.updateCanvas();
   }
 
-  fetchImages() {
-    if (this.state.spriteBitmap == null) {
-      const {id, sprite} = this.props.place;
-      if (sprite) {
-        console.log("Fetching bitmap for", id);
-        new ImageBitmapCreator()
-          .create(id, sprite.dataURL)
-          .then(bitmap => this.setState({spriteBitmap: bitmap}))
-          .then(() => console.log("Fetched bitmap for", id));
-      }
-    }
-  }
-
   updateCanvas() {
     const context = this.refs.canvas.getContext('2d');
     context.clearRect(0,0, this.state.dimensions.width, this.state.dimensions.height);
     context.save();
-    this.props.rendererFn(context, this.state.dimensions, this.props.place, this.state.spriteBitmap);
+    this.renderCanvas(context, this.state.dimensions);
     context.restore();
+  }
+
+  renderCanvas(context, dimensions) {
+
   }
 
   render() {
@@ -139,56 +75,117 @@ class FixedSizeCanvas extends Component {
   }
 }
 
+function maxXY(dimensionsList) {
+  const first = dimensionsList[0];
+  const max = {
+    x: first.x + first.width,
+    y: first.y + first.height,
+  };
+  const reducer = (accum, entry) => {
+    return {
+      x: Math.max(accum.x, entry.x + entry.width),
+      y: Math.max(accum.y, entry.y + entry.height),
+    }
+  };
+  return dimensionsList.reduce(reducer, max);
+}
+
+class PlaceStretchRenderer extends FixedSizeCanvas {
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      spriteBitmap: null
+    };
+  }
+
+  componentDidMount() {
+    super.componentDidMount();
+    this.fetchImages();
+  }
+
+  componentDidUpdate() {
+    super.componentDidUpdate();
+    this.fetchImages();
+  }
+
+  fetchImages() {
+    if (this.state.spriteBitmap == null) {
+      const {id, sprite} = this.props.place;
+      if (sprite) {
+        console.log("Fetching bitmap for", id);
+        new ImageBitmapCreator()
+          .create(id, sprite.dataURL)
+          .then(bitmap => this.setState({spriteBitmap: bitmap}))
+          .then(() => console.log("Fetched bitmap for", id));
+      }
+    }
+  }
+
+  backgroundColor() {
+    if (orientation(this.props.dimensions) === LANDSCAPE) {
+      return 'red';
+    }
+    else {
+      return 'blue';
+    }
+  }
+
+  renderCanvas(context, dimensions) {
+    context.fillStyle = this.backgroundColor();
+    context.fillRect(0, 0, dimensions.width, dimensions.height);
+
+    const bitmapImages = this.props.place.pieces.map(p => p.bitmapImage);
+    const max = maxXY(bitmapImages);
+    context.save();
+    context.scale(
+      dimensions.width / max.x,
+      dimensions.height / max.y
+    );
+    context.strokeStyle = 'black';
+    bitmapImages.forEach(bitmapImage => {
+      context.strokeRect(bitmapImage.x, bitmapImage.y, bitmapImage.width, bitmapImage.height);
+    });
+
+    if (this.state.spriteBitmap !== null) {
+      this.props.place.pieces.forEach(piece => {
+        const bitmapImage = piece.bitmapImage;
+        const spriteOffset = bitmapImage.spriteOffset;
+        context.drawImage(this.state.spriteBitmap,
+          spriteOffset.x, spriteOffset.y, bitmapImage.width, bitmapImage.height,
+          bitmapImage.x, bitmapImage.y, bitmapImage.width, bitmapImage.height);
+      });
+    }
+    context.restore();
+
+    context.fillStyle = 'green';
+    context.font = '20px sans-serif';
+    context.fillText(`pieces: ${this.props.place.pieces.length}`, 10, dimensions.height - 10);
+  }
+};
+
+
 class ResponsiveCanvas extends Component {
   constructor(props) {
     super(props);
 
     this.state = {
-      orientation: LANDSCAPE,
       dimensions: { width: 100, height: 100 },
     };
 
     this.onResize = this.onResize.bind(this);
-    this.canvasForOrientation = this.canvasForOrientation.bind(this);
   }
 
   onResize(contentRect) {
     const { bounds } = contentRect;
 
     this.setState({
-      orientation: this.orientation(bounds),
       dimensions: bounds
     });
   }
 
-  orientation(dimensions) {
-    if (dimensions.width >= dimensions.height) {
-      return LANDSCAPE;
-    }
-    else {
-      return PORTRAIT;
-    }
-  }
-
-  canvasForOrientation(orientation, dimensions) {
-    if (orientation === LANDSCAPE) {
-      return <FixedSizeCanvas
-        containerDimensions={dimensions}
-        rendererFn={LandscapeRenderer}
-        place={this.props.place}
-      />;
-    }
-    else {
-      return <FixedSizeCanvas
-        containerDimensions={dimensions}
-        rendererFn={PortraitRenderer}
-        place={this.props.place}
-      />;
-    }
-  }
-
   render() {
-    const { orientation, dimensions } = this.state;
+    const { dimensions } = this.state;
 
     return (
       <Measure
@@ -197,7 +194,10 @@ class ResponsiveCanvas extends Component {
       >
         {({ measureRef }) => (
           <div className='CanvasContainer' ref={measureRef}>
-            { this.canvasForOrientation(orientation, dimensions) }
+            <PlaceStretchRenderer
+              containerDimensions={dimensions}
+              place={this.props.place}
+            />
           </div>
         )}
       </Measure>
