@@ -24,10 +24,10 @@ spec:
         resources: 
           limits:
             cpu: 100m
-            memory: 250Mi
+            memory: 100Mi
           requests:
             cpu: 10m
-            memory: 125Mi
+            memory: 50Mi
         ports:
         - name: http
           containerPort: 3000
