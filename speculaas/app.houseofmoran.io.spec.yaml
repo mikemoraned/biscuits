@@ -77,6 +77,7 @@ metadata:
 spec:
   image: kope.io/k8s-1.8-debian-jessie-amd64-hvm-ebs-2017-12-02
   machineType: m3.medium
+  maxPrice: "0.07"
   maxSize: 1
   minSize: 1
   nodeLabels:
