@@ -97,8 +97,8 @@ metadata:
   name: nodes
 spec:
   image: kope.io/k8s-1.8-debian-jessie-amd64-hvm-ebs-2017-12-02
-  machineType: t2.small
-  maxPrice: "0.023"
+  machineType: t2.micro
+  maxPrice: "0.012"
   maxSize: 3
   minSize: 3
   nodeLabels:
