@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { graphql } from 'react-apollo';
 import gql from 'graphql-tag';
 import ResponsiveCanvas from "./ResponsiveCanvas";
+import {CityRenderer} from "./CityRenderer";
 
 const PLACE_QUERY = gql`
 query PlaceQuery($id: String!, $shallowRender: Boolean!) {
@@ -65,7 +66,11 @@ class Place extends Component {
 
     const place = placeQuery.place;
 
-    return <ResponsiveCanvas place={place}/>;
+    return (
+      <ResponsiveCanvas>
+        <CityRenderer backgroundColor={'blue'} place={place} />
+      </ResponsiveCanvas>
+    );
   }
 }
 
