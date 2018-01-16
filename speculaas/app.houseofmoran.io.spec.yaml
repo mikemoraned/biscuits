@@ -70,6 +70,26 @@ spec:
 apiVersion: kops/v1alpha2
 kind: InstanceGroup
 metadata:
+  creationTimestamp: 2018-01-16T23:18:54Z
+  labels:
+    kops.k8s.io/cluster: app.houseofmoran.io
+  name: bastions
+spec:
+  image: kope.io/k8s-1.8-debian-jessie-amd64-hvm-ebs-2017-12-02
+  machineType: t2.micro
+  maxSize: 1
+  minSize: 1
+  nodeLabels:
+    kops.k8s.io/instancegroup: bastions
+  role: Bastion
+  subnets:
+  - us-west-2a
+
+---
+
+apiVersion: kops/v1alpha2
+kind: InstanceGroup
+metadata:
   creationTimestamp: 2018-01-02T18:51:54Z
   labels:
     kops.k8s.io/cluster: app.houseofmoran.io

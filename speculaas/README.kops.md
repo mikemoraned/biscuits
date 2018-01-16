@@ -69,10 +69,12 @@ Choices for this cluster
     export TOPOLOGY=private
     export NETWORKING=flannel-vxlan
     export NODE_SIZE=t2.small
+    export SUBNET=us-west-2a
 
 Create cluster:
     
-    kops create cluster --zones us-west-2a ${NAME} --topology ${TOPOLOGY} --networking ${NETWORKING} --node-size ${NODE_SIZE}
+    kops create cluster --zones ${SUBNET} ${NAME} --topology ${TOPOLOGY} --networking ${NETWORKING} \
+    --node-size ${NODE_SIZE} --bastion
     kops update cluster ${NAME} --yes
     
 ... then wait a few minutes to check if it is working (5 mins or more)
@@ -95,7 +97,19 @@ Create cluster:
     
 based on https://github.com/kubernetes/dashboard/wiki/Accessing-Dashboard---1.7.X-and-above, the ui can then be
 accessed at http://localhost:8001/api/v1/namespaces/kube-system/services/https:kubernetes-dashboard:/proxy/
-    
+   
+## Bastion access
+
+Following https://github.com/kubernetes/kops/blob/master/docs/bastion.md :
+
+    ssh -A admin@<bastion_elb_a_record>
+    ssh admin@<master_ip>
+
+or:
+
+    ssh -A admin@<bastion_elb_a_record>
+    ssh admin@<node_ip>
+
 ## External DNS
 
 Note: following requires assigning the same IAM permissions to all nodes; https://github.com/jtblin/kube2iam may
