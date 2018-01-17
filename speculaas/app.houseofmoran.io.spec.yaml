@@ -124,5 +124,7 @@ spec:
   nodeLabels:
     kops.k8s.io/instancegroup: nodes
   role: Node
+  rootVolumeSize: 32
+  rootVolumeType: gp2
   subnets:
   - us-west-2a
