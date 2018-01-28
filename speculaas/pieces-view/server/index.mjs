@@ -7,37 +7,44 @@ const app = express();
 const port = process.argv[2];
 const graphqlServerUrl = process.argv[3];
 
-const graphqlContactable = (serverURL) => new Promise((resolve, reject) => {
+const graphqlContactable = (serverURL, context) => new Promise((resolve, reject) => {
+  const logPrefix = `graphql (${context})`;
   const headers = new Headers();
   headers.append("Accept", "text/html")
   const healthcheckURL = serverURL + "graphql";
   fetch(healthcheckURL, { headers }).then((response) => {
     if (response.ok) {
-      const message = `graphql: OK, URL: ${healthcheckURL}`;
+      const message = `${logPrefix}: OK, URL: ${healthcheckURL}`;
       resolve(message);
     }
     else {
-      const message = `graphql: non OK status, ${response.status}, URL: ${healthcheckURL}`;
+      const message = `${logPrefix}: non OK status, ${response.status}, URL: ${healthcheckURL}`;
       reject(message);
     }
   }).catch((error) => {
-    const message = `graphql: Error, URL: ${healthcheckURL}`;
+    const message = `${logPrefix}: Error, URL: ${healthcheckURL}`;
     reject(message);
   });
 });
 
-app.use('/graphql', proxy({target: graphqlServerUrl, changeOrigin: true}));
-app.get('/healthcheck/alive', (req, res) => res.send("Alive"));
-app.get('/healthcheck/ready', (req, res) => {
-  graphqlContactable(graphqlServerUrl)
+const healthcheckResponse = (promise, response, resultForSuccess) => {
+  promise
     .then((message) => {
       console.log(message);
-      res.send("Ready");
+      response.send(resultForSuccess);
     })
     .catch((message) => {
       console.error(message);
-      res.status(500).send(message);
-    })
+      response.status(500).send(message);
+    });
+};
+
+app.use('/graphql', proxy({target: graphqlServerUrl, changeOrigin: true}));
+app.get('/healthcheck/alive', (req, res) => {
+  healthcheckResponse(graphqlContactable(graphqlServerUrl, "liveness"), res, "Alive");
+});
+app.get('/healthcheck/ready', (req, res) => {
+  healthcheckResponse(graphqlContactable(graphqlServerUrl, "readyness"), res, "Ready");
 });
 app.use('/', express.static('../build'));
 
