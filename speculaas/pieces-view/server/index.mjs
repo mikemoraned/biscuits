@@ -22,7 +22,7 @@ const graphqlContactable = (serverURL, context) => new Promise((resolve, reject)
       reject(message);
     }
   }).catch((error) => {
-    const message = `${logPrefix}: Error, URL: ${healthcheckURL}`;
+    const message = `${logPrefix}: Error, URL: ${healthcheckURL}, error: ${error}`;
     reject(message);
   });
 });
