@@ -5,20 +5,17 @@ import ResponsiveCanvas from "./ResponsiveCanvas";
 import {CityRenderer} from "./CityRenderer";
 
 const PLACE_QUERY = gql`
-query PlaceQuery($id: String!, $shallowRender: Boolean!) {
+query PlaceQuery($id: String!) {
   place: placeById(id: $id) {
     id
-    sprite @skip(if: $shallowRender) {
-      dataURL
-    }
     pieces {
       id
-      bitmapImage {
+      b: bitmapImage {
         x
         y
-        width
-        height,
-        spriteOffset {
+        w: width
+        h: height,
+        s: spriteOffset {
           x
           y
         }
@@ -27,6 +24,23 @@ query PlaceQuery($id: String!, $shallowRender: Boolean!) {
   }
 }
 `;
+
+function expandShortNames(place) {
+  return {
+    ...place,
+    pieces: place.pieces.map((piece) => (
+      {
+        ...piece,
+        bitmapImage: {
+          ...piece.b,
+          width: piece.b.w,
+          height: piece.b.h,
+          spriteOffset: piece.b.s
+        }
+      }
+    ))
+  };
+}
 
 class Place extends Component {
 
@@ -68,7 +82,7 @@ class Place extends Component {
 
     return (
       <ResponsiveCanvas>
-        <CityRenderer backgroundColor={'blue'} place={place} />
+        <CityRenderer backgroundColor={'blue'} place={expandShortNames(place)} />
       </ResponsiveCanvas>
     );
   }

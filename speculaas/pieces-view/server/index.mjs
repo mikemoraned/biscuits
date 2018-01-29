@@ -1,6 +1,7 @@
 import express from 'express';
 import proxy from 'http-proxy-middleware';
 import fetch from 'isomorphic-fetch';
+import compression from 'compression';
 
 const app = express();
 
@@ -38,6 +39,8 @@ const healthcheckResponse = (promise, response, resultForSuccess) => {
       response.status(500).send(message);
     });
 };
+
+app.use(compression());
 
 app.use('/graphql', proxy({target: graphqlServerUrl, changeOrigin: true}));
 app.get('/healthcheck/alive', (req, res) => {
