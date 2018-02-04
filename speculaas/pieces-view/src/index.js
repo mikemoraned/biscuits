@@ -9,14 +9,14 @@ import { InMemoryCache } from 'apollo-cache-inmemory';
 
 const httpLink = new HttpLink({ uri: '/graphql' });
 const client = new ApolloClient({
-    link: httpLink,
-    cache: new InMemoryCache(),
-    connectToDevTools: true
+  link: httpLink,
+  cache: new InMemoryCache(),
+  connectToDevTools: true
 })
 
 ReactDOM.render(
-    <ApolloProvider client={client}>
-        <App />
-    </ApolloProvider>,
-    document.getElementById('root'));
+  <ApolloProvider client={client}>
+    <App />
+  </ApolloProvider>,
+  document.getElementById('root'));
 
