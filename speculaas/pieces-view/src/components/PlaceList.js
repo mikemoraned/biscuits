@@ -30,7 +30,7 @@ class PlaceList extends Component {
         <div className="PlaceList">
           {
             this.props.placeIds.map(placeId => {
-              return <Place key={placeId} id={placeId}
+              return <Place key={placeId} id={placeId} transitionProportion={this.props.transitionProportion}
                             shallowRender={this.shouldShallowRender()} onLoad={this.onPlaceLoad}/>
             })
           }
