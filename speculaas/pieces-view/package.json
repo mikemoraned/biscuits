@@ -12,7 +12,8 @@
     "react-apollo": "^2.0.4",
     "react-dom": "^16.2.0",
     "react-measure": "^2.0.2",
-    "react-scripts": "1.0.17"
+    "react-scripts": "1.0.17",
+    "react-visibility-sensor": "^3.11.0"
   },
   "scripts": {
     "analyze": "source-map-explorer build/static/js/main.*",

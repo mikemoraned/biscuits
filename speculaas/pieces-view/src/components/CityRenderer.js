@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { interpolateRgb } from 'd3-interpolate';
+import VisibilitySensor from 'react-visibility-sensor';
 
 function maxXY(list, boxFn) {
   const first = boxFn(list[0]);
@@ -28,6 +29,13 @@ export class CityRenderer extends Component {
     };
 
     this.backgroundColorInterpolator = interpolateRgb('red', props.backgroundColor);
+    this.onVisibilityChange = this.onVisibilityChange.bind(this);
+  }
+
+  onVisibilityChange(isVisible) {
+    this.setState({
+      visible: isVisible
+    });
   }
 
   backgroundColor() {
@@ -67,11 +75,14 @@ export class CityRenderer extends Component {
       context.clearRect(0,0, this.props.dimensions.width, this.props.dimensions.height);
       this.renderBackground(context);
 
-      if (this.props.dimensions.width >= this.props.dimensions.height) {
-        this.renderLandscapeLayout(context);
-      }
-      else {
-        this.renderPortraitLayout(context);
+      console.log(`is visible: ${this.state.visible}`);
+      if (this.state.visible) {
+        if (this.props.dimensions.width >= this.props.dimensions.height) {
+          this.renderLandscapeLayout(context);
+        }
+        else {
+          this.renderPortraitLayout(context);
+        }
       }
     });
   }
@@ -154,6 +165,10 @@ export class CityRenderer extends Component {
   }
 
   render() {
-    return <canvas ref="canvas" width={this.props.dimensions.width} height={this.props.dimensions.height}/>;
+    return (
+      <VisibilitySensor onChange={this.onVisibilityChange} partialVisibility={true} scrollCheck={true}>
+        <canvas ref="canvas" width={this.props.dimensions.width} height={this.props.dimensions.height}/>
+      </VisibilitySensor>
+    );
   }
 }
