@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { interpolateRgb } from 'd3-interpolate';
 
 function maxXY(list, boxFn) {
   const first = boxFn(list[0]);
@@ -25,6 +26,12 @@ export class CityRenderer extends Component {
     this.state = {
       spriteBitmap: null
     };
+
+    this.backgroundColorInterpolator = interpolateRgb('red', props.backgroundColor);
+  }
+
+  backgroundColor() {
+    return this.backgroundColorInterpolator(this.props.transitionProportion);
   }
 
   componentDidMount() {
@@ -74,7 +81,7 @@ export class CityRenderer extends Component {
 
   renderBackground(context) {
     this.saveRestore(context, (context) => {
-      context.fillStyle = this.props.backgroundColor;
+      context.fillStyle = this.backgroundColor();
       context.fillRect(0, 0, this.props.dimensions.width, this.props.dimensions.height);
     });
   }

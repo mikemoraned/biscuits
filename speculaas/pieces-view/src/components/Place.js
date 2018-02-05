@@ -82,7 +82,8 @@ class Place extends Component {
 
     return (
       <ResponsiveCanvas>
-        <CityRenderer backgroundColor={'blue'} place={expandShortNames(place)} />
+        <CityRenderer transitionProportion={this.props.transitionProportion}
+                      backgroundColor={'blue'} place={expandShortNames(place)} />
       </ResponsiveCanvas>
     );
   }
