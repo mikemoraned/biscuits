@@ -25,7 +25,6 @@ export class CityRenderer extends Component {
     this.state = {
       spriteBitmap: null
     };
-
   }
 
   componentDidMount() {
@@ -38,6 +37,8 @@ export class CityRenderer extends Component {
 
   updateCanvas() {
     const context = this.refs.canvas.getContext('2d');
+    context.save();
+
     context.clearRect(0,0, this.props.dimensions.width, this.props.dimensions.height);
     this.renderBackground(context);
 
@@ -47,6 +48,8 @@ export class CityRenderer extends Component {
     else {
       this.renderPortraitLayout(context);
     }
+
+    context.restore();
   }
 
   renderPortraitLayout(context) {
