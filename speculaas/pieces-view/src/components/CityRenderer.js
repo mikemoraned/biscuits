@@ -35,11 +35,24 @@ export class CityRenderer extends Component {
   }
 
   componentDidMount() {
-    this.updateCanvas();
+    this.doInAnimationFrame(() => {
+      this.updateCanvas();
+    });
   }
 
   componentDidUpdate() {
-    this.updateCanvas();
+    this.doInAnimationFrame(() => {
+      this.updateCanvas();
+    });
+  }
+
+  doInAnimationFrame(fn) {
+    if (window.requestAnimationFrame) {
+      window.requestAnimationFrame(fn);
+    }
+    else {
+      fn();
+    }
   }
 
   saveRestore(context, fn) {
