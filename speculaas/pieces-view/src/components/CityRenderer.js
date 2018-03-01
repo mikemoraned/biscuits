@@ -91,7 +91,7 @@ export class CityRenderer extends Component {
     this.saveRestore(context, (context) => {
       this.renderPiecesInCityPosition(context, {width: 1.0, height: 0.5}, 'black');
       context.translate(0, this.props.dimensions.height / 2);
-      this.renderPiecesInPackedPosition(context, {width: 1.0, height: 0.5}, 'white');
+      this.renderPiecesInTransitionedPosition(context, {width: 1.0, height: 0.5}, 'white');
     });
   }
 
@@ -99,7 +99,7 @@ export class CityRenderer extends Component {
     this.saveRestore(context, (context) => {
       this.renderPiecesInCityPosition(context, {width: 0.5, height: 1.0}, 'black');
       context.translate(this.props.dimensions.width / 2, 0);
-      this.renderPiecesInPackedPosition(context, {width: 0.5, height: 1.0}, 'white');
+      this.renderPiecesInTransitionedPosition(context, {width: 0.5, height: 1.0}, 'white');
     });
   }
 
@@ -136,31 +136,50 @@ export class CityRenderer extends Component {
     });
   }
 
-  renderPiecesInPackedPosition(context, scaleProportions, foregroundColor) {
+  renderPiecesInTransitionedPosition(context, scaleProportions, foregroundColor) {
     this.saveRestore(context, (context) => {
       const bitmapImages = this.props.place.pieces.map(p => p.bitmapImage);
-      const max = maxXY(bitmapImages, (bitmapImage) => ({
+      const bitmapImageMax = maxXY(bitmapImages, (bitmapImage) => ({
+        x: bitmapImage.x,
+        y: bitmapImage.y,
+        width: bitmapImage.width,
+        height: bitmapImage.height
+      }));
+      const spriteOffsetMax = maxXY(bitmapImages, (bitmapImage) => ({
         x: bitmapImage.spriteOffset.x,
         y: bitmapImage.spriteOffset.y,
         width: bitmapImage.width,
         height: bitmapImage.height
       }));
       this.saveRestore(context, (context) => {
-        context.scale(
-          scaleProportions.width * this.props.dimensions.width / max.x,
-          scaleProportions.height * this.props.dimensions.height / max.y
-        );
         context.strokeStyle = foregroundColor;
+        context.lineWidth = 2;
+        const bT = (1.0 - this.props.transitionProportion);
+        const sT = this.props.transitionProportion;
+        context.scale(
+          scaleProportions.width
+          * ((bT * (this.props.dimensions.width / bitmapImageMax.x))
+             + (sT * (this.props.dimensions.width / spriteOffsetMax.x))),
+
+          scaleProportions.height
+          * ((bT * (this.props.dimensions.height / bitmapImageMax.y))
+             + (sT * (this.props.dimensions.height / spriteOffsetMax.y))),
+        );
         this.props.place.pieces.forEach(piece => {
           const bitmapImage = piece.bitmapImage;
           const spriteOffset = bitmapImage.spriteOffset;
-          context.strokeRect(spriteOffset.x, spriteOffset.y, bitmapImage.width, bitmapImage.height);
+
+          context.strokeRect((bT * bitmapImage.x) + (sT * spriteOffset.x),
+            (bT * bitmapImage.y) + (sT * spriteOffset.y),
+            bitmapImage.width,
+            bitmapImage.height);
         });
       });
 
       context.fillStyle = 'green';
       context.font = '20px sans-serif';
-      context.fillText(`feep pieces: ${this.props.place.pieces.length}`, 10, this.props.dimensions.height - 10);
+      context.fillText(`feep pieces: ${this.props.place.pieces.length}, t: ${this.props.transitionProportion}`,
+        10, this.props.dimensions.height - 10);
     });
   }
 

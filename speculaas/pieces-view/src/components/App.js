@@ -25,11 +25,13 @@ class App extends Component {
   render() {
     return (
       <div className="App">
-        <input style={{ width: "80%" }}
+        <input style={{ width: "90%", position: "sticky", top: "10px" }}
                type="range" min="0" max="100" step="1"
                value={this.state.t * 100} onChange={this.handleTransitionProportionChange}></input>
         <PlaceList transitionProportion={this.state.t}
                    placeIds={['edinburgh', 'jerusalem', 'au', 'newyork', 'budapest']}/>
+        {/*<PlaceList transitionProportion={this.state.t}*/}
+                   {/*placeIds={['newyork']}/>*/}
         {/*<PlaceList transitionProportion={this.state.t}*/}
                    {/*placeIds={['edinburgh']}/>*/}
         {/*<PlaceList placeIds={['edinburgh']}/>*/}
