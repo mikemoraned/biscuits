@@ -40,7 +40,7 @@ spec:
     legacy: false
   kubernetesApiAccess:
   - 0.0.0.0/0
-  kubernetesVersion: 1.8.4
+  kubernetesVersion: 1.8.6
   masterInternalName: api.internal.app.houseofmoran.io
   masterPublicName: api.app.houseofmoran.io
   networkCIDR: 172.20.0.0/16
@@ -75,7 +75,7 @@ metadata:
     kops.k8s.io/cluster: app.houseofmoran.io
   name: bastions
 spec:
-  image: kope.io/k8s-1.8-debian-jessie-amd64-hvm-ebs-2017-12-02
+  image: kope.io/k8s-1.8-debian-jessie-amd64-hvm-ebs-2018-01-14
   machineType: t2.micro
   maxSize: 1
   minSize: 1
@@ -95,7 +95,7 @@ metadata:
     kops.k8s.io/cluster: app.houseofmoran.io
   name: master-us-west-2a
 spec:
-  image: kope.io/k8s-1.8-debian-jessie-amd64-hvm-ebs-2017-12-02
+  image: kope.io/k8s-1.8-debian-jessie-amd64-hvm-ebs-2018-01-14
   machineType: m3.medium
   maxPrice: "0.07"
   maxSize: 1
@@ -116,7 +116,7 @@ metadata:
     kops.k8s.io/cluster: app.houseofmoran.io
   name: nodes
 spec:
-  image: kope.io/k8s-1.8-debian-jessie-amd64-hvm-ebs-2017-12-02
+  image: kope.io/k8s-1.8-debian-jessie-amd64-hvm-ebs-2018-01-14
   machineType: t2.micro
   maxPrice: "0.012"
   maxSize: 3
