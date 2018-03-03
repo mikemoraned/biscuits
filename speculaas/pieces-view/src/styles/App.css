@@ -30,6 +30,26 @@
     width: 90%;
     margin-right: 5%;
   }
+
+  .App .TransitionControl_top {
+    display: none;
+  }
+
+  .App .TransitionControl_bottom {
+    position: fixed;
+    left: 5px;
+    right: 5px;
+    bottom: 10px;
+    height: 20px;
+    padding-left: 10px;
+    padding-right: 15px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    border: 1px solid;
+    border-radius: 5px;
+    background-color: white;
+    opacity: 0.8;
+  }
 }
 
 @media (orientation: landscape) {
@@ -41,6 +61,27 @@
 
   .App .PlaceList .Place {
     flex-basis: 450px;
+  }
+
+  .App .TransitionControl_top {
+    width: 30%;
+    position: sticky;
+    top: 10px;
+
+    left: 5px;
+    height: 20px;
+    padding-left: 10px;
+    padding-right: 15px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    border: 1px solid;
+    border-radius: 5px;
+    background-color: white;
+    opacity: 0.8;
+  }
+
+  .App .TransitionControl_bottom {
+    display: none;
   }
 }
 
