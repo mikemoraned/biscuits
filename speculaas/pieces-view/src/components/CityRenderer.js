@@ -75,7 +75,6 @@ export class CityRenderer extends Component {
       context.clearRect(0,0, this.props.dimensions.width, this.props.dimensions.height);
       this.renderBackground(context);
 
-      console.log(`is visible: ${this.state.visible}`);
       if (this.state.visible) {
         if (this.props.dimensions.width >= this.props.dimensions.height) {
           this.renderLandscapeLayout(context);

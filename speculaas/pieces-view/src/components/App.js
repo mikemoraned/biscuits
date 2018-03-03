@@ -19,7 +19,6 @@ class App extends Component {
     this.setState({
       t: (value / 100.0)
     });
-    console.log(`Value: ${this.state.t}`);
   }
 
   render() {
