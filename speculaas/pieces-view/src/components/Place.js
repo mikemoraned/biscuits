@@ -26,6 +26,7 @@ query PlaceQuery($id: String!) {
 `;
 
 function expandShortNames(place) {
+  console.log("expandShortNames");
   return {
     ...place,
     pieces: place.pieces.map((piece) => (
@@ -43,22 +44,6 @@ function expandShortNames(place) {
 }
 
 class Place extends Component {
-
-  constructor(props) {
-    super(props);
-
-    this.prevLoaded = false;
-  }
-
-  componentDidUpdate(prevProps) {
-    if (!this.prevLoaded) {
-      const loaded = !(prevProps.placeQuery.loading || prevProps.placeQuery.error);
-      if (loaded) {
-        this.prevLoaded = loaded;
-        this.props.onLoad();
-      }
-    }
-  }
 
   render() {
     return (
