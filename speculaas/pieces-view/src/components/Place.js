@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { graphql } from 'react-apollo';
+import { withApollo } from 'react-apollo';
 import gql from 'graphql-tag';
 import ResponsiveCanvas from "./ResponsiveCanvas";
 import {CityRenderer} from "./CityRenderer";
@@ -45,35 +45,56 @@ function expandShortNames(place) {
 
 class Place extends Component {
 
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      place: null,
+      status: "Loading"
+    };
+  }
+
+  componentDidMount() {
+    this.props.client.query({
+      query: PLACE_QUERY,
+      variables: {
+        id: this.props.id
+      }
+    }).then((result) => {
+      this.setState({
+        place: expandShortNames(result.data.place),
+        status: "Loaded"
+      });
+    }).catch((error) => {
+      console.log(error);
+      this.setState({
+        status: "Errored"
+      });
+    });
+  }
+
   render() {
     return (
       <div className="Place">
         <h1>{ this.props.id }</h1>
-        {this.renderPieces(this.props.placeQuery)}
+        {this.renderPieces()}
       </div>
     );
   }
 
-  renderPieces(placeQuery) {
-    if (placeQuery.loading) {
-      return <div>Loading</div>
+  renderPieces() {
+    if (this.state.status !== "Loaded") {
+      return <div>{this.state.status}</div>;
     }
-
-    if (placeQuery.error) {
-      return <div>Error</div>
+    else {
+      return (
+        <ResponsiveCanvas>
+          <CityRenderer transitionProportion={this.props.transitionProportion}
+                        backgroundColor={'blue'} place={this.state.place} />
+        </ResponsiveCanvas>
+      );
     }
-
-    const place = placeQuery.place;
-
-    return (
-      <ResponsiveCanvas>
-        <CityRenderer transitionProportion={this.props.transitionProportion}
-                      backgroundColor={'blue'} place={expandShortNames(place)} />
-      </ResponsiveCanvas>
-    );
   }
 }
 
-export default graphql(PLACE_QUERY, {
-  name: 'placeQuery'
-}) ( Place );
+export default withApollo( Place );
