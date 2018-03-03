@@ -24,10 +24,6 @@ export class CityRenderer extends Component {
   constructor(props) {
     super(props);
 
-    this.state = {
-      spriteBitmap: null
-    };
-
     this.backgroundColorInterpolator = interpolateRgb('red', props.backgroundColor);
     this.onVisibilityChange = this.onVisibilityChange.bind(this);
   }
@@ -127,6 +123,16 @@ export class CityRenderer extends Component {
         bitmapImages.forEach(bitmapImage => {
           context.strokeRect(bitmapImage.x, bitmapImage.y, bitmapImage.width, bitmapImage.height);
         });
+
+        if (this.props.spriteBitmap !== null) {
+          this.props.place.pieces.forEach(piece => {
+            const bitmapImage = piece.bitmapImage;
+            const spriteOffset = bitmapImage.spriteOffset;
+            context.drawImage(this.props.spriteBitmap,
+              spriteOffset.x, spriteOffset.y, bitmapImage.width, bitmapImage.height,
+              bitmapImage.x, bitmapImage.y, bitmapImage.width, bitmapImage.height);
+          });
+        }
       });
 
       context.fillStyle = 'green';
@@ -168,10 +174,18 @@ export class CityRenderer extends Component {
           const bitmapImage = piece.bitmapImage;
           const spriteOffset = bitmapImage.spriteOffset;
 
-          context.strokeRect((bT * bitmapImage.x) + (sT * spriteOffset.x),
-            (bT * bitmapImage.y) + (sT * spriteOffset.y),
-            bitmapImage.width,
-            bitmapImage.height);
+          const x = (bT * bitmapImage.x) + (sT * spriteOffset.x);
+          const y = (bT * bitmapImage.y) + (sT * spriteOffset.y);
+
+          if (this.props.spriteBitmap !== null) {
+            const bitmapImage = piece.bitmapImage;
+            const spriteOffset = bitmapImage.spriteOffset;
+            context.drawImage(this.props.spriteBitmap,
+              spriteOffset.x, spriteOffset.y, bitmapImage.width, bitmapImage.height,
+              x, y, bitmapImage.width, bitmapImage.height);
+          }
+
+          context.strokeRect(x, y, bitmapImage.width, bitmapImage.height);
         });
       });
 
