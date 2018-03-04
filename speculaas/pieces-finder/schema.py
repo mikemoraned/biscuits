@@ -6,6 +6,44 @@ from PIL import Image
 from image_signature import signature
 
 
+class Layout(graphene.ObjectType):
+    id = graphene.ID()
+
+    def __eq__(self, other):
+        if isinstance(self, other.__class__):
+            return self.id == other.id
+        return False
+
+    def __repr__(self):
+        return self.__str__()
+
+    def __str__(self):
+        return "Layout(id={})".format(
+            self.id
+        )
+
+
+class LayoutOffset(graphene.ObjectType):
+    x = graphene.Int()
+    y = graphene.Int()
+    layout = graphene.Field(Layout)
+
+    def __eq__(self, other):
+        if isinstance(self, other.__class__):
+            return self.x == other.x \
+                   and self.y == other.y \
+                   and self.layout == other.layout
+        return False
+
+    def __repr__(self):
+        return self.__str__()
+
+    def __str__(self):
+        return "LayoutOffset(x={},y={},layout={})".format(
+            self.x, self.y, self.layout
+        )
+
+
 class Sprite(graphene.ObjectType):
     data_url = graphene.String(name='dataURL')
 
@@ -53,6 +91,7 @@ class Sprite(graphene.ObjectType):
             self.signature
         )
 
+
 class SpriteOffset(graphene.ObjectType):
     x = graphene.Int()
     y = graphene.Int()
@@ -78,6 +117,18 @@ class BitmapImage(graphene.ObjectType):
     width = graphene.Int()
     height = graphene.Int()
     sprite_offset = graphene.Field(SpriteOffset)
+    layout_offset = graphene.Field(LayoutOffset, id=graphene.String())
+
+    def resolve_layout_offset(self, info, id):
+        if id == 'sprite':
+            return LayoutOffset(x=self.sprite_offset.x,
+                                y=self.sprite_offset.y,
+                                layout=Layout(id='sprite'))
+        else:
+            None
+
+    def available_layouts(self):
+        return [Layout(id='sprite')]
 
     def __eq__(self, other):
         if isinstance(self, other.__class__):
@@ -120,20 +171,30 @@ class Place(graphene.ObjectType):
     id = graphene.ID()
     sprite = graphene.Field(Sprite)
     pieces = graphene.Field(graphene.List(Piece))
+    layouts = graphene.Field(graphene.List(Layout))
+
+    def resolve_layouts(self, info):
+        layouts={}
+        for piece in self.pieces:
+            for layout in piece.bitmap_image.available_layouts():
+                layouts[layout.id] = layout
+
+        return list(layouts.values())
 
     def __eq__(self, other):
         if isinstance(self, other.__class__):
             return self.id == other.id \
                    and self.sprite == other.sprite \
-                   and self.pieces == self.pieces
+                   and self.pieces == self.pieces \
+                   and self.layouts == self.layouts
         return False
 
     def __repr__(self):
         return self.__str__()
 
     def __str__(self):
-        return "Place(id={},sprite={},pieces={})".format(
-            self.id, self.sprite, self.pieces
+        return "Place(id={},sprite={},pieces={},layouts={})".format(
+            self.id, self.sprite, self.pieces, self.layouts
         )
 
 

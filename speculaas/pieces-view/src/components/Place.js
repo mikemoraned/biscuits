@@ -6,11 +6,14 @@ import {CityRenderer} from "./CityRenderer";
 import ImageBitmapCreator from "./ImageBitmapCreator";
 
 const PLACE_QUERY = gql`
-query PlaceQuery($id: String!, $loadSpriteData: Boolean!) {
+query PlaceQuery($id: String!, $loadSpriteData: Boolean!, $selectedLayoutId: String!) {
   place: placeById(id: $id) {
     id
     sprite @include(if: $loadSpriteData) {
       dataURL
+    }
+    layouts {
+      id
     }
     pieces {
       id
@@ -20,6 +23,10 @@ query PlaceQuery($id: String!, $loadSpriteData: Boolean!) {
         w: width
         h: height,
         s: spriteOffset {
+          x
+          y
+        }
+        l: layoutOffset(id: $selectedLayoutId) {
           x
           y
         }
@@ -39,7 +46,8 @@ function expandShortNames(place) {
           ...piece.b,
           width: piece.b.w,
           height: piece.b.h,
-          spriteOffset: piece.b.s
+          spriteOffset: piece.b.s,
+          layoutOffset: piece.b.l
         }
       }
     ))
@@ -53,12 +61,19 @@ class Place extends Component {
 
     this.state = {
       place: null,
+      selectedLayoutId: "sprite",
       spriteBitmap: null,
       status: "Loading"
     };
+
+    this.handleSelectedLayoutChange = this.handleSelectedLayoutChange.bind(this);
   }
 
   componentDidMount() {
+    this.fetch();
+  }
+
+  fetch() {
     const handleError = (error) => {
       console.log(error);
       this.setState({
@@ -71,10 +86,15 @@ class Place extends Component {
         query: PLACE_QUERY,
         variables: {
           id: this.props.id,
+          selectedLayoutId: this.state.selectedLayoutId,
           ...variables
         }
       });
     };
+
+    this.setState({
+      status: "Loading"
+    });
 
     query({loadSpriteData: false}).then((result) => {
       this.setState({
@@ -93,13 +113,37 @@ class Place extends Component {
     }).catch(handleError);
   }
 
+  handleSelectedLayoutChange(event) {
+    const id = event.target.value;
+    this.setState({
+      selectedLayoutId: id
+    });
+    this.fetch();
+  }
+
   render() {
     return (
       <div className="Place">
         <h1>{ this.props.id }</h1>
+        {this.renderLayoutChoice()}
         {this.renderPieces()}
       </div>
     );
+  }
+
+  renderLayoutChoice() {
+    if (this.state.status !== "Loaded") {
+      return <div></div>;
+    }
+    else {
+      return (
+        <select value={this.state.selectedLayoutId} onChange={this.handleSelectedLayoutChange}>
+          { this.state.place.layouts.map((layout) => (
+            <option value={layout.id}>{layout.id} Layout</option>
+          ))}
+        </select>
+      );
+    }
   }
 
   renderPieces() {

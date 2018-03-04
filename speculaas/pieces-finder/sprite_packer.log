@@ -1,0 +1,9 @@
+INFO:root:Using 2/<class 'rectpack.maxrects.MaxRectsBssf'>/<function <lambda> at 0x10b5a1d90> for edinburgh
+INFO:root:loaded 5 ids from ./precomputed
+INFO:root:Using bin of size 1736 x 1736 = 3014271.0
+INFO:root:edinburgh: 147 rects, bounds=(1736, 1282)
+INFO:root:saved image to ./precomputed_repacked/edinburgh.label_sprites.png
+INFO:root:saved 147 pieces to ./precomputed_repacked/edinburgh.labels.json
+INFO:root:Using 2/<class 'rectpack.maxrects.MaxRectsBssf'>/<function <lambda> at 0x10b5a1d90> for au
+INFO:root:loaded 5 ids from ./precomputed
+INFO:root:Using bin of size 1056 x 1056 = 1115992.5

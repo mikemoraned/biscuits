@@ -34,7 +34,7 @@ class App extends Component {
     super(props);
 
     this.state = {
-      t: 0
+      t: 0.5
     };
 
     this.handleTransitionProportionChange = this.handleTransitionProportionChange.bind(this);
