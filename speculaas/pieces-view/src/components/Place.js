@@ -70,38 +70,38 @@ class Place extends Component {
   }
 
   componentDidMount() {
-    this.fetch();
+    this.fetch(this.state.selectedLayoutId);
   }
 
-  fetch() {
-    const handleError = (error) => {
-      console.log(error);
-      this.setState({
-        status: "Errored"
-      });
-    };
+  handleFetchError(error) {
+    console.log(error);
+    this.setState({
+      status: "Errored"
+    });
+  }
 
-    const query = (variables) => {
-      return this.props.client.query({
-        query: PLACE_QUERY,
-        variables: {
-          id: this.props.id,
-          selectedLayoutId: this.state.selectedLayoutId,
-          ...variables
-        }
-      });
-    };
+  query(variables) {
+    return this.props.client.query({
+      query: PLACE_QUERY,
+      variables: {
+        id: this.props.id,
+        selectedLayoutId: this.state.selectedLayoutId,
+        ...variables
+      }
+    });
+  }
 
+  fetch(layoutId) {
     this.setState({
       status: "Loading"
     });
 
-    query({loadSpriteData: false}).then((result) => {
+    this.query({loadSpriteData: false, selectedLayoutId: layoutId}).then((result) => {
       this.setState({
         place: expandShortNames(result.data.place),
         status: "Loaded"
       });
-      query({loadSpriteData: true}).then((result) => {
+      this.query({loadSpriteData: true, selectedLayoutId: layoutId}).then((result) => {
         new ImageBitmapCreator()
           .create(this.props.id, result.data.place.sprite.dataURL)
           .then((spriteBitmap) => {
@@ -109,8 +109,8 @@ class Place extends Component {
               spriteBitmap
             });
           });
-      }).catch(handleError);
-    }).catch(handleError);
+      }).catch(this.handleFetchError);
+    }).catch(this.handleFetchError);
   }
 
   handleSelectedLayoutChange(event) {
@@ -118,7 +118,7 @@ class Place extends Component {
     this.setState({
       selectedLayoutId: id
     });
-    this.fetch();
+    this.fetch(id);
   }
 
   render() {
@@ -139,7 +139,7 @@ class Place extends Component {
       return (
         <select value={this.state.selectedLayoutId} onChange={this.handleSelectedLayoutChange}>
           { this.state.place.layouts.map((layout) => (
-            <option value={layout.id}>{layout.id} Layout</option>
+            <option key={layout.id} value={layout.id}>{layout.id} Layout</option>
           ))}
         </select>
       );

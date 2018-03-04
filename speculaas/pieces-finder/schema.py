@@ -1,4 +1,5 @@
 import base64
+import random
 
 import graphene
 import io
@@ -125,10 +126,15 @@ class BitmapImage(graphene.ObjectType):
                                 y=self.sprite_offset.y,
                                 layout=Layout(id='sprite'))
         else:
-            None
+            if id == 'random':
+                return LayoutOffset(x=random.randint(0, self.sprite_offset.x),
+                                    y=random.randint(0, self.sprite_offset.y),
+                                    layout=Layout(id='random'))
+            else:
+                None
 
     def available_layouts(self):
-        return [Layout(id='sprite')]
+        return [Layout(id='sprite'), Layout(id='random')]
 
     def __eq__(self, other):
         if isinstance(self, other.__class__):
