@@ -158,7 +158,7 @@ export class CityRenderer extends Component {
       }));
       this.saveRestore(context, (context) => {
         context.strokeStyle = foregroundColor;
-        context.lineWidth = 2;
+        context.lineWidth = 0.01 + ((2.0 - 0.01) * Math.sin(this.props.transitionProportion * Math.PI));
         const bT = (1.0 - this.props.transitionProportion);
         const sT = this.props.transitionProportion;
         context.scale(
