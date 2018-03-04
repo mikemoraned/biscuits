@@ -23,7 +23,8 @@ query PlaceQuery($id: String!, $loadSpriteData: Boolean!) {
           x
           y
         }
-        l: layoutOffset(id: "sprite_offset") {
+        l: layoutOffset(id: "BNF/GuillotineBafLas/SORT_AREA") {
+          id
           x
           y
         }
@@ -34,7 +35,7 @@ query PlaceQuery($id: String!, $loadSpriteData: Boolean!) {
 `;
 
 function expandShortNames(place) {
-  return {
+  const expanded = {
     ...place,
     pieces: place.pieces.map((piece) => (
       {
@@ -49,6 +50,12 @@ function expandShortNames(place) {
       }
     ))
   };
+  expanded.pieces.forEach((piece) => {
+    if (piece.bitmapImage.layoutOffset == null) {
+      console.dir(piece);
+    }
+  });
+  return expanded;
 }
 
 class Place extends Component {

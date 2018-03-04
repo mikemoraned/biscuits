@@ -2,8 +2,10 @@ import tempfile
 import unittest
 
 from image_signature import signature
+from layout.empty_layout_registry import EmptyLayoutRegistry
 from precomputed_lookup_splitter import PreComputedLookupSplitter
-from sprite_packer import SpritePacker
+from layout.sprite_packer import SpritePacker
+from layout.layout_generator import LayoutGenerator
 
 unittest.util._MAX_LENGTH = 2000
 
@@ -18,7 +20,8 @@ class TestSpritePacker(unittest.TestCase):
         place_id = 'edinburgh_real'
         with tempfile.TemporaryDirectory() as packed_dir_name:
             packer = SpritePacker(input_dir_name, packed_dir_name,
-                                  input_dir_has_background=True)
+                                  input_dir_has_background=True,
+                                  layout_generator=LayoutGenerator())
             packer.pack(place_id)
             input_content = self.sprite_content(place_id, input_dir_name,
                                                 has_background=True)
@@ -41,6 +44,8 @@ class TestSpritePacker(unittest.TestCase):
     def sprite_content(place_id, dir_name, has_background):
         splitter = \
             PreComputedLookupSplitter.from_dir(dir_name,
+                                               layout_registry=
+                                               EmptyLayoutRegistry(),
                                                has_background=has_background)
         place = splitter.split(place_id)
 

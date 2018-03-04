@@ -12,7 +12,7 @@ const client = new ApolloClient({
   link: httpLink,
   cache: new InMemoryCache(),
   connectToDevTools: true
-})
+});
 
 ReactDOM.render(
   <ApolloProvider client={client}>
