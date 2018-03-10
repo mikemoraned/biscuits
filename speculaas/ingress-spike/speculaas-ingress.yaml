@@ -1,0 +1,21 @@
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: speculaas-ingress
+  namespace: speculaas
+  annotations:
+    kubernetes.io/ingress.class: "nginx"
+spec:
+  rules:
+  - host: speculaas-ingress.houseofmoran.io
+    http:
+      paths:
+      - path: /
+        backend:
+          namespace:
+          serviceName: pieces-view-service
+          servicePort: 80
+      - path: /graphql
+        backend:
+          serviceName: pieces-finder-service
+          servicePort: 80
