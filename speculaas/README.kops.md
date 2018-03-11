@@ -1,70 +1,16 @@
-# Kops
-
-## Requirements
-
-* a working `awscli` install
-
-## One-off setup
-
-### Tools
-
-following https://github.com/kubernetes/kops/blob/master/docs/install.md:
-
-    brew install kops
-
-### Users/Groups
-
-following https://github.com/kubernetes/kops/blob/master/docs/aws.md run following commands:
-
-    aws iam create-group --group-name kops
-    
-    aws iam attach-group-policy --policy-arn arn:aws:iam::aws:policy/AmazonEC2FullAccess --group-name kops
-    aws iam attach-group-policy --policy-arn arn:aws:iam::aws:policy/AmazonRoute53FullAccess --group-name kops
-    aws iam attach-group-policy --policy-arn arn:aws:iam::aws:policy/AmazonS3FullAccess --group-name kops
-    aws iam attach-group-policy --policy-arn arn:aws:iam::aws:policy/IAMFullAccess --group-name kops
-    aws iam attach-group-policy --policy-arn arn:aws:iam::aws:policy/AmazonVPCFullAccess --group-name kops
-    
-    aws iam create-user --user-name kops
-    
-    aws iam add-user-to-group --user-name kops --group-name kops
-
-### Profile for kops
-
-We don't explicitly set local env's for secret keys, but rather create a profile:
-
-    aws iam create-access-key --user-name kops # keep the output of this in your terminal
-    
-Add a section to ~/.aws/credentials like:
-
-    [kops]
-    aws_access_key_id = <20-char AccessKeyId>
-    aws_secret_access_key = <40-char SecretAccessKey>
-
-### State bucket
-
-create a bucket for state store
-
-    export STATE_STORE_BUCKET=houseofmoran-com-kops-state-store
-    
-    aws s3api create-bucket --bucket $STATE_STORE_BUCKET --region us-east-1
-    aws s3api put-bucket-versioning --bucket $STATE_STORE_BUCKET --versioning-configuration Status=Enabled
-
-### SSH
-
-Only needed if I have no ssh keys:
-
-    ssh-keygen
-
-## Setup a cluster
+# From one-off setup
 
 Ensure choices from one-off setup are used
 
     export AWS_PROFILE=kops
     export STATE_STORE_BUCKET=houseofmoran-com-kops-state-store
-    
+
+## Setup a cluster
+
 Choices for this cluster
 
-    export NAME=app.houseofmoran.io
+    export VERSION=app2
+    export NAME=${VERSION}.houseofmoran.io
     export KOPS_STATE_STORE=s3://$STATE_STORE_BUCKET
     export TOPOLOGY=private
     export NETWORKING=flannel-vxlan
@@ -76,42 +22,76 @@ Create cluster:
     kops create cluster --zones ${SUBNET} ${NAME} --topology ${TOPOLOGY} --networking ${NETWORKING} \
     --node-size ${NODE_SIZE} --bastion
     kops update cluster ${NAME} --yes
+
+Setup context:
+
+    export CONTEXT=cluster-${VERSION}
+    kubectl config set-context ${CONTEXT} --cluster=${NAME} --user=${NAME}
+    kubectl config use-context ${CONTEXT}
     
 ... then wait a few minutes to check if it is working (5 mins or more)
 
     watch -n 30 kops validate cluster
     kubectl get nodes --show-labels
-    
-... note that following doesn't seem to work
 
-    ssh -i ~/.ssh/id_rsa admin@api.${NAME}
-    
-... however if you find the public dns of the master node then it works:
+## kube proxy
 
-    export MASTER=...
-    ssh -i ~/.ssh/id_rsa admin@${MASTER}
-    
-... install addons:
+Start kube proxy so that you can access internal services etc from local machine
 
-    kubectl create -f https://raw.githubusercontent.com/kubernetes/kops/master/addons/kubernetes-dashboard/v1.8.1.yaml
+    export PROXY_PORT=8002
+    kubectl proxy --port=${PROXY_PORT} &
     
-based on https://github.com/kubernetes/dashboard/wiki/Accessing-Dashboard---1.7.X-and-above, the ui can then be
-accessed at http://localhost:8001/api/v1/namespaces/kube-system/services/https:kubernetes-dashboard:/proxy/
-   
+(PROXY_PORT should be free on localhost)
+
+## Dumping config
+
+    kops get --name $NAME -o yaml > $NAME.spec.yaml
+
+## Deleting the cluster
+
+    kops delete cluster --name ${NAME} # dry run
+    kops delete cluster --name ${NAME} --yes # for real
+    
 ## Bastion access
 
-Following https://github.com/kubernetes/kops/blob/master/docs/bastion.md :
+    ssh -A -i ~/.ssh/id_rsa admin@bastion.${NAME}
 
-    ssh -A admin@<bastion_elb_a_record>
-    ssh admin@<master_ip>
+## Useful Addons 
 
-or:
+### Monitoring
 
-    ssh -A admin@<bastion_elb_a_record>
-    ssh admin@<node_ip>
+    mkdir -p addons/monitoring-standalone
+    curl https://raw.githubusercontent.com/kubernetes/kops/master/addons/monitoring-standalone/v1.7.0.yaml > \
+    addons/monitoring-standalone/v1.7.0.yaml
+    kubectl create -f addons/monitoring-standalone/v1.7.0.yaml
+    
+### Dashboard
 
-## External DNS
+    mkdir -p addons/kubernetes-dashboard
+    curl https://raw.githubusercontent.com/kubernetes/kops/master/addons/kubernetes-dashboard/v1.8.1.yaml > \
+    addons/kubernetes-dashboard/v1.8.1.yaml 
+    kubectl create -f addons/kubernetes-dashboard/v1.8.1.yaml
+    
+Based on https://github.com/kubernetes/dashboard/wiki/Accessing-Dashboard---1.7.X-and-above, the ui can then be
+accessed via:
 
+    open http://localhost:${PROXY_PORT}/api/v1/namespaces/kube-system/services/https:kubernetes-dashboard:/proxy/
+
+This will ask for a "Token", which you can get from:
+
+    kops get secrets kube --type secret -oplaintext
+
+## Setup ingress
+
+### Ingress addon
+
+    mkdir -p addons/ingress-nginx
+    curl https://raw.githubusercontent.com/kubernetes/kops/master/addons/ingress-nginx/v1.6.0.yaml > \
+    addons/ingress-nginx/v1.6.0.yaml
+    kubectl create -f addons/ingress-nginx/v1.6.0.yaml
+    
+### External DNS
+    
 Note: following requires assigning the same IAM permissions to all nodes; https://github.com/jtblin/kube2iam may
 be a better way to restrict this in the future
 
@@ -146,15 +126,30 @@ Install the [ExternalDNS](https://github.com/kubernetes-incubator/external-dns/b
 
     kubectl apply -f k8s/externalDNS.yaml
 
-## Adding monitoring
+## Changing instance types
 
-    kubectl create -f https://raw.githubusercontent.com/kubernetes/kops/master/addons/monitoring-standalone/v1.7.0.yaml
-
-## Changing instance type
-
-Change "machineType" using:
+### nodes
 
     kops edit ig nodes
+
+Add or replace the following under ``spec``:
+
+    machineType: t2.micro
+    maxPrice: "0.012"
+    maxSize: 3
+    minSize: 3
+    rootVolumeSize: 16
+    rootVolumeType: gp2
+
+### master
+
+    kops edit ig master-${SUBNET}
+
+Add or replace the following under ``spec``:
+
+    maxPrice: "0.07"
+
+### for both above
 
 Preview changes to cluster:
 
@@ -172,15 +167,6 @@ Apply changes to nodes:
 
     kops rolling-update cluster --yes
 
-## Dumping config
-
-    kops get --name $NAME -o yaml > $NAME.spec.yaml
-
-## Deleting the cluster
-
-    kops delete cluster --name ${NAME} # dry run
-    kops delete cluster --name ${NAME} --yes # for real
-
 # Speculaas
 
 ## Shared
@@ -188,29 +174,33 @@ Apply changes to nodes:
 Setup namespace, context:
 
     kubectl apply -f k8s/namespace.yaml
-    kubectl config set-context speculaas-kops --namespace=speculaas --cluster=${NAME} --user=${NAME}
+    kubectl config set-context speculaas-kops-${VERSION} --namespace=speculaas --cluster=${NAME} --user=${NAME}
 
 Use docker hub and switch to speculaas-kops context:
 
     export DOCKER_ID_USER="houseofmoran"
     docker login
     kubectl config use-context speculaas-kops
+
+## Ingress and services
+    
+    kubectl apply -f ./pieces-finder/k8s/service.yaml
+    kubectl apply -f ./pieces-view/k8s/service.yaml
+    kubectl apply -f ./k8s/ingress.yaml
     
 ## Build and push
 
     docker build -t houseofmoran/speculaas-pieces-finder:9 ./pieces-finder
-    docker build -t houseofmoran/speculaas-pieces-view:22 ./pieces-view
+    docker build -t houseofmoran/speculaas-pieces-view:23 ./pieces-view
     
     docker push houseofmoran/speculaas-pieces-finder:9
-    docker push houseofmoran/speculaas-pieces-view:22
+    docker push houseofmoran/speculaas-pieces-view:23
         
-## Startup
+## Deployments
 
     kubectl apply -f ./pieces-finder/k8s/deployment.yaml
-    kubectl apply -f ./pieces-finder/k8s/service.yaml
     kubectl apply -f ./pieces-view/k8s/deployment.yaml
-    kubectl apply -f ./pieces-view/k8s/service.yaml
-
+    
 # Access
 
 ## pieces-finder

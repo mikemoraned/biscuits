@@ -14,10 +14,9 @@ spec:
       - name: external-dns
         image: registry.opensource.zalan.do/teapot/external-dns:v0.4.8
         args:
-        - --source=service
+        - --source=ingress
         - --domain-filter=houseofmoran.io
         - --provider=aws
-        - --policy=upsert-only
         - --registry=txt
-        - --txt-owner-id=external-dns
+        - --txt-owner-id=external-dns-app2
         - --log-level=debug

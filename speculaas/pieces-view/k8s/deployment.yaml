@@ -17,11 +17,8 @@ spec:
     spec:
       containers:
       - name: pieces-view
-        image: houseofmoran/speculaas-pieces-view:22
-        env:
-          - name: GRAPHQL_URL
-            value: "http://pieces-finder-service/"
-        resources: 
+        image: houseofmoran/speculaas-pieces-view:23
+        resources:
           limits:
             cpu: 100m
             memory: 100Mi
