@@ -1,8 +1,9 @@
+from schema.layout import Layout
+from schema.piece import Piece
+from schema.place import Place
 from tests.images_for_tests import transparent_image, \
     transparent_image_data_url
 from schema.bitmap_image import BitmapImage
-from schema.piece import Place
-from schema.place import Piece
 from schema.sprite import Sprite
 from schema.sprite_offset import SpriteOffset
 
@@ -28,6 +29,8 @@ class DummySplitter:
                                  ) for index, entry in enumerate(place)])
             return Place(id=place_id,
                          sprite=Sprite(image=transparent_image),
-                         pieces=pieces)
+                         pieces=pieces,
+                         layouts=[Layout(id='sprite_layout',
+                                         name='Sprite Layout')])
         else:
             None

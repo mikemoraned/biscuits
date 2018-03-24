@@ -1,6 +1,7 @@
 import tempfile
 import unittest
 
+from schema.layout import Layout
 from tests.images_for_tests import transparent_image
 from precomputed_lookup_splitter import PreComputedLookupSplitter
 from schema.bitmap_image import BitmapImage
@@ -32,6 +33,8 @@ class TestPreComputedLookupSplitter(unittest.TestCase):
         place = splitter.split('edinburgh')
         self.assertEqual(place.id, 'edinburgh')
         self.assertEqual(place.sprite, Sprite(image=transparent_image))
+        self.assertEqual(place.layouts, [Layout(id='sprite_layout',
+                                                name='Sprite Layout')])
         self.assertEqual(len(place.pieces), 1)
         self.assertEqual(place.pieces[0],
                          Piece(id='edinburgh_1',
@@ -48,6 +51,8 @@ class TestPreComputedLookupSplitter(unittest.TestCase):
         place = splitter.split('edinburgh_withbackground')
         self.assertEqual(place.id, 'edinburgh_withbackground')
         self.assertEqual(place.sprite, Sprite(image=transparent_image))
+        self.assertEqual(place.layouts, [Layout(id='sprite_layout',
+                                                name='Sprite Layout')])
         self.assertEqual(len(place.pieces), 1)
         self.assertEqual(place.pieces[0],
                          Piece(id='edinburgh_withbackground_1',
@@ -63,6 +68,8 @@ class TestPreComputedLookupSplitter(unittest.TestCase):
         place = splitter.split('edinburgh_with_xy_sprite')
         self.assertEqual(place.id, 'edinburgh_with_xy_sprite')
         self.assertEqual(place.sprite, Sprite(image=transparent_image))
+        self.assertEqual(place.layouts, [Layout(id='sprite_layout',
+                                                name='Sprite Layout')])
         self.assertEqual(len(place.pieces), 1)
         self.assertEqual(place.pieces[0],
                          Piece(id='edinburgh_with_xy_sprite_1',

@@ -1,6 +1,6 @@
 import graphene
 
-from schema.piece import Place
+from schema.place import Place
 
 
 class Query(graphene.ObjectType):

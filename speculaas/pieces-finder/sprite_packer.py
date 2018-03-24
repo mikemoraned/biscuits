@@ -8,8 +8,8 @@ from precomputed_lookup_splitter import PreComputedLookupSplitter
 from rectpack import newPacker
 
 from schema.bitmap_image import BitmapImage
-from schema.piece import Place
-from schema.place import Piece
+from schema.piece import Piece
+from schema.place import Place
 from schema.sprite import Sprite
 from schema.sprite_offset import SpriteOffset
 

@@ -4,8 +4,9 @@ import re
 import logging
 
 from schema.bitmap_image import BitmapImage
-from schema.piece import Place
-from schema.place import Piece
+from schema.layout import Layout
+from schema.piece import Piece
+from schema.place import Place
 from schema.sprite import Sprite
 from schema.sprite_offset import SpriteOffset
 
@@ -47,7 +48,8 @@ class PreComputedLookupSplitter:
         json_file_name = "{}/{}.labels.json".format(dir_name, place.id)
         with open(json_file_name, 'w') as out:
             json.dump(collapsed, out, indent=True)
-        logging.info("saved {} pieces to {}".format(len(collapsed), json_file_name))
+        logging.info(
+            "saved {} pieces to {}".format(len(collapsed), json_file_name))
 
     def split(self, place_id):
         if place_id in self.place_ids:
@@ -65,7 +67,9 @@ class PreComputedLookupSplitter:
             pieces_filtered = self.filter_out_background(pieces)
             return Place(id=place_id,
                          sprite=sprite,
-                         pieces=pieces_filtered)
+                         pieces=pieces_filtered,
+                         layouts=[Layout(id='sprite_layout',
+                                         name='Sprite Layout')])
         else:
             None
 

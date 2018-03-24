@@ -1,25 +1,22 @@
 import graphene
 
-from schema.place import Piece
-from schema.sprite import Sprite
+from schema.bitmap_image import BitmapImage
 
 
-class Place(graphene.ObjectType):
+class Piece(graphene.ObjectType):
     id = graphene.ID()
-    sprite = graphene.Field(Sprite)
-    pieces = graphene.Field(graphene.List(Piece))
+    bitmap_image = graphene.Field(BitmapImage)
 
     def __eq__(self, other):
         if isinstance(self, other.__class__):
             return self.id == other.id \
-                   and self.sprite == other.sprite \
-                   and self.pieces == self.pieces
+                   and self.bitmap_image == other.bitmap_image
         return False
 
     def __repr__(self):
         return self.__str__()
 
     def __str__(self):
-        return "Place(id={},sprite={},pieces={})".format(
-            self.id, self.sprite, self.pieces
+        return "Piece(id={},bitmap_image={})".format(
+            self.id, self.bitmap_image
         )
