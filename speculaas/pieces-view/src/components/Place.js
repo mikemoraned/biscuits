@@ -23,6 +23,10 @@ query PlaceQuery($id: String!, $loadSpriteData: Boolean!) {
           x
           y
         }
+        l: layoutOffset(id: "sprite_offset") {
+          x
+          y
+        }
       }
     }
   }
@@ -39,7 +43,8 @@ function expandShortNames(place) {
           ...piece.b,
           width: piece.b.w,
           height: piece.b.h,
-          spriteOffset: piece.b.s
+          spriteOffset: piece.b.s,
+          layoutOffset: piece.b.l
         }
       }
     ))
