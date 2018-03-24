@@ -7,7 +7,11 @@ from PIL import Image
 from precomputed_lookup_splitter import PreComputedLookupSplitter
 from rectpack import newPacker
 
-from schema import Place, Sprite, Piece, BitmapImage, SpriteOffset
+from schema.bitmap_image import BitmapImage
+from schema.piece import Place
+from schema.place import Piece
+from schema.sprite import Sprite
+from schema.sprite_offset import SpriteOffset
 
 
 class SpritePacker:

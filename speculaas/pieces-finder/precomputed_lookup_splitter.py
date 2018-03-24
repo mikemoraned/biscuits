@@ -3,7 +3,11 @@ import json
 import re
 import logging
 
-from schema import Piece, BitmapImage, Place, SpriteOffset, Sprite
+from schema.bitmap_image import BitmapImage
+from schema.piece import Place
+from schema.place import Piece
+from schema.sprite import Sprite
+from schema.sprite_offset import SpriteOffset
 
 
 class PreComputedLookupSplitter:

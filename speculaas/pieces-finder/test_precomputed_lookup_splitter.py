@@ -3,7 +3,10 @@ import unittest
 
 from images_for_tests import transparent_image
 from precomputed_lookup_splitter import PreComputedLookupSplitter
-from schema import Piece, BitmapImage, SpriteOffset, Sprite
+from schema.bitmap_image import BitmapImage
+from schema.place import Piece
+from schema.sprite import Sprite
+from schema.sprite_offset import SpriteOffset
 
 unittest.util._MAX_LENGTH = 2000
 
