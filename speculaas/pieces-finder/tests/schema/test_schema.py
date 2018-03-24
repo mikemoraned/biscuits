@@ -3,7 +3,7 @@ from collections import OrderedDict
 
 from graphene.test import Client
 
-from dummy_splitter import DummySplitter
+from tests.dummy_splitter import DummySplitter
 from schema import schema
 
 unittest.util._MAX_LENGTH = 2000

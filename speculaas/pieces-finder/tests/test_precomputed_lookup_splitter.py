@@ -1,9 +1,13 @@
 import tempfile
 import unittest
 
-from images_for_tests import transparent_image
+from schema.layout import Layout
+from tests.images_for_tests import transparent_image
 from precomputed_lookup_splitter import PreComputedLookupSplitter
-from schema import Piece, BitmapImage, SpriteOffset, Sprite
+from schema.bitmap_image import BitmapImage
+from schema.place import Piece
+from schema.sprite import Sprite
+from schema.sprite_offset import SpriteOffset
 
 unittest.util._MAX_LENGTH = 2000
 
@@ -14,21 +18,23 @@ class TestPreComputedLookupSplitter(unittest.TestCase):
         self.maxDiff = None
 
     def test_finds_edinburgh(self):
-        splitter = PreComputedLookupSplitter.from_dir("precomputed_test")
+        splitter = PreComputedLookupSplitter.from_dir("tests/precomputed")
         self.assertIn('edinburgh', splitter.place_ids)
 
     def test_ids_are_globally_unique(self):
-        splitter = PreComputedLookupSplitter.from_dir("precomputed_test")
+        splitter = PreComputedLookupSplitter.from_dir("tests/precomputed")
         edinburgh_ids = self.idsOf(splitter.split('edinburgh'))
         edinburgh2_ids = self.idsOf(splitter.split('edinburgh2'))
         for id in edinburgh2_ids:
             self.assertNotIn(id, edinburgh_ids)
 
     def test_finds_and_loads_edinburgh(self):
-        splitter = PreComputedLookupSplitter.from_dir("precomputed_test")
+        splitter = PreComputedLookupSplitter.from_dir("tests/precomputed")
         place = splitter.split('edinburgh')
         self.assertEqual(place.id, 'edinburgh')
         self.assertEqual(place.sprite, Sprite(image=transparent_image))
+        self.assertEqual(place.layouts, [Layout(id='sprite_layout',
+                                                name='Sprite Layout')])
         self.assertEqual(len(place.pieces), 1)
         self.assertEqual(place.pieces[0],
                          Piece(id='edinburgh_1',
@@ -40,11 +46,13 @@ class TestPreComputedLookupSplitter(unittest.TestCase):
                                    sprite_offset=SpriteOffset(x=1350, y=0))))
 
     def test_ignores_background_in_sprite(self):
-        splitter = PreComputedLookupSplitter.from_dir("precomputed_test",
+        splitter = PreComputedLookupSplitter.from_dir("tests/precomputed",
                                                       has_background=True)
         place = splitter.split('edinburgh_withbackground')
         self.assertEqual(place.id, 'edinburgh_withbackground')
         self.assertEqual(place.sprite, Sprite(image=transparent_image))
+        self.assertEqual(place.layouts, [Layout(id='sprite_layout',
+                                                name='Sprite Layout')])
         self.assertEqual(len(place.pieces), 1)
         self.assertEqual(place.pieces[0],
                          Piece(id='edinburgh_withbackground_1',
@@ -56,10 +64,12 @@ class TestPreComputedLookupSplitter(unittest.TestCase):
                                    sprite_offset=SpriteOffset(x=1350, y=0))))
 
     def test_finds_and_loads_edinburgh_with_xy_sprite(self):
-        splitter = PreComputedLookupSplitter.from_dir("precomputed_test")
+        splitter = PreComputedLookupSplitter.from_dir("tests/precomputed")
         place = splitter.split('edinburgh_with_xy_sprite')
         self.assertEqual(place.id, 'edinburgh_with_xy_sprite')
         self.assertEqual(place.sprite, Sprite(image=transparent_image))
+        self.assertEqual(place.layouts, [Layout(id='sprite_layout',
+                                                name='Sprite Layout')])
         self.assertEqual(len(place.pieces), 1)
         self.assertEqual(place.pieces[0],
                          Piece(id='edinburgh_with_xy_sprite_1',
@@ -71,7 +81,7 @@ class TestPreComputedLookupSplitter(unittest.TestCase):
                                    sprite_offset=SpriteOffset(x=1350, y=200))))
 
     def test_roundtrip_through_load_and_save(self):
-        input_dir_name = 'precomputed_test'
+        input_dir_name = 'tests/precomputed'
         place_id = 'edinburgh'
         with tempfile.TemporaryDirectory() as temp_dir_name:
             splitter = PreComputedLookupSplitter.from_dir(input_dir_name,

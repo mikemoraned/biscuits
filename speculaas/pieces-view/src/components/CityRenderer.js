@@ -150,7 +150,7 @@ export class CityRenderer extends Component {
         width: bitmapImage.width,
         height: bitmapImage.height
       }));
-      const spriteOffsetMax = maxXY(bitmapImages, (bitmapImage) => ({
+      const layoutOffsetMax = maxXY(bitmapImages, (bitmapImage) => ({
         x: bitmapImage.spriteOffset.x,
         y: bitmapImage.spriteOffset.y,
         width: bitmapImage.width,
@@ -160,22 +160,22 @@ export class CityRenderer extends Component {
         context.strokeStyle = foregroundColor;
         context.lineWidth = 0.01 + ((2.0 - 0.01) * Math.sin(this.props.transitionProportion * Math.PI));
         const bT = (1.0 - this.props.transitionProportion);
-        const sT = this.props.transitionProportion;
+        const l = this.props.transitionProportion;
         context.scale(
           scaleProportions.width
           * ((bT * (this.props.dimensions.width / bitmapImageMax.x))
-             + (sT * (this.props.dimensions.width / spriteOffsetMax.x))),
+             + (l * (this.props.dimensions.width / layoutOffsetMax.x))),
 
           scaleProportions.height
           * ((bT * (this.props.dimensions.height / bitmapImageMax.y))
-             + (sT * (this.props.dimensions.height / spriteOffsetMax.y))),
+             + (l * (this.props.dimensions.height / layoutOffsetMax.y))),
         );
         this.props.place.pieces.forEach(piece => {
           const bitmapImage = piece.bitmapImage;
           const spriteOffset = bitmapImage.spriteOffset;
 
-          const x = (bT * bitmapImage.x) + (sT * spriteOffset.x);
-          const y = (bT * bitmapImage.y) + (sT * spriteOffset.y);
+          const x = (bT * bitmapImage.x) + (l * spriteOffset.x);
+          const y = (bT * bitmapImage.y) + (l * spriteOffset.y);
 
           if (this.props.spriteBitmap !== null) {
             const bitmapImage = piece.bitmapImage;
