@@ -14,7 +14,7 @@ class TestSpritePacker(unittest.TestCase):
         self.maxDiff = None
 
     def test_sprite_bytes_are_identical(self):
-        input_dir_name = 'precomputed_test'
+        input_dir_name = 'tests/precomputed'
         place_id = 'edinburgh_real'
         with tempfile.TemporaryDirectory() as packed_dir_name:
             packer = SpritePacker(input_dir_name, packed_dir_name,
@@ -27,7 +27,7 @@ class TestSpritePacker(unittest.TestCase):
             self.assertListEqual(input_content, packed_content)
 
     def test_sprite_content_equal(self):
-        input_dir_name = 'precomputed_test'
+        input_dir_name = 'tests/precomputed'
         edinburgh = self.sprite_content('edinburgh_real', input_dir_name,
                                         has_background=True)
         edinburgh_same = self.sprite_content('edinburgh_real', input_dir_name,
