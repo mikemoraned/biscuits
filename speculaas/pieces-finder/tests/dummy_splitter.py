@@ -1,4 +1,5 @@
-from images_for_tests import transparent_image, transparent_image_data_url
+from tests.images_for_tests import transparent_image, \
+    transparent_image_data_url
 from schema.bitmap_image import BitmapImage
 from schema.piece import Place
 from schema.place import Piece

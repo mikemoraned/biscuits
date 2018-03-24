@@ -1,7 +1,7 @@
 import tempfile
 import unittest
 
-from images_for_tests import transparent_image
+from tests.images_for_tests import transparent_image
 from precomputed_lookup_splitter import PreComputedLookupSplitter
 from schema.bitmap_image import BitmapImage
 from schema.place import Piece
