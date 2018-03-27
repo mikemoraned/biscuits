@@ -34,7 +34,7 @@ class App extends Component {
     super(props);
 
     this.state = {
-      t: 0
+      t: 1.0
     };
 
     this.handleTransitionProportionChange = this.handleTransitionProportionChange.bind(this);
@@ -54,6 +54,8 @@ class App extends Component {
                            onChange={this.handleTransitionProportionChange}/>
         <PlaceList transitionProportion={this.state.t}
                    placeIds={['edinburgh', 'jerusalem', 'au', 'newyork', 'budapest']}/>
+        {/*<PlaceList transitionProportion={this.state.t}*/}
+          {/*placeIds={['edinburgh', 'au']}/>*/}
         {/*<PlaceList transitionProportion={this.state.t}*/}
                    {/*placeIds={['newyork']}/>*/}
         {/*<PlaceList transitionProportion={this.state.t}*/}

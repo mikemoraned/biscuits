@@ -12,12 +12,21 @@ class BitmapImage(graphene.ObjectType):
     sprite_offset = graphene.Field(SpriteOffset)
     layout_offset = graphene.Field(LayoutOffset, id=graphene.String())
 
+    def __init__(self, x, y, width, height, sprite_offset,
+                 layout_offset_lookup=lambda: None):
+        self.x = x
+        self.y = y
+        self.width = width
+        self.height = height
+        self.sprite_offset = sprite_offset
+        self.layout_offset_lookup = layout_offset_lookup
+
     def resolve_layout_offset(self, info, id):
         if id == 'sprite_offset':
             return LayoutOffset(x=self.sprite_offset.x,
                                 y=self.sprite_offset.y)
         else:
-            None
+            return self.layout_offset_lookup(id)
 
     def __eq__(self, other):
         if isinstance(self, other.__class__):

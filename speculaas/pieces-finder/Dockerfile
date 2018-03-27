@@ -9,11 +9,11 @@ RUN mkdir /app
 COPY --from=build /target /app
 COPY . /app
 WORKDIR /app
-RUN python -m unittest test_*
+RUN python -m unittest discover -s tests -t . -v
 
 FROM python:3.5-slim
 RUN mkdir /app
 COPY --from=build /target /app
 COPY . /app
 
-CMD [ "python", "/app/server.py", "/app/precomputed_repacked" ]
+CMD [ "python", "/app/server.py", "/app/precomputed_repacked", "/app/layouts" ]

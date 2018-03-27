@@ -150,32 +150,38 @@ export class CityRenderer extends Component {
         width: bitmapImage.width,
         height: bitmapImage.height
       }));
-      const layoutOffsetMax = maxXY(bitmapImages, (bitmapImage) => ({
-        x: bitmapImage.spriteOffset.x,
-        y: bitmapImage.spriteOffset.y,
-        width: bitmapImage.width,
-        height: bitmapImage.height
-      }));
+      const layoutOffsetMax = maxXY(bitmapImages, (bitmapImage) => {
+        // console.dir(bitmapImage);
+        return {
+          x: bitmapImage.layoutOffset.x,
+          y: bitmapImage.layoutOffset.y,
+          width: bitmapImage.width,
+          height: bitmapImage.height
+        }
+      });
       this.saveRestore(context, (context) => {
         context.strokeStyle = foregroundColor;
         context.lineWidth = 0.01 + ((2.0 - 0.01) * Math.sin(this.props.transitionProportion * Math.PI));
         const bT = (1.0 - this.props.transitionProportion);
-        const l = this.props.transitionProportion;
+        const lT = this.props.transitionProportion;
         context.scale(
           scaleProportions.width
           * ((bT * (this.props.dimensions.width / bitmapImageMax.x))
-             + (l * (this.props.dimensions.width / layoutOffsetMax.x))),
+             + (lT * (this.props.dimensions.width / layoutOffsetMax.x))),
 
           scaleProportions.height
           * ((bT * (this.props.dimensions.height / bitmapImageMax.y))
-             + (l * (this.props.dimensions.height / layoutOffsetMax.y))),
+             + (lT * (this.props.dimensions.height / layoutOffsetMax.y))),
         );
         this.props.place.pieces.forEach(piece => {
+        // const foop = [ this.props.place.pieces[0] ];
+        // foop.forEach(piece => {
+        //   console.dir(piece);
           const bitmapImage = piece.bitmapImage;
-          const spriteOffset = bitmapImage.spriteOffset;
+          const layoutOffset = bitmapImage.layoutOffset;
 
-          const x = (bT * bitmapImage.x) + (l * spriteOffset.x);
-          const y = (bT * bitmapImage.y) + (l * spriteOffset.y);
+          const x = (bT * bitmapImage.x) + (lT * layoutOffset.x);
+          const y = (bT * bitmapImage.y) + (lT * layoutOffset.y);
 
           if (this.props.spriteBitmap !== null) {
             const bitmapImage = piece.bitmapImage;

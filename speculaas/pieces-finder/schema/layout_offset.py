@@ -2,6 +2,7 @@ import graphene
 
 
 class LayoutOffset(graphene.ObjectType):
+    id = graphene.ID()
     x = graphene.Int()
     y = graphene.Int()
 
