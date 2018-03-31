@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import '../styles/App.css';
 import PlaceList from "./PlaceList";
 import {TransitionControl} from "./TransitionControl";
+import {LayoutSuggest} from "./LayoutSuggest";
 
 class App extends Component {
 
@@ -9,10 +10,12 @@ class App extends Component {
     super(props);
 
     this.state = {
-      t: 1.0
+      t: 1.0,
+      layoutId: 'BNF/GuillotineBafLas/SORT_AREA'
     };
 
     this.handleTransitionProportionChange = this.handleTransitionProportionChange.bind(this);
+    this.handleLayoutChange = this.handleLayoutChange.bind(this);
   }
 
   handleTransitionProportionChange(t) {
@@ -21,14 +24,24 @@ class App extends Component {
     });
   }
 
+  handleLayoutChange(layoutId) {
+    this.setState({
+      layoutId
+    });
+  }
+
+
   render() {
     return (
       <div className="App">
         <TransitionControl className="TransitionControl_top"
                            transitionProportion={this.state.t}
                            onChange={this.handleTransitionProportionChange}/>
+        <LayoutSuggest className="LayoutSuggest"
+                       onSelect={this.handleLayoutChange}/>
         <PlaceList transitionProportion={this.state.t}
-                   placeIds={['edinburgh', 'jerusalem', 'au', 'newyork', 'budapest']}/>
+                   placeIds={['edinburgh', 'jerusalem', 'au', 'newyork', 'budapest']}
+                   layoutId={this.state.layoutId}/>
         {/*<PlaceList transitionProportion={this.state.t}*/}
           {/*placeIds={['edinburgh', 'au']}/>*/}
         {/*<PlaceList transitionProportion={this.state.t}*/}

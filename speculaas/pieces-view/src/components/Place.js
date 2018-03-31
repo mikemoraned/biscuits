@@ -6,7 +6,7 @@ import {CityRenderer} from "./CityRenderer";
 import ImageBitmapCreator from "./ImageBitmapCreator";
 
 const PLACE_QUERY = gql`
-query PlaceQuery($id: String!, $loadSpriteData: Boolean!) {
+query PlaceQuery($id: String!, $layoutId: String!, $loadSpriteData: Boolean!) {
   place: placeById(id: $id) {
     id
     sprite @include(if: $loadSpriteData) {
@@ -23,7 +23,7 @@ query PlaceQuery($id: String!, $loadSpriteData: Boolean!) {
           x
           y
         }
-        l: layoutOffset(id: "BNF/GuillotineBafLas/SORT_AREA") {
+        l: layoutOffset(id: $layoutId) {
           id
           x
           y
@@ -83,6 +83,7 @@ class Place extends Component {
         query: PLACE_QUERY,
         variables: {
           id: this.props.id,
+          layoutId: this.props.layoutId,
           ...variables
         }
       });
