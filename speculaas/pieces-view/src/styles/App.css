@@ -31,6 +31,19 @@
     margin-right: 5%;
   }
 
+  .App .Control_top {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+
+    position: sticky;
+    top: 10px;
+  }
+
+  .App .PlaceChooser_top {
+    margin-left: 10px;
+  }
+
   .App .TransitionControl_top {
     display: none;
   }
@@ -63,13 +76,21 @@
     flex-basis: 450px;
   }
 
-  .App .TransitionControl_top {
-    width: 30%;
+  .App .Control_top {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+
     position: sticky;
     top: 10px;
+  }
 
-    left: 5px;
+  .App .TransitionControl_top {
+    margin-left: 10px;
+
+    width: 30%;
     height: 20px;
+
     padding-left: 10px;
     padding-right: 15px;
     padding-top: 10px;
@@ -80,9 +101,21 @@
     opacity: 0.8;
   }
 
+  .App .PlaceChooser_top {
+    margin-left: 10px;
+  }
+
   .App .TransitionControl_bottom {
     display: none;
   }
+}
+
+.App .PlaceChooser_top button {
+  font-size: 20px;
+}
+
+.App .PlaceChooser_top select {
+  font-size: 20px;
 }
 
 .App .PlaceList .Place {

@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import '../styles/App.css';
 import PlaceList from "./PlaceList";
 import {TransitionControl} from "./TransitionControl";
+import {PlaceChooser} from "./PlaceChooser";
 
 class App extends Component {
 
@@ -9,10 +10,13 @@ class App extends Component {
     super(props);
 
     this.state = {
-      t: 1.0
+      t: 1.0,
+      possiblePlaceIds: ['jerusalem', 'au', 'newyork', 'budapest'],
+      placeIds: ['edinburgh']
     };
 
     this.handleTransitionProportionChange = this.handleTransitionProportionChange.bind(this);
+    this.handlePlaceIdAdded = this.handlePlaceIdAdded.bind(this);
   }
 
   handleTransitionProportionChange(t) {
@@ -21,23 +25,25 @@ class App extends Component {
     });
   }
 
+  handlePlaceIdAdded(placeId) {
+    this.setState({
+      placeIds: [ placeId ].concat(this.state.placeIds),
+    });
+  }
+
   render() {
     return (
       <div className="App">
-        <TransitionControl className="TransitionControl_top"
-                           transitionProportion={this.state.t}
-                           onChange={this.handleTransitionProportionChange}/>
+        <div className="Control_top">
+          <TransitionControl className="TransitionControl_top"
+                             transitionProportion={this.state.t}
+                             onChange={this.handleTransitionProportionChange}/>
+          <PlaceChooser className="PlaceChooser_top"
+                        allowedPlaceIds={this.state.possiblePlaceIds}
+                        onPlaceIdAdded={this.handlePlaceIdAdded}/>
+        </div>
         <PlaceList transitionProportion={this.state.t}
-                   placeIds={['edinburgh', 'jerusalem', 'au', 'newyork', 'budapest']}/>
-        {/*<PlaceList transitionProportion={this.state.t}*/}
-          {/*placeIds={['edinburgh', 'au']}/>*/}
-        {/*<PlaceList transitionProportion={this.state.t}*/}
-                   {/*placeIds={['newyork']}/>*/}
-        {/*<PlaceList transitionProportion={this.state.t}*/}
-                   {/*placeIds={['edinburgh']}/>*/}
-        {/*<PlaceList placeIds={['edinburgh']}/>*/}
-        {/*<PlaceList placeIds={['edinburgh','budapest']}/>*/}
-        {/*<PlaceList placeIds={['jerusalem']}/>*/}
+                   placeIds={this.state.placeIds}/>
         <TransitionControl className="TransitionControl_bottom"
                            transitionProportion={this.state.t}
                            onChange={this.handleTransitionProportionChange}/>
