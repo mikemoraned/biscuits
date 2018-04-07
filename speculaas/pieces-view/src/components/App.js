@@ -38,12 +38,16 @@ class App extends Component {
                            transitionProportion={this.state.t}
                            onChange={this.handleTransitionProportionChange}/>
         <LayoutSuggest className="LayoutSuggest"
-                       onSelect={this.handleLayoutChange}/>
-        <PlaceList transitionProportion={this.state.t}
-                   placeIds={['edinburgh', 'jerusalem', 'au', 'newyork', 'budapest']}
-                   layoutId={this.state.layoutId}/>
+                       layoutId={this.state.layoutId}
+                       onChange={this.handleLayoutChange}/>
         {/*<PlaceList transitionProportion={this.state.t}*/}
-          {/*placeIds={['edinburgh', 'au']}/>*/}
+                   {/*placeIds={['edinburgh', 'jerusalem', 'au', 'newyork', 'budapest']}*/}
+                   {/*layoutId={this.state.layoutId}/>*/}
+        <PlaceList transitionProportion={this.state.t}
+                   // placeIds={['edinburgh', 'au']}
+                   placeIds={['edinburgh']}
+                   layoutId={this.state.layoutId}/>
+        />
         {/*<PlaceList transitionProportion={this.state.t}*/}
                    {/*placeIds={['newyork']}/>*/}
         {/*<PlaceList transitionProportion={this.state.t}*/}

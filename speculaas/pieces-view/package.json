@@ -10,10 +10,10 @@
     "graphql-tag": "^2.6.1",
     "react": "^16.2.0",
     "react-apollo": "^2.0.4",
-    "react-autosuggest": "^9.3.4",
     "react-dom": "^16.2.0",
     "react-measure": "^2.0.2",
     "react-scripts": "1.0.17",
+    "react-select": "^1.2.1",
     "react-visibility-sensor": "^3.11.0"
   },
   "scripts": {

@@ -70,31 +70,31 @@ class Place extends Component {
     };
   }
 
+  handleError = (error) => {
+    console.log(error);
+    this.setState({
+      status: "Errored"
+    });
+  };
+
+  query = (variables) => {
+    return this.props.client.query({
+      query: PLACE_QUERY,
+      variables: {
+        id: this.props.id,
+        layoutId: this.props.layoutId,
+        ...variables
+      }
+    });
+  };
+
   componentDidMount() {
-    const handleError = (error) => {
-      console.log(error);
-      this.setState({
-        status: "Errored"
-      });
-    };
-
-    const query = (variables) => {
-      return this.props.client.query({
-        query: PLACE_QUERY,
-        variables: {
-          id: this.props.id,
-          layoutId: this.props.layoutId,
-          ...variables
-        }
-      });
-    };
-
-    query({loadSpriteData: false}).then((result) => {
+    this.query({loadSpriteData: false}).then((result) => {
       this.setState({
         place: expandShortNames(result.data.place),
         status: "Loaded"
       });
-      query({loadSpriteData: true}).then((result) => {
+      this.query({loadSpriteData: true}).then((result) => {
         new ImageBitmapCreator()
           .create(this.props.id, result.data.place.sprite.dataURL)
           .then((spriteBitmap) => {
@@ -102,8 +102,34 @@ class Place extends Component {
               spriteBitmap
             });
           });
-      }).catch(handleError);
-    }).catch(handleError);
+      }).catch(this.handleError);
+    }).catch(this.handleError);
+  }
+
+  componentWillReceiveProps(nextProps) {
+    if (this.props.id !== nextProps.id || this.props.layoutId !== nextProps.layoutId) {
+      this.setState({
+        place: null,
+        spriteBitmap: null,
+        status: "Loading"
+      });
+
+      this.query({loadSpriteData: false}).then((result) => {
+        this.setState({
+          place: expandShortNames(result.data.place),
+          status: "Loaded"
+        });
+        this.query({loadSpriteData: true}).then((result) => {
+          new ImageBitmapCreator()
+            .create(this.props.id, result.data.place.sprite.dataURL)
+            .then((spriteBitmap) => {
+              this.setState({
+                spriteBitmap
+              });
+            });
+        }).catch(this.handleError);
+      }).catch(this.handleError);
+    }
   }
 
   render() {

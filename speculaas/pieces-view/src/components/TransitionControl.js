@@ -11,12 +11,12 @@ export class TransitionControl extends Component {
 
   onValueChange(event) {
     const value = event.target.value;
-    console.log(`onChange, value: ${value}`);
+    // console.log(`onChange, value: ${value}`);
     this.props.onChange(value / 100.0);
   }
 
   render() {
-    console.log(`render, t: ${this.props.transitionProportion}`);
+    // console.log(`render, t: ${this.props.transitionProportion}`);
     return <div className={this.props.className}>
       <input style={{width: "100%"}}
              type="range" min="0" max="100" step="1"

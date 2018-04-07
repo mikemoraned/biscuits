@@ -24,6 +24,10 @@ export class CityRenderer extends Component {
   constructor(props) {
     super(props);
 
+    this.state = {
+      visible: false
+    };
+
     this.backgroundColorInterpolator = interpolateRgb('red', props.backgroundColor);
     this.onVisibilityChange = this.onVisibilityChange.bind(this);
   }
@@ -40,23 +44,31 @@ export class CityRenderer extends Component {
 
   componentDidMount() {
     this.doInAnimationFrame(() => {
-      this.updateCanvas();
+      this.updateCanvas(this.props.place.id);
     });
   }
 
   componentDidUpdate() {
     this.doInAnimationFrame(() => {
-      this.updateCanvas();
+      this.updateCanvas(this.props.place.id);
     });
   }
 
+  componentWillReceiveProps(nextProps) {
+    this.doInAnimationFrame(() => {
+      this.updateCanvas(this.props.place.id);
+    });
+  }
+
+
   doInAnimationFrame(fn) {
-    if (window.requestAnimationFrame) {
-      window.requestAnimationFrame(fn);
-    }
-    else {
-      fn();
-    }
+    fn();
+    // if (window.requestAnimationFrame) {
+    //   window.requestAnimationFrame(fn);
+    // }
+    // else {
+    //   fn();
+    // }
   }
 
   saveRestore(context, fn) {
@@ -65,21 +77,23 @@ export class CityRenderer extends Component {
     context.restore();
   }
 
-  updateCanvas() {
-    const context = this.refs.canvas.getContext('2d');
-    this.saveRestore(context, (context) => {
-      context.clearRect(0,0, this.props.dimensions.width, this.props.dimensions.height);
-      this.renderBackground(context);
+  updateCanvas(placeId) {
+    // if (this.props.place.id === placeId) {
+      const context = this.refs.canvas.getContext('2d');
+      this.saveRestore(context, (context) => {
+        context.clearRect(0, 0, this.props.dimensions.width, this.props.dimensions.height);
+        this.renderBackground(context);
 
-      if (this.state.visible) {
-        if (this.props.dimensions.width >= this.props.dimensions.height) {
-          this.renderLandscapeLayout(context);
+        if (this.state.visible) {
+          if (this.props.dimensions.width >= this.props.dimensions.height) {
+            this.renderLandscapeLayout(context);
+          }
+          else {
+            this.renderPortraitLayout(context);
+          }
         }
-        else {
-          this.renderPortraitLayout(context);
-        }
-      }
-    });
+      });
+    // }
   }
 
   renderPortraitLayout(context) {
