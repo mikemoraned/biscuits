@@ -34,7 +34,7 @@ export class PlaceChooser extends Component {
   }
 
   render() {
-    return <div className={this.props.className}>
+    return <div className={`PlaceChooser ${this.props.className}`}>
       <select value={this.state.nextPlaceId}
               onChange={this.handleNextPlaceIdChange}
               disabled={!this.state.hasNextPlaceId}>

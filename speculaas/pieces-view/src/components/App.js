@@ -34,17 +34,17 @@ class App extends Component {
   render() {
     return (
       <div className="App">
-        <div className="Control_top">
-          <TransitionControl className="TransitionControl_top"
+        <div className="Control top">
+          <TransitionControl className="top"
                              transitionProportion={this.state.t}
                              onChange={this.handleTransitionProportionChange}/>
-          <PlaceChooser className="PlaceChooser_top"
+          <PlaceChooser className="top"
                         allowedPlaceIds={this.state.possiblePlaceIds}
                         onPlaceIdAdded={this.handlePlaceIdAdded}/>
         </div>
         <PlaceList transitionProportion={this.state.t}
                    placeIds={this.state.placeIds}/>
-        <TransitionControl className="TransitionControl_bottom"
+        <TransitionControl className="bottom"
                            transitionProportion={this.state.t}
                            onChange={this.handleTransitionProportionChange}/>
       </div>

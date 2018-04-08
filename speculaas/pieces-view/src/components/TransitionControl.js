@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import '../styles/TransitionControl.css';
 
 export class TransitionControl extends Component {
   constructor(props) {
@@ -13,7 +14,7 @@ export class TransitionControl extends Component {
   }
 
   render() {
-    return <div className={this.props.className}>
+    return <div className={`TransitionControl ${this.props.className}`}>
       <input style={{width: "100%"}}
              type="range" min="0" max="100" step="1"
              value={this.props.transitionProportion * 100}

@@ -1,67 +1,44 @@
-/*
-  On portrait, show places left to right, scrolling horizontally
-  on landscape, top to bottom, scrolling vertically
- */
 @media (orientation: portrait) {
   html, body, #root, .App {
     height: 100%;
   }
 
-  .App {
-    display: flex;
-    flex-flow: column;
-  }
-
   .App .PlaceList {
-    flex-grow: 2;
-  }
-
-  .App .PlaceList {
-    display: flex;
-    flex-flow: row;
-    flex-wrap: nowrap;
-    overflow-x: auto;
+    padding-top: 30px;
+    height: 100%;
   }
 
   .App .PlaceList .Place {
-    flex-shrink: 0;
-    flex-grow: 0;
-    flex-basis: auto;
-    width: 90%;
-    margin-right: 5%;
+    height: 70%;
   }
 
-  .App .Control_top {
+  .App .PlaceList .Place .CanvasContainer {
+    height: 90%;
+  }
+
+  .App .Control.top {
     display: flex;
     flex-direction: row;
     align-items: center;
 
-    position: sticky;
+    position: fixed;
     top: 10px;
   }
 
-  .App .PlaceChooser_top {
+  .App .PlaceChooser.top {
     margin-left: 10px;
   }
 
-  .App .TransitionControl_top {
+  .App .TransitionControl.top {
     display: none;
   }
 
-  .App .TransitionControl_bottom {
+  .App .TransitionControl.bottom {
     position: fixed;
-    left: 5px;
-    right: 5px;
-    bottom: 10px;
+    left: 20px;
+    right: 20px;
+    bottom: 30px;
     height: 20px;
-    padding-left: 10px;
-    padding-right: 15px;
-    padding-top: 10px;
-    padding-bottom: 10px;
-    border: 1px solid;
-    border-radius: 5px;
-    background-color: white;
-    opacity: 0.8;
   }
 }
 
@@ -76,7 +53,16 @@
     flex-basis: 450px;
   }
 
-  .App .Control_top {
+  .App .PlaceList .Place {
+    display: flex;
+    flex-flow: column;
+  }
+
+  .CanvasContainer {
+    flex-grow: 2;
+  }
+
+  .App .Control.top {
     display: flex;
     flex-direction: row;
     align-items: center;
@@ -85,45 +71,27 @@
     top: 10px;
   }
 
-  .App .TransitionControl_top {
+  .App .TransitionControl.top {
     margin-left: 10px;
 
     width: 30%;
-    height: 20px;
-
-    padding-left: 10px;
-    padding-right: 15px;
-    padding-top: 10px;
-    padding-bottom: 10px;
-    border: 1px solid;
-    border-radius: 5px;
-    background-color: white;
-    opacity: 0.8;
+    height: 40px;
   }
 
-  .App .PlaceChooser_top {
+  .App .PlaceChooser.top {
     margin-left: 10px;
   }
 
-  .App .TransitionControl_bottom {
+  .App .TransitionControl.bottom {
     display: none;
   }
 }
 
-.App .PlaceChooser_top button {
+.App .PlaceChooser.top button {
   font-size: 20px;
 }
 
-.App .PlaceChooser_top select {
+.App .PlaceChooser.top select {
   font-size: 20px;
-}
-
-.App .PlaceList .Place {
-  display: flex;
-  flex-flow: column;
-}
-
-.CanvasContainer {
-  flex-grow: 2;
 }
 

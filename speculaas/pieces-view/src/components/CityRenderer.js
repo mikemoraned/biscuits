@@ -120,9 +120,6 @@ export class CityRenderer extends Component {
           scaleProportions.height * this.props.dimensions.height / max.y
         );
         context.strokeStyle = foregroundColor;
-        bitmapImages.forEach(bitmapImage => {
-          context.strokeRect(bitmapImage.x, bitmapImage.y, bitmapImage.width, bitmapImage.height);
-        });
 
         if (this.props.spriteBitmap !== null) {
           this.props.place.pieces.forEach(piece => {
