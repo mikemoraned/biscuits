@@ -95,3 +95,6 @@
   font-size: 20px;
 }
 
+canvas {
+  border-radius: 10px;
+}
