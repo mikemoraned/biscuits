@@ -7,8 +7,12 @@ class PlaceList extends Component {
       return (
         <div className="PlaceList">
           {
-            this.props.placeIds.map(placeId => {
-              return <Place key={placeId} id={placeId} transitionProportion={this.props.transitionProportion} />
+            this.props.chosenIds.map(chosenId => {
+              const choice = this.props.possibleChoices[chosenId];
+              return <Place key={chosenId}
+                            placeId={choice.placeId}
+                            layout={choice.layout}
+                            transitionProportion={this.props.transitionProportion} />
             })
           }
         </div>

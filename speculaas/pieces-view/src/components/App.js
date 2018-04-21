@@ -9,14 +9,42 @@ class App extends Component {
   constructor(props) {
     super(props);
 
+    const possiblePlaceIds =  ['edinburgh', 'jerusalem', 'au', 'newyork', 'budapest'];
+    const possibleLayouts = [
+      {
+        id: 'BNF/GuillotineBafLas/SORT_AREA',
+        name: 'Guillotine',
+      },
+      {
+        id: 'BNF/MaxRectsBaf/SORT_AREA',
+        name: 'MaxRectsBaf'
+      }
+    ];
+
+    const possibleChoices = possiblePlaceIds.reduce((accum, placeId) => {
+      possibleLayouts.forEach(layout => {
+        const choice = {
+          placeId,
+          layout
+        };
+        const choiceId = this.choiceIdForChoice(choice);
+        accum[choiceId] = choice;
+      });
+      return accum;
+    }, {});
+
     this.state = {
       t: 1.0,
-      possiblePlaceIds: ['jerusalem', 'au', 'newyork', 'budapest'],
-      placeIds: ['edinburgh']
+      possibleChoices,
+      chosenIds: [ 'edinburgh_BNF/GuillotineBafLas/SORT_AREA' ]
     };
 
     this.handleTransitionProportionChange = this.handleTransitionProportionChange.bind(this);
-    this.handlePlaceIdAdded = this.handlePlaceIdAdded.bind(this);
+    this.handleChosen = this.handleChosen.bind(this);
+  }
+
+  choiceIdForChoice(choice) {
+    return `${choice.placeId}_${choice.layout.id}`;
   }
 
   handleTransitionProportionChange(t) {
@@ -25,9 +53,9 @@ class App extends Component {
     });
   }
 
-  handlePlaceIdAdded(placeId) {
+  handleChosen(choiceId) {
     this.setState({
-      placeIds: [ placeId ].concat(this.state.placeIds),
+      chosenIds: [ choiceId ].concat(this.state.chosenIds),
     });
   }
 
@@ -39,11 +67,13 @@ class App extends Component {
                              transitionProportion={this.state.t}
                              onChange={this.handleTransitionProportionChange}/>
           <PlaceChooser className="top"
-                        allowedPlaceIds={this.state.possiblePlaceIds}
-                        onPlaceIdAdded={this.handlePlaceIdAdded}/>
+                        possibleChoices={this.state.possibleChoices}
+                        chosenIds={this.state.chosenIds}
+                        onChosen={this.handleChosen}/>
         </div>
         <PlaceList transitionProportion={this.state.t}
-                   placeIds={this.state.placeIds}/>
+                   possibleChoices={this.state.possibleChoices}
+                   chosenIds={this.state.chosenIds}/>
         <TransitionControl className="bottom"
                            transitionProportion={this.state.t}
                            onChange={this.handleTransitionProportionChange}/>

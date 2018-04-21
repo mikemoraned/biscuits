@@ -19,7 +19,7 @@ Use minikube docker registry and switch to speculaas context:
 ## Build
 
     docker build -t houseofmoran/speculaas-pieces-finder:11 ./pieces-finder
-    docker build -t houseofmoran/speculaas-pieces-view:26 ./pieces-view
+    docker build -t houseofmoran/speculaas-pieces-view:27 ./pieces-view
     
 ## Startup
 
