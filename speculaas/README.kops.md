@@ -191,10 +191,10 @@ Use docker hub and switch to speculaas-kops context:
 ## Build and push
 
     docker build -t houseofmoran/speculaas-pieces-finder:11 ./pieces-finder
-    docker build -t houseofmoran/speculaas-pieces-view:27 ./pieces-view
+    docker build -t houseofmoran/speculaas-pieces-view:29 ./pieces-view
     
     docker push houseofmoran/speculaas-pieces-finder:11
-    docker push houseofmoran/speculaas-pieces-view:27
+    docker push houseofmoran/speculaas-pieces-view:29
         
 ## Deployments
 
