@@ -6,7 +6,7 @@ see http://www.armellecaron.fr/works/les-villes-rangees/.
 
 ## April 2018 : Speculaas
 
-<img src="public/apr2018.jerusalem.png" />
+<a href="https://youtu.be/6DsjwTlskkM"><img src="public/apr2018.jerusalem.png" /></a>
 
 I've re-used the city images and the connected components from the previous work. This then allowed me to:
 
