@@ -1,8 +1,28 @@
 # Biscuits
 
-This is a small project for playing with automatically destructuring 
+This is a side project for playing with automatically destructuring 
 cities in a similarish way to that done by the artist Armelle Caron,
 see http://www.armellecaron.fr/works/les-villes-rangees/.
+
+## April 2018 : Speculaas
+
+<img src="public/apr2018.jerusalem.png" />
+
+I've re-used the city images and the connected components from the previous work. This then allowed me to:
+
+1. [pieces-finder](speculaas/pieces-finder): For each set of connected components, process
+them using the [rectpack](https://github.com/secnot/rectpack) bin-packing library in two ways:
+    1. find a compact sprite packing of the connected components to reduce download size for any
+    visualisations; the previous packing was very simple but large
+    2. find all variations of the bin-packings available and make them available as alternative layouts
+2. [pieces-view](speculaas/pieces-view): provide visualisations of a selected subset of layouts which can
+be animated and displayed at reasonable speed on both mobile and desktop: http://speculaas.houseofmoran.io/
+3. make above layouts available at a [GraphQL endpoint](http://speculaas.houseofmoran.io/graphql) so that
+others could build on this if they wanted to.
+
+I also used this an opportunity to:
+* learn how to deploy and use a kubernetes cluster
+* learn a practical application of GraphQL
 
 ## September 2017
 
