@@ -70,9 +70,6 @@ class App extends Component {
                         possibleChoices={this.state.possibleChoices}
                         chosenIds={this.state.chosenIds}
                         onChosen={this.handleChosen}/>
-          <div class="WhatIsThis">
-            <a href='https://github.com/mikemoraned/biscuits'>?</a>
-          </div>
         </div>
         <PlaceList transitionProportion={this.state.t}
                    possibleChoices={this.state.possibleChoices}

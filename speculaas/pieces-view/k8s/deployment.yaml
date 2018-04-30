@@ -17,7 +17,7 @@ spec:
     spec:
       containers:
       - name: pieces-view
-        image: houseofmoran/speculaas-pieces-view:29
+        image: houseofmoran/speculaas-pieces-view:30
         resources:
           limits:
             cpu: 100m
