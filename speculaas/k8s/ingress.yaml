@@ -11,6 +11,7 @@ spec:
     - hosts:
         - speculaas.do.houseofmoran.io
         - speculaas.houseofmoran.com
+        - speculaas.houseofmoran.io
       secretName: letsencrypt-prod
   rules:
     - host: speculaas.do.houseofmoran.io
@@ -25,4 +26,6 @@ spec:
               serviceName: pieces-finder-service
               servicePort: 80
     - host: speculaas.houseofmoran.com
+      http: *http
+    - host: speculaas.houseofmoran.io
       http: *http
