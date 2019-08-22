@@ -4,6 +4,45 @@ This is a side project for playing with automatically destructuring
 cities in a similarish way to that done by the artist Armelle Caron,
 see http://www.armellecaron.fr/works/les-villes-rangees/.
 
+## August 2019: Garibaldi
+
+Where I got to with Speculaas was great to get an idea with what can be done with automatic layouts based
+on bin packing algorithms, where the whole area is treated as one "bin". However, it was lacking in a
+few major aspects.
+
+The bin-packing algorithms are quite slow to execute, as they are np-hard in general. This is not a new
+learning, but given that my execution language was Python the impact of the algorithmic hardness was
+increased by having a slow execution language. Also, the layouts from bin-packing algorithms don't look
+anywhere near as nice as the original artists work.
+
+Speculaas is based on hand-picked screenshots of maps. This was a deliberate compromise but
+limits discovery and comparison; it's hard to add new areas and hard to be sure they are being compared at
+same size scale.
+
+When it comes to implementation I did this as Python running on Kubernetes. The Kubernetes part was fine in
+general but brings with it a bunch of overheads. Add onto this the cpu requirements of running python and it
+quickly eats into my personal Kubernetes budget.
+
+So the aims for the next iteration (Garibaldi) are:
+- free choice of areas at a fixed set of zoom levels i.e. any area on the world can be chosen that corresponds
+to zoom levels which show city details
+- allow automatic layouts that don't correspond only to bin-packing algorithms
+- fast dynamic updates i.e. where possible, data is produced quickly in response to user interactions and
+not as a batch offline process
+
+Also, I have a bunch of technologies I am interested in exploring, so I'll be chosen from those.
+
+This leads to a few interesting implementation constraints:
+- Bias towards processing vectors which preserve structures, as opposed to using images
+- Bias towards languages which:
+  - can be made fast, for general responsiveness and reducing the impact of np-hard algorithms
+  - have a low memory footprint, so that they don't take up space in browser or in back-end clusters
+  - can be made to run either in-browser or on back-end, so that computation can move to where it is needed
+  - have a mature grpc implementation that allows services written in different languages to interoperate
+
+Also, some allowances:
+- This doesn't need to run in all browsers i.e. so backwards incompatibility is allowed
+
 ## April 2018 : Speculaas
 
 <a href="https://youtu.be/6DsjwTlskkM"><img src="public/apr2018.jerusalem.png" /></a>
@@ -39,3 +78,4 @@ such there is a clear figure/ground delineation.
 3. Use React + Canvas rendering + d3 animations to:
   * sort and pack areas by size
   * animate the chunks into place over original image
+
