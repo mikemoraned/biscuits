@@ -25,3 +25,4 @@ __pycache__/
 *~
 venv_python2/
 .env
+node_modules/
