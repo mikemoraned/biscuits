@@ -43,6 +43,17 @@ This leads to a few interesting implementation constraints:
 Also, some allowances:
 - This doesn't need to run in all browsers i.e. so backwards incompatibility is allowed
 
+### Approach
+
+1. Choose aspect ratio of area, and real height e.g. 16:9 and height of 1km.
+2. Chunk this to a bounding box represented by a pair of geohashes at some fixed geohash accuracy, where top-left corner of top-left geohash and top-left corner of bottom-right geohash define the area.
+3. Choose mapbox as the map provider.
+4. This allows us to define a binary image, where we start with a white image and then draw in black all features we want to act as separators between areas. This would be features like roads, sea, etc. We get these by getting a set of vector or raster tiles which represent these features and then drawing them to an image, where we truncate and offset the points in the features. This means we end up with a binary image which corresponds to the original bounding box.
+5. Take this binary image and find connected components. This defines our "biscuits" as separate raster images.
+6. Convert these raster images back to vectors by taking each separately as a binary image and tracing around the edge.
+7. Ask the layout algorithm to take these inputs and lay them out by arranging into an area which retains tha original aspect ratio but can be bigger or smaller.
+8. These biscuits can then be animated back onto the main grid in the front-end, displayed using a canvas overlay over the main mapbox map.
+
 ## April 2018 : Speculaas
 
 <a href="https://youtu.be/6DsjwTlskkM"><img src="public/apr2018.jerusalem.png" /></a>
