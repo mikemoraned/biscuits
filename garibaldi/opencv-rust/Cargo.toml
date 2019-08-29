@@ -8,3 +8,4 @@ edition = "2018"
 
 [dependencies]
 opencv = {version = "0.19.1", default-features = false, features = ["opencv-41"]}
+rand = "0.7.0"
