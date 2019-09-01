@@ -35,17 +35,14 @@ fn label_components(component_image: &Mat, num_components: i32) -> Result<Mat> {
     Ok(label_image)
 }
 
-fn detect_components() -> Result<()> {
-    let binary_path = PathBuf::from(env!("CARGO_MANIFEST_DIR")).join("greyscale.png");
-    let components_path = PathBuf::from(env!("CARGO_MANIFEST_DIR")).join("components.png");
-
-    let src = imgcodecs::imread(binary_path.to_str().unwrap(), imgcodecs::IMREAD_GRAYSCALE)?;
+fn detect_components(src_path: PathBuf, components_path: PathBuf) -> Result<()> {
+    let src = imgcodecs::imread(src_path.to_str().unwrap(), imgcodecs::IMREAD_GRAYSCALE)?;
     let mut src_bw = unsafe { Mat::new_size(src.size()?, core::CV_32S)? };
     imgproc::threshold(&src, &mut src_bw, 128.0, 255.0, imgproc::THRESH_BINARY)?;
     let mut component_image = unsafe { Mat::new_size(src.size()?, core::CV_32S)? };
-
     let num_components =
         imgproc::connected_components(&src_bw, &mut component_image, 8, core::CV_32S)?;
+
     let label_image = label_components(&component_image, num_components)?;
 
     let params = opencv::types::VectorOfint::new();
@@ -55,5 +52,8 @@ fn detect_components() -> Result<()> {
 }
 
 fn main() {
-    println!("{:?}", detect_components());
+    let src_path = PathBuf::from(env!("CARGO_MANIFEST_DIR")).join("greyscale.png");
+    let components_path = PathBuf::from(env!("CARGO_MANIFEST_DIR")).join("components.png");
+
+    println!("{:?}", detect_components(src_path, components_path));
 }
