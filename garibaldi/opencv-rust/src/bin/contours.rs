@@ -20,7 +20,7 @@ fn detect_contours(src_path: PathBuf, contours_path: PathBuf) -> Result<()> {
     let zero = core::Scalar::new(0.0, 0.0, 0.0, 0.0);
     let mut contour_image = Mat::new_size_with_default(src.size()?, core::CV_32S, zero)?;
 
-    let color = core::Scalar::new(128.0, 128.0, 128.0, 128.0);
+    let color = core::Scalar::new(255.0, 255.0, 255.0, 255.0);
     let thickness = 1;
     let linetype = 4;
     let max_level = 0;
