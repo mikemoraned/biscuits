@@ -27,6 +27,16 @@ fn detect_contours(src_path: PathBuf, contours_path: PathBuf) -> Result<()> {
     let hierarchy = core::Mat::default()?;
 
     for contour_index in 0..contours.len() {
+        let contour = contours.get(contour_index)?;
+        println!("contour: {}", contour_index);
+        for row_index in 0..contour.rows()? {
+            let row: &[core::Vec2i] = contour.at_row::<core::Vec2i>(row_index)?;
+            println!(
+                "\tx: {}, y: {}",
+                row[0].get(0).unwrap(),
+                row[0].get(1).unwrap()
+            );
+        }
         imgproc::draw_contours(
             &mut contour_image,
             &contours,
