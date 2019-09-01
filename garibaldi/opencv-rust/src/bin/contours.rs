@@ -17,25 +17,28 @@ fn detect_contours(src_path: PathBuf, contours_path: PathBuf) -> Result<()> {
         offset,
     )?;
 
-    let mut contour_image = unsafe { Mat::new_size(src.size()?, core::CV_32S)? };
+    let zero = core::Scalar::new(0.0, 0.0, 0.0, 0.0);
+    let mut contour_image = Mat::new_size_with_default(src.size()?, core::CV_32S, zero)?;
 
-    let contour_index = -1; // draw all
     let color = core::Scalar::new(128.0, 128.0, 128.0, 128.0);
     let thickness = 1;
     let linetype = 4;
-    let hierarchy = core::Mat::default()?;
     let max_level = 0;
-    imgproc::draw_contours(
-        &mut contour_image,
-        &contours,
-        contour_index,
-        color,
-        thickness,
-        linetype,
-        &hierarchy,
-        max_level,
-        offset,
-    )?;
+    let hierarchy = core::Mat::default()?;
+
+    for contour_index in 0..contours.len() {
+        imgproc::draw_contours(
+            &mut contour_image,
+            &contours,
+            contour_index as i32,
+            color,
+            thickness,
+            linetype,
+            &hierarchy,
+            max_level,
+            offset,
+        )?;
+    }
 
     let params = opencv::types::VectorOfint::new();
     imgcodecs::imwrite(contours_path.to_str().unwrap(), &contour_image, &params)?;
