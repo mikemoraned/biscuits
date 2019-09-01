@@ -8,7 +8,7 @@ fn random_color_map(num_labels: usize) -> Vec<Vec3b> {
     let mut rng = thread_rng();
     color_map[0] = Vec3b::default();
     for label in 1..num_labels {
-        color_map[label as usize] = Vec3b::from([
+        color_map[label] = Vec3b::from([
             rng.gen_range(0, 255),
             rng.gen_range(0, 255),
             rng.gen_range(0, 255),
