@@ -1,18 +1,18 @@
 import React, { useRef } from "react";
 
 function App() {
+  const canvasRef = useRef(null);
+
   const handleClick = () => {
     import("@mike_moran/biscuiting-lib")
       .then(biscuiting => {
-        console.dir(biscuiting);
-        biscuiting.greet("foop");
+        const dataURL = canvasRef.current.toDataURL();
+        biscuiting.find_biscuits(dataURL);
       })
       .catch(err => {
         console.log(err);
       });
   };
-
-  const canvasRef = useRef(null);
 
   return (
     <canvas
