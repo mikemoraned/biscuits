@@ -1,7 +1,7 @@
-import React, { Component } from "react";
+import React from "react";
 
-class App extends Component {
-  handleClick = () => {
+function App() {
+  const handleClick = () => {
     import("@mike_moran/biscuiting-lib")
       .then(biscuiting => {
         console.dir(biscuiting);
@@ -12,13 +12,11 @@ class App extends Component {
       });
   };
 
-  render() {
-    return (
-      <div>
-        <button onClick={this.handleClick}>Load</button>
-      </div>
-    );
-  }
+  return (
+    <div>
+      <button onClick={handleClick}>Load</button>
+    </div>
+  );
 }
 
 export default App;
