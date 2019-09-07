@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useRef } from "react";
 
 function App() {
   const handleClick = () => {
@@ -12,10 +12,15 @@ function App() {
       });
   };
 
+  const canvasRef = useRef(null);
+
   return (
-    <div>
-      <button onClick={handleClick}>Load</button>
-    </div>
+    <canvas
+      ref={canvasRef}
+      width={window.innerWidth}
+      height={window.innerHeight}
+      onClick={handleClick}
+    />
   );
 }
 
