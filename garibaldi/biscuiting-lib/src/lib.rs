@@ -53,8 +53,8 @@ pub fn find_biscuits(image_data_uri_str: &str) -> Result<String, JsValue> {
                                     console::time_end_with_label("encode data url");
                                     return Ok(modified_image_uri.as_str().into());
                                 }
-                                _ => {
-                                    return Err(format!("got some other image type").into());
+                                some_image => {
+                                    return Err(format!("got some other image type, {:?}", some_image.color()).into());
                                 }
                             },
                             Err(error) => {
