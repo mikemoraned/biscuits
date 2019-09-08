@@ -7,13 +7,18 @@ function App() {
     import("@mike_moran/biscuiting-lib")
       .then(biscuiting => {
         const dataURL = canvasRef.current.toDataURL();
+        console.time("find biscuits");
         const result = biscuiting.find_biscuits(dataURL);
-        console.dir(result);
+        console.timeEnd("find biscuits");
         const context = canvasRef.current.getContext("2d");
         const image = new Image();
         image.onload = () => {
+          console.timeEnd("load image");
+          console.time("draw image");
           context.drawImage(image, 0, 0);
+          console.timeEnd("draw image");
         };
+        console.time("load image");
         image.src = result;
       })
       .catch(err => {
