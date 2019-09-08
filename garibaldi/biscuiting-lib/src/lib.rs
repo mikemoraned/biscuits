@@ -6,6 +6,7 @@ use wasm_bindgen::prelude::*;
 #[wasm_bindgen]
 pub fn find_biscuits(image_data_uri_str: &str) {
     use base64::decode;
+    use image::{load_from_memory_with_format, DynamicImage, ImageFormat};
     use url::Url;
     use web_sys::console;
 
@@ -32,6 +33,19 @@ pub fn find_biscuits(image_data_uri_str: &str) {
                 match decode(image_base64) {
                     Ok(image_bytes) => {
                         console::log_1(&format!("got bytes: {}", image_bytes.len()).into());
+                        match load_from_memory_with_format(&image_bytes, ImageFormat::PNG) {
+                            Ok(image) => match image {
+                                DynamicImage::ImageRgba8(_) => {
+                                    console::log_1(&format!("got rgba image").into());
+                                }
+                                _ => {
+                                    console::log_1(&format!("got some other image type").into());
+                                }
+                            },
+                            Err(error) => {
+                                console::error_1(&format!("{:?}", error).into());
+                            }
+                        }
                     }
                     Err(error) => {
                         console::error_1(&format!("{:?}", error).into());
