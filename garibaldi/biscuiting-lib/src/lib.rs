@@ -5,7 +5,7 @@ extern crate wasm_bindgen;
 use wasm_bindgen::prelude::*;
 
 #[wasm_bindgen]
-pub fn find_biscuits(image_data_uri_str: &str) {
+pub fn find_biscuits(image_data_uri_str: &str) -> Result<String, JsValue> {
     use base64::{decode, encode};
     use image::{load_from_memory_with_format, DynamicImage, ImageFormat, ImageOutputFormat};
     use imageproc::noise::salt_and_pepper_noise;
@@ -63,34 +63,32 @@ pub fn find_biscuits(image_data_uri_str: &str) {
                                         .into(),
                                     );
                                     let mut modified_image_uri = image_data_uri.clone();
-                                    modified_image_uri.set_path(&format!("{}{}", prefix, modified_image_base64));
+                                    modified_image_uri
+                                        .set_path(&format!("{}{}", prefix, modified_image_base64));
                                     console::log_1(
-                                        &format!(
-                                            "converted to url, {}",
-                                            modified_image_uri
-                                        )
-                                        .into(),
+                                        &format!("converted to url, {}", modified_image_uri).into(),
                                     );
+                                    return Ok(modified_image_uri.as_str().into());
                                 }
                                 _ => {
-                                    console::log_1(&format!("got some other image type").into());
+                                    return Err(format!("got some other image type").into());
                                 }
                             },
                             Err(error) => {
-                                console::error_1(&format!("{:?}", error).into());
+                                return Err(format!("image error: {:?}", error).into());
                             }
                         }
                     }
                     Err(error) => {
-                        console::error_1(&format!("{:?}", error).into());
+                        return Err(format!("{:?}", error).into());
                     }
                 }
             } else {
-                console::error_1(&format!("did not find {:?}", prefix).into());
+                return Err(format!("did not find {:?}", prefix).into());
             }
         }
         Err(error) => {
-            console::error_1(&format!("{:?}", error).into());
+            return Err(format!("{:?}", error).into());
         }
     }
 }

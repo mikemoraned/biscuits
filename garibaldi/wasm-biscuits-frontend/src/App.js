@@ -7,7 +7,14 @@ function App() {
     import("@mike_moran/biscuiting-lib")
       .then(biscuiting => {
         const dataURL = canvasRef.current.toDataURL();
-        biscuiting.find_biscuits(dataURL);
+        const result = biscuiting.find_biscuits(dataURL);
+        console.dir(result);
+        const context = canvasRef.current.getContext("2d");
+        const image = new Image();
+        image.onload = () => {
+          context.drawImage(image, 0, 0);
+        };
+        image.src = result;
       })
       .catch(err => {
         console.log(err);
