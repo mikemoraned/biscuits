@@ -12,62 +12,45 @@ pub fn find_biscuits(image_data_uri_str: &str) -> Result<String, JsValue> {
     use url::Url;
     use web_sys::console;
 
-    console::log_1(&format!("received '{}'", image_data_uri_str).into());
-
+    console::time_with_label("parse data url");
     match Url::parse(image_data_uri_str) {
         Ok(image_data_uri) => {
-            console::log_1(&format!("uri: '{:?}'", image_data_uri).into());
-            console::log_1(
-                &format!(
-                    "uri parts: scheme: '{:?}', path: '{:?}'",
-                    image_data_uri.scheme(),
-                    image_data_uri.path()
-                )
-                .into(),
-            );
-
+            console::time_end_with_label("parse data url");
+            console::time_with_label("trim url");
             let path = image_data_uri.path();
             let prefix = "image/png;base64,";
             if path.starts_with(prefix) {
                 let image_base64 = path.trim_start_matches(prefix);
-                console::log_1(&format!("base64: {}", image_base64).into());
+                console::time_end_with_label("trim url");
 
+                console::time_with_label("decode base64");
                 match decode(image_base64) {
                     Ok(image_bytes) => {
-                        console::log_1(&format!("got bytes: {}", image_bytes.len()).into());
+                        console::time_end_with_label("decode base64");
+                        console::time_with_label("decode png");
                         match load_from_memory_with_format(&image_bytes, ImageFormat::PNG) {
                             Ok(image) => match image {
                                 DynamicImage::ImageRgba8(rgba_image) => {
-                                    console::log_1(&format!("got rgba image").into());
+                                    console::time_end_with_label("decode png");
+                                    console::time_with_label("process image");
                                     let modified_image = DynamicImage::ImageRgba8(
                                         salt_and_pepper_noise(&rgba_image, 0.1, 1),
                                     );
-                                    console::log_1(&format!("modified image").into());
+                                    console::time_end_with_label("process image");
+                                    console::time_with_label("encode png");
                                     let mut modified_image_bytes = vec![];
                                     modified_image
                                         .write_to(&mut modified_image_bytes, ImageOutputFormat::PNG)
                                         .unwrap();
-                                    console::log_1(
-                                        &format!(
-                                            "wrote image as PNG bytes, {}",
-                                            modified_image_bytes.len()
-                                        )
-                                        .into(),
-                                    );
+                                    console::time_end_with_label("encode png");
+                                    console::time_with_label("encode base64");
                                     let modified_image_base64 = encode(&modified_image_bytes);
-                                    console::log_1(
-                                        &format!(
-                                            "converted to base64, {}",
-                                            modified_image_base64.len()
-                                        )
-                                        .into(),
-                                    );
+                                    console::time_end_with_label("encode base64");
+                                    console::time_with_label("encode data url");
                                     let mut modified_image_uri = image_data_uri.clone();
                                     modified_image_uri
                                         .set_path(&format!("{}{}", prefix, modified_image_base64));
-                                    console::log_1(
-                                        &format!("converted to url, {}", modified_image_uri).into(),
-                                    );
+                                    console::time_end_with_label("encode data url");
                                     return Ok(modified_image_uri.as_str().into());
                                 }
                                 _ => {
