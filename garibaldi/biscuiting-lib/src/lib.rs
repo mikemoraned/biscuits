@@ -1,12 +1,14 @@
 extern crate base64;
+extern crate image;
 extern crate wasm_bindgen;
 
 use wasm_bindgen::prelude::*;
 
 #[wasm_bindgen]
 pub fn find_biscuits(image_data_uri_str: &str) {
-    use base64::decode;
-    use image::{load_from_memory_with_format, DynamicImage, ImageFormat};
+    use base64::{decode, encode};
+    use image::{load_from_memory_with_format, DynamicImage, ImageFormat, ImageOutputFormat};
+    use imageproc::noise::salt_and_pepper_noise;
     use url::Url;
     use web_sys::console;
 
@@ -35,8 +37,40 @@ pub fn find_biscuits(image_data_uri_str: &str) {
                         console::log_1(&format!("got bytes: {}", image_bytes.len()).into());
                         match load_from_memory_with_format(&image_bytes, ImageFormat::PNG) {
                             Ok(image) => match image {
-                                DynamicImage::ImageRgba8(_) => {
+                                DynamicImage::ImageRgba8(rgba_image) => {
                                     console::log_1(&format!("got rgba image").into());
+                                    let modified_image = DynamicImage::ImageRgba8(
+                                        salt_and_pepper_noise(&rgba_image, 0.1, 1),
+                                    );
+                                    console::log_1(&format!("modified image").into());
+                                    let mut modified_image_bytes = vec![];
+                                    modified_image
+                                        .write_to(&mut modified_image_bytes, ImageOutputFormat::PNG)
+                                        .unwrap();
+                                    console::log_1(
+                                        &format!(
+                                            "wrote image as PNG bytes, {}",
+                                            modified_image_bytes.len()
+                                        )
+                                        .into(),
+                                    );
+                                    let modified_image_base64 = encode(&modified_image_bytes);
+                                    console::log_1(
+                                        &format!(
+                                            "converted to base64, {}",
+                                            modified_image_base64.len()
+                                        )
+                                        .into(),
+                                    );
+                                    let mut modified_image_uri = image_data_uri.clone();
+                                    modified_image_uri.set_path(&format!("{}{}", prefix, modified_image_base64));
+                                    console::log_1(
+                                        &format!(
+                                            "converted to url, {}",
+                                            modified_image_uri
+                                        )
+                                        .into(),
+                                    );
                                 }
                                 _ => {
                                     console::log_1(&format!("got some other image type").into());
