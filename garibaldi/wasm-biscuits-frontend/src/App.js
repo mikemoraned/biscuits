@@ -6,11 +6,17 @@ function App() {
   const handleClick = () => {
     import("@mike_moran/biscuiting-lib")
       .then(biscuiting => {
-        const dataURL = canvasRef.current.toDataURL();
+        const canvas = canvasRef.current;
+        const { BiscuitFinder } = biscuiting;
+        const biscuitFinder = BiscuitFinder.new(canvas.width, canvas.height);
+        console.dir(biscuitFinder);
+        console.dir(biscuitFinder.foop());
+
+        const dataURL = canvas.toDataURL();
         console.time("find biscuits");
         const result = biscuiting.find_biscuits(dataURL);
         console.timeEnd("find biscuits");
-        const context = canvasRef.current.getContext("2d");
+        const context = canvas.getContext("2d");
         const image = new Image();
         image.onload = () => {
           console.timeEnd("load image");

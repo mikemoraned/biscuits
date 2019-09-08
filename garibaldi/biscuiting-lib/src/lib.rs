@@ -5,6 +5,23 @@ extern crate wasm_bindgen;
 use wasm_bindgen::prelude::*;
 
 #[wasm_bindgen]
+pub struct BiscuitFinder {
+    width: u8,
+    height: u8,
+}
+
+#[wasm_bindgen]
+impl BiscuitFinder {
+    pub fn new(width: u8, height: u8) -> BiscuitFinder {
+        BiscuitFinder { width, height }
+    }
+
+    pub fn foop(&self) -> String {
+        "foop!".into()
+    }
+}
+
+#[wasm_bindgen]
 pub fn find_biscuits(image_data_uri_str: &str) -> Result<String, JsValue> {
     use base64::{decode, encode};
     use image::{load_from_memory_with_format, DynamicImage, ImageFormat, ImageOutputFormat};
@@ -54,7 +71,11 @@ pub fn find_biscuits(image_data_uri_str: &str) -> Result<String, JsValue> {
                                     return Ok(modified_image_uri.as_str().into());
                                 }
                                 some_image => {
-                                    return Err(format!("got some other image type, {:?}", some_image.color()).into());
+                                    return Err(format!(
+                                        "got some other image type, {:?}",
+                                        some_image.color()
+                                    )
+                                    .into());
                                 }
                             },
                             Err(error) => {
