@@ -23,7 +23,6 @@ function App() {
 
         console.time("draw image");
         const outputPointer = biscuitFinder.output();
-        console.dir(outputPointer);
         const outputArray = new Uint8ClampedArray(
           memory.buffer,
           outputPointer,
@@ -34,21 +33,6 @@ function App() {
 
         context.putImageData(outputImageData, 0, 0);
         console.timeEnd("draw image");
-
-        // const dataURL = canvas.toDataURL();
-        // console.time("find biscuits");
-        // const result = biscuiting.find_biscuits(dataURL);
-        // console.timeEnd("find biscuits");
-
-        // const image = new Image();
-        // image.onload = () => {
-        //   console.timeEnd("load image");
-        //   console.time("draw image");
-        //   context.drawImage(image, 0, 0);
-        //   console.timeEnd("draw image");
-        // };
-        // console.time("load image");
-        // image.src = result;
       })
       .catch(err => {
         console.log(err);
