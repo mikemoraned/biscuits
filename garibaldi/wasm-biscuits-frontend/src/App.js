@@ -55,6 +55,7 @@ function loadBiscuitFinderLayer({ width, height, setBiscuitFinderLayer }) {
 function App() {
   const canvasRef = useRef(null);
   const [biscuitFinderLayer, setBiscuitFinderLayer] = useState(null);
+  const [circles, setCircles] = useState([]);
 
   useEffect(() => {
     if (biscuitFinderLayer == null && canvasRef.current != null) {
@@ -65,13 +66,28 @@ function App() {
     }
   }, [canvasRef, biscuitFinderLayer]);
 
-  const handleClick = () => {
-    if (biscuitFinderLayer != null) {
+  useEffect(() => {
+    if (canvasRef.current != null && circles.length > 0) {
       const canvas = canvasRef.current;
+      const { width, height } = canvas;
       const context = canvas.getContext("2d");
+      context.clearRect(0, 0, width, height);
+      context.fillStyle = "black";
+      circles.forEach(({ x, y, radius }) => {
+        context.beginPath();
+        context.arc(x, y, radius, 0, 2 * Math.PI);
+        context.fill();
+      });
 
-      biscuitFinderLayer.draw(context);
+      if (biscuitFinderLayer != null) {
+        biscuitFinderLayer.draw(context);
+      }
     }
+  }, [circles, canvasRef, biscuitFinderLayer]);
+
+  const handleClick = event => {
+    const circle = { x: event.clientX, y: event.clientY, radius: 50 };
+    setCircles(circles.concat([circle]));
   };
 
   return (
