@@ -113,20 +113,16 @@ impl BiscuitFinder {
                 });
 
                 console::log_1(
-                    &format_histogram(&binarised_image, |pixel: &Luma<u8>| {
-                        format!("{}", pixel[0])
-                    })
-                    .into(),
+                    &format_histogram(&binarised_image, |pixel: &Luma<u8>| format!("{}", pixel[0]))
+                        .into(),
                 );
 
                 let labelled_image =
                     connected_components(&binarised_image, Connectivity::Four, background_color);
 
                 console::log_1(
-                    &format_histogram(&labelled_image, |pixel: &Luma<u32>| {
-                        format!("{}", pixel[0])
-                    })
-                    .into(),
+                    &format_histogram(&labelled_image, |pixel: &Luma<u32>| format!("{}", pixel[0]))
+                        .into(),
                 );
 
                 console::time_end_with_label("find connected components");
@@ -138,6 +134,36 @@ impl BiscuitFinder {
                 console::time_with_label("apply color map");
                 let processed_image = map_colors(&labelled_image, |p| color_map[p[0] as usize]);
                 console::time_end_with_label("apply color map");
+                console::time_end_with_label("process image");
+
+                console::time_with_label("to raw output");
+                self.output = Some(processed_image.to_vec());
+                console::time_end_with_label("to raw output");
+
+                return Ok("processed image".into());
+            }
+            None => {
+                return Err("couldn't read from raw".into());
+            }
+        }
+    }
+
+    pub fn find_biscuits_simple(&mut self, input: Clamped<Vec<u8>>) -> Result<String, JsValue> {
+        use web_sys::console;
+
+        console::time_with_label("from raw input");
+        match RgbaImage::from_raw(self.width, self.height, input.0) {
+            Some(image) => {
+                console::time_end_with_label("from raw input");
+                console::log_1(
+                    &format_histogram(&image, |pixel: &Rgba<u8>| {
+                        format!("{}, {}, {}, {}", pixel[0], pixel[1], pixel[2], pixel[3])
+                    })
+                    .into(),
+                );
+
+                console::time_with_label("process image");
+                let processed_image = image.clone();
                 console::time_end_with_label("process image");
 
                 console::time_with_label("to raw output");
