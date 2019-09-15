@@ -151,6 +151,7 @@ impl BiscuitFinder {
     pub fn find_biscuits_simple(&mut self, input: Clamped<Vec<u8>>) -> Result<String, JsValue> {
         use image::{GrayImage, Luma};
         use imageproc::map::map_colors;
+        use imageproc::region_labelling::{connected_components, Connectivity};
         use web_sys::console;
 
         let len = input.0.len();
@@ -192,16 +193,26 @@ impl BiscuitFinder {
                 );
 
                 console::time_with_label("process image");
-                let processed_image: GrayImage = map_colors(&image, |p| {
+                let gray_image: GrayImage = map_colors(&image, |p| {
                     let avg = ((p[0] as f32) + (p[1] as f32) + (p[2] as f32)) / 3.0;
                     let alpha = p[3] as f32 / std::u8::MAX as f32;
                     let gray = (alpha * avg).floor() as u8;
                     Luma([gray])
                 });
+
+                let background_color = Luma([255u8; 1]);
+                let labelled_image =
+                    connected_components(&gray_image, Connectivity::Four, background_color);
+                let num_labels = (labelled_image.pixels().map(|p| p[0]).max().unwrap()) as usize;
+                let color_map = self.random_color_map(num_labels + 1);
+                let processed_gray_image =
+                    map_colors(&labelled_image, |p| color_map[p[0] as usize]);
+
                 console::time_end_with_label("process image");
 
                 console::time_with_label("to raw output");
-                let remapped_to_rgba_image: RgbaImage = map_colors(&processed_image, |p| {
+                // let remapped_to_rgba_image: RgbaImage = map_colors(&gray_image, |p| {
+                let remapped_to_rgba_image: RgbaImage = map_colors(&processed_gray_image, |p| {
                     let gray = p[0];
                     Rgba([gray, gray, gray, 255])
                 });
