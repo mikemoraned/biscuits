@@ -197,10 +197,11 @@ impl BiscuitFinder {
                     let avg = ((p[0] as f32) + (p[1] as f32) + (p[2] as f32)) / 3.0;
                     let alpha = p[3] as f32 / std::u8::MAX as f32;
                     let gray = (alpha * avg).floor() as u8;
-                    Luma([gray])
+                    let inverted_gray = 255 - gray;
+                    Luma([inverted_gray])
                 });
 
-                let background_color = Luma([255u8; 1]);
+                let background_color = Luma([0u8; 1]);
                 let labelled_image =
                     connected_components(&gray_image, Connectivity::Four, background_color);
                 let num_labels = (labelled_image.pixels().map(|p| p[0]).max().unwrap()) as usize;
