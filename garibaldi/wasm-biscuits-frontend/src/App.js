@@ -11,6 +11,18 @@ class BiscuitFinderLayer {
   draw(context) {
     console.time("BiscuitFinderLayer.draw");
     const inputImageData = context.getImageData(0, 0, this.width, this.height);
+    console.dir(
+      inputImageData.data[0],
+      inputImageData.data[1],
+      inputImageData.data[2],
+      inputImageData.data[3]
+    );
+    console.dir(
+      inputImageData.data[inputImageData.data.length - 4],
+      inputImageData.data[inputImageData.data.length - 3],
+      inputImageData.data[inputImageData.data.length - 2],
+      inputImageData.data[inputImageData.data.length - 1]
+    );
     console.time("find biscuits");
     console.dir(this.biscuitFinder.find_biscuits_simple(inputImageData.data));
     console.timeEnd("find biscuits");
@@ -71,7 +83,8 @@ function App() {
       const canvas = canvasRef.current;
       const { width, height } = canvas;
       const context = canvas.getContext("2d");
-      context.clearRect(0, 0, width, height);
+      context.fillStyle = "white";
+      context.fillRect(0, 0, width, height);
       context.fillStyle = "black";
       circles.forEach(({ x, y, radius }) => {
         context.beginPath();
