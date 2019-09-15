@@ -1,6 +1,7 @@
 extern crate base64;
 extern crate console_error_panic_hook;
 extern crate image;
+extern crate js_sys;
 extern crate wasm_bindgen;
 
 use wasm_bindgen::prelude::*;
@@ -15,6 +16,11 @@ pub struct BiscuitFinder {
 
 use image::{Rgba, RgbaImage};
 
+fn gen_range(min: u8, max: u8) -> u8 {
+    let random = js_sys::Math::random();
+    return ((random * ((max - min + 1) as f64)).floor() as u8) + min;
+}
+
 #[wasm_bindgen]
 impl BiscuitFinder {
     pub fn new(width: u32, height: u32) -> BiscuitFinder {
@@ -27,20 +33,14 @@ impl BiscuitFinder {
     }
 
     fn random_color_map(&self, num_labels: usize) -> Vec<Rgba<u8>> {
-        use rand::Rng;
+        use web_sys::console;
 
         let mut color_map = vec![Rgba([0u8; 4]); num_labels];
-        let mut rng = rand::thread_rng();
         color_map[0] = Rgba([0u8; 4]);
         for label in 1..num_labels {
-            color_map[label] = Rgba([
-                rng.gen_range(0, 255),
-                rng.gen_range(0, 255),
-                rng.gen_range(0, 255),
-                0u8,
-            ]);
+            color_map[label] = Rgba([gen_range(1, 255), gen_range(1, 255), gen_range(1, 255), 0u8]);
         }
-        println!("color map: {:?}", color_map);
+        console::log_1(&format!("color map: {:?}", color_map).into());
 
         color_map
     }
@@ -68,23 +68,6 @@ impl BiscuitFinder {
                         return foreground_color;
                     }
                 });
-                let (width, height) = binarised_image.dimensions();
-                let image_size = width as usize * height as usize;
-                let limit = 2usize.pow(32);
-                let unlimited = 2u32.pow(32);
-                console::log_1(
-                    &format!(
-                        "image dimensions: {:?}, {}, {}, {}, {}, {}",
-                        binarised_image.dimensions(),
-                        image_size,
-                        limit,
-                        unlimited,
-                        std::mem::size_of::<usize>(),
-                        usize::max_value()
-                    )
-                    .into(),
-                );
-
                 let labelled_image =
                     connected_components(&binarised_image, Connectivity::Four, background_color);
                 console::time_end_with_label("find connected components");
@@ -94,8 +77,7 @@ impl BiscuitFinder {
                 let color_map = self.random_color_map(num_labels);
                 console::time_end_with_label("build color map");
                 console::time_with_label("apply color map");
-                let processed_image =
-                    map_colors(&labelled_image, |p| color_map[p[0] as usize]);
+                let processed_image = map_colors(&labelled_image, |p| color_map[p[0] as usize]);
                 console::time_end_with_label("apply color map");
                 console::time_end_with_label("process image");
 
