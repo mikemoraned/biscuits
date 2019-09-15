@@ -11,6 +11,7 @@ class BiscuitFinderLayer {
   draw(context) {
     console.time("BiscuitFinderLayer.draw");
     const inputImageData = context.getImageData(0, 0, this.width, this.height);
+    console.dir(inputImageData.data);
     console.time("find biscuits");
     console.dir(this.biscuitFinder.find_biscuits(inputImageData.data));
     console.timeEnd("find biscuits");
@@ -55,7 +56,7 @@ function loadBiscuitFinderLayer({ width, height, setBiscuitFinderLayer }) {
 function App() {
   const canvasRef = useRef(null);
   const [biscuitFinderLayer, setBiscuitFinderLayer] = useState(null);
-  const [circles, setCircles] = useState([]);
+  const [circles, setCircles] = useState([{ x: 20, y: 20, radius: 50 }]);
 
   useEffect(() => {
     if (biscuitFinderLayer == null && canvasRef.current != null) {
