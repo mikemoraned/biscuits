@@ -21,25 +21,31 @@ fn gen_range(min: u8, max: u8) -> u8 {
     return ((random * ((max - min + 1) as f64)).floor() as u8) + min;
 }
 
-fn format_histogram<P>(image: &imageproc::definitions::Image<P>) -> String
+fn format_histogram<P, F>(image: &imageproc::definitions::Image<P>, key_format_fn: F) -> String
 where
+    F: Fn(&P) -> String,
     P: image::Pixel<Subpixel = u8> + 'static,
 {
-    use imageproc::stats::histogram;
+    use std::collections::HashMap;
 
-    let summary: Vec<String> = histogram(&image)
-        .channels
+    let pixel_counts: HashMap<String, usize> =
+        image.pixels().fold(HashMap::new(), |mut counts, pixel| {
+            let formatted_pixel = key_format_fn(pixel);
+            counts.insert(
+                formatted_pixel.clone(),
+                match counts.get(&formatted_pixel) {
+                    Some(count) => count + 1,
+                    None => 1,
+                },
+            );
+            counts
+        });
+
+    let mut keys: Vec<String> = pixel_counts.keys().map(|k| k.clone()).collect();
+    keys.sort();
+    let summary: Vec<String> = keys
         .iter()
-        .enumerate()
-        .map(|(channel, &dist)| {
-            let channel_summary: Vec<String> = dist
-                .iter()
-                .enumerate()
-                .filter(|(_, &count)| count > 0)
-                .map(|(intensity, &count)| format!("[{}]: {}", intensity, count))
-                .collect();
-            format!("c{}: ({})", channel, channel_summary.join(", "))
-        })
+        .map(|k| format!("{}: {}", k, pixel_counts[k]))
         .collect();
 
     summary.join(", ")
@@ -75,11 +81,23 @@ impl BiscuitFinder {
         use imageproc::region_labelling::{connected_components, Connectivity};
         use web_sys::console;
 
+        console::log_1(
+            &format!(
+                "{}, {}, {}, {}",
+                input.0[0], input.0[1], input.0[2], input.0[3]
+            )
+            .into(),
+        );
         console::time_with_label("from raw input");
         match RgbaImage::from_raw(self.width, self.height, input.0) {
             Some(image) => {
                 console::time_end_with_label("from raw input");
-                console::log_1(&format_histogram(&image).into());
+                console::log_1(
+                    &format_histogram(&image, |pixel: &Rgba<u8>| {
+                        format!("{}, {}, {}, {}", pixel[0], pixel[1], pixel[2], pixel[3])
+                    })
+                    .into(),
+                );
 
                 console::time_with_label("process image");
                 let foreground_color = Luma([255u8; 1]);
