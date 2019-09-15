@@ -149,19 +149,63 @@ impl BiscuitFinder {
     }
 
     pub fn find_biscuits_simple(&mut self, input: Clamped<Vec<u8>>) -> Result<String, JsValue> {
+        use image::{GrayImage, Luma};
+        use imageproc::map::map_colors;
         use web_sys::console;
+
+        let len = input.0.len();
+        console::log_1(
+            &format!(
+                "raw input [{}, {}, {}, {}], [{}, {}, {}, {}]",
+                input.0[0],
+                input.0[1],
+                input.0[2],
+                input.0[3],
+                input.0[len - 4],
+                input.0[len - 3],
+                input.0[len - 2],
+                input.0[len - 1]
+            )
+            .into(),
+        );
 
         console::time_with_label("from raw input");
         match RgbaImage::from_raw(self.width, self.height, input.0) {
             Some(image) => {
                 console::time_end_with_label("from raw input");
 
+                let top_left = image.get_pixel(0, 0);
+                let bottom_right = image.get_pixel(self.width - 1, self.height - 1);
+                console::log_1(
+                    &format!(
+                        "rgba [{}, {}, {}, {}], [{}, {}, {}, {}]",
+                        top_left[0],
+                        top_left[1],
+                        top_left[2],
+                        top_left[3],
+                        bottom_right[0],
+                        bottom_right[1],
+                        bottom_right[2],
+                        bottom_right[3]
+                    )
+                    .into(),
+                );
+
                 console::time_with_label("process image");
-                let processed_image = image.clone();
+                let processed_image: GrayImage = map_colors(&image, |p| {
+                    let avg = ((p[0] as f32) + (p[1] as f32) + (p[2] as f32)) / 3.0;
+                    let alpha = p[3] as f32 / std::u8::MAX as f32;
+                    let gray = (alpha * avg).floor() as u8;
+                    Luma([gray])
+                });
                 console::time_end_with_label("process image");
 
                 console::time_with_label("to raw output");
-                self.output = Some(processed_image.to_vec());
+                let remapped_to_rgba_image: RgbaImage = map_colors(&processed_image, |p| {
+                    let gray = p[0];
+                    Rgba([gray, gray, gray, 255])
+                });
+                self.output = Some(remapped_to_rgba_image.to_vec());
                 console::time_end_with_label("to raw output");
 
                 return Ok("processed image".into());
