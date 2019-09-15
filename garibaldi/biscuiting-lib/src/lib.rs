@@ -155,12 +155,6 @@ impl BiscuitFinder {
         match RgbaImage::from_raw(self.width, self.height, input.0) {
             Some(image) => {
                 console::time_end_with_label("from raw input");
-                console::log_1(
-                    &format_histogram(&image, |pixel: &Rgba<u8>| {
-                        format!("{}, {}, {}, {}", pixel[0], pixel[1], pixel[2], pixel[3])
-                    })
-                    .into(),
-                );
 
                 console::time_with_label("process image");
                 let processed_image = image.clone();
