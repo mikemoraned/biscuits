@@ -14,9 +14,13 @@ wasm-bindgen = "0.2"
 web-sys = { version="0.3", features = ['console', 'Window', 'Performance'] }
 url = "2.1"
 base64 = "0.10"
-imageproc = "0.18"
-image = "0.21"
+# imageproc = "0.18"
+imageproc = { path = "/Users/mxm/Code/mine/forks/image-rs/imageproc"}
+image = "0.22"
+rand = "0.7"
+console_error_panic_hook = "0.1"
 
 [profile.release]
 lto = true
 opt-level = 's'
+debug = true
