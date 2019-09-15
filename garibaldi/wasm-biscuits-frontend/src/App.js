@@ -13,7 +13,7 @@ class BiscuitFinderLayer {
     const inputImageData = context.getImageData(0, 0, this.width, this.height);
     console.dir(inputImageData.data);
     console.time("find biscuits");
-    console.dir(this.biscuitFinder.find_biscuits(inputImageData.data));
+    console.dir(this.biscuitFinder.find_biscuits_simple(inputImageData.data));
     console.timeEnd("find biscuits");
 
     console.time("draw image");
