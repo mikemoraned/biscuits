@@ -1,4 +1,5 @@
 extern crate base64;
+extern crate console_error_panic_hook;
 extern crate image;
 extern crate wasm_bindgen;
 
@@ -12,16 +13,12 @@ pub struct BiscuitFinder {
     output: Option<Vec<u8>>,
 }
 
-fn performance() -> web_sys::Performance {
-    let window = web_sys::window().expect("should have a window in this context");
-    window
-        .performance()
-        .expect("performance should be available")
-}
+use image::{Rgba, RgbaImage};
 
 #[wasm_bindgen]
 impl BiscuitFinder {
     pub fn new(width: u32, height: u32) -> BiscuitFinder {
+        console_error_panic_hook::set_once();
         BiscuitFinder {
             width,
             height,
@@ -29,9 +26,30 @@ impl BiscuitFinder {
         }
     }
 
+    fn random_color_map(&self, num_labels: usize) -> Vec<Rgba<u8>> {
+        use rand::Rng;
+
+        let mut color_map = vec![Rgba([0u8; 4]); num_labels];
+        let mut rng = rand::thread_rng();
+        color_map[0] = Rgba([0u8; 4]);
+        for label in 1..num_labels {
+            color_map[label] = Rgba([
+                rng.gen_range(0, 255),
+                rng.gen_range(0, 255),
+                rng.gen_range(0, 255),
+                0u8,
+            ]);
+        }
+        println!("color map: {:?}", color_map);
+
+        color_map
+    }
+
     pub fn find_biscuits(&mut self, input: Clamped<Vec<u8>>) -> Result<String, JsValue> {
-        use image::RgbaImage;
-        use imageproc::noise::salt_and_pepper_noise;
+        // use imageproc::noise::salt_and_pepper_noise;
+        use image::Luma;
+        use imageproc::map::map_colors;
+        use imageproc::region_labelling::{connected_components, Connectivity};
         use web_sys::console;
 
         console::time_with_label("from raw input");
@@ -40,8 +58,45 @@ impl BiscuitFinder {
                 console::time_end_with_label("from raw input");
 
                 console::time_with_label("process image");
-                let seed = performance().now();
-                let processed_image = salt_and_pepper_noise(&image, 0.1, seed as u64);
+                let foreground_color = Luma([255u8; 1]);
+                let background_color = Luma([0u8; 1]);
+                console::time_with_label("find connected components");
+                let binarised_image = map_colors(&image, |p| {
+                    if p[0] > 0 {
+                        return background_color;
+                    } else {
+                        return foreground_color;
+                    }
+                });
+                let (width, height) = binarised_image.dimensions();
+                let image_size = width as usize * height as usize;
+                let limit = 2usize.pow(32);
+                let unlimited = 2u32.pow(32);
+                console::log_1(
+                    &format!(
+                        "image dimensions: {:?}, {}, {}, {}, {}, {}",
+                        binarised_image.dimensions(),
+                        image_size,
+                        limit,
+                        unlimited,
+                        std::mem::size_of::<usize>(),
+                        usize::max_value()
+                    )
+                    .into(),
+                );
+
+                let labelled_image =
+                    connected_components(&binarised_image, Connectivity::Four, background_color);
+                console::time_end_with_label("find connected components");
+                console::time_with_label("build color map");
+                let num_labels =
+                    (labelled_image.pixels().map(|p| p[0]).max().unwrap() + 1) as usize;
+                let color_map = self.random_color_map(num_labels);
+                console::time_end_with_label("build color map");
+                console::time_with_label("apply color map");
+                let processed_image =
+                    map_colors(&labelled_image, |p| color_map[p[0] as usize]);
+                console::time_end_with_label("apply color map");
                 console::time_end_with_label("process image");
 
                 console::time_with_label("to raw output");
