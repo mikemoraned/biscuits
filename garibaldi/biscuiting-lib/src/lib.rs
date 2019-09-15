@@ -198,7 +198,11 @@ impl BiscuitFinder {
                     let alpha = p[3] as f32 / std::u8::MAX as f32;
                     let gray = (alpha * avg).floor() as u8;
                     let inverted_gray = 255 - gray;
-                    Luma([inverted_gray])
+                    if inverted_gray < 128 {
+                        Luma([0u8; 1])
+                    } else {
+                        Luma([255u8; 1])
+                    }
                 });
 
                 let background_color = Luma([0u8; 1]);
