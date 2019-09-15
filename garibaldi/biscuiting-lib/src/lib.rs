@@ -21,10 +21,11 @@ fn gen_range(min: u8, max: u8) -> u8 {
     return ((random * ((max - min + 1) as f64)).floor() as u8) + min;
 }
 
-fn format_histogram<P, F>(image: &imageproc::definitions::Image<P>, key_format_fn: F) -> String
+fn format_histogram<P, F, PS>(image: &imageproc::definitions::Image<P>, key_format_fn: F) -> String
 where
     F: Fn(&P) -> String,
-    P: image::Pixel<Subpixel = u8> + 'static,
+    PS: image::Primitive + 'static,
+    P: image::Pixel<Subpixel = PS> + 'static,
 {
     use std::collections::HashMap;
 
@@ -110,8 +111,24 @@ impl BiscuitFinder {
                         return foreground_color;
                     }
                 });
+
+                console::log_1(
+                    &format_histogram(&binarised_image, |pixel: &Luma<u8>| {
+                        format!("{}", pixel[0])
+                    })
+                    .into(),
+                );
+
                 let labelled_image =
                     connected_components(&binarised_image, Connectivity::Four, background_color);
+
+                console::log_1(
+                    &format_histogram(&labelled_image, |pixel: &Luma<u32>| {
+                        format!("{}", pixel[0])
+                    })
+                    .into(),
+                );
+
                 console::time_end_with_label("find connected components");
                 console::time_with_label("build color map");
                 let num_labels =
