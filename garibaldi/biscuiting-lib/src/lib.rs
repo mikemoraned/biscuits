@@ -45,7 +45,7 @@ where
     keys.sort();
     let summary: Vec<String> = keys
         .iter()
-        .map(|k| format!("{}: {}", k, pixel_counts[k]))
+        .map(|k| format!("[{}]: {}", k, pixel_counts[k]))
         .collect();
 
     summary.join(", ")
