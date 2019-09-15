@@ -15,8 +15,7 @@ web-sys = { version="0.3", features = ['console', 'Window', 'Performance'] }
 js-sys = "0.3"
 url = "2.1"
 base64 = "0.10"
-# imageproc = "0.18"
-imageproc = { path = "/Users/mxm/Code/mine/forks/image-rs/imageproc"}
+imageproc = "0.19"
 image = "0.22"
 rand = "0.7"
 console_error_panic_hook = "0.1"
