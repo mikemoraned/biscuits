@@ -24,7 +24,7 @@ class BiscuitFinderLayer {
       inputImageData.data[inputImageData.data.length - 1]
     );
     console.time("find biscuits");
-    console.dir(this.biscuitFinder.find_biscuits_simple(inputImageData.data));
+    console.dir(this.biscuitFinder.find_biscuits(inputImageData.data));
     console.timeEnd("find biscuits");
 
     console.time("draw image");
