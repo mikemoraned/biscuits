@@ -55,7 +55,7 @@ function loadBiscuitFinderLayer({ width, height, setBiscuitFinderLayer }) {
 function App() {
   const canvasRef = useRef(null);
   const [biscuitFinderLayer, setBiscuitFinderLayer] = useState(null);
-  const [circles, setCircles] = useState([{ x: 20, y: 20, radius: 50 }]);
+  const [circles, setCircles] = useState([]);
 
   useEffect(() => {
     if (biscuitFinderLayer == null && canvasRef.current != null) {
