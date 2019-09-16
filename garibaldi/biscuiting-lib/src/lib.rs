@@ -22,6 +22,24 @@ fn gen_range(min: u8, max: u8) -> u8 {
     return ((random * ((max - min + 1) as f64)).floor() as u8) + min;
 }
 
+fn random_color_map(num_labels: usize) -> Vec<Rgba<u8>> {
+    use web_sys::console;
+
+    let mut color_map = vec![Rgba([0u8; 4]); num_labels];
+    color_map[0] = Rgba([0u8; 4]);
+    for label in 1..num_labels {
+        color_map[label] = Rgba([
+            gen_range(1, 255),
+            gen_range(1, 255),
+            gen_range(1, 255),
+            255u8,
+        ]);
+    }
+    console::log_1(&format!("color map: {:?}", color_map).into());
+
+    color_map
+}
+
 #[wasm_bindgen]
 impl BiscuitFinder {
     pub fn new(width: u32, height: u32) -> BiscuitFinder {
@@ -30,26 +48,8 @@ impl BiscuitFinder {
             width,
             height,
             output: None,
-            color_map: None,
+            color_map: Some(random_color_map(100)),
         }
-    }
-
-    fn random_color_map(&self, num_labels: usize) -> Vec<Rgba<u8>> {
-        use web_sys::console;
-
-        let mut color_map = vec![Rgba([0u8; 4]); num_labels];
-        color_map[0] = Rgba([0u8; 4]);
-        for label in 1..num_labels {
-            color_map[label] = Rgba([
-                gen_range(1, 255),
-                gen_range(1, 255),
-                gen_range(1, 255),
-                255u8,
-            ]);
-        }
-        console::log_1(&format!("color map: {:?}", color_map).into());
-
-        color_map
     }
 
     pub fn find_biscuits(&mut self, input: Clamped<Vec<u8>>) -> Result<String, JsValue> {
@@ -84,11 +84,11 @@ impl BiscuitFinder {
                 match &self.color_map {
                     Some(map) => {
                         if map.len() <= required_color_map_size {
-                            self.color_map = Some(self.random_color_map(required_color_map_size));
+                            self.color_map = Some(random_color_map(required_color_map_size));
                         }
                     }
                     None => {
-                        self.color_map = Some(self.random_color_map(required_color_map_size));
+                        self.color_map = Some(random_color_map(required_color_map_size));
                     }
                 };
                 let color_map = self.color_map.as_ref().unwrap();
