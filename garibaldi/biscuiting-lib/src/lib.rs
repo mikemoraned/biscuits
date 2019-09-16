@@ -12,6 +12,7 @@ pub struct BiscuitFinder {
     width: u32,
     height: u32,
     output: Option<Vec<u8>>,
+    color_map: Option<Vec<Rgba<u8>>>,
 }
 
 use image::{Rgba, RgbaImage};
@@ -29,6 +30,7 @@ impl BiscuitFinder {
             width,
             height,
             output: None,
+            color_map: None,
         }
     }
 
@@ -78,7 +80,18 @@ impl BiscuitFinder {
                 let labelled_image =
                     connected_components(&gray_image, Connectivity::Four, background_color);
                 let num_labels = (labelled_image.pixels().map(|p| p[0]).max().unwrap()) as usize;
-                let color_map = self.random_color_map(num_labels + 1);
+                let required_color_map_size = num_labels + 1;
+                match &self.color_map {
+                    Some(map) => {
+                        if map.len() <= required_color_map_size {
+                            self.color_map = Some(self.random_color_map(required_color_map_size));
+                        }
+                    }
+                    None => {
+                        self.color_map = Some(self.random_color_map(required_color_map_size));
+                    }
+                };
+                let color_map = self.color_map.as_ref().unwrap();
                 let processed_gray_image =
                     map_colors(&labelled_image, |p| color_map[p[0] as usize]);
 
