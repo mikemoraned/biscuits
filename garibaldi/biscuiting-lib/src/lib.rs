@@ -3,9 +3,14 @@ extern crate console_error_panic_hook;
 extern crate image;
 extern crate js_sys;
 extern crate wasm_bindgen;
+extern crate wee_alloc;
 
 use wasm_bindgen::prelude::*;
 use wasm_bindgen::Clamped;
+
+#[cfg(feature = "wee_alloc")]
+#[global_allocator]
+static ALLOC: wee_alloc::WeeAlloc = wee_alloc::WeeAlloc::INIT;
 
 #[wasm_bindgen]
 pub struct BiscuitFinder {
