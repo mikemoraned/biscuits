@@ -104,6 +104,7 @@ function Map() {
         onViewportChange={viewportUpdated}
         onLoad={onLoad}
         mapboxApiAccessToken={process.env.REACT_APP_MAPBOX_ACCESS_TOKEN}
+        mapStyle="mapbox://styles/mapbox/streets-v11"
       />
     </div>
   );
