@@ -26,5 +26,5 @@ default = ["wee_alloc"]
 
 [profile.release]
 lto = true
-opt-level = 'z'
+opt-level = 's'
 debug = true
