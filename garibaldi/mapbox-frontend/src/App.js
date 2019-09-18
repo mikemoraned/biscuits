@@ -63,6 +63,21 @@ function Map() {
       type: "circle",
       source: "point"
     });
+
+    map.addSource("mapbox-streets", {
+      type: "vector",
+      url: "mapbox://mapbox.mapbox-streets-v8"
+    });
+    map.addLayer({
+      id: "road",
+      source: "mapbox-streets",
+      "source-layer": "road",
+      type: "line",
+      paint: {
+        "line-color": "#ffffff"
+      }
+    });
+
     setCenter({
       latitude: viewport.latitude,
       longitude: viewport.longitude
@@ -90,7 +105,7 @@ function Map() {
   useEffect(() => {
     const map = mapRef.current.getMap();
     if (map) {
-      const features = map.queryRenderedFeatures();
+      const features = map.queryRenderedFeatures({ layers: ["road"] });
       console.dir(features);
     }
   }, [mapRef, center]);
@@ -104,7 +119,6 @@ function Map() {
         onViewportChange={viewportUpdated}
         onLoad={onLoad}
         mapboxApiAccessToken={process.env.REACT_APP_MAPBOX_ACCESS_TOKEN}
-        mapStyle="mapbox://styles/mapbox/streets-v11"
       />
     </div>
   );
