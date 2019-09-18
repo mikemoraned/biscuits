@@ -3,6 +3,7 @@ extern crate console_error_panic_hook;
 extern crate image;
 extern crate js_sys;
 extern crate wasm_bindgen;
+#[cfg(feature = "wee_alloc")]
 extern crate wee_alloc;
 
 use wasm_bindgen::prelude::*;
