@@ -19,8 +19,12 @@ imageproc = "0.19"
 image = "0.22"
 rand = "0.7"
 console_error_panic_hook = "0.1"
+wee_alloc = { version="0.4", optional=true}
+
+[features]
+default = ["wee_alloc"]
 
 [profile.release]
 lto = true
-opt-level = 's'
+opt-level = 'z'
 debug = true
