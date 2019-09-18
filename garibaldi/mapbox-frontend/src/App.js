@@ -87,6 +87,14 @@ function Map() {
     }
   }, [mapRef, center]);
 
+  useEffect(() => {
+    const map = mapRef.current.getMap();
+    if (map) {
+      const features = map.queryRenderedFeatures();
+      console.dir(features);
+    }
+  }, [mapRef, center]);
+
   return (
     <div ref={containerRef} className="fullscreen">
       <ReactMapGL
