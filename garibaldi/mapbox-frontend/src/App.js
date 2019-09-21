@@ -210,6 +210,7 @@ function Map() {
           onViewportChange={viewportUpdated}
           onLoad={onLoad}
           mapboxApiAccessToken={process.env.REACT_APP_MAPBOX_ACCESS_TOKEN}
+          zoom={12}
         />
       </div>
       <canvas
