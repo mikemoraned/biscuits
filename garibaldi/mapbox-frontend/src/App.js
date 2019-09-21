@@ -85,7 +85,11 @@ function Map() {
       name: "San Francisco",
       zoom: 13
     },
-    { latitude: 31.771959, longitude: 35.217018, name: "Jerusalem", zoom: 13 }
+    { latitude: 31.771959, longitude: 35.217018, name: "Jerusalem", zoom: 13 },
+    { latitude: 55.953251, longitude: -3.188267, name: "Edinburgh", zoom: 13 },
+    { latitude: 40.71427, longitude: -74.00597, name: "New York", zoom: 13 },
+    { latitude: 48.85341, longitude: 2.3488, name: "Paris", zoom: 13 },
+    { latitude: 47.49801, longitude: 19.03991, name: "Budapest", zoom: 13 }
   ];
   const [locationId, setLocationId] = useState(1);
 
