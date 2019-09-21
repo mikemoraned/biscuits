@@ -143,6 +143,29 @@ function Map() {
     ) {
       const features = map.queryRenderedFeatures({ layers: ["road"] });
       console.dir(features);
+      const bounds = map.getBounds();
+      console.dir(bounds);
+      const geoJsonBounds = {
+        type: "FeatureCollection",
+        features: [
+          {
+            type: "Feature",
+            geometry: {
+              type: "Polygon",
+              coordinates: [
+                [
+                  bounds.getNorthEast().toArray(),
+                  bounds.getSouthEast().toArray(),
+                  bounds.getSouthWest().toArray(),
+                  bounds.getNorthWest().toArray(),
+                  bounds.getNorthEast().toArray()
+                ]
+              ]
+            }
+          }
+        ]
+      };
+      console.dir(geoJsonBounds);
 
       console.dir(canvasContainerRef.current);
       const geoJson = { type: "FeatureCollection", features };
@@ -156,7 +179,7 @@ function Map() {
       // context.scale(scale, scale);
       const projection = geoMercator().fitSize(
         [width / scale, height / scale],
-        geoJson
+        geoJsonBounds
       );
       const generator = geoPath(projection).context(context);
       context.fillStyle = "black";
@@ -164,7 +187,14 @@ function Map() {
       context.fillRect(0, 0, canvas.width, canvas.height);
       context.fillStyle = "blue";
       context.fillRect(0, 0, 25, 25);
+
       context.beginPath();
+      context.strokeStyle = "red";
+      generator(geoJsonBounds);
+      context.stroke();
+
+      context.beginPath();
+      context.strokeStyle = "white";
       generator(geoJson);
       context.stroke();
     }
