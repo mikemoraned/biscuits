@@ -8,6 +8,7 @@ import React, {
 import "./App.css";
 import ReactMapGL from "react-map-gl";
 import dotenv from "dotenv";
+import { geoMercator, geoPath } from "d3-geo";
 
 dotenv.config();
 
@@ -38,19 +39,21 @@ function Map() {
     longitude: viewport.longitude
   });
 
-  const containerRef = useRef();
+  const mapContainerRef = useRef();
   const [containerDimensions, setContainerDimensions] = useState({});
   const resizeHandler = useCallback(() => {
-    const { width, height } = containerRef.current.getBoundingClientRect();
+    const { width, height } = mapContainerRef.current.getBoundingClientRect();
     setContainerDimensions({ width, height });
-  }, [containerRef]);
+  }, [mapContainerRef]);
   useLayoutEffect(() => {
-    const { width, height } = containerRef.current.getBoundingClientRect();
+    const { width, height } = mapContainerRef.current.getBoundingClientRect();
     setContainerDimensions({ width, height });
 
     let resizeObserver = new ResizeObserver(() => resizeHandler());
-    resizeObserver.observe(containerRef.current);
-  }, [containerRef, resizeHandler]);
+    resizeObserver.observe(mapContainerRef.current);
+  }, [mapContainerRef, resizeHandler]);
+
+  const biscuitContainerRef = useRef();
 
   const mapRef = useRef();
 
@@ -104,21 +107,42 @@ function Map() {
 
   useEffect(() => {
     const map = mapRef.current.getMap();
-    if (map) {
+    if (map && biscuitContainerRef.current != null) {
       const features = map.queryRenderedFeatures({ layers: ["road"] });
       console.dir(features);
+
+      console.dir(biscuitContainerRef.current);
+      const geoJson = { type: "FeatureCollection", features };
+
+      const canvas = biscuitContainerRef.current;
+      const { width, height } = canvas;
+      const context = canvas.getContext("2d");
+      const projection = geoMercator().fitSize([width, height], geoJson);
+      const generator = geoPath(projection).context(context);
+      context.fillStyle = "black";
+      context.strokeStyle = "white";
+      context.fillRect(0, 0, canvas.width, canvas.height);
+      context.beginPath();
+      generator(geoJson);
+      context.stroke();
     }
-  }, [mapRef, center]);
+  }, [mapRef, biscuitContainerRef, center]);
 
   return (
-    <div ref={containerRef} className="fullscreen">
-      <ReactMapGL
-        ref={mapRef}
-        {...viewport}
-        {...containerDimensions}
-        onViewportChange={viewportUpdated}
-        onLoad={onLoad}
-        mapboxApiAccessToken={process.env.REACT_APP_MAPBOX_ACCESS_TOKEN}
+    <div style={{ display: "flex", flexDirection: "column" }}>
+      <div ref={mapContainerRef} style={{ width: "100vw", height: "50vh" }}>
+        <ReactMapGL
+          ref={mapRef}
+          {...viewport}
+          {...containerDimensions}
+          onViewportChange={viewportUpdated}
+          onLoad={onLoad}
+          mapboxApiAccessToken={process.env.REACT_APP_MAPBOX_ACCESS_TOKEN}
+        />
+      </div>
+      <canvas
+        ref={biscuitContainerRef}
+        style={{ width: "100vw", height: "50vh" }}
       />
     </div>
   );
