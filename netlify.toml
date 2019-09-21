@@ -1,4 +1,4 @@
 [build]
-  base    = "garibaldi/wasm-biscuits-frontend"
-  publish = "garibaldi/wasm-biscuits-frontend/build"
+  base    = "garibaldi/mapbox-frontend"
+  publish = "garibaldi/mapbox-frontend/build"
   command = "npm run build"
