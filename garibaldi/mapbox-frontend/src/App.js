@@ -234,7 +234,34 @@ function Map() {
       canvasContainerRef.current != null
     ) {
       const features = map.queryRenderedFeatures({ layers: ["road"] });
-      // console.dir(features);
+      console.dir(features);
+      var seenClasses = {};
+      features.forEach(f => {
+        const c = f.properties.class;
+        if (seenClasses[c]) {
+          seenClasses[c] = seenClasses[c] + 1;
+        } else {
+          seenClasses[c] = 1;
+        }
+      });
+      console.dir(seenClasses);
+      const allowedClasses = [
+        "street",
+        "pedestrian",
+        "motorway",
+        "motorway_link",
+        "path",
+        "primary",
+        "primary_link",
+        "secondary",
+        "secondary_link",
+        "tertiary",
+        "tertiary_link",
+        "track"
+      ];
+      const filteredFeatures = features.filter(f => {
+        return allowedClasses.indexOf(f.properties.class) >= 0;
+      });
       const bounds = map.getBounds();
       // console.dir(bounds);
       const geoJsonBounds = {
@@ -260,7 +287,7 @@ function Map() {
       // console.dir(geoJsonBounds);
 
       // console.dir(canvasContainerRef.current);
-      const geoJson = { type: "FeatureCollection", features };
+      const geoJson = { type: "FeatureCollection", features: filteredFeatures };
 
       const canvas = canvasContainerRef.current;
       const { width, height } = canvas;
@@ -279,7 +306,6 @@ function Map() {
       context.fillRect(0, 0, canvas.width, canvas.height);
       // context.fillStyle = "blue";
       // context.fillRect(0, 0, 25, 25);
-
       context.beginPath();
       context.strokeStyle = "red";
       generator(geoJsonBounds);
