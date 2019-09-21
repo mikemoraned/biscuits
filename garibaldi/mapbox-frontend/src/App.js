@@ -53,10 +53,11 @@ function Map() {
     resizeObserver.observe(mapContainerRef.current);
   }, [mapContainerRef, resizeHandler]);
 
-  const biscuitContainerRef = useRef();
+  const canvasContainerRef = useRef();
 
   const mapRef = useRef();
 
+  const [layersDefined, setLayersDefined] = useState(false);
   function onLoad() {
     const map = mapRef.current.getMap();
     console.log("defining layer");
@@ -85,6 +86,7 @@ function Map() {
       latitude: viewport.latitude,
       longitude: viewport.longitude
     });
+    setLayersDefined(true);
   }
 
   function viewportUpdated(viewport) {
@@ -105,28 +107,68 @@ function Map() {
     }
   }, [mapRef, center]);
 
+  const [scaledCanvas, setScaledCanvas] = useState(false);
+  useEffect(() => {
+    if (!scaledCanvas && canvasContainerRef.current != null) {
+      const canvas = canvasContainerRef.current;
+      const { width, height } = canvas;
+
+      const scale = window.devicePixelRatio;
+      canvas.width = width * scale;
+      canvas.height = height * scale;
+
+      console.log("scaled");
+      console.log("w: ", canvas.width, "h: ", canvas.height);
+
+      const context = canvas.getContext("2d");
+      context.fillStyle = "blue";
+      context.fillRect(0, 0, canvas.width, canvas.height);
+      context.fillStyle = "red";
+      context.fillRect(0, 0, 30, 30);
+      context.scale(scale, scale);
+      context.fillStyle = "green";
+      context.fillRect(0, 0, 10, 10);
+
+      setScaledCanvas(true);
+    }
+  }, [scaledCanvas, canvasContainerRef]);
   useEffect(() => {
     const map = mapRef.current.getMap();
-    if (map && biscuitContainerRef.current != null) {
+    if (
+      // false &&
+      map &&
+      scaledCanvas &&
+      layersDefined &&
+      canvasContainerRef.current != null
+    ) {
       const features = map.queryRenderedFeatures({ layers: ["road"] });
       console.dir(features);
 
-      console.dir(biscuitContainerRef.current);
+      console.dir(canvasContainerRef.current);
       const geoJson = { type: "FeatureCollection", features };
 
-      const canvas = biscuitContainerRef.current;
+      const canvas = canvasContainerRef.current;
       const { width, height } = canvas;
+      console.log("w: ", width, "h: ", height);
+
+      const scale = window.devicePixelRatio;
       const context = canvas.getContext("2d");
-      const projection = geoMercator().fitSize([width, height], geoJson);
+      // context.scale(scale, scale);
+      const projection = geoMercator().fitSize(
+        [width / scale, height / scale],
+        geoJson
+      );
       const generator = geoPath(projection).context(context);
       context.fillStyle = "black";
       context.strokeStyle = "white";
       context.fillRect(0, 0, canvas.width, canvas.height);
+      context.fillStyle = "blue";
+      context.fillRect(0, 0, 25, 25);
       context.beginPath();
       generator(geoJson);
       context.stroke();
     }
-  }, [mapRef, biscuitContainerRef, center]);
+  }, [scaledCanvas, layersDefined, mapRef, canvasContainerRef, center]);
 
   return (
     <div style={{ display: "flex", flexDirection: "column" }}>
@@ -141,7 +183,7 @@ function Map() {
         />
       </div>
       <canvas
-        ref={biscuitContainerRef}
+        ref={canvasContainerRef}
         style={{ width: "100vw", height: "50vh" }}
       />
     </div>
