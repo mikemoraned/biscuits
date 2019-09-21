@@ -78,13 +78,33 @@ function geoJSONPoint({ latitude, longitude }) {
 }
 
 function Map() {
+  const locations = [
+    {
+      latitude: 37.7577,
+      longitude: -122.4376,
+      name: "San Francisco",
+      zoom: 13
+    },
+    { latitude: 31.771959, longitude: 35.217018, name: "Jerusalem", zoom: 13 }
+  ];
+  const [locationId, setLocationId] = useState(1);
+
   const [viewport, setViewport] = useState({
     width: "100vh",
     height: "100vh",
-    latitude: 37.7577,
-    longitude: -122.4376,
-    zoom: 8
+    ...locations[locationId]
   });
+
+  function handleLocationIdChange(event) {
+    const locationId = event.target.value;
+    setViewport(viewport => {
+      return {
+        ...viewport,
+        ...locations[locationId]
+      };
+    });
+    setLocationId(locationId);
+  }
 
   const [center, setCenter] = useState({
     latitude: viewport.latitude,
@@ -280,6 +300,17 @@ function Map() {
 
   return (
     <div style={{ display: "flex", flexDirection: "column" }}>
+      <div>
+        <select value={locationId} onChange={handleLocationIdChange}>
+          {locations.map((location, index) => {
+            return (
+              <option value={index} key={index}>
+                {location.name}
+              </option>
+            );
+          })}
+        </select>
+      </div>
       <div ref={mapContainerRef} style={{ width: "100vw", height: "50vh" }}>
         <ReactMapGL
           ref={mapRef}
@@ -288,7 +319,6 @@ function Map() {
           onViewportChange={viewportUpdated}
           onLoad={onLoad}
           mapboxApiAccessToken={process.env.REACT_APP_MAPBOX_ACCESS_TOKEN}
-          zoom={12}
         />
       </div>
       <canvas
