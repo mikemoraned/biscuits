@@ -41,7 +41,7 @@ fn random_color_map(num_labels: usize) -> Vec<Rgba<u8>> {
             255u8,
         ]);
     }
-    console::log_1(&format!("color map: {:?}", color_map).into());
+    console::log_1(&format!("len color map: {:?}", color_map.len()).into());
 
     color_map
 }

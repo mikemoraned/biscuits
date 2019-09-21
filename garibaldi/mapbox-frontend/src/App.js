@@ -12,6 +12,58 @@ import { geoMercator, geoPath } from "d3-geo";
 
 dotenv.config();
 
+class BiscuitFinderLayer {
+  constructor({ width, height, biscuitFinder, memory }) {
+    this.width = width;
+    this.height = height;
+    this.biscuitFinder = biscuitFinder;
+    this.memory = memory;
+  }
+
+  draw(context) {
+    console.time("BiscuitFinderLayer.draw");
+    const inputImageData = context.getImageData(0, 0, this.width, this.height);
+    console.time("find biscuits");
+    console.dir(this.biscuitFinder.find_biscuits(inputImageData.data));
+    console.timeEnd("find biscuits");
+
+    console.time("draw image");
+    const outputPointer = this.biscuitFinder.output();
+    const outputArray = new Uint8ClampedArray(
+      this.memory.buffer,
+      outputPointer,
+      4 * this.width * this.height
+    );
+
+    const outputImageData = new ImageData(outputArray, this.width, this.height);
+
+    context.putImageData(outputImageData, 0, 0);
+    console.timeEnd("draw image");
+    console.timeEnd("BiscuitFinderLayer.draw");
+  }
+}
+
+function loadBiscuitFinderLayer({ width, height, setBiscuitFinderLayer }) {
+  console.time("loadBiscuitFinderLayer");
+  Promise.all([
+    import("@mike_moran/biscuiting-lib"),
+    import("@mike_moran/biscuiting-lib/biscuiting_lib_bg")
+  ])
+    .then(([biscuiting, biscuiting_bg]) => {
+      const { BiscuitFinder } = biscuiting;
+      const { memory } = biscuiting_bg;
+      const biscuitFinder = BiscuitFinder.new(width, height);
+
+      setBiscuitFinderLayer(
+        new BiscuitFinderLayer({ width, height, biscuitFinder, memory })
+      );
+      console.timeEnd("loadBiscuitFinderLayer");
+    })
+    .catch(err => {
+      console.log(err);
+    });
+}
+
 function geoJSONPoint({ latitude, longitude }) {
   return {
     type: "Feature",
@@ -132,6 +184,21 @@ function Map() {
       setScaledCanvas(true);
     }
   }, [scaledCanvas, canvasContainerRef]);
+
+  const [biscuitFinderLayer, setBiscuitFinderLayer] = useState(null);
+  useEffect(() => {
+    if (
+      scaledCanvas &&
+      biscuitFinderLayer == null &&
+      canvasContainerRef.current != null
+    ) {
+      const canvas = canvasContainerRef.current;
+      const { width, height } = canvas;
+
+      loadBiscuitFinderLayer({ width, height, setBiscuitFinderLayer });
+    }
+  }, [scaledCanvas, canvasContainerRef, biscuitFinderLayer]);
+
   useEffect(() => {
     const map = mapRef.current.getMap();
     if (
@@ -197,8 +264,19 @@ function Map() {
       context.strokeStyle = "white";
       generator(geoJson);
       context.stroke();
+
+      if (biscuitFinderLayer != null) {
+        biscuitFinderLayer.draw(context);
+      }
     }
-  }, [scaledCanvas, layersDefined, mapRef, canvasContainerRef, center]);
+  }, [
+    scaledCanvas,
+    layersDefined,
+    mapRef,
+    canvasContainerRef,
+    center,
+    biscuitFinderLayer
+  ]);
 
   return (
     <div style={{ display: "flex", flexDirection: "column" }}>
