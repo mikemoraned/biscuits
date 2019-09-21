@@ -121,13 +121,13 @@ function Map() {
       console.log("w: ", canvas.width, "h: ", canvas.height);
 
       const context = canvas.getContext("2d");
-      context.fillStyle = "blue";
-      context.fillRect(0, 0, canvas.width, canvas.height);
-      context.fillStyle = "red";
-      context.fillRect(0, 0, 30, 30);
+      // context.fillStyle = "blue";
+      // context.fillRect(0, 0, canvas.width, canvas.height);
+      // context.fillStyle = "red";
+      // context.fillRect(0, 0, 30, 30);
       context.scale(scale, scale);
-      context.fillStyle = "green";
-      context.fillRect(0, 0, 10, 10);
+      // context.fillStyle = "green";
+      // context.fillRect(0, 0, 10, 10);
 
       setScaledCanvas(true);
     }
@@ -142,9 +142,9 @@ function Map() {
       canvasContainerRef.current != null
     ) {
       const features = map.queryRenderedFeatures({ layers: ["road"] });
-      console.dir(features);
+      // console.dir(features);
       const bounds = map.getBounds();
-      console.dir(bounds);
+      // console.dir(bounds);
       const geoJsonBounds = {
         type: "FeatureCollection",
         features: [
@@ -165,14 +165,14 @@ function Map() {
           }
         ]
       };
-      console.dir(geoJsonBounds);
+      // console.dir(geoJsonBounds);
 
-      console.dir(canvasContainerRef.current);
+      // console.dir(canvasContainerRef.current);
       const geoJson = { type: "FeatureCollection", features };
 
       const canvas = canvasContainerRef.current;
       const { width, height } = canvas;
-      console.log("w: ", width, "h: ", height);
+      // console.log("w: ", width, "h: ", height);
 
       const scale = window.devicePixelRatio;
       const context = canvas.getContext("2d");
@@ -183,10 +183,10 @@ function Map() {
       );
       const generator = geoPath(projection).context(context);
       context.fillStyle = "black";
-      context.strokeStyle = "white";
+      // context.strokeStyle = "white";
       context.fillRect(0, 0, canvas.width, canvas.height);
-      context.fillStyle = "blue";
-      context.fillRect(0, 0, 25, 25);
+      // context.fillStyle = "blue";
+      // context.fillRect(0, 0, 25, 25);
 
       context.beginPath();
       context.strokeStyle = "red";
