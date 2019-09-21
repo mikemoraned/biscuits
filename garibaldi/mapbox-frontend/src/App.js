@@ -78,19 +78,52 @@ function geoJSONPoint({ latitude, longitude }) {
 }
 
 function Map() {
+  const defaults = {
+    zoom: 12
+  };
   const locations = [
     {
+      ...defaults,
       latitude: 37.7577,
       longitude: -122.4376,
-      name: "San Francisco",
-      zoom: 13
+      name: "San Francisco"
     },
-    { latitude: 31.771959, longitude: 35.217018, name: "Jerusalem", zoom: 13 },
-    { latitude: 55.953251, longitude: -3.188267, name: "Edinburgh", zoom: 13 },
-    { latitude: 40.71427, longitude: -74.00597, name: "New York", zoom: 13 },
-    { latitude: 48.85341, longitude: 2.3488, name: "Paris", zoom: 13 },
-    { latitude: 47.49801, longitude: 19.03991, name: "Budapest", zoom: 13 },
-    { latitude: 41.38879, longitude: 2.15899, name: "Barcelona", zoom: 13 }
+    {
+      ...defaults,
+      latitude: 31.771959,
+      longitude: 35.217018,
+      name: "Jerusalem"
+    },
+    {
+      ...defaults,
+      latitude: 55.953251,
+      longitude: -3.188267,
+      name: "Edinburgh"
+    },
+    {
+      ...defaults,
+      latitude: 40.71427,
+      longitude: -74.00597,
+      name: "New York"
+    },
+    {
+      ...defaults,
+      latitude: 48.85341,
+      longitude: 2.3488,
+      name: "Paris"
+    },
+    {
+      ...defaults,
+      latitude: 47.49801,
+      longitude: 19.03991,
+      name: "Budapest"
+    },
+    {
+      ...defaults,
+      latitude: 41.38879,
+      longitude: 2.15899,
+      name: "Barcelona"
+    }
   ];
   const [locationId, setLocationId] = useState(1);
 
