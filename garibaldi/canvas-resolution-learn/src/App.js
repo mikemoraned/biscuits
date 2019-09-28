@@ -38,7 +38,7 @@ function TestCanvas({ scale }) {
 
     if (canvasRef.current) {
       const canvas = canvasRef.current;
-      const { width, height } = canvas;
+      const { width, height } = canvas.getBoundingClientRect();
 
       dispatch({ type: "dimensionsKnown", dimensions: { width, height } });
     }
@@ -47,8 +47,14 @@ function TestCanvas({ scale }) {
   useEffect(() => {
     if (canvasRef.current && state.dimensions && state.points) {
       const canvas = canvasRef.current;
-      const context = canvas.getContext("2d");
       const { width, height } = state.dimensions;
+      canvas.width = width * scale;
+      canvas.height = height * scale;
+      canvas.style.width = width + "px";
+      canvas.style.height = height + "px";
+
+      const context = canvas.getContext("2d");
+      context.scale(scale, scale);
       context.clearRect(0, 0, width, height);
       context.strokeStyle = "black";
       context.beginPath();
@@ -58,7 +64,7 @@ function TestCanvas({ scale }) {
       });
       context.stroke();
     }
-  }, [canvasRef, state]);
+  }, [canvasRef, state, scale]);
 
   return (
     <div>
@@ -73,9 +79,10 @@ function TestCanvas({ scale }) {
 }
 
 function App() {
-  const [scale, setScale] = useState(0.1);
+  const defaultScale = window.devicePixelRatio || 1.0;
+  const [scale, setScale] = useState(defaultScale);
   const minScale = 0.1;
-  const maxScale = 2.0;
+  const maxScale = defaultScale * 2.0;
   const scaleStep = 0.1;
 
   function handleScaleChange(event) {
