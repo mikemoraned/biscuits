@@ -1,13 +1,13 @@
-import { useRef, useEffect, useState, useReducer } from "react";
+import { useRef, useEffect, useReducer, useState } from "react";
 import React from "react";
 import "./App.css";
-import { stat } from "fs";
 
-function App() {
-  const requiredPoints = 100;
+function TestCanvas({ scale }) {
+  const requiredPoints = 200;
   const canvasRef = useRef();
   const [state, dispatch] = useReducer(
     (state, action) => {
+      console.dir(action);
       switch (action.type) {
         case "dimensionsKnown":
           const { width, height } = action.dimensions;
@@ -20,13 +20,17 @@ function App() {
             });
           });
           return {
+            dimensions: action.dimensions,
             points
           };
         default:
           throw new Error();
       }
     },
-    { points: [] }
+    {
+      dimensions: null,
+      points: []
+    }
   );
 
   useEffect(() => {
@@ -41,9 +45,11 @@ function App() {
   }, [canvasRef]);
 
   useEffect(() => {
-    if (canvasRef.current) {
+    if (canvasRef.current && state.dimensions && state.points) {
       const canvas = canvasRef.current;
       const context = canvas.getContext("2d");
+      const { width, height } = state.dimensions;
+      context.clearRect(0, 0, width, height);
       context.strokeStyle = "black";
       context.beginPath();
       state.points.forEach(({ x, y, radius }) => {
@@ -55,16 +61,39 @@ function App() {
   }, [canvasRef, state]);
 
   return (
+    <div>
+      <canvas
+        ref={canvasRef}
+        width="400"
+        height="400"
+        style={{ border: "1px dashed black" }}
+      ></canvas>
+    </div>
+  );
+}
+
+function App() {
+  const [scale, setScale] = useState(0.1);
+  const minScale = 0.1;
+  const maxScale = 2.0;
+  const scaleStep = 0.1;
+
+  function handleScaleChange(event) {
+    setScale(event.target.value);
+    console.log(scale);
+  }
+
+  return (
     <div className="App">
-      <div>
-        <canvas
-          ref={canvasRef}
-          width="400"
-          height="400"
-          style={{ border: "1px dashed black" }}
-        ></canvas>
-      </div>
-      <input type="range"></input>
+      <TestCanvas scale={scale} />
+      <input
+        type="range"
+        min={minScale}
+        step={scaleStep}
+        max={maxScale}
+        value={scale}
+        onChange={handleScaleChange}
+      ></input>
     </div>
   );
 }
