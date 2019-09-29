@@ -1,4 +1,4 @@
 [build]
-  base    = "garibaldi/wasm-biscuits-frontend"
-  publish = "garibaldi/wasm-biscuits-frontend/build"
+  base    = "garibaldi/canvas-resolution-learn"
+  publish = "garibaldi/canvas-resolution-learn/build"
   command = "npm run build"
