@@ -1,6 +1,6 @@
 [package]
 name = "biscuiting-lib"
-version = "0.6.2"
+version = "0.7.0"
 authors = ["Mike Moran <mike@houseofmoran.com>"]
 edition = "2018"
 
@@ -20,6 +20,9 @@ image = "0.22"
 rand = "0.7"
 console_error_panic_hook = "0.1"
 wee_alloc = { version="0.4", optional=true}
+nphysics2d = { version = "0.12", default-features = false, features = [ "dim2", "use-wasm-bindgen" ] }
+nalgebra = "0.18"
+ncollide2d = "0.20"
 
 [features]
 # default = ["wee_alloc"]
