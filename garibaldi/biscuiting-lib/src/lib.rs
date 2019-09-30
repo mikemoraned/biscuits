@@ -24,7 +24,14 @@ use nphysics2d::object::{
 use nphysics2d::world::{DefaultGeometricalWorld, DefaultMechanicalWorld};
 
 #[wasm_bindgen]
-pub struct BallPhysicsSimulation {}
+pub struct BallPhysicsSimulation {
+    mechanical_world: DefaultMechanicalWorld<f32>,
+    geometrical_world: DefaultGeometricalWorld<f32>,
+    bodies: DefaultBodySet<f32>,
+    colliders: DefaultColliderSet<f32>,
+    forces: DefaultForceGeneratorSet<f32>,
+    constraints: DefaultJointConstraintSet<f32>,
+}
 
 pub struct Ball {}
 
@@ -38,8 +45,8 @@ impl BallPhysicsSimulation {
         let mut geometrical_world = DefaultGeometricalWorld::new();
         let mut bodies = DefaultBodySet::new();
         let mut colliders = DefaultColliderSet::new();
-        let joint_constraints = DefaultJointConstraintSet::<f32>::new();
-        let force_generators = DefaultForceGeneratorSet::<f32>::new();
+        let forces = DefaultForceGeneratorSet::<f32>::new();
+        let constraints = DefaultJointConstraintSet::<f32>::new();
 
         /*
          * Ground
@@ -85,7 +92,14 @@ impl BallPhysicsSimulation {
         mechanical_world.counters.enable();
         geometrical_world.maintain(&mut bodies, &mut colliders);
 
-        BallPhysicsSimulation {}
+        BallPhysicsSimulation {
+            mechanical_world,
+            geometrical_world,
+            bodies,
+            colliders,
+            forces,
+            constraints,
+        }
     }
 }
 
