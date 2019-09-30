@@ -101,6 +101,16 @@ impl BallPhysicsSimulation {
             constraints,
         }
     }
+
+    pub fn step(&mut self) {
+        self.mechanical_world.step(
+            &mut self.geometrical_world,
+            &mut self.bodies,
+            &mut self.colliders,
+            &mut self.constraints,
+            &mut self.forces,
+        );
+    }
 }
 
 #[wasm_bindgen]
