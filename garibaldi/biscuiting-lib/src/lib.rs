@@ -38,6 +38,7 @@ pub struct Ball {}
 #[wasm_bindgen]
 impl BallPhysicsSimulation {
     pub fn new() -> BallPhysicsSimulation {
+        console_error_panic_hook::set_once();
         /*
          * World
          */
@@ -89,7 +90,7 @@ impl BallPhysicsSimulation {
             }
         }
 
-        mechanical_world.counters.enable();
+        mechanical_world.counters.disable();
         geometrical_world.maintain(&mut bodies, &mut colliders);
 
         BallPhysicsSimulation {

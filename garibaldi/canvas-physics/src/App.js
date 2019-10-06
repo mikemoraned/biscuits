@@ -5,16 +5,19 @@ import "./App.css";
 
 function loadBallPhysicsSimulation({ setSimulation }) {
   console.time("loadBallPhysicsSimulation");
-  Promise.all([
-    import("@mike_moran/biscuiting-lib"),
-    import("@mike_moran/biscuiting-lib/biscuiting_lib_bg")
-  ])
-    .then(([biscuiting, biscuiting_bg]) => {
+  Promise.all([import("@mike_moran/biscuiting-lib")])
+    .then(([biscuiting]) => {
       const { BallPhysicsSimulation } = biscuiting;
-      const { memory } = biscuiting_bg;
       const simulation = BallPhysicsSimulation.new();
 
       console.timeEnd("loadBallPhysicsSimulation");
+
+      const animate = () => {
+        simulation.step();
+        requestAnimationFrame(animate);
+      };
+
+      animate();
     })
     .catch(err => {
       console.log(err);
