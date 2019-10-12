@@ -26,3 +26,4 @@ __pycache__/
 venv_python2/
 .env
 target
+node_modules/
