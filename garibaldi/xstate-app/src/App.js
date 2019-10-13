@@ -1,9 +1,9 @@
 import React from "react";
 import "./App.css";
-import { Machine } from "xstate";
-import { useMachine } from "@xstate/react";
+import { Machine, interpret } from "xstate";
+import { useService } from "@xstate/react";
 
-const fetchMap = () => {
+const fetchMap = (context, event) => {
   console.log("fetching map...");
   return new Promise((resolve, reject) => {
     setTimeout(function() {
@@ -25,7 +25,7 @@ const mapMachine = Machine({
     loading: {
       invoke: {
         id: "fetchMap",
-        src: (context, event) => fetchMap(),
+        src: fetchMap,
         onDone: {
           target: "interactive"
         },
@@ -47,14 +47,18 @@ const mapMachine = Machine({
   }
 });
 
+const mapService = interpret(mapMachine)
+  .onTransition(state => console.log(state.value))
+  .start();
+
 function Reload() {
-  const [current, send] = useMachine(mapMachine);
+  const [current, send] = useService(mapService);
 
   return <button onClick={() => send("RETRY")}>Retry</button>;
 }
 
 function Map() {
-  const [current, send] = useMachine(mapMachine);
+  const [current, send] = useService(mapService);
 
   if (current.matches("loading")) {
     return <div>Loading</div>;
