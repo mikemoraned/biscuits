@@ -1,9 +1,11 @@
+/*eslint no-unused-vars: ["error", { "varsIgnorePattern": "_" }]*/
+
 import React from "react";
 import "./App.css";
 import { Machine, interpret } from "xstate";
 import { useService } from "@xstate/react";
 
-const fetchMap = (context, event) => {
+const fetchMap = () => {
   console.log("fetching map...");
   return new Promise((resolve, reject) => {
     setTimeout(function() {
@@ -52,13 +54,13 @@ const mapService = interpret(mapMachine)
   .start();
 
 function Reload() {
-  const [current, send] = useService(mapService);
+  const [_, send] = useService(mapService);
 
   return <button onClick={() => send("RETRY")}>Retry</button>;
 }
 
 function Map() {
-  const [current, send] = useService(mapService);
+  const [current] = useService(mapService);
 
   if (current.matches("loading")) {
     return <div>Loading</div>;
