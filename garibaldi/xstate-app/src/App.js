@@ -1,6 +1,7 @@
 import React from "react";
 import "./App.css";
-import { Machine, interpret } from "xstate";
+import { Machine } from "xstate";
+import { useMachine } from "@xstate/react";
 
 const toggleMachine = Machine({
   id: "toggle",
@@ -11,18 +12,18 @@ const toggleMachine = Machine({
   }
 });
 
-const toggleService = interpret(toggleMachine)
-  .onTransition(state => console.log(state.value))
-  .start();
-
 function App() {
+  const [current, send] = useMachine(toggleMachine);
+
   function toggle() {
-    toggleService.send("TOGGLE");
+    send("TOGGLE");
   }
 
   return (
     <div className="App">
-      <button onClick={toggle}>toggle</button>
+      <button onClick={toggle}>
+        {current.matches("inactive") ? "Off" : "On"}
+      </button>
     </div>
   );
 }
