@@ -2,7 +2,7 @@
 
 import React from "react";
 import "./App.css";
-import { mapService } from "./MapMachine";
+import { mapService } from "./MapService";
 import { useService } from "@xstate/react";
 
 function Reload() {
@@ -11,36 +11,52 @@ function Reload() {
   return <button onClick={() => send("RETRY")}>Retry</button>;
 }
 
-function Map() {
+function Loading() {
+  return <div>Loading</div>;
+}
+
+function LoadingFailed() {
+  return (
+    <>
+      <div>Loading failed</div>
+      <Reload />
+    </>
+  );
+}
+
+function InteractiveMap() {
+  return (
+    <>
+      <div>Interactive</div>
+      <Reload />
+    </>
+  );
+}
+
+function App() {
   const [current] = useService(mapService);
 
   if (current.matches("loading")) {
-    return <div>Loading</div>;
+    return (
+      <div className="App">
+        <Loading />
+      </div>
+    );
   } else if (current.matches("loading_failed")) {
     return (
-      <div>
-        <div>Loading failed</div>
-        <Reload />
+      <div className="App">
+        <LoadingFailed />
       </div>
     );
   } else if (current.matches("interactive")) {
     return (
-      <div>
-        <div>Interactive</div>
-        <Reload />
+      <div className="App">
+        <InteractiveMap />
       </div>
     );
   } else {
     return <div></div>;
   }
-}
-
-function App() {
-  return (
-    <div className="App">
-      <Map />
-    </div>
-  );
 }
 
 export default App;

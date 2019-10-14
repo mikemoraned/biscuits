@@ -3,7 +3,10 @@ import ReactDOM from "react-dom";
 import "./index.css";
 import App from "./App";
 import * as serviceWorker from "./serviceWorker";
-import { mapService } from "./MapMachine";
+import { mapService } from "./MapService";
+import dotenv from "dotenv";
+
+dotenv.config();
 
 mapService.start();
 
