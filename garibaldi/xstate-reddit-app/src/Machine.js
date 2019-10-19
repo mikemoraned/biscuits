@@ -1,4 +1,4 @@
-import { Machine, assign } from "xstate";
+import { Machine, assign, spawn } from "xstate";
 
 function invokeFetchSubreddit(context) {
   const { subreddit } = context;
@@ -12,6 +12,7 @@ export const redditMachine = Machine({
   id: "reddit",
   initial: "idle",
   context: {
+    subreddits: {},
     subreddit: null
   },
   states: {
@@ -21,8 +22,28 @@ export const redditMachine = Machine({
   on: {
     SELECT: {
       target: ".selected",
-      actions: assign({
-        subreddit: (context, event) => event.name
+      actions: assign((context, event) => {
+        // Use the existing subreddit actor if one doesn't exist
+        let subreddit = context.subreddits[event.name];
+
+        if (subreddit) {
+          return {
+            ...context,
+            subreddit
+          };
+        }
+
+        // Otherwise, spawn a new subreddit actor and
+        // save it in the subreddits object
+        subreddit = spawn(createSubredditMachine(event.name));
+
+        return {
+          subreddits: {
+            ...context.subreddits,
+            [event.name]: subreddit
+          },
+          subreddit
+        };
       })
     }
   }
