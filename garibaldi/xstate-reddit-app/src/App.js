@@ -1,14 +1,59 @@
 import React from "react";
-import logo from "./logo.svg";
+import { useMemo } from "react";
 import "./App.css";
 import { useMachine } from "@xstate/react";
-import { redditMachine } from "./Machine";
+import { redditMachine, createSubredditMachine } from "./Machine";
 
 const subreddits = ["frontend", "reactjs", "vuejs"];
 
+const Subreddit = ({ name }) => {
+  // Only create the machine based on the subreddit name once
+  const subredditMachine = useMemo(() => {
+    return createSubredditMachine(name);
+  }, [name]);
+
+  const [current, send] = useMachine(subredditMachine);
+
+  if (current.matches("failure")) {
+    return (
+      <div>
+        Failed to load posts.{" "}
+        <button onClick={_ => send("RETRY")}>Retry?</button>
+      </div>
+    );
+  }
+
+  const { subreddit, posts, lastUpdated } = current.context;
+
+  return (
+    <section
+      data-machine={subredditMachine.id}
+      data-state={current.toStrings().join(" ")}
+    >
+      {current.matches("loading") && <div>Loading posts...</div>}
+      {posts && (
+        <>
+          <header>
+            <h2>{subreddit}</h2>
+            <small>
+              Last updated: {lastUpdated}{" "}
+              <button onClick={_ => send("REFRESH")}>Refresh</button>
+            </small>
+          </header>
+          <ul>
+            {posts.map(post => {
+              return <li key={post.id}>{post.title}</li>;
+            })}
+          </ul>
+        </>
+      )}
+    </section>
+  );
+};
+
 const App = () => {
   const [current, send] = useMachine(redditMachine);
-  const { subreddit, posts } = current.context;
+  const { subreddit } = current.context;
 
   return (
     <main>
@@ -23,17 +68,7 @@ const App = () => {
           })}
         </select>
       </header>
-      <section>
-        <h1>{current.matches("idle") ? "Select a subreddit" : subreddit}</h1>
-        {current.matches({ selected: "loading" }) && <div>Loading...</div>}
-        {current.matches({ selected: "loaded" }) && (
-          <ul>
-            {posts.map(post => (
-              <li key={post.title}>{post.title}</li>
-            ))}
-          </ul>
-        )}
-      </section>
+      {subreddit && <Subreddit name={subreddit} key={subreddit} />}
     </main>
   );
 };

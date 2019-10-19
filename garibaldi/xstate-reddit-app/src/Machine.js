@@ -12,31 +12,11 @@ export const redditMachine = Machine({
   id: "reddit",
   initial: "idle",
   context: {
-    subreddit: null,
-    posts: null
+    subreddit: null
   },
   states: {
     idle: {},
-    selected: {
-      initial: "loading",
-      states: {
-        loading: {
-          invoke: {
-            id: "fetch-subreddit",
-            src: invokeFetchSubreddit,
-            onDone: {
-              target: "loaded",
-              actions: assign({
-                posts: (context, event) => event.data
-              })
-            },
-            onError: "failed"
-          }
-        },
-        loaded: {},
-        failed: {}
-      }
-    }
+    selected: {} // no invocations!
   },
   on: {
     SELECT: {
@@ -48,8 +28,39 @@ export const redditMachine = Machine({
   }
 });
 
-// sample SELECT event
-const selectEvent = {
-  type: "SELECT", // event type
-  name: "reactjs" // subreddit name
+export const createSubredditMachine = subreddit => {
+  return Machine({
+    id: "subreddit",
+    initial: "loading",
+    context: {
+      subreddit, // subreddit name passed in
+      posts: null,
+      lastUpdated: null
+    },
+    states: {
+      loading: {
+        invoke: {
+          id: "fetch-subreddit",
+          src: invokeFetchSubreddit,
+          onDone: {
+            target: "loaded",
+            actions: assign({
+              posts: (_, event) => event.data,
+              lastUpdated: () => Date.now()
+            })
+          }
+        }
+      },
+      loaded: {
+        on: {
+          REFRESH: "loading"
+        }
+      },
+      failure: {
+        on: {
+          RETRY: "loading"
+        }
+      }
+    }
+  });
 };
