@@ -59,24 +59,16 @@ Also, some allowances:
 
 #### WIP Approach
 
-1. (x) Initial display:
+- (/) Initial display:
 
-   - (x) Display default Map in both:
-     - (x) landscape (desktop, ipad)
-     - (x) portrait (phone, ipad)
-   - (x) a selector which allows:
-     - (x) search by name
-     - (x) in menu of suggested places
+  - (/) display list of pre-chosen places
+  - (/) allow select of a place
 
-2. (x) Search / preview mode: shows:
+- (/) Show Map of place at (lat, lon)
 
-   - (x) Map
-   - (x) a center cursor
-   - (x) under center cursor a suggested area with a particular aspect ratio (relative to earth, not screen)
-     - (x) aspect ratio defined by geohash chunks
-   - (x) a preview of the city chunks in this area
+  - (/) Show navigation which allows going back to main list
 
-3. ...
+- ...
 
 ## April 2018 : Speculaas
 
