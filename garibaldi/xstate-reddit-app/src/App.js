@@ -1,26 +1,41 @@
 import React from "react";
 import logo from "./logo.svg";
 import "./App.css";
+import { useMachine } from "@xstate/react";
+import { redditMachine } from "./Machine";
 
-function App() {
+const subreddits = ["frontend", "reactjs", "vuejs"];
+
+const App = () => {
+  const [current, send] = useMachine(redditMachine);
+  const { subreddit, posts } = current.context;
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
+    <main>
+      <header>
+        <select
+          onChange={e => {
+            send("SELECT", { name: e.target.value });
+          }}
         >
-          Learn React
-        </a>
+          {subreddits.map(subreddit => {
+            return <option key={subreddit}>{subreddit}</option>;
+          })}
+        </select>
       </header>
-    </div>
+      <section>
+        <h1>{current.matches("idle") ? "Select a subreddit" : subreddit}</h1>
+        {current.matches({ selected: "loading" }) && <div>Loading...</div>}
+        {current.matches({ selected: "loaded" }) && (
+          <ul>
+            {posts.map(post => (
+              <li key={post.title}>{post.title}</li>
+            ))}
+          </ul>
+        )}
+      </section>
+    </main>
   );
-}
+};
 
 export default App;
