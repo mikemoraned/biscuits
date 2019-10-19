@@ -1,18 +1,12 @@
 import React from "react";
-import { useMemo } from "react";
 import "./App.css";
-import { useMachine } from "@xstate/react";
-import { redditMachine, createSubredditMachine } from "./Machine";
+import { useMachine, useService } from "@xstate/react";
+import { redditMachine } from "./Machine";
 
 const subreddits = ["frontend", "reactjs", "vuejs"];
 
-const Subreddit = ({ name }) => {
-  // Only create the machine based on the subreddit name once
-  const subredditMachine = useMemo(() => {
-    return createSubredditMachine(name);
-  }, [name]);
-
-  const [current, send] = useMachine(subredditMachine);
+const Subreddit = ({ service }) => {
+  const [current, send] = useService(service);
 
   if (current.matches("failure")) {
     return (
@@ -27,7 +21,7 @@ const Subreddit = ({ name }) => {
 
   return (
     <section
-      data-machine={subredditMachine.id}
+      data-machine={service.machine.id}
       data-state={current.toStrings().join(" ")}
     >
       {current.matches("loading") && <div>Loading posts...</div>}
@@ -68,7 +62,7 @@ const App = () => {
           })}
         </select>
       </header>
-      {subreddit && <Subreddit name={subreddit} key={subreddit} />}
+      {subreddit && <Subreddit service={subreddit} key={subreddit.id} />}
     </main>
   );
 };
