@@ -1,4 +1,4 @@
 [build]
-  base    = "garibaldi/canvas-resolution-learn"
-  publish = "garibaldi/canvas-resolution-learn/build"
+  base    = "garibaldi/bulma-react-app"
+  publish = "garibaldi/bulma-react-app/build"
   command = "npm run build"
