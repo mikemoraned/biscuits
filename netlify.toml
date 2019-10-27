@@ -1,4 +1,4 @@
 [build]
-  base    = "garibaldi/bulma-react-app"
-  publish = "garibaldi/bulma-react-app/build"
+  base    = "garibaldi/frontend-app"
+  publish = "garibaldi/frontend-app/build"
   command = "npm run build"
