@@ -1,0 +1,11 @@
+language: node_js
+node_js:
+  - 8
+cache:
+  npm: false
+before_script:
+  - cd garibaldi/frontend-app
+script:
+  - npm install
+  - npm run build
+  - npm test

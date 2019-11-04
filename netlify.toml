@@ -1,4 +1,4 @@
 [build]
-  base    = "garibaldi/canvas-resolution-learn"
-  publish = "garibaldi/canvas-resolution-learn/build"
+  base    = "garibaldi/frontend-app"
+  publish = "garibaldi/frontend-app/build"
   command = "npm run build"
