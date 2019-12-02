@@ -1,5 +1,5 @@
 # Spike
 
-- (x) display a Mapbox Map using React
-- (x) use map built-ins to display a lat-lon bounding box
-- (x) use canvas layer to display a red rectangle filling in this box
+- (/) display a Mapbox Map using React
+- (/) use canvas layer + map built-ins to display a lat-lon bounding box
+- (/) use canvas layer to display a smaller bounding box (reticule) in center of display
