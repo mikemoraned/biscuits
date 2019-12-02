@@ -1,4 +1,4 @@
 [build]
-  base    = "garibaldi/frontend-app"
-  publish = "garibaldi/frontend-app/build"
+  base    = "garibaldi/spikes/map-registration"
+  publish = "garibaldi/spikes/map-registration/build"
   command = "npm run build"
