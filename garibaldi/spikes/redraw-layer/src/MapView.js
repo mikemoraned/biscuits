@@ -32,6 +32,12 @@ function BoundingBoxOverlay({ boundingBox }) {
   return <CanvasOverlay redraw={redraw} />;
 }
 
+function FeatureOverlay({ boundingBox, features }) {
+  function redraw({ width, height, ctx, isDragging, project, unproject }) {}
+
+  return <CanvasOverlay redraw={redraw} />;
+}
+
 function reticuleFromMapBounds(bounds) {
   const northSouthExtent = bounds.getSouth() - bounds.getNorth();
   const westEastExtent = bounds.getEast() - bounds.getWest();
@@ -60,6 +66,7 @@ export function MapView({ city }) {
     height: 800
   });
   const [reticuleBounds, setReticuleBounds] = useState(null);
+  const [features, setFeatures] = useState(null);
 
   useLayoutEffect(() => {
     const { width, height } = containerRef.current.getBoundingClientRect();
@@ -77,12 +84,18 @@ export function MapView({ city }) {
     setViewport({ zoom, latitude, longitude });
   }
 
+  function onBoundsChanged(map) {
+    const reticule = reticuleFromMapBounds(map.getBounds());
+    setReticuleBounds(reticule);
+    setFeatures(map.queryRenderedFeatures(reticule));
+  }
+
   function onLoad({ target }) {
     const map = target;
     console.log("loaded");
-    setReticuleBounds(reticuleFromMapBounds(map.getBounds()));
+    onBoundsChanged(map);
     map.on("moveend", () => {
-      setReticuleBounds(reticuleFromMapBounds(map.getBounds()));
+      onBoundsChanged(map);
     });
   }
 
@@ -97,6 +110,9 @@ export function MapView({ city }) {
         onLoad={onLoad}
       >
         {reticuleBounds && <BoundingBoxOverlay boundingBox={reticuleBounds} />}
+        {reticuleBounds && features && (
+          <FeatureOverlay boundingBox={reticuleBounds} features={features} />
+        )}
       </ReactMapGL>
     </div>
   );
