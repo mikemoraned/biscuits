@@ -1,25 +1,32 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React from "react";
+import "./App.scss";
+import { MapView } from "./MapView";
+import dotenv from "dotenv";
+
+import { MapBoxContextProviderFromEnvironment } from "./MapBoxContext";
+
+dotenv.config();
+
+const cities = [
+  {
+    name: "San Francisco",
+    location: { latitude: 37.774929, longitude: -122.419418 }
+  },
+  {
+    name: "Jerusalem",
+    location: { latitude: 31.768318, longitude: 35.213711 }
+  },
+  { name: "Berlin", location: { latitude: 52.520008, longitude: 13.404954 } },
+  { name: "London", location: { latitude: 51.507351, longitude: -0.127758 } }
+];
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <MapBoxContextProviderFromEnvironment>
+      <div>
+        <MapView city={cities[0]} />
+      </div>
+    </MapBoxContextProviderFromEnvironment>
   );
 }
 
