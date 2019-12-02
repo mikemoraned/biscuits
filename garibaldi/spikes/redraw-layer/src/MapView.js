@@ -49,6 +49,7 @@ function FeatureOverlay({ boundingBox, features }) {
 
     console.dir("drawing features: started");
     const geoJson = { type: "FeatureCollection", features };
+    console.dir(geoJson);
     const geoJsonBounds = geoJsonBoundsFromLngLatBounds(boundingBox);
 
     const topLeft = project(boundingBox.getNorthWest().toArray());
@@ -74,15 +75,18 @@ function FeatureOverlay({ boundingBox, features }) {
 
     const generator = geoPath(reticuleProjection).context(ctx);
 
+    ctx.fillStyle = "black";
+    ctx.fillRect(0, 0, width, height);
     ctx.lineWidth = 3;
     ctx.beginPath();
-    ctx.strokeStyle = "red";
+    ctx.strokeStyle = "white";
     generator(geoJsonBounds);
     ctx.stroke();
+    ctx.fill();
 
     ctx.beginPath();
+    ctx.strokeStyle = "white";
     generator(geoJson);
-    ctx.strokeStyle = "red";
     ctx.stroke();
     console.dir("drawing features: completed");
   }
