@@ -5,6 +5,7 @@ import { useRef, useLayoutEffect, useState } from "react";
 import ReactMapGL from "react-map-gl";
 import { CanvasOverlay } from "react-map-gl";
 import { LngLatBounds } from "mapbox-gl";
+import { geoProjection, geoPath } from "d3-geo";
 
 function BoundingBoxOverlay({ boundingBox }) {
   function redraw({ width, height, ctx, isDragging, project, unproject }) {
@@ -33,7 +34,58 @@ function BoundingBoxOverlay({ boundingBox }) {
 }
 
 function FeatureOverlay({ boundingBox, features }) {
-  function redraw({ width, height, ctx, isDragging, project, unproject }) {}
+  function redraw({ width, height, ctx, isDragging, project, unproject }) {
+    console.log(width, height);
+    // ctx.fillStyle = "black";
+    // ctx.fillRect(0, 0, width, height);
+    // ctx.fill();
+
+    const center = project(boundingBox.getCenter().toArray());
+    ctx.clearRect(0, 0, width, height);
+    ctx.beginPath();
+    ctx.arc(center[0], center[1], 10.0, 0, 2 * Math.PI, false);
+    ctx.fillStyle = "green";
+    ctx.fill();
+
+    console.dir("drawing features: started");
+    const geoJson = { type: "FeatureCollection", features };
+    const geoJsonBounds = geoJsonBoundsFromLngLatBounds(boundingBox);
+
+    const topLeft = project(boundingBox.getNorthWest().toArray());
+    const bottomRight = project(boundingBox.getSouthEast().toArray());
+
+    // const reticuleProjection = geoMercator().fitExtent(
+    //   [
+    //     [topLeft[0], topLeft[1]],
+    //     [bottomRight[0], bottomRight[1]]
+    //   ],
+    //   geoJsonBounds
+    // );
+
+    const reticuleProjection = geoProjection(function(xRadians, yRadians) {
+      const xDegrees = (xRadians * 180.0) / Math.PI;
+      const yDegrees = (yRadians * 180.0) / Math.PI;
+      const projected = project([xDegrees, yDegrees]);
+
+      // console.log([xRadians, yRadians], [xDegrees, yDegrees], projected);
+
+      return projected;
+    });
+
+    const generator = geoPath(reticuleProjection).context(ctx);
+
+    ctx.lineWidth = 3;
+    ctx.beginPath();
+    ctx.strokeStyle = "red";
+    generator(geoJsonBounds);
+    ctx.stroke();
+
+    ctx.beginPath();
+    generator(geoJson);
+    ctx.strokeStyle = "red";
+    ctx.stroke();
+    console.dir("drawing features: completed");
+  }
 
   return <CanvasOverlay redraw={redraw} />;
 }
@@ -56,6 +108,29 @@ function reticuleFromMapBounds(bounds) {
   ]);
 
   return reticuleBounds;
+}
+
+function geoJsonBoundsFromLngLatBounds(bounds) {
+  return {
+    type: "FeatureCollection",
+    features: [
+      {
+        type: "Feature",
+        geometry: {
+          type: "Polygon",
+          coordinates: [
+            [
+              bounds.getNorthEast().toArray(),
+              bounds.getSouthEast().toArray(),
+              bounds.getSouthWest().toArray(),
+              bounds.getNorthWest().toArray(),
+              bounds.getNorthEast().toArray()
+            ]
+          ]
+        }
+      }
+    ]
+  };
 }
 
 export function MapView({ city }) {
@@ -109,7 +184,7 @@ export function MapView({ city }) {
         mapboxApiAccessToken={mapbox.access_token}
         onLoad={onLoad}
       >
-        {reticuleBounds && <BoundingBoxOverlay boundingBox={reticuleBounds} />}
+        {/* {reticuleBounds && <BoundingBoxOverlay boundingBox={reticuleBounds} />} */}
         {reticuleBounds && features && (
           <FeatureOverlay boundingBox={reticuleBounds} features={features} />
         )}
