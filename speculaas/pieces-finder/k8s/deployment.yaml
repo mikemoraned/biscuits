@@ -1,4 +1,4 @@
-apiVersion: extensions/v1beta1
+apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: pieces-finder
@@ -16,29 +16,29 @@ spec:
         app: pieces-finder
     spec:
       containers:
-      - name: pieces-finder
-        image: houseofmoran/speculaas-pieces-finder:11
-        resources: 
-          limits:
-            cpu: 0.9
-            memory: 400Mi
-          requests:
-            cpu: 0.1
-            memory: 300Mi
-        ports:
-        - name: http
-          containerPort: 5000
-        livenessProbe:
-          httpGet:
-            path: /healthcheck/alive
-            port: 5000
-          initialDelaySeconds: 60
-          periodSeconds: 5
-          timeoutSeconds: 1
-        readinessProbe:
-          httpGet:
-            path: /healthcheck/ready
-            port: 5000
-          initialDelaySeconds: 0
-          periodSeconds: 10
-          timeoutSeconds: 60
+        - name: pieces-finder
+          image: houseofmoran/speculaas-pieces-finder:11
+          resources:
+            limits:
+              cpu: 0.9
+              memory: 400Mi
+            requests:
+              cpu: 0.1
+              memory: 300Mi
+          ports:
+            - name: http
+              containerPort: 5000
+          livenessProbe:
+            httpGet:
+              path: /healthcheck/alive
+              port: 5000
+            initialDelaySeconds: 60
+            periodSeconds: 5
+            timeoutSeconds: 1
+          readinessProbe:
+            httpGet:
+              path: /healthcheck/ready
+              port: 5000
+            initialDelaySeconds: 0
+            periodSeconds: 10
+            timeoutSeconds: 60
