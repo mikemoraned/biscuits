@@ -10,6 +10,7 @@ spec:
   tls:
     - hosts:
         - speculaas.do.houseofmoran.io
+        - speculaas.houseofmoran.io
         - speculaas.houseofmoran.com
       secretName: speculaas-cert-prod
   rules:
@@ -24,5 +25,7 @@ spec:
             backend:
               serviceName: pieces-finder-service
               servicePort: 80
+    - host: speculaas.houseofmoran.io
+      http: *http
     - host: speculaas.houseofmoran.com
       http: *http
