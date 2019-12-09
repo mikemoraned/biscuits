@@ -59,7 +59,7 @@ function FeatureOverlay({ boundingBox, features }) {
     const reticuleProjection = geoTransform({
       point: function(lon, lat) {
         const point = project(new LngLat(lon, lat).toArray());
-        console.log(lon, lat, "->", point);
+        // console.log(lon, lat, "->", point);
         this.stream.point(point[0], point[1]);
       }
     });
@@ -72,6 +72,12 @@ function FeatureOverlay({ boundingBox, features }) {
     ctx.beginPath();
     ctx.strokeStyle = "red";
     generator(geoJsonBounds);
+    ctx.stroke();
+
+    ctx.lineWidth = 3;
+    ctx.beginPath();
+    ctx.strokeStyle = "blue";
+    generator(geoJson);
     ctx.stroke();
 
     console.dir("drawing features: completed");
