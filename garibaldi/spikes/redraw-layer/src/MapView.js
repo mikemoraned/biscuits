@@ -9,7 +9,6 @@ import { geoPath, geoTransform } from "d3-geo";
 
 function FeatureOverlay({ boundingBox, featureLoader }) {
   function redraw({ width, height, ctx, isDragging, project, unproject }) {
-    console.time("redraw");
     const center = project(boundingBox.getCenter().toArray());
     ctx.clearRect(0, 0, width, height);
     ctx.beginPath();
@@ -31,6 +30,7 @@ function FeatureOverlay({ boundingBox, featureLoader }) {
       .context(ctx);
 
     if (!isDragging) {
+      console.time("redraw: all");
       const features = featureLoader();
       const geoJson = { type: "FeatureCollection", features };
 
@@ -39,6 +39,7 @@ function FeatureOverlay({ boundingBox, featureLoader }) {
       ctx.strokeStyle = "blue";
       generator(geoJson);
       ctx.stroke();
+      console.timeEnd("redraw: all");
     }
 
     ctx.lineWidth = 2;
@@ -46,8 +47,6 @@ function FeatureOverlay({ boundingBox, featureLoader }) {
     ctx.strokeStyle = "red";
     generator(geoJsonBounds);
     ctx.stroke();
-
-    console.timeEnd("redraw");
   }
 
   return <CanvasOverlay redraw={redraw} />;
