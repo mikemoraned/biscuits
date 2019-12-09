@@ -1,4 +1,4 @@
 [build]
-  base    = "garibaldi/spikes/redraw-layer"
-  publish = "garibaldi/spikes/redraw-layer/build"
+  base    = "garibaldi/frontend-app/"
+  publish = "garibaldi/frontend-app/build"
   command = "npm run build"
