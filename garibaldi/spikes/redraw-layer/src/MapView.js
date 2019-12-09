@@ -47,19 +47,10 @@ function FeatureOverlay({ boundingBox, features }) {
     console.dir("drawing features: started");
     const geoJson = { type: "FeatureCollection", features };
     const geoJsonBounds = geoJsonBoundsFromLngLatBounds(boundingBox);
-    const boundsPointsWorld = geoJsonBounds.features[0].geometry.coordinates[0];
-    boundsPointsWorld.forEach(boundsPointWorld => {
-      const boundsPoint = project(boundsPointWorld);
-      ctx.beginPath();
-      ctx.arc(boundsPoint[0], boundsPoint[1], 5.0, 0, 2 * Math.PI, false);
-      ctx.fillStyle = "red";
-      ctx.fill();
-    });
 
     const reticuleProjection = geoTransform({
       point: function(lon, lat) {
         const point = project(new LngLat(lon, lat).toArray());
-        // console.log(lon, lat, "->", point);
         this.stream.point(point[0], point[1]);
       }
     });
@@ -68,16 +59,18 @@ function FeatureOverlay({ boundingBox, features }) {
       .projection(reticuleProjection)
       .context(ctx);
 
+    if (!isDragging) {
+      ctx.lineWidth = 3;
+      ctx.beginPath();
+      ctx.strokeStyle = "blue";
+      generator(geoJson);
+      ctx.stroke();
+    }
+
     ctx.lineWidth = 3;
     ctx.beginPath();
     ctx.strokeStyle = "red";
     generator(geoJsonBounds);
-    ctx.stroke();
-
-    ctx.lineWidth = 3;
-    ctx.beginPath();
-    ctx.strokeStyle = "blue";
-    generator(geoJson);
     ctx.stroke();
 
     console.dir("drawing features: completed");
