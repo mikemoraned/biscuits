@@ -60,11 +60,13 @@ function FeatureOverlay({ boundingBox, features }) {
       point: function(lon, lat) {
         const point = project(new LngLat(lon, lat).toArray());
         console.log(lon, lat, "->", point);
-        this.stream.point(point.x, point.y);
+        this.stream.point(point[0], point[1]);
       }
     });
 
-    const generator = geoPath(reticuleProjection).context(ctx);
+    const generator = geoPath()
+      .projection(reticuleProjection)
+      .context(ctx);
 
     ctx.lineWidth = 3;
     ctx.beginPath();
