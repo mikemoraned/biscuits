@@ -30,7 +30,7 @@ function App() {
   return (
     <MapBoxContextProviderFromEnvironment>
       <div>
-        <MapView city={cities[6]} />
+        <MapView city={cities[0]} />
       </div>
     </MapBoxContextProviderFromEnvironment>
   );
