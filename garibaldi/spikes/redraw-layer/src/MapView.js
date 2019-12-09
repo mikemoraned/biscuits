@@ -33,7 +33,7 @@ function BoundingBoxOverlay({ boundingBox }) {
   return <CanvasOverlay redraw={redraw} />;
 }
 
-function FeatureOverlay({ boundingBox, features }) {
+function FeatureOverlay({ boundingBox, featureLoader }) {
   function redraw({ width, height, ctx, isDragging, project, unproject }) {
     console.log(width, height);
 
@@ -45,7 +45,6 @@ function FeatureOverlay({ boundingBox, features }) {
     ctx.fill();
 
     console.dir("drawing features: started");
-    const geoJson = { type: "FeatureCollection", features };
     const geoJsonBounds = geoJsonBoundsFromLngLatBounds(boundingBox);
 
     const reticuleProjection = geoTransform({
@@ -60,6 +59,9 @@ function FeatureOverlay({ boundingBox, features }) {
       .context(ctx);
 
     if (!isDragging) {
+      const features = featureLoader();
+      const geoJson = { type: "FeatureCollection", features };
+
       ctx.lineWidth = 3;
       ctx.beginPath();
       ctx.strokeStyle = "blue";
@@ -130,7 +132,7 @@ export function MapView({ city }) {
     height: 800
   });
   const [reticuleBounds, setReticuleBounds] = useState(null);
-  const [features, setFeatures] = useState(null);
+  const [featureLoader, setFeatureLoader] = useState(null);
 
   useLayoutEffect(() => {
     const { width, height } = containerRef.current.getBoundingClientRect();
@@ -151,12 +153,14 @@ export function MapView({ city }) {
   function onBoundsChanged(map) {
     const reticule = reticuleFromMapBounds(map.getBounds());
     setReticuleBounds(reticule);
-    setFeatures(
-      map.queryRenderedFeatures([
-        map.project(reticule.getNorthEast().toArray()),
-        map.project(reticule.getSouthWest().toArray())
-      ])
-    );
+    setFeatureLoader(() => {
+      return () => {
+        return map.queryRenderedFeatures([
+          map.project(reticule.getNorthEast().toArray()),
+          map.project(reticule.getSouthWest().toArray())
+        ]);
+      };
+    });
   }
 
   function onLoad({ target }) {
@@ -178,9 +182,11 @@ export function MapView({ city }) {
         mapboxApiAccessToken={mapbox.access_token}
         onLoad={onLoad}
       >
-        {/* {reticuleBounds && <BoundingBoxOverlay boundingBox={reticuleBounds} />} */}
-        {reticuleBounds && features && (
-          <FeatureOverlay boundingBox={reticuleBounds} features={features} />
+        {reticuleBounds && featureLoader != null && (
+          <FeatureOverlay
+            boundingBox={reticuleBounds}
+            featureLoader={featureLoader}
+          />
         )}
       </ReactMapGL>
     </div>
