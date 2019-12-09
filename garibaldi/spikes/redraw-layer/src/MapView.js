@@ -35,6 +35,7 @@ function BoundingBoxOverlay({ boundingBox }) {
 
 function FeatureOverlay({ boundingBox, featureLoader }) {
   function redraw({ width, height, ctx, isDragging, project, unproject }) {
+    console.time("redraw");
     const center = project(boundingBox.getCenter().toArray());
     ctx.clearRect(0, 0, width, height);
     ctx.beginPath();
@@ -42,7 +43,6 @@ function FeatureOverlay({ boundingBox, featureLoader }) {
     ctx.fillStyle = "green";
     ctx.fill();
 
-    console.dir("drawing features: started");
     const geoJsonBounds = geoJsonBoundsFromLngLatBounds(boundingBox);
 
     const reticuleProjection = geoTransform({
@@ -73,7 +73,7 @@ function FeatureOverlay({ boundingBox, featureLoader }) {
     generator(geoJsonBounds);
     ctx.stroke();
 
-    console.dir("drawing features: completed");
+    console.timeEnd("redraw");
   }
 
   return <CanvasOverlay redraw={redraw} />;
