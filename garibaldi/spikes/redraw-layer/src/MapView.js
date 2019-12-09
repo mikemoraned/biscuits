@@ -5,33 +5,7 @@ import { useRef, useLayoutEffect, useState } from "react";
 import ReactMapGL from "react-map-gl";
 import { CanvasOverlay } from "react-map-gl";
 import { LngLatBounds, LngLat } from "mapbox-gl";
-import { geoPath, geoTransform, geoIdentity } from "d3-geo";
-
-function BoundingBoxOverlay({ boundingBox }) {
-  function redraw({ width, height, ctx, isDragging, project, unproject }) {
-    const center = project(boundingBox.getCenter().toArray());
-    ctx.clearRect(0, 0, width, height);
-    ctx.beginPath();
-    ctx.arc(center[0], center[1], 10.0, 0, 2 * Math.PI, false);
-    ctx.fillStyle = "green";
-    ctx.fill();
-
-    const topLeft = project(boundingBox.getNorthWest().toArray());
-    const bottomRight = project(boundingBox.getSouthEast().toArray());
-    ctx.beginPath();
-    ctx.rect(
-      topLeft[0],
-      topLeft[1],
-      bottomRight[0] - topLeft[0],
-      bottomRight[1] - topLeft[1]
-    );
-    ctx.lineWidth = 3;
-    ctx.strokeStyle = "red";
-    ctx.stroke();
-  }
-
-  return <CanvasOverlay redraw={redraw} />;
-}
+import { geoPath, geoTransform } from "d3-geo";
 
 function FeatureOverlay({ boundingBox, featureLoader }) {
   function redraw({ width, height, ctx, isDragging, project, unproject }) {
@@ -52,18 +26,8 @@ function FeatureOverlay({ boundingBox, featureLoader }) {
       }
     });
 
-    const clip = geoIdentity().clipExtent([
-      project(boundingBox.getNorthWest().toArray()),
-      project(boundingBox.getSouthEast().toArray())
-    ]);
-
     const generator = geoPath()
-      // .projection(reticuleProjection)
-      .projection({
-        stream: function(s) {
-          return reticuleProjection.stream(clip.stream(s));
-        }
-      })
+      .projection(reticuleProjection)
       .context(ctx);
 
     if (!isDragging) {

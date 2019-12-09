@@ -4,7 +4,6 @@
   "private": true,
   "dependencies": {
     "d3-geo": "^1.11.9",
-    "d3-geo-projection": "^2.7.1",
     "dotenv": "^8.2.0",
     "node-sass": "^4.13.0",
     "react": "^16.12.0",
