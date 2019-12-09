@@ -60,14 +60,14 @@ function FeatureOverlay({ boundingBox, featureLoader }) {
       const features = featureLoader();
       const geoJson = { type: "FeatureCollection", features };
 
-      ctx.lineWidth = 3;
+      ctx.lineWidth = 1;
       ctx.beginPath();
       ctx.strokeStyle = "blue";
       generator(geoJson);
       ctx.stroke();
     }
 
-    ctx.lineWidth = 3;
+    ctx.lineWidth = 2;
     ctx.beginPath();
     ctx.strokeStyle = "red";
     generator(geoJsonBounds);
