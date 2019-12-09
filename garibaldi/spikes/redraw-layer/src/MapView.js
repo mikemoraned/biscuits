@@ -151,7 +151,12 @@ export function MapView({ city }) {
   function onBoundsChanged(map) {
     const reticule = reticuleFromMapBounds(map.getBounds());
     setReticuleBounds(reticule);
-    setFeatures(map.queryRenderedFeatures(reticule));
+    setFeatures(
+      map.queryRenderedFeatures([
+        map.project(reticule.getNorthEast().toArray()),
+        map.project(reticule.getSouthWest().toArray())
+      ])
+    );
   }
 
   function onLoad({ target }) {
