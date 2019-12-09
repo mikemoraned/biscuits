@@ -4,8 +4,8 @@ import { MapBoxContext } from "./MapBoxContext";
 import { useRef, useLayoutEffect, useState } from "react";
 import ReactMapGL from "react-map-gl";
 import { CanvasOverlay } from "react-map-gl";
-import { LngLatBounds } from "mapbox-gl";
-import { geoProjection, geoPath } from "d3-geo";
+import { LngLatBounds, LngLat } from "mapbox-gl";
+import { geoPath, geoTransform } from "d3-geo";
 
 function BoundingBoxOverlay({ boundingBox }) {
   function redraw({ width, height, ctx, isDragging, project, unproject }) {
@@ -36,9 +36,6 @@ function BoundingBoxOverlay({ boundingBox }) {
 function FeatureOverlay({ boundingBox, features }) {
   function redraw({ width, height, ctx, isDragging, project, unproject }) {
     console.log(width, height);
-    // ctx.fillStyle = "black";
-    // ctx.fillRect(0, 0, width, height);
-    // ctx.fill();
 
     const center = project(boundingBox.getCenter().toArray());
     ctx.clearRect(0, 0, width, height);
@@ -49,8 +46,17 @@ function FeatureOverlay({ boundingBox, features }) {
 
     console.dir("drawing features: started");
     const geoJson = { type: "FeatureCollection", features };
-    console.dir(geoJson);
     const geoJsonBounds = geoJsonBoundsFromLngLatBounds(boundingBox);
+    // console.dir(geoJsonBounds);
+    const boundsPointsWorld = geoJsonBounds.features[0].geometry.coordinates[0];
+    boundsPointsWorld.forEach(boundsPointWorld => {
+      // console.dir(boundsPointWorld);
+      const boundsPoint = project(boundsPointWorld);
+      ctx.beginPath();
+      ctx.arc(boundsPoint[0], boundsPoint[1], 5.0, 0, 2 * Math.PI, false);
+      ctx.fillStyle = "red";
+      ctx.fill();
+    });
 
     const topLeft = project(boundingBox.getNorthWest().toArray());
     const bottomRight = project(boundingBox.getSouthEast().toArray());
@@ -63,31 +69,35 @@ function FeatureOverlay({ boundingBox, features }) {
     //   geoJsonBounds
     // );
 
-    const reticuleProjection = geoProjection(function(xRadians, yRadians) {
-      const xDegrees = (xRadians * 180.0) / Math.PI;
-      const yDegrees = (yRadians * 180.0) / Math.PI;
-      const projected = project([xDegrees, yDegrees]);
+    // const reticuleProjection = geoProjection(function(xRadians, yRadians) {
+    //   // const xDegrees = (xRadians * 180.0) / Math.PI;
+    //   // const yDegrees = (yRadians * 180.0) / Math.PI;
+    //   // const projected = project([xDegrees, yDegrees]);
+    //   const xDegrees = (xRadians * 180.0) / Math.PI;
+    //   const yDegrees = (yRadians * 180.0) / Math.PI;
+    //   const projected = project([xRadians, yRadians]);
 
-      // console.log([xRadians, yRadians], [xDegrees, yDegrees], projected);
+    //   console.log([xRadians, yRadians], [xDegrees, yDegrees], projected);
 
-      return projected;
+    //   return projected;
+    // });
+
+    const reticuleProjection = geoTransform({
+      point: function(lon, lat) {
+        const point = project(new LngLat(lon, lat).toArray());
+        console.log(lon, lat, "->", point);
+        this.stream.point(point.x, point.y);
+      }
     });
 
     const generator = geoPath(reticuleProjection).context(ctx);
 
-    ctx.fillStyle = "black";
-    ctx.fillRect(0, 0, width, height);
     ctx.lineWidth = 3;
     ctx.beginPath();
-    ctx.strokeStyle = "white";
+    ctx.strokeStyle = "red";
     generator(geoJsonBounds);
     ctx.stroke();
-    ctx.fill();
 
-    ctx.beginPath();
-    ctx.strokeStyle = "white";
-    generator(geoJson);
-    ctx.stroke();
     console.dir("drawing features: completed");
   }
 
