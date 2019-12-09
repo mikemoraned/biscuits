@@ -47,40 +47,14 @@ function FeatureOverlay({ boundingBox, features }) {
     console.dir("drawing features: started");
     const geoJson = { type: "FeatureCollection", features };
     const geoJsonBounds = geoJsonBoundsFromLngLatBounds(boundingBox);
-    // console.dir(geoJsonBounds);
     const boundsPointsWorld = geoJsonBounds.features[0].geometry.coordinates[0];
     boundsPointsWorld.forEach(boundsPointWorld => {
-      // console.dir(boundsPointWorld);
       const boundsPoint = project(boundsPointWorld);
       ctx.beginPath();
       ctx.arc(boundsPoint[0], boundsPoint[1], 5.0, 0, 2 * Math.PI, false);
       ctx.fillStyle = "red";
       ctx.fill();
     });
-
-    const topLeft = project(boundingBox.getNorthWest().toArray());
-    const bottomRight = project(boundingBox.getSouthEast().toArray());
-
-    // const reticuleProjection = geoMercator().fitExtent(
-    //   [
-    //     [topLeft[0], topLeft[1]],
-    //     [bottomRight[0], bottomRight[1]]
-    //   ],
-    //   geoJsonBounds
-    // );
-
-    // const reticuleProjection = geoProjection(function(xRadians, yRadians) {
-    //   // const xDegrees = (xRadians * 180.0) / Math.PI;
-    //   // const yDegrees = (yRadians * 180.0) / Math.PI;
-    //   // const projected = project([xDegrees, yDegrees]);
-    //   const xDegrees = (xRadians * 180.0) / Math.PI;
-    //   const yDegrees = (yRadians * 180.0) / Math.PI;
-    //   const projected = project([xRadians, yRadians]);
-
-    //   console.log([xRadians, yRadians], [xDegrees, yDegrees], projected);
-
-    //   return projected;
-    // });
 
     const reticuleProjection = geoTransform({
       point: function(lon, lat) {
