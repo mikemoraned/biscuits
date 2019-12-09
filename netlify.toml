@@ -1,4 +1,4 @@
 [build]
-  base    = "garibaldi/spikes/map-registration"
-  publish = "garibaldi/spikes/map-registration/build"
+  base    = "garibaldi/spikes/redraw-layer"
+  publish = "garibaldi/spikes/redraw-layer/build"
   command = "npm run build"
