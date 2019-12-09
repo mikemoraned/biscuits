@@ -35,8 +35,6 @@ function BoundingBoxOverlay({ boundingBox }) {
 
 function FeatureOverlay({ boundingBox, featureLoader }) {
   function redraw({ width, height, ctx, isDragging, project, unproject }) {
-    console.log(width, height);
-
     const center = project(boundingBox.getCenter().toArray());
     ctx.clearRect(0, 0, width, height);
     ctx.beginPath();
