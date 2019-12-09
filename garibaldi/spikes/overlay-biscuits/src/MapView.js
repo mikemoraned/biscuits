@@ -30,6 +30,7 @@ function reticuleFromMapBounds(bounds) {
 export function MapView({ city }) {
   const mapbox = useContext(MapBoxContext);
   const containerRef = useRef(null);
+  const bufferContainerRef = useRef(null);
   const [containerDimensions, setContainerDimensions] = useState({
     width: 400,
     height: 800
@@ -96,30 +97,36 @@ export function MapView({ city }) {
   }
 
   return (
-    <div ref={containerRef} className="map">
-      <ReactMapGL
-        width={width}
-        height={height}
-        {...viewport}
-        onViewportChange={viewportUpdated}
-        mapboxApiAccessToken={mapbox.access_token}
-        onLoad={onLoad}
-      >
-        <>
-          {reticuleBounds && featureLoader != null && (
-            <FeatureOverlay
-              boundingBox={reticuleBounds}
-              featureLoader={featureLoader}
-            />
-          )}
-          {reticuleBounds && featureLoader != null && (
-            <BiscuitOverlay
-              boundingBox={reticuleBounds}
-              featureLoader={featureLoader}
-            />
-          )}
-        </>
-      </ReactMapGL>
-    </div>
+    <>
+      <div ref={containerRef} className="map">
+        <ReactMapGL
+          width={width}
+          height={height}
+          {...viewport}
+          onViewportChange={viewportUpdated}
+          mapboxApiAccessToken={mapbox.access_token}
+          onLoad={onLoad}
+        >
+          <>
+            {reticuleBounds && featureLoader != null && (
+              <FeatureOverlay
+                boundingBox={reticuleBounds}
+                featureLoader={featureLoader}
+              />
+            )}
+            {reticuleBounds &&
+              featureLoader != null &&
+              bufferContainerRef.current && (
+                <BiscuitOverlay
+                  boundingBox={reticuleBounds}
+                  featureLoader={featureLoader}
+                  bufferContainerRef={bufferContainerRef}
+                />
+              )}
+          </>
+        </ReactMapGL>
+      </div>
+      <div ref={bufferContainerRef}></div>
+    </>
   );
 }
