@@ -127,10 +127,30 @@ export function MapView({ city }) {
     setReticuleBounds(reticule);
     setFeatureLoader(() => {
       return () => {
-        return map.queryRenderedFeatures([
-          map.project(reticule.getNorthEast().toArray()),
-          map.project(reticule.getSouthWest().toArray())
-        ]);
+        return map.queryRenderedFeatures(
+          [
+            map.project(reticule.getNorthEast().toArray()),
+            map.project(reticule.getSouthWest().toArray())
+          ],
+          {
+            filter: [
+              "in",
+              "class",
+              "street",
+              "pedestrian",
+              "motorway",
+              "motorway_link",
+              "path",
+              "primary",
+              "primary_link",
+              "secondary",
+              "secondary_link",
+              "tertiary",
+              "tertiary_link",
+              "track"
+            ]
+          }
+        );
       };
     });
   }
