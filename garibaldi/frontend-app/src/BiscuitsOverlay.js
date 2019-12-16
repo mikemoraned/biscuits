@@ -61,10 +61,18 @@ export function BiscuitsOverlay({ boundingBox, featureLoader, biscuitFinder }) {
 
       console.log(boundingBoxTopLeft, boundingBoxBottomRight);
 
-      const boundingBoxMinX = Math.floor(boundingBoxTopLeft[0]) * 2;
-      const boundingBoxMinY = Math.floor(boundingBoxTopLeft[1]) * 2;
-      const boundingBoxMaxX = Math.ceil(boundingBoxBottomRight[0]) * 2;
-      const boundingBoxMaxY = Math.ceil(boundingBoxBottomRight[1]) * 2;
+      const boundingBoxMinX = Math.floor(
+        boundingBoxTopLeft[0] * window.devicePixelRatio
+      );
+      const boundingBoxMinY = Math.floor(
+        boundingBoxTopLeft[1] * window.devicePixelRatio
+      );
+      const boundingBoxMaxX = Math.ceil(
+        boundingBoxBottomRight[0] * window.devicePixelRatio
+      );
+      const boundingBoxMaxY = Math.ceil(
+        boundingBoxBottomRight[1] * window.devicePixelRatio
+      );
       const boundingBoxWidth = boundingBoxMaxX - boundingBoxMinX;
       const boundingBoxHeight = boundingBoxMaxY - boundingBoxMinY;
 
