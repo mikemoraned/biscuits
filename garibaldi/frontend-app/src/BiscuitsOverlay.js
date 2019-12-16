@@ -46,12 +46,43 @@ export function BiscuitsOverlay({ boundingBox, featureLoader, biscuitFinder }) {
       .context(ctx);
 
     if (!isDragging) {
-      const topLeft = project(boundingBox.getNorthWest().toArray());
-      const bottomRight = project(boundingBox.getSouthEast().toArray());
+      console.log(boundingBox);
+      console.log(width, height);
+
+      // const boundingBoxTopLeft = project(boundingBox.getNorthWest().toArray());
+      // const boundingBoxBottomRight = project(
+      //   boundingBox.getSouthEast().toArray()
+      // );
+
+      const boundingBoxTopLeft = project(boundingBox.getSouthWest().toArray());
+      const boundingBoxBottomRight = project(
+        boundingBox.getNorthEast().toArray()
+      );
+
+      console.log(boundingBoxTopLeft, boundingBoxBottomRight);
+
+      const boundingBoxMinX = Math.floor(boundingBoxTopLeft[0]) * 2;
+      const boundingBoxMinY = Math.floor(boundingBoxTopLeft[1]) * 2;
+      const boundingBoxMaxX = Math.ceil(boundingBoxBottomRight[0]) * 2;
+      const boundingBoxMaxY = Math.ceil(boundingBoxBottomRight[1]) * 2;
+      const boundingBoxWidth = boundingBoxMaxX - boundingBoxMinX;
+      const boundingBoxHeight = boundingBoxMaxY - boundingBoxMinY;
 
       console.time("drawing map");
       ctx.fillStyle = "black";
-      ctx.fillRect(0, 0, width, height);
+      ctx.fillRect(
+        boundingBoxMinX,
+        boundingBoxMinY,
+        boundingBoxWidth,
+        boundingBoxHeight
+      );
+
+      console.log(
+        boundingBoxMinX,
+        boundingBoxMinY,
+        boundingBoxWidth,
+        boundingBoxHeight
+      );
 
       const features = featureLoader();
       const geoJson = { type: "FeatureCollection", features };
@@ -63,20 +94,21 @@ export function BiscuitsOverlay({ boundingBox, featureLoader, biscuitFinder }) {
       ctx.stroke();
       console.timeEnd("drawing map");
 
-      console.log(topLeft, bottomRight);
       console.time("getImageData");
-      // const inputImageData = ctx.getImageData(
-      //   topLeft[0],
-      //   topLeft[1],
-      //   bottomRight[0] - topLeft[0],
-      //   bottomRight[1] - topLeft[1]
-      // );
-      const inputImageData = ctx.getImageData(0, 0, width, height);
+      const inputImageData = ctx.getImageData(
+        boundingBoxMinX,
+        boundingBoxMinY,
+        boundingBoxWidth,
+        boundingBoxHeight
+      );
       console.dir(inputImageData);
       console.timeEnd("getImageData");
 
       console.time("find_biscuits");
-      const biscuitFinder = BiscuitFinder.new(width, height);
+      const biscuitFinder = BiscuitFinder.new(
+        boundingBoxWidth,
+        boundingBoxHeight
+      );
       console.dir(biscuitFinder.find_biscuits(inputImageData.data));
       console.timeEnd("find_biscuits");
 
@@ -85,14 +117,18 @@ export function BiscuitsOverlay({ boundingBox, featureLoader, biscuitFinder }) {
       const outputArray = new Uint8ClampedArray(
         memory.buffer,
         outputPointer,
-        4 * width * height
+        4 * boundingBoxWidth * boundingBoxHeight
       );
 
-      const outputImageData = new ImageData(outputArray, width, height);
+      const outputImageData = new ImageData(
+        outputArray,
+        boundingBoxWidth,
+        boundingBoxHeight
+      );
       console.timeEnd("get biscuits back");
 
       console.time("draw biscuits");
-      ctx.putImageData(outputImageData, 0, 0);
+      ctx.putImageData(outputImageData, boundingBoxMinX, boundingBoxMinY);
       console.timeEnd("draw biscuits");
     }
 
