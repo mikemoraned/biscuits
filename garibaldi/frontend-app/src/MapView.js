@@ -1,7 +1,7 @@
 import React from "react";
 import { useContext } from "react";
 import { MapBoxContext } from "./MapBoxContext";
-import { useRef, useLayoutEffect, useState } from "react";
+import { useRef, useLayoutEffect, useState, useEffect } from "react";
 import ReactMapGL from "react-map-gl";
 import { LngLatBounds } from "mapbox-gl";
 import { FeatureOverlay } from "./FeatureOverlay";
@@ -95,6 +95,16 @@ export function MapView({ city }) {
     });
   }
 
+  const [biscuitFinder, setBiscuitFinder] = useState(null);
+
+  useEffect(() => {
+    if (biscuitFinder == null) {
+      loadBiscuitFinder({
+        setBiscuitFinder
+      });
+    }
+  }, [biscuitFinder]);
+
   return (
     <div ref={containerRef} className="map">
       <ReactMapGL
@@ -112,14 +122,33 @@ export function MapView({ city }) {
               featureLoader={featureLoader}
             />
           )}
-          {reticuleBounds && featureLoader != null && (
+          {reticuleBounds && featureLoader != null && biscuitFinder != null && (
             <BiscuitsOverlay
               boundingBox={reticuleBounds}
               featureLoader={featureLoader}
+              biscuitFinder={biscuitFinder}
             />
           )}
         </>
       </ReactMapGL>
     </div>
   );
+}
+
+function loadBiscuitFinder({ setBiscuitFinder }) {
+  console.time("loadBiscuitFinder");
+  Promise.all([
+    import("@mike_moran/biscuiting-lib"),
+    import("@mike_moran/biscuiting-lib/biscuiting_lib_bg")
+  ])
+    .then(([biscuiting, biscuiting_bg]) => {
+      const { BiscuitFinder } = biscuiting;
+      const { memory } = biscuiting_bg;
+
+      setBiscuitFinder({ BiscuitFinder, memory });
+      console.timeEnd("loadBiscuitFinder");
+    })
+    .catch(err => {
+      console.log(err);
+    });
 }
