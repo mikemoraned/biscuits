@@ -116,17 +116,17 @@ export function MapView({ city }) {
         onLoad={onLoad}
       >
         <>
-          {reticuleBounds && featureLoader != null && (
-            <FeatureOverlay
-              boundingBox={reticuleBounds}
-              featureLoader={featureLoader}
-            />
-          )}
           {reticuleBounds && featureLoader != null && biscuitFinder != null && (
             <BiscuitsOverlay
               boundingBox={reticuleBounds}
               featureLoader={featureLoader}
               biscuitFinder={biscuitFinder}
+            />
+          )}
+          {reticuleBounds && featureLoader != null && (
+            <FeatureOverlay
+              boundingBox={reticuleBounds}
+              featureLoader={featureLoader}
             />
           )}
         </>
