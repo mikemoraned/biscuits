@@ -46,13 +46,54 @@ export function BiscuitsOverlay({ boundingBox, featureLoader, biscuitFinder }) {
       .context(ctx);
 
     if (!isDragging) {
+      const topLeft = project(boundingBox.getNorthWest().toArray());
+      const bottomRight = project(boundingBox.getSouthEast().toArray());
+
+      console.time("drawing map");
+      ctx.fillStyle = "black";
+      ctx.fillRect(0, 0, width, height);
+
+      const features = featureLoader();
+      const geoJson = { type: "FeatureCollection", features };
+
+      ctx.lineWidth = 1;
+      ctx.beginPath();
+      ctx.strokeStyle = "white";
+      generator(geoJson);
+      ctx.stroke();
+      console.timeEnd("drawing map");
+
+      console.log(topLeft, bottomRight);
       console.time("getImageData");
+      // const inputImageData = ctx.getImageData(
+      //   topLeft[0],
+      //   topLeft[1],
+      //   bottomRight[0] - topLeft[0],
+      //   bottomRight[1] - topLeft[1]
+      // );
       const inputImageData = ctx.getImageData(0, 0, width, height);
+      console.dir(inputImageData);
       console.timeEnd("getImageData");
+
       console.time("find_biscuits");
       const biscuitFinder = BiscuitFinder.new(width, height);
       console.dir(biscuitFinder.find_biscuits(inputImageData.data));
       console.timeEnd("find_biscuits");
+
+      console.time("get biscuits back");
+      const outputPointer = biscuitFinder.output();
+      const outputArray = new Uint8ClampedArray(
+        memory.buffer,
+        outputPointer,
+        4 * width * height
+      );
+
+      const outputImageData = new ImageData(outputArray, width, height);
+      console.timeEnd("get biscuits back");
+
+      console.time("draw biscuits");
+      ctx.putImageData(outputImageData, 0, 0);
+      console.timeEnd("draw biscuits");
     }
 
     ctx.lineWidth = 2;
