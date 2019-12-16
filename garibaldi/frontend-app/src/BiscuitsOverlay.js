@@ -28,29 +28,15 @@ function geoJsonBoundsFromLngLatBounds(bounds) {
 }
 
 export function BiscuitsOverlay({ boundingBox, featureLoader }) {
-  const [loadingBiscuitFinderLayer, setLoadingBiscuitFinderLayer] = useState(
-    false
-  );
-  const [biscuitFinderLayer, setBiscuitFinderLayer] = useState(null);
-  const [dimensions, setDimensions] = useState(null);
+  const [biscuitFinder, setBiscuitFinder] = useState(null);
 
   useEffect(() => {
-    if (
-      biscuitFinderLayer == null &&
-      dimensions != null &&
-      !loadingBiscuitFinderLayer
-    ) {
-      const { width, height } = dimensions;
-
-      setLoadingBiscuitFinderLayer(true);
-      loadBiscuitFinderLayer({
-        width,
-        height,
-        setBiscuitFinderLayer,
-        setLoadingBiscuitFinderLayer
+    if (biscuitFinder == null) {
+      loadBiscuitFinder({
+        setBiscuitFinder
       });
     }
-  }, [loadingBiscuitFinderLayer, biscuitFinderLayer, dimensions]);
+  }, [biscuitFinder]);
 
   function redraw({ width, height, ctx, isDragging, project, unproject }) {
     ctx.clearRect(0, 0, width, height);
@@ -75,7 +61,7 @@ export function BiscuitsOverlay({ boundingBox, featureLoader }) {
     generator(geoJsonBounds);
     ctx.stroke();
 
-    if (biscuitFinderLayer) {
+    if (biscuitFinder) {
       ctx.lineWidth = 2;
       ctx.beginPath();
       ctx.setLineDash([15, 15]);
@@ -83,51 +69,44 @@ export function BiscuitsOverlay({ boundingBox, featureLoader }) {
       generator(geoJsonBounds);
       ctx.stroke();
     }
-
-    setDimensions({ width, height });
   }
 
   return <CanvasOverlay redraw={redraw} />;
 }
 
-class BiscuitFinderLayer {
-  constructor({ width, height, biscuitFinder, memory }) {
-    this.width = width;
-    this.height = height;
-    this.biscuitFinder = biscuitFinder;
-    this.memory = memory;
-  }
+// class BiscuitFinderLayer {
+//   constructor({ width, height, biscuitFinder, memory }) {
+//     this.width = width;
+//     this.height = height;
+//     this.biscuitFinder = biscuitFinder;
+//     this.memory = memory;
+//   }
 
-  draw(context) {
-    console.time("BiscuitFinderLayer.draw");
-    const inputImageData = context.getImageData(0, 0, this.width, this.height);
-    console.time("find biscuits");
-    console.dir(this.biscuitFinder.find_biscuits(inputImageData.data));
-    console.timeEnd("find biscuits");
+//   draw(context) {
+//     console.time("BiscuitFinderLayer.draw");
+//     const inputImageData = context.getImageData(0, 0, this.width, this.height);
+//     console.time("find biscuits");
+//     console.dir(this.biscuitFinder.find_biscuits(inputImageData.data));
+//     console.timeEnd("find biscuits");
 
-    console.time("draw image");
-    const outputPointer = this.biscuitFinder.output();
-    const outputArray = new Uint8ClampedArray(
-      this.memory.buffer,
-      outputPointer,
-      4 * this.width * this.height
-    );
+//     console.time("draw image");
+//     const outputPointer = this.biscuitFinder.output();
+//     const outputArray = new Uint8ClampedArray(
+//       this.memory.buffer,
+//       outputPointer,
+//       4 * this.width * this.height
+//     );
 
-    const outputImageData = new ImageData(outputArray, this.width, this.height);
+//     const outputImageData = new ImageData(outputArray, this.width, this.height);
 
-    context.putImageData(outputImageData, 0, 0);
-    console.timeEnd("draw image");
-    console.timeEnd("BiscuitFinderLayer.draw");
-  }
-}
+//     context.putImageData(outputImageData, 0, 0);
+//     console.timeEnd("draw image");
+//     console.timeEnd("BiscuitFinderLayer.draw");
+//   }
+// }
 
-function loadBiscuitFinderLayer({
-  width,
-  height,
-  setBiscuitFinderLayer,
-  setLoadingBiscuitFinderLayer
-}) {
-  console.time("loadBiscuitFinderLayer");
+function loadBiscuitFinder({ setBiscuitFinder }) {
+  console.time("loadBiscuitFinder");
   Promise.all([
     import("@mike_moran/biscuiting-lib"),
     import("@mike_moran/biscuiting-lib/biscuiting_lib_bg")
@@ -135,13 +114,9 @@ function loadBiscuitFinderLayer({
     .then(([biscuiting, biscuiting_bg]) => {
       const { BiscuitFinder } = biscuiting;
       const { memory } = biscuiting_bg;
-      const biscuitFinder = BiscuitFinder.new(width, height);
 
-      setBiscuitFinderLayer(
-        new BiscuitFinderLayer({ width, height, biscuitFinder, memory })
-      );
-      setLoadingBiscuitFinderLayer(false);
-      console.timeEnd("loadBiscuitFinderLayer");
+      setBiscuitFinder({ BiscuitFinder, memory });
+      console.timeEnd("loadBiscuitFinder");
     })
     .catch(err => {
       console.log(err);
