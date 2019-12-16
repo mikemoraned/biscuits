@@ -5,6 +5,7 @@ import { useRef, useLayoutEffect, useState } from "react";
 import ReactMapGL from "react-map-gl";
 import { LngLatBounds } from "mapbox-gl";
 import { FeatureOverlay } from "./FeatureOverlay";
+import { BiscuitsOverlay } from "./BiscuitsOverlay";
 
 function reticuleFromMapBounds(bounds) {
   const northSouthExtent = bounds.getSouth() - bounds.getNorth();
@@ -104,12 +105,20 @@ export function MapView({ city }) {
         mapboxApiAccessToken={mapbox.access_token}
         onLoad={onLoad}
       >
-        {reticuleBounds && featureLoader != null && (
-          <FeatureOverlay
-            boundingBox={reticuleBounds}
-            featureLoader={featureLoader}
-          />
-        )}
+        <>
+          {reticuleBounds && featureLoader != null && (
+            <FeatureOverlay
+              boundingBox={reticuleBounds}
+              featureLoader={featureLoader}
+            />
+          )}
+          {reticuleBounds && featureLoader != null && (
+            <BiscuitsOverlay
+              boundingBox={reticuleBounds}
+              featureLoader={featureLoader}
+            />
+          )}
+        </>
       </ReactMapGL>
     </div>
   );
