@@ -29,7 +29,7 @@ fn gen_range(min: u8, max: u8) -> u8 {
 }
 
 fn random_color_map(num_labels: usize) -> Vec<Rgba<u8>> {
-    use web_sys::console;
+    // use web_sys::console;
 
     let mut color_map = vec![Rgba([0u8; 4]); num_labels];
     color_map[0] = Rgba([0u8; 4]);
@@ -41,7 +41,7 @@ fn random_color_map(num_labels: usize) -> Vec<Rgba<u8>> {
             255u8,
         ]);
     }
-    console::log_1(&format!("color map: {:?}", color_map).into());
+    // console::log_1(&format!("color map: {:?}", color_map).into());
 
     color_map
 }
@@ -64,18 +64,28 @@ impl BiscuitFinder {
         use imageproc::region_labelling::{connected_components, Connectivity};
         use web_sys::console;
 
+        let fg_color = Rgba([255u8; 4]);
+
         console::time_with_label("from raw input");
         match RgbaImage::from_raw(self.width, self.height, input.0) {
             Some(image) => {
                 console::time_end_with_label("from raw input");
 
                 console::time_with_label("process image");
+                // let gray_image: GrayImage = map_colors(&image, |p| {
+                //     let avg = ((p[0] as f32) + (p[1] as f32) + (p[2] as f32)) / 3.0;
+                //     let alpha = p[3] as f32 / std::u8::MAX as f32;
+                //     let gray = (alpha * avg).floor() as u8;
+                //     let inverted_gray = 255 - gray;
+                //     if inverted_gray < 128 {
+                //         Luma([0u8; 1])
+                //     } else {
+                //         Luma([255u8; 1])
+                //     }
+                // });
+
                 let gray_image: GrayImage = map_colors(&image, |p| {
-                    let avg = ((p[0] as f32) + (p[1] as f32) + (p[2] as f32)) / 3.0;
-                    let alpha = p[3] as f32 / std::u8::MAX as f32;
-                    let gray = (alpha * avg).floor() as u8;
-                    let inverted_gray = 255 - gray;
-                    if inverted_gray < 128 {
+                    if p == fg_color {
                         Luma([0u8; 1])
                     } else {
                         Luma([255u8; 1])

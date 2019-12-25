@@ -46,6 +46,8 @@ export function BiscuitsOverlay({ boundingBox, featureLoader, biscuitFinder }) {
       .context(ctx);
 
     if (!isDragging) {
+      console.time("redraw: biscuits");
+
       // FIXME: logically, I want to get top left / bottom right of bounding box
       // by asking for north west / south east points. however, that doesn't seem to
       // work and instead I need to get south west / north east instead.
@@ -127,6 +129,7 @@ export function BiscuitsOverlay({ boundingBox, featureLoader, biscuitFinder }) {
         boundingBoxMinY * window.devicePixelRatio
       );
       console.timeEnd("draw biscuits");
+      console.timeEnd("redraw: biscuits");
     }
 
     ctx.lineWidth = 2;
