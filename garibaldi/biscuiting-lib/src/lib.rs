@@ -64,35 +64,25 @@ impl BiscuitFinder {
         use imageproc::region_labelling::{connected_components, Connectivity};
         use web_sys::console;
 
-        let fg_color = Rgba([255u8; 4]);
+        let input_background_color = Rgba([255u8; 4]);
 
         console::time_with_label("from raw input");
         match RgbaImage::from_raw(self.width, self.height, input.0) {
             Some(image) => {
                 console::time_end_with_label("from raw input");
 
-                console::time_with_label("process image");
-                // let gray_image: GrayImage = map_colors(&image, |p| {
-                //     let avg = ((p[0] as f32) + (p[1] as f32) + (p[2] as f32)) / 3.0;
-                //     let alpha = p[3] as f32 / std::u8::MAX as f32;
-                //     let gray = (alpha * avg).floor() as u8;
-                //     let inverted_gray = 255 - gray;
-                //     if inverted_gray < 128 {
-                //         Luma([0u8; 1])
-                //     } else {
-                //         Luma([255u8; 1])
-                //     }
-                // });
+                let foreground_color = Luma([255u8; 1]);
+                let background_color = Luma([0u8; 1]);
 
+                console::time_with_label("process image");
                 let gray_image: GrayImage = map_colors(&image, |p| {
-                    if p == fg_color {
-                        Luma([0u8; 1])
+                    if p == input_background_color {
+                        background_color
                     } else {
-                        Luma([255u8; 1])
+                        foreground_color
                     }
                 });
 
-                let background_color = Luma([0u8; 1]);
                 let labelled_image =
                     connected_components(&gray_image, Connectivity::Four, background_color);
                 let num_labels = (labelled_image.pixels().map(|p| p[0]).max().unwrap()) as usize;
