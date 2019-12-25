@@ -1,6 +1,6 @@
 # Building
 
-    wasm-pack build
+    wasm-pack build --scope mike_moran
 
 # Sharing locally
 
