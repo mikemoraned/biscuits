@@ -88,17 +88,7 @@ impl BiscuitFinder {
                     connected_components(&gray_image, Connectivity::Four, background_color);
                 let num_labels = (labelled_image.pixels().map(|p| p[0]).max().unwrap()) as usize;
                 let required_color_map_size = num_labels + 1;
-                match &self.color_map {
-                    Some(map) => {
-                        if map.len() <= required_color_map_size {
-                            self.color_map = Some(random_color_map(required_color_map_size));
-                        }
-                    }
-                    None => {
-                        self.color_map = Some(random_color_map(required_color_map_size));
-                    }
-                };
-                let color_map = self.color_map.as_ref().unwrap();
+                let color_map = self.stretch_color_map(required_color_map_size);
                 let processed_gray_image =
                     map_colors(&labelled_image, |p| color_map[p[0] as usize]);
 
@@ -113,6 +103,20 @@ impl BiscuitFinder {
                 return Err("couldn't read from raw".into());
             }
         }
+    }
+
+    fn stretch_color_map(&mut self, required_color_map_size: usize) -> &Vec<Rgba<u8>> {
+        match &self.color_map {
+            Some(map) => {
+                if map.len() <= required_color_map_size {
+                    self.color_map = Some(random_color_map(required_color_map_size));
+                }
+            }
+            None => {
+                self.color_map = Some(random_color_map(required_color_map_size));
+            }
+        };
+        self.color_map.as_ref().unwrap()
     }
 
     pub fn output(&self) -> *const u8 {
