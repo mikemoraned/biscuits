@@ -15,7 +15,7 @@ static ALLOC: wee_alloc::WeeAlloc = wee_alloc::WeeAlloc::INIT;
 
 #[wasm_bindgen]
 pub struct BiscuitFinder {
-    output: Option<Vec<u8>>,
+    colored_areas: Option<Vec<u8>>,
     color_map: Option<Vec<Rgba<u8>>>,
 }
 
@@ -49,7 +49,7 @@ impl BiscuitFinder {
     pub fn new() -> BiscuitFinder {
         console_error_panic_hook::set_once();
         BiscuitFinder {
-            output: None,
+            colored_areas: None,
             color_map: Some(random_color_map(100)),
         }
     }
@@ -63,6 +63,7 @@ impl BiscuitFinder {
         use image::{GrayImage, Luma};
         use imageproc::map::map_colors;
         use imageproc::region_labelling::{connected_components, Connectivity};
+        use std::cmp::{max, min};
         use web_sys::console;
 
         let input_background_color = Rgba([255u8; 4]);
@@ -92,10 +93,23 @@ impl BiscuitFinder {
                 let processed_gray_image =
                     map_colors(&labelled_image, |p| color_map[p[0] as usize]);
 
+                console::time_with_label("finding bounding boxes");
+                let mut bounding_boxes = Vec::new();
+                bounding_boxes.resize_with(num_labels + 1, || vec![width, height, 0, 0]);
+                for (x, y, p) in labelled_image.enumerate_pixels() {
+                    let label_id = p[0] as usize;
+                    let current_bounding_box = &mut bounding_boxes[label_id];
+                    current_bounding_box[0] = min(x, current_bounding_box[0]);
+                    current_bounding_box[1] = min(y, current_bounding_box[1]);
+                    current_bounding_box[2] = max(x, current_bounding_box[2]);
+                    current_bounding_box[3] = max(y, current_bounding_box[3]);
+                }
+                console::time_end_with_label("finding bounding boxes");
+
                 console::time_end_with_label("process image");
 
                 console::time_with_label("to raw output");
-                self.output = Some(processed_gray_image.to_vec());
+                self.colored_areas = Some(processed_gray_image.to_vec());
                 console::time_end_with_label("to raw output");
                 return Ok("processed image".into());
             }
@@ -120,7 +134,7 @@ impl BiscuitFinder {
     }
 
     pub fn output(&self) -> *const u8 {
-        match &self.output {
+        match &self.colored_areas {
             Some(buffer) => buffer.as_ptr(),
             None => panic!("no output"),
         }
