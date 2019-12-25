@@ -119,7 +119,7 @@ export function MapView({ city }) {
             <BiscuitsOverlay
               boundingBox={reticuleBounds}
               featureLoader={featureLoader}
-              biscuitFinder={biscuitFinder}
+              biscuitFinderLib={biscuitFinder}
             />
           )}
         </>

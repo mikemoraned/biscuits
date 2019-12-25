@@ -27,7 +27,7 @@ fn gen_range(min: u8, max: u8) -> u8 {
 }
 
 fn random_color_map(num_labels: usize) -> Vec<Rgba<u8>> {
-    // use web_sys::console;
+    use web_sys::console;
 
     let mut color_map = vec![Rgba([0u8; 4]); num_labels];
     color_map[0] = Rgba([0u8; 4]);
@@ -39,7 +39,7 @@ fn random_color_map(num_labels: usize) -> Vec<Rgba<u8>> {
             255u8,
         ]);
     }
-    // console::log_1(&format!("color map: {:?}", color_map).into());
+    console::log_1(&format!("color map: {:?}", color_map).into());
 
     color_map
 }

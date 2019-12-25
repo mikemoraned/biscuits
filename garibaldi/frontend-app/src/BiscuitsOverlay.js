@@ -1,4 +1,5 @@
 import React from "react";
+import { useMemo } from "react";
 import { CanvasOverlay } from "react-map-gl";
 import { LngLat } from "mapbox-gl";
 import { geoPath, geoTransform } from "d3-geo";
@@ -26,8 +27,13 @@ function geoJsonBoundsFromLngLatBounds(bounds) {
   };
 }
 
-export function BiscuitsOverlay({ boundingBox, featureLoader, biscuitFinder }) {
-  const { BiscuitFinder, memory } = biscuitFinder;
+export function BiscuitsOverlay({
+  boundingBox,
+  featureLoader,
+  biscuitFinderLib
+}) {
+  const { BiscuitFinder, memory } = biscuitFinderLib;
+  const biscuitFinder = useMemo(() => BiscuitFinder.new(), [BiscuitFinder]);
 
   function redraw({ width, height, ctx, isDragging, project, unproject }) {
     ctx.clearRect(0, 0, width, height);
@@ -96,7 +102,6 @@ export function BiscuitsOverlay({ boundingBox, featureLoader, biscuitFinder }) {
       console.timeEnd("getImageData");
 
       console.time("find_biscuits");
-      const biscuitFinder = BiscuitFinder.new();
       biscuitFinder.find_biscuits(
         boundingBoxWidth * window.devicePixelRatio,
         boundingBoxHeight * window.devicePixelRatio,
