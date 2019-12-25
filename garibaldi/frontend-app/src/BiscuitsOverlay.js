@@ -96,11 +96,12 @@ export function BiscuitsOverlay({ boundingBox, featureLoader, biscuitFinder }) {
       console.timeEnd("getImageData");
 
       console.time("find_biscuits");
-      const biscuitFinder = BiscuitFinder.new(
+      const biscuitFinder = BiscuitFinder.new();
+      biscuitFinder.find_biscuits(
         boundingBoxWidth * window.devicePixelRatio,
-        boundingBoxHeight * window.devicePixelRatio
+        boundingBoxHeight * window.devicePixelRatio,
+        inputImageData.data
       );
-      biscuitFinder.find_biscuits(inputImageData.data);
       console.timeEnd("find_biscuits");
 
       console.time("get biscuits back");

@@ -15,8 +15,6 @@ static ALLOC: wee_alloc::WeeAlloc = wee_alloc::WeeAlloc::INIT;
 
 #[wasm_bindgen]
 pub struct BiscuitFinder {
-    width: u32,
-    height: u32,
     output: Option<Vec<u8>>,
     color_map: Option<Vec<Rgba<u8>>>,
 }
@@ -48,17 +46,20 @@ fn random_color_map(num_labels: usize) -> Vec<Rgba<u8>> {
 
 #[wasm_bindgen]
 impl BiscuitFinder {
-    pub fn new(width: u32, height: u32) -> BiscuitFinder {
+    pub fn new() -> BiscuitFinder {
         console_error_panic_hook::set_once();
         BiscuitFinder {
-            width,
-            height,
             output: None,
             color_map: Some(random_color_map(100)),
         }
     }
 
-    pub fn find_biscuits(&mut self, input: Clamped<Vec<u8>>) -> Result<String, JsValue> {
+    pub fn find_biscuits(
+        &mut self,
+        width: u32,
+        height: u32,
+        input: Clamped<Vec<u8>>,
+    ) -> Result<String, JsValue> {
         use image::{GrayImage, Luma};
         use imageproc::map::map_colors;
         use imageproc::region_labelling::{connected_components, Connectivity};
@@ -67,7 +68,7 @@ impl BiscuitFinder {
         let input_background_color = Rgba([255u8; 4]);
 
         console::time_with_label("from raw input");
-        match RgbaImage::from_raw(self.width, self.height, input.0) {
+        match RgbaImage::from_raw(width, height, input.0) {
             Some(image) => {
                 console::time_end_with_label("from raw input");
 
