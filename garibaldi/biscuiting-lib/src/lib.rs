@@ -90,8 +90,6 @@ impl BiscuitFinder {
 
                 let labelled_image =
                     connected_components(&gray_image, Connectivity::Four, background_color);
-                console::log_1(&format!("labelled image: {:?}", labelled_image).into());
-
                 let num_labels = (labelled_image.pixels().map(|p| p[0]).max().unwrap()) as usize;
                 let required_color_map_size = num_labels + 1;
                 let color_map = self.stretch_color_map(required_color_map_size);
@@ -109,7 +107,6 @@ impl BiscuitFinder {
                     current_bounding_box[2] = max(x + 1, current_bounding_box[2]);
                     current_bounding_box[3] = max(y + 1, current_bounding_box[3]);
                 }
-                console::log_1(&format!("bounding boxes: {:?}", bounding_boxes).into());
 
                 let background_label_id = 0;
                 let mut flattened_bounding_boxes = Vec::new();
@@ -122,10 +119,6 @@ impl BiscuitFinder {
                         flattened_bounding_boxes[(label_id - 1) * 4 + 3] = bounding_box[3];
                     }
                 }
-                console::log_1(
-                    &format!("flattened bounding boxes: {:?}", flattened_bounding_boxes).into(),
-                );
-
                 self.bounding_boxes = Some(flattened_bounding_boxes);
                 console::time_end_with_label("finding bounding boxes");
 
