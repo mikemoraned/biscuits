@@ -16,6 +16,7 @@ static ALLOC: wee_alloc::WeeAlloc = wee_alloc::WeeAlloc::INIT;
 #[wasm_bindgen]
 pub struct BiscuitFinder {
     colored_areas: Option<Vec<u8>>,
+    bounding_boxes: Option<Vec<u32>>,
     color_map: Option<Vec<Rgba<u8>>>,
 }
 
@@ -50,6 +51,7 @@ impl BiscuitFinder {
         console_error_panic_hook::set_once();
         BiscuitFinder {
             colored_areas: None,
+            bounding_boxes: None,
             color_map: Some(random_color_map(100)),
         }
     }
@@ -104,6 +106,24 @@ impl BiscuitFinder {
                     current_bounding_box[2] = max(x, current_bounding_box[2]);
                     current_bounding_box[3] = max(y, current_bounding_box[3]);
                 }
+                // let mut flattened_bounding_boxes = Vec::new();
+                // flattened_bounding_boxes.resize(bounding_boxes.len() * 4, 0);
+                // for (index, bounding_box) in bounding_boxes.iter().enumerate() {
+                //     flattened_bounding_boxes[index + 0] = bounding_box[0];
+                //     flattened_bounding_boxes[index + 1] = bounding_box[1];
+                //     flattened_bounding_boxes[index + 2] = bounding_box[2];
+                //     flattened_bounding_boxes[index + 3] = bounding_box[3];
+                // }
+                // self.bounding_boxes = Some(flattened_bounding_boxes);
+                let mut flattened_bounding_boxes = Vec::new();
+                flattened_bounding_boxes.resize(4, 0);
+
+                flattened_bounding_boxes[0] = 0;
+                flattened_bounding_boxes[1] = 0;
+                flattened_bounding_boxes[2] = width;
+                flattened_bounding_boxes[3] = height;
+                // }
+                self.bounding_boxes = Some(flattened_bounding_boxes);
                 console::time_end_with_label("finding bounding boxes");
 
                 console::time_end_with_label("process image");
@@ -137,6 +157,20 @@ impl BiscuitFinder {
         match &self.colored_areas {
             Some(buffer) => buffer.as_ptr(),
             None => panic!("no output"),
+        }
+    }
+
+    pub fn num_bounding_boxes(&self) -> usize {
+        match &self.bounding_boxes {
+            Some(vec) => vec.len() / 4,
+            None => panic!("no bounding boxes"),
+        }
+    }
+
+    pub fn bounding_boxes(&self) -> *const u32 {
+        match &self.bounding_boxes {
+            Some(vec) => vec.as_ptr(),
+            None => panic!("no bounding boxes"),
         }
     }
 }
