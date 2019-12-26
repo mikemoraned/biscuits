@@ -139,11 +139,11 @@ export function BiscuitsOverlay({
       console.timeEnd("get bounding boxes back");
 
       console.time("draw biscuits");
-      ctx.putImageData(
-        outputImageData,
-        boundingBoxMinX * window.devicePixelRatio,
-        boundingBoxMinY * window.devicePixelRatio
-      );
+      // ctx.putImageData(
+      //   outputImageData,
+      //   boundingBoxMinX * window.devicePixelRatio,
+      //   boundingBoxMinY * window.devicePixelRatio
+      // );
       console.timeEnd("draw biscuits");
 
       console.time("draw bounding boxes");
