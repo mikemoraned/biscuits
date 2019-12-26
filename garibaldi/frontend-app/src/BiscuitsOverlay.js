@@ -139,32 +139,33 @@ export function BiscuitsOverlay({
       console.timeEnd("get bounding boxes back");
 
       console.time("draw biscuits");
-      // ctx.putImageData(
-      //   outputImageData,
-      //   boundingBoxMinX * window.devicePixelRatio,
-      //   boundingBoxMinY * window.devicePixelRatio
-      // );
+      ctx.putImageData(
+        outputImageData,
+        boundingBoxMinX * window.devicePixelRatio,
+        boundingBoxMinY * window.devicePixelRatio
+      );
       console.timeEnd("draw biscuits");
 
       console.time("draw bounding boxes");
-      ctx.lineWidth = 10;
+      ctx.lineWidth = 1;
       ctx.beginPath();
       ctx.strokeStyle = "red";
       console.log("num biscuits", numBiscuits);
       for (let biscuitNum = 0; biscuitNum < numBiscuits; biscuitNum++) {
+        const offset = biscuitNum * 4;
         const [minX, minY, maxX, maxY] = [
           boundingBoxMinX +
-            biscuitBoundingBoxes[biscuitNum + 0] / window.devicePixelRatio,
+            biscuitBoundingBoxes[offset + 0] / window.devicePixelRatio,
           boundingBoxMinY +
-            biscuitBoundingBoxes[biscuitNum + 1] / window.devicePixelRatio,
+            biscuitBoundingBoxes[offset + 1] / window.devicePixelRatio,
           boundingBoxMinX +
-            biscuitBoundingBoxes[biscuitNum + 2] / window.devicePixelRatio,
+            biscuitBoundingBoxes[offset + 2] / window.devicePixelRatio,
           boundingBoxMinY +
-            biscuitBoundingBoxes[biscuitNum + 3] / window.devicePixelRatio
+            biscuitBoundingBoxes[offset + 3] / window.devicePixelRatio
         ];
-        // console.dir([minX, minY, maxX, maxY]);
         ctx.rect(minX, minY, maxX - minX, maxY - minY);
       }
+
       ctx.stroke();
       console.timeEnd("draw bounding boxes");
 

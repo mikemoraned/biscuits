@@ -94,36 +94,58 @@ impl BiscuitFinder {
                 let color_map = self.stretch_color_map(required_color_map_size);
                 let processed_gray_image =
                     map_colors(&labelled_image, |p| color_map[p[0] as usize]);
+                // let test_label = 100;
+                // let processed_gray_image = map_colors(&labelled_image, |p| {
+                //     let label_id = p[0] as usize;
+                //     if label_id == test_label {
+                //         Rgba([255u8; 4])
+                //     } else {
+                //         Rgba([0u8; 4])
+                //     }
+                // });
 
                 console::time_with_label("finding bounding boxes");
                 let mut bounding_boxes = Vec::new();
                 bounding_boxes.resize_with(num_labels + 1, || vec![width, height, 0, 0]);
                 for (x, y, p) in labelled_image.enumerate_pixels() {
                     let label_id = p[0] as usize;
+                    // console::log_1(&format!("({}, {}): label: {}", x, y, label_id).into());
                     let current_bounding_box = &mut bounding_boxes[label_id];
+                    // if label_id == 1 {
+                    //     console::log_1(
+                    //         &format!("({}, {}): {:?}", x, y, current_bounding_box).into(),
+                    //     );
+                    // }
                     current_bounding_box[0] = min(x, current_bounding_box[0]);
                     current_bounding_box[1] = min(y, current_bounding_box[1]);
                     current_bounding_box[2] = max(x, current_bounding_box[2]);
                     current_bounding_box[3] = max(y, current_bounding_box[3]);
+                    // if label_id == 1 {
+                    //     console::log_1(
+                    //         &format!("({}, {}): -> {:?}", x, y, current_bounding_box).into(),
+                    //     );
+                    // }
                 }
-                // let mut flattened_bounding_boxes = Vec::new();
-                // flattened_bounding_boxes.resize(bounding_boxes.len() * 4, 0);
-                // for (index, bounding_box) in bounding_boxes.iter().enumerate() {
-                //     flattened_bounding_boxes[index + 0] = bounding_box[0];
-                //     flattened_bounding_boxes[index + 1] = bounding_box[1];
-                //     flattened_bounding_boxes[index + 2] = bounding_box[2];
-                //     flattened_bounding_boxes[index + 3] = bounding_box[3];
-                // }
-                // self.bounding_boxes = Some(flattened_bounding_boxes);
+                // console::log_1(
+                //     &format!("{}: -> {:?}", test_label, bounding_boxes[test_label]).into(),
+                // );
                 let mut flattened_bounding_boxes = Vec::new();
-                flattened_bounding_boxes.resize(4, 0);
-
-                flattened_bounding_boxes[0] = 0;
-                flattened_bounding_boxes[1] = 0;
-                flattened_bounding_boxes[2] = width;
-                flattened_bounding_boxes[3] = height;
-                // }
+                flattened_bounding_boxes.resize(bounding_boxes.len() * 4, 0);
+                for (index, bounding_box) in bounding_boxes.iter().enumerate() {
+                    flattened_bounding_boxes[index + 0] = bounding_box[0];
+                    flattened_bounding_boxes[index + 1] = bounding_box[1];
+                    flattened_bounding_boxes[index + 2] = bounding_box[2];
+                    flattened_bounding_boxes[index + 3] = bounding_box[3];
+                }
                 self.bounding_boxes = Some(flattened_bounding_boxes);
+                // let mut flattened_bounding_boxes = Vec::new();
+                // flattened_bounding_boxes.resize(4, 0);
+
+                // flattened_bounding_boxes[0] = 0;
+                // flattened_bounding_boxes[1] = 0;
+                // flattened_bounding_boxes[2] = width;
+                // flattened_bounding_boxes[3] = height;
+                // self.bounding_boxes = Some(flattened_bounding_boxes);
                 console::time_end_with_label("finding bounding boxes");
 
                 console::time_end_with_label("process image");
