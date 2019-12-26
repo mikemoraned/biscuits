@@ -177,10 +177,17 @@ impl BiscuitFinder {
         self.color_map.as_ref().unwrap()
     }
 
-    pub fn output(&self) -> *const u8 {
+    pub fn output_ptr(&self) -> *const u8 {
         match &self.colored_areas {
             Some(buffer) => buffer.as_ptr(),
             None => panic!("no output"),
+        }
+    }
+
+    pub fn bounding_boxes_ptr(&self) -> *const u32 {
+        match &self.bounding_boxes {
+            Some(vec) => vec.as_ptr(),
+            None => panic!("no bounding boxes"),
         }
     }
 
@@ -190,11 +197,20 @@ impl BiscuitFinder {
             None => panic!("no bounding boxes"),
         }
     }
+}
 
-    pub fn bounding_boxes(&self) -> *const u32 {
+impl BiscuitFinder {
+    pub fn output(&self) -> Result<Vec<u8>, String> {
+        match &self.colored_areas {
+            Some(buffer) => Ok(buffer.clone()),
+            None => Err("no output".into()),
+        }
+    }
+
+    pub fn bounding_boxes(&self) -> Result<Vec<u32>, String> {
         match &self.bounding_boxes {
-            Some(vec) => vec.as_ptr(),
-            None => panic!("no bounding boxes"),
+            Some(vec) => Ok(vec.clone()),
+            None => Err("no output".into()),
         }
     }
 }
@@ -217,5 +233,12 @@ mod tests {
         let result = biscuit_finder.find_biscuits(2, 2, input);
 
         assert_eq!(Ok("processed image".into()), result);
+
+        let output = biscuit_finder.output();
+        assert!(output.is_ok());
+
+        assert_eq!(1, biscuit_finder.num_bounding_boxes());
+        let bounding_boxes = biscuit_finder.bounding_boxes();
+        assert_eq!(Ok(vec![0, 0, 1, 1]), bounding_boxes);
     }
 }
