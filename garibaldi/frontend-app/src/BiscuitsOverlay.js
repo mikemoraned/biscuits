@@ -110,7 +110,7 @@ export function BiscuitsOverlay({
       console.timeEnd("find_biscuits");
 
       console.time("get biscuits back");
-      const outputPointer = biscuitFinder.output();
+      const outputPointer = biscuitFinder.output_ptr();
       const outputArray = new Uint8ClampedArray(
         memory.buffer,
         outputPointer,
@@ -130,7 +130,7 @@ export function BiscuitsOverlay({
 
       console.time("get bounding boxes back");
       const numBiscuits = biscuitFinder.num_bounding_boxes();
-      const biscuitBoundingBoxesPointer = biscuitFinder.bounding_boxes();
+      const biscuitBoundingBoxesPointer = biscuitFinder.bounding_boxes_ptr();
       const biscuitBoundingBoxes = new Uint32Array(
         memory.buffer,
         biscuitBoundingBoxesPointer,

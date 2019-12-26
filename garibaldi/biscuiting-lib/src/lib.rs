@@ -1,8 +1,7 @@
-#[macro_use]
-extern crate imageproc;
 extern crate base64;
 extern crate console_error_panic_hook;
 extern crate image;
+extern crate imageproc;
 extern crate js_sys;
 extern crate wasm_bindgen;
 #[cfg(feature = "wee_alloc")]
