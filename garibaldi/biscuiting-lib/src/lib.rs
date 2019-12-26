@@ -1,6 +1,7 @@
 extern crate base64;
 extern crate console_error_panic_hook;
 extern crate image;
+#[macro_use]
 extern crate imageproc;
 extern crate js_sys;
 extern crate wasm_bindgen;
@@ -108,17 +109,11 @@ impl BiscuitFinder {
                     current_bounding_box[3] = max(y + 1, current_bounding_box[3]);
                 }
 
-                let background_label_id = 0;
-                let mut flattened_bounding_boxes = Vec::new();
-                flattened_bounding_boxes.resize((bounding_boxes.len() - 1) * 4, 0);
-                for (label_id, bounding_box) in bounding_boxes.iter().enumerate() {
-                    if label_id != background_label_id {
-                        flattened_bounding_boxes[(label_id - 1) * 4 + 0] = bounding_box[0];
-                        flattened_bounding_boxes[(label_id - 1) * 4 + 1] = bounding_box[1];
-                        flattened_bounding_boxes[(label_id - 1) * 4 + 2] = bounding_box[2];
-                        flattened_bounding_boxes[(label_id - 1) * 4 + 3] = bounding_box[3];
-                    }
-                }
+                let without_background_bounding_box = bounding_boxes.split_off(1);
+                let flattened_bounding_boxes = without_background_bounding_box
+                    .into_iter()
+                    .flatten()
+                    .collect::<Vec<u32>>();
                 self.bounding_boxes = Some(flattened_bounding_boxes);
                 console::time_end_with_label("finding bounding boxes");
 
