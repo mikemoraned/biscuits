@@ -117,10 +117,10 @@ impl BiscuitFinder {
                 flattened_bounding_boxes.resize((bounding_boxes.len() - 1) * 4, 0);
                 for (label_id, bounding_box) in bounding_boxes.iter().enumerate() {
                     if label_id != background_label_id {
-                        flattened_bounding_boxes[label_id - 1 + 0] = bounding_box[0];
-                        flattened_bounding_boxes[label_id - 1 + 1] = bounding_box[1];
-                        flattened_bounding_boxes[label_id - 1 + 2] = bounding_box[2];
-                        flattened_bounding_boxes[label_id - 1 + 3] = bounding_box[3];
+                        flattened_bounding_boxes[(label_id - 1) * 4 + 0] = bounding_box[0];
+                        flattened_bounding_boxes[(label_id - 1) * 4 + 1] = bounding_box[1];
+                        flattened_bounding_boxes[(label_id - 1) * 4 + 2] = bounding_box[2];
+                        flattened_bounding_boxes[(label_id - 1) * 4 + 3] = bounding_box[3];
                     }
                 }
                 console::log_1(
@@ -264,5 +264,37 @@ mod tests {
         assert_eq!(1, biscuit_finder.num_bounding_boxes());
         let bounding_boxes = biscuit_finder.bounding_boxes();
         assert_eq!(Ok(vec![1, 1, 3, 3]), bounding_boxes);
+    }
+
+    #[wasm_bindgen_test]
+    fn test_with_multiple_biscuits() {
+        let mut biscuit_finder = BiscuitFinder::new();
+
+        let image = rgba_image!(
+            [255, 255, 255, 255], [255, 255, 255, 255], [255, 255, 255, 255], [255, 255, 255, 255], [255, 255, 255, 255];
+            [255, 255, 255, 255], [0,     0,   0, 255], [255, 255, 255, 255], [0,     0,   0, 255], [255, 255, 255, 255];
+            [255, 255, 255, 255], [255, 255, 255, 255], [255, 255, 255, 255], [255, 255, 255, 255], [255, 255, 255, 255];
+            [255, 255, 255, 255], [0,     0,   0, 255], [255, 255, 255, 255], [0,     0,   0, 255], [255, 255, 255, 255];
+            [255, 255, 255, 255], [255, 255, 255, 255], [255, 255, 255, 255], [255, 255, 255, 255], [255, 255, 255, 255]);
+
+        let input = Clamped(image.to_vec());
+        let result = biscuit_finder.find_biscuits(5, 5, input);
+
+        assert_eq!(Ok("processed image".into()), result);
+
+        let output = biscuit_finder.output();
+        assert!(output.is_ok());
+
+        assert_eq!(4, biscuit_finder.num_bounding_boxes());
+        let bounding_boxes = biscuit_finder.bounding_boxes();
+        assert_eq!(
+            Ok(vec![
+                1, 1, 2, 2, //
+                3, 1, 4, 2, //
+                1, 3, 2, 4, //
+                3, 3, 4, 4, //
+            ]),
+            bounding_boxes
+        );
     }
 }
