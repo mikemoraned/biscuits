@@ -223,7 +223,7 @@ mod tests {
     }
 
     #[wasm_bindgen_test]
-    fn test_with_single_biscuit() {
+    fn test_with_single_pixel_biscuit_in_top_left_corner() {
         let mut biscuit_finder = BiscuitFinder::new();
 
         let image = rgba_image!(
@@ -241,5 +241,28 @@ mod tests {
         assert_eq!(1, biscuit_finder.num_bounding_boxes());
         let bounding_boxes = biscuit_finder.bounding_boxes();
         assert_eq!(Ok(vec![0, 0, 1, 1]), bounding_boxes);
+    }
+
+    #[wasm_bindgen_test]
+    fn test_with_big_biscuit_in_middle() {
+        let mut biscuit_finder = BiscuitFinder::new();
+
+        let image = rgba_image!(
+            [255, 255, 255, 255], [255, 255, 255, 255], [255, 255, 255, 255], [255, 255, 255, 255];
+            [255, 255, 255, 255], [0,     0,   0, 255], [0,     0,   0, 255], [255, 255, 255, 255];
+            [255, 255, 255, 255], [0,     0,   0, 255], [0,     0,   0, 255], [255, 255, 255, 255];
+            [255, 255, 255, 255], [255, 255, 255, 255], [255, 255, 255, 255], [255, 255, 255, 255]);
+
+        let input = Clamped(image.to_vec());
+        let result = biscuit_finder.find_biscuits(4, 4, input);
+
+        assert_eq!(Ok("processed image".into()), result);
+
+        let output = biscuit_finder.output();
+        assert!(output.is_ok());
+
+        assert_eq!(1, biscuit_finder.num_bounding_boxes());
+        let bounding_boxes = biscuit_finder.bounding_boxes();
+        assert_eq!(Ok(vec![1, 1, 3, 3]), bounding_boxes);
     }
 }
