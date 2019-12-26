@@ -1,3 +1,5 @@
+#[macro_use]
+extern crate imageproc;
 extern crate base64;
 extern crate console_error_panic_hook;
 extern crate image;
@@ -194,5 +196,26 @@ impl BiscuitFinder {
             Some(vec) => vec.as_ptr(),
             None => panic!("no bounding boxes"),
         }
+    }
+}
+
+#[cfg(test)]
+mod tests {
+    extern crate wasm_bindgen_test;
+    use super::*;
+    use wasm_bindgen_test::*;
+
+    #[wasm_bindgen_test]
+    fn test_when_only_background_pixels_provided() {
+        let mut biscuit_finder = BiscuitFinder::new();
+
+        let image = rgba_image!(
+            [255, 255, 255, 255], [255, 255, 255, 255];
+            [255, 255, 255, 255], [255, 255, 255, 255]);
+
+        let input = Clamped(image.to_vec());
+        let result = biscuit_finder.find_biscuits(2, 2, input);
+
+        assert_eq!(Ok("processed image".into()), result);
     }
 }
