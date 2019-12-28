@@ -15,9 +15,12 @@ from beeline.middleware.flask import HoneyMiddleware
 
 from splitter_cache import SplitterCache
 
+import atexit
+
+
 load_dotenv()
 
-logging.basicConfig(level=logging.DEBUG)
+logging.basicConfig(level=logging.INFO)
 
 app = Flask(__name__)
 CORS(app)
@@ -51,12 +54,32 @@ def ready():
     return "Ready"
 
 
+def honeycomb_middleware(next, root, info, **args):
+    with beeline.tracer(name="graphql_execute"):
+        beeline.add_context(
+            {
+                "graphql.parent_type": root._meta.name
+                if root and hasattr(root, "_meta")
+                else "",
+                "graphql.field_name": info.field_name,
+                "graphql.args": args,
+            }
+        )
+        return next(root, info, **args)
+
+
 app.add_url_rule(
     "/graphql",
     view_func=GraphQLView.as_view(
-        "graphql", schema=schema, root_value=splitter, graphiql=True
+        "graphql",
+        schema=schema,
+        root_value=splitter,
+        graphiql=True,
+        middleware=[honeycomb_middleware],
     ),
 )
+
+atexit.register(beeline.close)
 
 if __name__ == "__main__":
     app.run(host="0.0.0.0")

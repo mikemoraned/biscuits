@@ -17,7 +17,7 @@ spec:
     spec:
       containers:
         - name: pieces-finder
-          image: houseofmoran/speculaas-pieces-finder:14
+          image: houseofmoran/speculaas-pieces-finder:16
           env:
             - name: HONEYCOMB_KEY
               valueFrom:
