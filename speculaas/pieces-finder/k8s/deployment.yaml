@@ -17,7 +17,13 @@ spec:
     spec:
       containers:
         - name: pieces-finder
-          image: houseofmoran/speculaas-pieces-finder:13
+          image: houseofmoran/speculaas-pieces-finder:14
+          env:
+            - name: HONEYCOMB_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: honeycomb-api-key
+                  key: HONEYCOMB_KEY
           resources:
             limits:
               cpu: 0.9
