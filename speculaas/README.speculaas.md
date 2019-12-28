@@ -20,10 +20,10 @@ Use docker hub and switch to speculaas-kops context:
     export DOCKER_ID_USER="houseofmoran"
     docker login
 
-    docker build -t houseofmoran/speculaas-pieces-finder:9 ./pieces-finder
+    docker build -t houseofmoran/speculaas-pieces-finder:12 ./pieces-finder
     docker build -t houseofmoran/speculaas-pieces-view:31 ./pieces-view
 
-    docker push houseofmoran/speculaas-pieces-finder:9
+    docker push houseofmoran/speculaas-pieces-finder:12
     docker push houseofmoran/speculaas-pieces-view:31
 
 ## Ingress and services
