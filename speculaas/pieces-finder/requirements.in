@@ -5,3 +5,6 @@ graphene
 Pillow
 rectpack
 unittest2
+honeycomb-beeline
+python-dotenv
+
