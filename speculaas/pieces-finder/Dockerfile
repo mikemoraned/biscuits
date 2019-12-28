@@ -1,17 +1,17 @@
-FROM python:3.5 as build
+FROM python:3.8 as build
 
 RUN mkdir /target
 COPY requirements.txt ./
 RUN pip install --target /target --no-cache-dir -r requirements.txt
 
-FROM python:3.5-slim as test
+FROM python:3.8-slim as test
 RUN mkdir /app
 COPY --from=build /target /app
 COPY . /app
 WORKDIR /app
 RUN python -m unittest discover -s tests -t . -v
 
-FROM python:3.5-slim
+FROM python:3.8-slim
 RUN mkdir /app
 COPY --from=build /target /app
 COPY . /app
