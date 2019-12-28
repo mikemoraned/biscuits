@@ -25,4 +25,4 @@ six==1.11.0
 traceback2==1.4.0
 typing==3.6.2
 unittest2==1.1.0
-werkzeug==0.13
+werkzeug==0.15.3
