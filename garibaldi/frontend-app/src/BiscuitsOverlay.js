@@ -90,6 +90,7 @@ export function BiscuitsOverlay({
       ctx.strokeStyle = "white";
       generator(geoJson);
       ctx.stroke();
+
       console.timeEnd("drawing map");
 
       console.time("getImageData");
@@ -147,23 +148,52 @@ export function BiscuitsOverlay({
       console.timeEnd("draw biscuits");
 
       console.time("draw bounding boxes");
+      ctx.beginPath();
+      ctx.fillStyle = "black";
+      ctx.rect(
+        boundingBoxMinX,
+        boundingBoxMinY,
+        boundingBoxWidth,
+        boundingBoxHeight
+      );
+      ctx.fill();
+
       ctx.lineWidth = 1;
       ctx.beginPath();
       ctx.strokeStyle = "red";
       console.log("num biscuits", numBiscuits);
-      for (let biscuitNum = 0; biscuitNum < numBiscuits; biscuitNum++) {
+      // for (let biscuitNum = 0; biscuitNum < numBiscuits; biscuitNum++) {
+      for (let biscuitNum = 1; biscuitNum < 2; biscuitNum++) {
         const offset = biscuitNum * 4;
         const [minX, minY, maxX, maxY] = [
-          boundingBoxMinX +
-            biscuitBoundingBoxes[offset + 0] / window.devicePixelRatio,
-          boundingBoxMinY +
-            biscuitBoundingBoxes[offset + 1] / window.devicePixelRatio,
-          boundingBoxMinX +
-            biscuitBoundingBoxes[offset + 2] / window.devicePixelRatio,
-          boundingBoxMinY +
-            biscuitBoundingBoxes[offset + 3] / window.devicePixelRatio
+          biscuitBoundingBoxes[offset + 0],
+          biscuitBoundingBoxes[offset + 1],
+          biscuitBoundingBoxes[offset + 2],
+          biscuitBoundingBoxes[offset + 3]
         ];
-        ctx.rect(minX, minY, maxX - minX, maxY - minY);
+        const width = maxX - minX;
+        const height = maxY - minY;
+
+        console.log(
+          boundingBoxMinX,
+          boundingBoxMinY,
+          boundingBoxWidth,
+          boundingBoxHeight
+        );
+        console.log(minX, minY, maxX, maxY, width, height);
+
+        ctx.putImageData(
+          // outputImageData,
+          inputImageData,
+          boundingBoxMinX * window.devicePixelRatio +
+            minX / window.devicePixelRatio,
+          boundingBoxMinY * window.devicePixelRatio +
+            minY / window.devicePixelRatio,
+          minX,
+          minY,
+          width,
+          height
+        );
       }
 
       ctx.stroke();
