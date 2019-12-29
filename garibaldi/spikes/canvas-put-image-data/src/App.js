@@ -1,5 +1,7 @@
 import React from "react";
 import { useMemo } from "react";
+import random from "random";
+import seedrandom from "seedrandom";
 
 const width = 400;
 const height = 400;
@@ -43,18 +45,20 @@ function copyDraw(directCtx, copyCtx, boxes) {
   });
 }
 
+const seed = "1";
+
 function App() {
   const boxes = useMemo(() => {
+    const rng = random.clone(seedrandom(seed));
     const boxes = [];
     let remaining = boxCount;
     while (remaining-- !== 0) {
       boxes.push({
-        x: Math.floor(Math.random() * (width - boxWidth)),
-        y: Math.floor(Math.random() * (height - boxHeight)),
+        x: rng.int(0, width - boxWidth),
+        y: rng.int(0, height - boxHeight),
         width: boxWidth,
         height: boxHeight,
-        fill: `rgb(${Math.random() * 255.0}, ${Math.random() *
-          255.0}, ${Math.random() * 255.0})`
+        fill: `rgb(${rng.int(0, 255)}, ${rng.int(0, 255)}, ${rng.int(0, 255)})`
       });
     }
     boxes.sort((a, b) => (a.y === b.y ? a.x - b.x : a.y - b.y));
