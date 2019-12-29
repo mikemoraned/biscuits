@@ -54,9 +54,12 @@ function App() {
         width: boxWidth,
         height: boxHeight,
         fill: `rgb(${Math.random() * 255.0}, ${Math.random() *
-          255.0}, ${Math.random() * 255.0})`,
-        id: boxCount - remaining
+          255.0}, ${Math.random() * 255.0})`
       });
+    }
+    boxes.sort((a, b) => (a.y === b.y ? a.x - b.x : a.y - b.y));
+    for (let index = 0; index < boxes.length; index++) {
+      boxes[index].id = index + 1;
     }
     return boxes;
   }, []);
