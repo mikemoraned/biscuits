@@ -31,17 +31,15 @@ function copyDraw(directCtx, copyCtx, boxes) {
   copyCtx.fill();
   const imageData = directCtx.getImageData(0, 0, width, height);
   boxes.forEach(box => {
-    if (box.id === 1) {
-      copyCtx.putImageData(
-        imageData,
-        box.x,
-        box.y,
-        box.x,
-        box.y,
-        box.width,
-        box.height
-      );
-    }
+    copyCtx.putImageData(
+      imageData,
+      box.x,
+      box.y,
+      box.x,
+      box.y,
+      box.width,
+      box.height
+    );
   });
 }
 
