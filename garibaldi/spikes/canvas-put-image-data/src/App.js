@@ -7,6 +7,42 @@ const boxCount = 10;
 const boxWidth = 30;
 const boxHeight = 30;
 
+function directDraw(ctx, boxes) {
+  ctx.clearRect(0, 0, width, height);
+  boxes.forEach(box => {
+    ctx.fillStyle = box.fill;
+    ctx.beginPath();
+    ctx.rect(box.x, box.y, box.width, box.height);
+    ctx.fill();
+  });
+  ctx.fillStyle = "white";
+  ctx.font = "20px Courier";
+  boxes.forEach(box => {
+    ctx.fillText(`${box.id}`, box.x + 5, box.y + box.height - 5);
+  });
+}
+
+function copyDraw(directCtx, copyCtx, boxes) {
+  copyCtx.clearRect(0, 0, width, height);
+  copyCtx.fillStyle = "red";
+  copyCtx.rect(0, 0, width, height);
+  copyCtx.fill();
+  const imageData = directCtx.getImageData(0, 0, width, height);
+  boxes.forEach(box => {
+    if (box.id === 1) {
+      copyCtx.putImageData(
+        imageData,
+        box.x,
+        box.y,
+        box.x,
+        box.y,
+        box.width,
+        box.height
+      );
+    }
+  });
+}
+
 function App() {
   const boxes = useMemo(() => {
     const boxes = [];
@@ -18,7 +54,8 @@ function App() {
         width: boxWidth,
         height: boxHeight,
         fill: `rgb(${Math.random() * 255.0}, ${Math.random() *
-          255.0}, ${Math.random() * 255.0})`
+          255.0}, ${Math.random() * 255.0})`,
+        id: boxCount - remaining
       });
     }
     return boxes;
@@ -28,15 +65,14 @@ function App() {
   const copyCanvasRef = React.useRef(null);
 
   React.useEffect(() => {
-    const canvas = directCanvasRef.current;
-    const ctx = canvas.getContext("2d");
-    ctx.clearRect(0, 0, width, height);
-    boxes.forEach(box => {
-      ctx.fillStyle = box.fill;
-      ctx.beginPath();
-      ctx.rect(box.x, box.y, box.width, box.height);
-      ctx.fill();
-    });
+    const directCanvas = directCanvasRef.current;
+    const directCtx = directCanvas.getContext("2d");
+    directDraw(directCtx, boxes);
+
+    const copyCanvas = copyCanvasRef.current;
+    const copyCtx = copyCanvas.getContext("2d");
+
+    copyDraw(directCtx, copyCtx, boxes);
   });
 
   return (
