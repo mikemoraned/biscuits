@@ -140,14 +140,6 @@ export function BiscuitsOverlay({
       console.timeEnd("get bounding boxes back");
 
       console.time("draw biscuits");
-      // ctx.putImageData(
-      //   outputImageData,
-      //   boundingBoxMinX * window.devicePixelRatio,
-      //   boundingBoxMinY * window.devicePixelRatio
-      // );
-      console.timeEnd("draw biscuits");
-
-      console.time("draw bounding boxes");
       ctx.beginPath();
       ctx.fillStyle = "black";
       ctx.rect(
@@ -158,12 +150,7 @@ export function BiscuitsOverlay({
       );
       ctx.fill();
 
-      ctx.lineWidth = 1;
-      ctx.beginPath();
-      ctx.strokeStyle = "red";
-      console.log("num biscuits", numBiscuits);
-      // for (let biscuitNum = 0; biscuitNum < numBiscuits; biscuitNum++) {
-      for (let biscuitNum = 1; biscuitNum < 2; biscuitNum++) {
+      for (let biscuitNum = 0; biscuitNum < numBiscuits; biscuitNum++) {
         const offset = biscuitNum * 4;
         const [minX, minY, maxX, maxY] = [
           biscuitBoundingBoxes[offset + 0],
@@ -174,30 +161,17 @@ export function BiscuitsOverlay({
         const width = maxX - minX;
         const height = maxY - minY;
 
-        console.log(
-          boundingBoxMinX,
-          boundingBoxMinY,
-          boundingBoxWidth,
-          boundingBoxHeight
-        );
-        console.log(minX, minY, maxX, maxY, width, height);
-
         ctx.putImageData(
-          // outputImageData,
-          inputImageData,
-          boundingBoxMinX * window.devicePixelRatio +
-            minX / window.devicePixelRatio,
-          boundingBoxMinY * window.devicePixelRatio +
-            minY / window.devicePixelRatio,
+          outputImageData,
+          boundingBoxMinX * window.devicePixelRatio,
+          boundingBoxMinY * window.devicePixelRatio,
           minX,
           minY,
           width,
           height
         );
       }
-
-      ctx.stroke();
-      console.timeEnd("draw bounding boxes");
+      console.timeEnd("draw biscuits");
 
       console.timeEnd("redraw: biscuits");
     }
