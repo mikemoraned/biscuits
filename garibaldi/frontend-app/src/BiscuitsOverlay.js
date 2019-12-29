@@ -139,6 +139,16 @@ export function BiscuitsOverlay({
       );
       console.timeEnd("get bounding boxes back");
 
+      console.time("get bounding boxes color map back");
+      const biscuitBoundingBoxesColorMapPointer = biscuitFinder.bounding_boxes_color_map_ptr();
+      const biscuitBoundingBoxesColorMap = new Uint8Array(
+        memory.buffer,
+        biscuitBoundingBoxesColorMapPointer,
+        4 * numBiscuits
+      );
+      console.dir(biscuitBoundingBoxesColorMap);
+      console.timeEnd("get bounding boxes back");
+
       console.time("draw biscuits");
       ctx.beginPath();
       ctx.fillStyle = "black";

@@ -19,6 +19,7 @@ static ALLOC: wee_alloc::WeeAlloc = wee_alloc::WeeAlloc::INIT;
 pub struct BiscuitFinder {
     colored_areas: Option<Vec<u8>>,
     bounding_boxes: Option<Vec<u32>>,
+    bounding_boxes_color_map: Option<Vec<u8>>,
     color_map: Option<Vec<Rgba<u8>>>,
 }
 
@@ -54,6 +55,7 @@ impl BiscuitFinder {
         BiscuitFinder {
             colored_areas: None,
             bounding_boxes: None,
+            bounding_boxes_color_map: None,
             color_map: Some(random_color_map(100)),
         }
     }
@@ -109,12 +111,20 @@ impl BiscuitFinder {
                     current_bounding_box[3] = max(y + 1, current_bounding_box[3]);
                 }
 
+                let without_background_color_map = color_map.clone().split_off(1);
+                let flattened_bounding_boxes_color_map = without_background_color_map
+                    .into_iter()
+                    .map(|color| vec![color[0], color[1], color[2], color[3]])
+                    .flatten()
+                    .collect::<Vec<u8>>();
+
                 let without_background_bounding_box = bounding_boxes.split_off(1);
                 let flattened_bounding_boxes = without_background_bounding_box
                     .into_iter()
                     .flatten()
                     .collect::<Vec<u32>>();
                 self.bounding_boxes = Some(flattened_bounding_boxes);
+                self.bounding_boxes_color_map = Some(flattened_bounding_boxes_color_map);
                 console::time_end_with_label("finding bounding boxes");
 
                 console::time_end_with_label("process image");
@@ -128,20 +138,6 @@ impl BiscuitFinder {
                 return Err("couldn't read from raw".into());
             }
         }
-    }
-
-    fn stretch_color_map(&mut self, required_color_map_size: usize) -> &Vec<Rgba<u8>> {
-        match &self.color_map {
-            Some(map) => {
-                if map.len() <= required_color_map_size {
-                    self.color_map = Some(random_color_map(required_color_map_size));
-                }
-            }
-            None => {
-                self.color_map = Some(random_color_map(required_color_map_size));
-            }
-        };
-        self.color_map.as_ref().unwrap()
     }
 
     pub fn output_ptr(&self) -> *const u8 {
@@ -158,6 +154,13 @@ impl BiscuitFinder {
         }
     }
 
+    pub fn bounding_boxes_color_map_ptr(&self) -> *const u8 {
+        match &self.bounding_boxes_color_map {
+            Some(vec) => vec.as_ptr(),
+            None => panic!("no bounding boxes"),
+        }
+    }
+
     pub fn num_bounding_boxes(&self) -> usize {
         match &self.bounding_boxes {
             Some(vec) => vec.len() / 4,
@@ -167,6 +170,19 @@ impl BiscuitFinder {
 }
 
 impl BiscuitFinder {
+    fn stretch_color_map(&mut self, required_color_map_size: usize) -> &Vec<Rgba<u8>> {
+        match &self.color_map {
+            Some(map) => {
+                if map.len() <= required_color_map_size {
+                    self.color_map = Some(random_color_map(required_color_map_size));
+                }
+            }
+            None => {
+                self.color_map = Some(random_color_map(required_color_map_size));
+            }
+        };
+        self.color_map.as_ref().unwrap()
+    }
     pub fn output(&self) -> Result<Vec<u8>, String> {
         match &self.colored_areas {
             Some(buffer) => Ok(buffer.clone()),
