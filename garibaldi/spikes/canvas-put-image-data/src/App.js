@@ -11,7 +11,7 @@ function App() {
   const boxes = useMemo(() => {
     const boxes = [];
     let remaining = boxCount;
-    while (remaining-- != 0) {
+    while (remaining-- !== 0) {
       boxes.push({
         x: Math.random() * (width - boxWidth),
         y: Math.random() * (height - boxHeight),
@@ -21,9 +21,12 @@ function App() {
     }
     return boxes;
   }, []);
-  const canvasRef = React.useRef(null);
+
+  const directCanvasRef = React.useRef(null);
+  const copyCanvasRef = React.useRef(null);
+
   React.useEffect(() => {
-    const canvas = canvasRef.current;
+    const canvas = directCanvasRef.current;
     const ctx = canvas.getContext("2d");
     ctx.clearRect(0, 0, width, height);
     ctx.fillStyle = "blue";
@@ -35,12 +38,20 @@ function App() {
   });
 
   return (
-    <canvas
-      ref={canvasRef}
-      width={width}
-      height={height}
-      style={{ border: "1px solid red" }}
-    />
+    <>
+      <canvas
+        ref={directCanvasRef}
+        width={width}
+        height={height}
+        style={{ border: "1px solid red" }}
+      />
+      <canvas
+        ref={copyCanvasRef}
+        width={width}
+        height={height}
+        style={{ border: "1px solid green" }}
+      />
+    </>
   );
 }
 
