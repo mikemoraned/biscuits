@@ -31,19 +31,17 @@ function copyDraw(directCtx, copyCtx, boxes) {
   copyCtx.fill();
   const imageData = directCtx.getImageData(0, 0, width, height);
   boxes.forEach(box => {
-    copyCtx.putImageData(
-      imageData,
-      box.x,
-      box.y,
-      box.x,
-      box.y,
-      box.width,
-      box.height
-    );
+    copyCtx.putImageData(imageData, 0, 0, box.x, box.y, box.width, box.height);
+  });
+  copyCtx.strokeStyle = "white";
+  boxes.forEach(box => {
+    copyCtx.beginPath();
+    copyCtx.rect(box.x, box.y, box.width, box.height);
+    copyCtx.stroke();
   });
 }
 
-const seed = "1";
+const seed = "3";
 
 function App() {
   const boxes = useMemo(() => {
