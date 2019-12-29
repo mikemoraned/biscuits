@@ -1,8 +1,8 @@
 import React from "react";
 import { useMemo } from "react";
 
-const width = 500;
-const height = 500;
+const width = 400;
+const height = 400;
 const boxCount = 10;
 const boxWidth = 30;
 const boxHeight = 30;
@@ -13,10 +13,12 @@ function App() {
     let remaining = boxCount;
     while (remaining-- !== 0) {
       boxes.push({
-        x: Math.random() * (width - boxWidth),
-        y: Math.random() * (height - boxHeight),
+        x: Math.floor(Math.random() * (width - boxWidth)),
+        y: Math.floor(Math.random() * (height - boxHeight)),
         width: boxWidth,
-        height: boxHeight
+        height: boxHeight,
+        fill: `rgb(${Math.random() * 255.0}, ${Math.random() *
+          255.0}, ${Math.random() * 255.0})`
       });
     }
     return boxes;
@@ -29,12 +31,12 @@ function App() {
     const canvas = directCanvasRef.current;
     const ctx = canvas.getContext("2d");
     ctx.clearRect(0, 0, width, height);
-    ctx.fillStyle = "blue";
-    ctx.beginPath();
     boxes.forEach(box => {
+      ctx.fillStyle = box.fill;
+      ctx.beginPath();
       ctx.rect(box.x, box.y, box.width, box.height);
+      ctx.fill();
     });
-    ctx.fill();
   });
 
   return (
