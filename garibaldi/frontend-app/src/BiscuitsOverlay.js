@@ -150,26 +150,52 @@ export function BiscuitsOverlay({
       );
       ctx.fill();
 
+      const sampleEvery = 5;
       for (let biscuitNum = 0; biscuitNum < numBiscuits; biscuitNum++) {
-        const offset = biscuitNum * 4;
-        const [minX, minY, maxX, maxY] = [
-          biscuitBoundingBoxes[offset + 0],
-          biscuitBoundingBoxes[offset + 1],
-          biscuitBoundingBoxes[offset + 2],
-          biscuitBoundingBoxes[offset + 3]
-        ];
-        const width = maxX - minX;
-        const height = maxY - minY;
+        if (biscuitNum % sampleEvery === 0) {
+          const offset = biscuitNum * 4;
+          const [minX, minY, maxX, maxY] = [
+            biscuitBoundingBoxes[offset + 0],
+            biscuitBoundingBoxes[offset + 1],
+            biscuitBoundingBoxes[offset + 2],
+            biscuitBoundingBoxes[offset + 3]
+          ];
+          const width = maxX - minX;
+          const height = maxY - minY;
 
-        ctx.putImageData(
-          outputImageData,
-          boundingBoxMinX * window.devicePixelRatio,
-          boundingBoxMinY * window.devicePixelRatio,
-          minX,
-          minY,
-          width,
-          height
-        );
+          ctx.putImageData(
+            outputImageData,
+            boundingBoxMinX * window.devicePixelRatio,
+            boundingBoxMinY * window.devicePixelRatio,
+            minX,
+            minY,
+            width,
+            height
+          );
+        }
+      }
+      for (let biscuitNum = 0; biscuitNum < numBiscuits; biscuitNum++) {
+        if (biscuitNum % sampleEvery === 0) {
+          const offset = biscuitNum * 4;
+          const [minX, minY, maxX, maxY] = [
+            biscuitBoundingBoxes[offset + 0],
+            biscuitBoundingBoxes[offset + 1],
+            biscuitBoundingBoxes[offset + 2],
+            biscuitBoundingBoxes[offset + 3]
+          ];
+          const width = maxX - minX;
+          const height = maxY - minY;
+
+          ctx.beginPath();
+          ctx.strokeStyle = "red";
+          ctx.rect(
+            boundingBoxMinX + minX / window.devicePixelRatio,
+            boundingBoxMinY + minY / window.devicePixelRatio,
+            width / window.devicePixelRatio,
+            height / window.devicePixelRatio
+          );
+          ctx.stroke();
+        }
       }
       console.timeEnd("draw biscuits");
 
