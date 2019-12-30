@@ -1,4 +1,4 @@
 [build]
-  base    = "garibaldi/frontend-app/"
-  publish = "garibaldi/frontend-app/build"
+  base    = "garibaldi/spikes/lazy-load-wasm-component"
+  publish = "garibaldi/spikes/lazy-load-wasm-component/build"
   command = "npm run build"
