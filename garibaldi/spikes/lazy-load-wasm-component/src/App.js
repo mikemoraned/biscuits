@@ -2,7 +2,15 @@ import React from "react";
 import { Suspense } from "react";
 import "./App.css";
 
-const VanillaComponent = React.lazy(() => import("./VanillaComponent"));
+function loaderFunction() {
+  console.log("Before delay");
+  return new Promise(resolve => setTimeout(resolve, 5 * 1000)).then(() => {
+    console.log("After delay");
+    return import("./VanillaComponent");
+  });
+}
+
+const VanillaComponent = React.lazy(loaderFunction);
 
 function App() {
   return (
