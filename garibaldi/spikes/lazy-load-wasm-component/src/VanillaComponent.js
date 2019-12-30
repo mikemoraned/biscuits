@@ -1,5 +1,7 @@
 import React from "react";
 
-export default function VanillaComponent() {
-  return <div>Hello</div>;
+export function binding(now) {
+  return () => {
+    return <div>Hello, now is {now.toString()}</div>;
+  };
 }

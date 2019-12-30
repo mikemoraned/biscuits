@@ -3,10 +3,14 @@ import { Suspense } from "react";
 import "./App.css";
 
 function loaderFunction() {
-  console.log("Before delay");
-  return new Promise(resolve => setTimeout(resolve, 5 * 1000)).then(() => {
-    console.log("After delay");
-    return import("./VanillaComponent");
+  console.time("import");
+  return import("./VanillaComponent").then(({ binding }) => {
+    console.timeEnd("import");
+    console.time("binding");
+    const now = new Date();
+    const Component = binding(now);
+    console.timeEnd("binding");
+    return { default: Component };
   });
 }
 
