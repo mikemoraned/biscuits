@@ -1,5 +1,5 @@
 import React from "react";
 
-export function VanillaComponent() {
+export default function VanillaComponent() {
   return <div>Hello</div>;
 }

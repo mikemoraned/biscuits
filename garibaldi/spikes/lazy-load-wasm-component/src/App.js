@@ -1,12 +1,15 @@
 import React from "react";
+import { Suspense } from "react";
 import "./App.css";
-import "./VanillaComponent";
-import { VanillaComponent } from "./VanillaComponent";
+
+const VanillaComponent = React.lazy(() => import("./VanillaComponent"));
 
 function App() {
   return (
     <div>
-      <VanillaComponent />
+      <Suspense fallback={<div>Loading...</div>}>
+        <VanillaComponent />
+      </Suspense>
     </div>
   );
 }
