@@ -9,7 +9,7 @@ function App() {
   return (
     <div>
       <Suspense fallback={<div>Loading...</div>}>
-        <BiscuitingComponent />
+        <BiscuitingComponent hello={"Woop Woop"} />
       </Suspense>
     </div>
   );

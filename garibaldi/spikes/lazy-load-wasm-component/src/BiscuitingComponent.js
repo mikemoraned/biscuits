@@ -16,11 +16,11 @@ export function lazyLoader() {
 
 function bindBiscuitingComponent({ biscuiting_lib, biscuiting_lib_bg }) {
   const { BiscuitFinder } = biscuiting_lib;
-  const BiscuitingComponent = () => {
+  const BiscuitingComponent = ({ hello }) => {
     console.time("creating biscuitFinder");
     BiscuitFinder.new();
     console.timeEnd("creating biscuitFinder");
-    return <div>Hello</div>;
+    return <div>Hello {hello}</div>;
   };
   return { default: BiscuitingComponent };
 }
