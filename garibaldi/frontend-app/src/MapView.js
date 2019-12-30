@@ -1,10 +1,12 @@
 import React from "react";
-import { useContext } from "react";
+import { useContext, Suspense } from "react";
 import { MapBoxContext } from "./MapBoxContext";
-import { useRef, useLayoutEffect, useState, useEffect } from "react";
+import { useRef, useLayoutEffect, useState } from "react";
 import ReactMapGL from "react-map-gl";
 import { LngLatBounds } from "mapbox-gl";
-import { BiscuitsOverlay } from "./BiscuitsOverlay";
+import { lazyLoader } from "./BiscuitsOverlay";
+
+const BiscuitsOverlay = React.lazy(lazyLoader);
 
 function reticuleFromMapBounds(bounds) {
   const northSouthExtent = bounds.getSouth() - bounds.getNorth();
@@ -94,16 +96,6 @@ export function MapView({ city }) {
     });
   }
 
-  const [biscuitFinder, setBiscuitFinder] = useState(null);
-
-  useEffect(() => {
-    if (biscuitFinder == null) {
-      loadBiscuitFinder({
-        setBiscuitFinder
-      });
-    }
-  }, [biscuitFinder]);
-
   return (
     <div ref={containerRef} className="map">
       <ReactMapGL
@@ -114,34 +106,15 @@ export function MapView({ city }) {
         mapboxApiAccessToken={mapbox.access_token}
         onLoad={onLoad}
       >
-        <>
-          {reticuleBounds && featureLoader != null && biscuitFinder != null && (
+        <Suspense fallback={<div></div>}>
+          {reticuleBounds && featureLoader != null && (
             <BiscuitsOverlay
               boundingBox={reticuleBounds}
               featureLoader={featureLoader}
-              biscuitFinderLib={biscuitFinder}
             />
           )}
-        </>
+        </Suspense>
       </ReactMapGL>
     </div>
   );
-}
-
-function loadBiscuitFinder({ setBiscuitFinder }) {
-  console.time("loadBiscuitFinder");
-  Promise.all([
-    import("@mike_moran/biscuiting-lib"),
-    import("@mike_moran/biscuiting-lib/biscuiting_lib_bg")
-  ])
-    .then(([biscuiting, biscuiting_bg]) => {
-      const { BiscuitFinder } = biscuiting;
-      const { memory } = biscuiting_bg;
-
-      setBiscuitFinder({ BiscuitFinder, memory });
-      console.timeEnd("loadBiscuitFinder");
-    })
-    .catch(err => {
-      console.log(err);
-    });
 }

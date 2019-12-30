@@ -1,4 +1,5 @@
 import React from "react";
+import { useMemo } from "react";
 import "./App.scss";
 import { CitySelector } from "./CitySelector";
 import { CityView } from "./CityView";
@@ -7,6 +8,7 @@ import dotenv from "dotenv";
 import { MapBoxContextProviderFromEnvironment } from "./MapBoxContext";
 import { useService } from "@xstate/react";
 import { service } from "./Machine";
+import { lazyLoader } from "./BiscuitsOverlay";
 
 dotenv.config();
 
@@ -14,6 +16,9 @@ function App() {
   // eslint-disable-next-line no-unused-vars
   const [current, send] = useService(service);
   const { cityService } = current.context;
+
+  // eslint-disable-next-line no-unused-vars
+  const _ = useMemo(() => lazyLoader(), []);
 
   return (
     <MapBoxContextProviderFromEnvironment>
