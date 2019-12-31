@@ -4,8 +4,8 @@ import random from "random";
 import seedrandom from "seedrandom";
 import { lazyLoader } from "./ContourDisplay";
 
-const width = 400;
-const height = 400;
+const width = 600;
+const height = 600;
 const circleCount = 10;
 const circleRadius = 40;
 

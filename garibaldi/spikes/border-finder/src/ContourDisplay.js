@@ -23,7 +23,7 @@ function bindContourDisplay({ biscuiting_lib, biscuiting_lib_bg }) {
     React.useEffect(() => {
       const canvas = canvasRef.current;
       const ctx = canvas.getContext("2d");
-      directDraw(ctx, circles, width, height);
+      drawCircles(ctx, circles, width, height);
 
       const contourFinder = ContourFinder.new();
       const imageData = ctx.getImageData(0, 0, width, height);
@@ -33,12 +33,13 @@ function bindContourDisplay({ biscuiting_lib, biscuiting_lib_bg }) {
       const numContourPoints = contourFinder.num_contour_points();
 
       const contourPointer = contourFinder.contour_ptr();
-      const contourArray = new Uint8ClampedArray(
+      const pointArray = new Uint8ClampedArray(
         memory.buffer,
         contourPointer,
         2 * numContourPoints
       );
-      console.log(contourArray);
+      console.log(pointArray);
+      drawContour(ctx, pointArray);
     });
 
     return (
@@ -53,7 +54,21 @@ function bindContourDisplay({ biscuiting_lib, biscuiting_lib_bg }) {
   return { default: ContourDisplay };
 }
 
-function directDraw(ctx, circles, width, height) {
+function drawContour(ctx, pointArray) {
+  const startX = pointArray[0];
+  const startY = pointArray[1];
+  ctx.beginPath();
+  ctx.moveTo(startX, startY);
+  ctx.strokeStyle = "red";
+  for (let index = 2; index < pointArray.length; index += 2) {
+    const x = pointArray[index];
+    const y = pointArray[index + 1];
+    ctx.lineTo(x, y);
+  }
+  ctx.stroke();
+}
+
+function drawCircles(ctx, circles, width, height) {
   ctx.clearRect(0, 0, width, height);
   ctx.fillStyle = "black";
   circles.forEach(circle => {
