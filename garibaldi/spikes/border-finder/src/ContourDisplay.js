@@ -57,8 +57,8 @@ function bindContourDisplay({ biscuiting_lib, biscuiting_lib_bg }) {
 function drawContour(ctx, pointArray) {
   const startX = pointArray[0];
   const startY = pointArray[1];
-  ctx.beginPath();
   ctx.moveTo(startX, startY);
+  ctx.beginPath();
   ctx.strokeStyle = "red";
   for (let index = 2; index < pointArray.length; index += 2) {
     const x = pointArray[index];

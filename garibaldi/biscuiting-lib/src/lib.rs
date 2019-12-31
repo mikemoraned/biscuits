@@ -43,7 +43,7 @@ impl ContourFinder {
                 console::time_end_with_label("from raw input");
                 match self.find_first_foreground_pixel(&input_foreground_color, &image) {
                     Some(start) => {
-                        console::log_1(&format!("start: {:?}", start).into());
+                        console::time_with_label("trace contour");
                         let mut contour = Vec::new();
                         contour.push((start.0, start.0));
                         self.trace_contour(
@@ -52,6 +52,8 @@ impl ContourFinder {
                             &input_foreground_color,
                             &mut contour,
                         );
+                        console::time_end_with_label("trace contour");
+                        console::time_with_label("save contour");
                         self.contour = Some(
                             contour
                                 .into_iter()
@@ -59,7 +61,7 @@ impl ContourFinder {
                                 .flatten()
                                 .collect::<Vec<u32>>(),
                         );
-                        console::log_1(&format!("contour: {:?}", self.contour).into());
+                        console::time_end_with_label("save contour");
 
                         Ok("found contours".into())
                     }
@@ -193,10 +195,8 @@ impl ContourFinder {
         foreground_color: &Rgba<u8>,
         points: &mut Vec<(u32, u32)>,
     ) {
-        use web_sys::console;
         let mut next = start.left();
         while next != start {
-            console::log_1(&format!("turtle: {:?}", next).into());
             if self.is_in_bounds(next.x, next.y, &image)
                 && image.get_pixel(next.x as u32, next.y as u32) == foreground_color
             {
