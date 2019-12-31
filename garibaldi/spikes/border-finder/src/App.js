@@ -1,8 +1,8 @@
 import React from "react";
-import { useMemo } from "react";
+import { useMemo, Suspense } from "react";
 import random from "random";
 import seedrandom from "seedrandom";
-import ContourFinder from "./ContourFinder";
+import { lazyLoader } from "./ContourFinder";
 
 const width = 400;
 const height = 400;
@@ -10,6 +10,8 @@ const circleCount = 10;
 const circleRadius = 40;
 
 const seed = "1";
+
+const ContourFinder = React.lazy(lazyLoader);
 
 function App() {
   const circles = useMemo(() => {
@@ -27,7 +29,11 @@ function App() {
     return circles;
   }, []);
 
-  return <ContourFinder circles={circles} width={width} height={height} />;
+  return (
+    <Suspense fallback={<div>Loading...</div>}>
+      <ContourFinder circles={circles} width={width} height={height} />
+    </Suspense>
+  );
 }
 
 export default App;
