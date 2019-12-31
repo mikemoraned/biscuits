@@ -16,13 +16,50 @@ use wasm_bindgen::Clamped;
 static ALLOC: wee_alloc::WeeAlloc = wee_alloc::WeeAlloc::INIT;
 
 #[wasm_bindgen]
-pub struct ContourFinder {}
+pub struct ContourFinder {
+    contour: Option<Vec<u8>>,
+}
 
 #[wasm_bindgen]
 impl ContourFinder {
     pub fn new() -> ContourFinder {
         console_error_panic_hook::set_once();
-        ContourFinder {}
+        ContourFinder { contour: None }
+    }
+
+    pub fn find(
+        &mut self,
+        width: u32,
+        height: u32,
+        input: Clamped<Vec<u8>>,
+    ) -> Result<String, JsValue> {
+        use web_sys::console;
+
+        let input_background_color = Rgba([0u8; 4]);
+
+        console::time_with_label("from raw input");
+        match RgbaImage::from_raw(width, height, input.0) {
+            Some(image) => {
+                console::time_end_with_label("from raw input");
+                self.contour = Some(vec![0, 0, 100, 100]);
+                Ok("found contours".into())
+            }
+            None => Err("couldn't read from raw".into()),
+        }
+    }
+
+    pub fn num_contour_points(&self) -> usize {
+        match &self.contour {
+            Some(vec) => vec.len() / 2,
+            None => panic!("no contour"),
+        }
+    }
+
+    pub fn contour_ptr(&self) -> *const u8 {
+        match &self.contour {
+            Some(vec) => vec.as_ptr(),
+            None => panic!("no contour"),
+        }
     }
 }
 

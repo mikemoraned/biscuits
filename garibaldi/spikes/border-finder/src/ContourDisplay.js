@@ -16,17 +16,29 @@ export function lazyLoader() {
 
 function bindContourDisplay({ biscuiting_lib, biscuiting_lib_bg }) {
   const { ContourFinder } = biscuiting_lib;
+  const { memory } = biscuiting_lib_bg;
   const ContourDisplay = ({ circles, width, height }) => {
-    console.time("creating ContourFinder");
-    ContourFinder.new();
-    console.timeEnd("creating ContourFinder");
-
     const canvasRef = React.useRef(null);
 
     React.useEffect(() => {
       const canvas = canvasRef.current;
       const ctx = canvas.getContext("2d");
       directDraw(ctx, circles, width, height);
+
+      const contourFinder = ContourFinder.new();
+      const imageData = ctx.getImageData(0, 0, width, height);
+      const result = contourFinder.find(width, height, imageData.data);
+      console.log(result);
+
+      const numContourPoints = contourFinder.num_contour_points();
+
+      const contourPointer = contourFinder.contour_ptr();
+      const contourArray = new Uint8ClampedArray(
+        memory.buffer,
+        contourPointer,
+        2 * numContourPoints
+      );
+      console.log(contourArray);
     });
 
     return (
