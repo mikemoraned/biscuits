@@ -1,25 +1,25 @@
 import React from "react";
 
 export function lazyLoader() {
-  console.time("biscuiting");
+  console.time("load biscuiting-lib");
   return Promise.all([
     import("@mike_moran/biscuiting-lib"),
     import("@mike_moran/biscuiting-lib/biscuiting_lib_bg")
   ]).then(([biscuiting_lib, biscuiting_lib_bg]) => {
-    console.timeEnd("biscuiting");
-    return bindContourFinder({
+    console.timeEnd("load biscuiting-lib");
+    return bindContourDisplay({
       biscuiting_lib,
       biscuiting_lib_bg
     });
   });
 }
 
-function bindContourFinder({ biscuiting_lib, biscuiting_lib_bg }) {
-  const { BiscuitFinder } = biscuiting_lib;
-  const ContourFinder = ({ circles, width, height }) => {
-    console.time("creating biscuitFinder");
-    BiscuitFinder.new();
-    console.timeEnd("creating biscuitFinder");
+function bindContourDisplay({ biscuiting_lib, biscuiting_lib_bg }) {
+  const { ContourFinder } = biscuiting_lib;
+  const ContourDisplay = ({ circles, width, height }) => {
+    console.time("creating ContourFinder");
+    ContourFinder.new();
+    console.timeEnd("creating ContourFinder");
 
     const canvasRef = React.useRef(null);
 
@@ -38,7 +38,7 @@ function bindContourFinder({ biscuiting_lib, biscuiting_lib_bg }) {
       />
     );
   };
-  return { default: ContourFinder };
+  return { default: ContourDisplay };
 }
 
 function directDraw(ctx, circles, width, height) {

@@ -2,7 +2,7 @@ import React from "react";
 import { useMemo, Suspense } from "react";
 import random from "random";
 import seedrandom from "seedrandom";
-import { lazyLoader } from "./ContourFinder";
+import { lazyLoader } from "./ContourDisplay";
 
 const width = 400;
 const height = 400;
@@ -11,7 +11,7 @@ const circleRadius = 40;
 
 const seed = "1";
 
-const ContourFinder = React.lazy(lazyLoader);
+const ContourDisplay = React.lazy(lazyLoader);
 
 function App() {
   const circles = useMemo(() => {
@@ -31,7 +31,7 @@ function App() {
 
   return (
     <Suspense fallback={<div>Loading...</div>}>
-      <ContourFinder circles={circles} width={width} height={height} />
+      <ContourDisplay circles={circles} width={width} height={height} />
     </Suspense>
   );
 }

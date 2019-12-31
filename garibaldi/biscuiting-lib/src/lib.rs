@@ -16,6 +16,17 @@ use wasm_bindgen::Clamped;
 static ALLOC: wee_alloc::WeeAlloc = wee_alloc::WeeAlloc::INIT;
 
 #[wasm_bindgen]
+pub struct ContourFinder {}
+
+#[wasm_bindgen]
+impl ContourFinder {
+    pub fn new() -> ContourFinder {
+        console_error_panic_hook::set_once();
+        ContourFinder {}
+    }
+}
+
+#[wasm_bindgen]
 pub struct BiscuitFinder {
     colored_areas: Option<Vec<u8>>,
     bounding_boxes: Option<Vec<u32>>,
