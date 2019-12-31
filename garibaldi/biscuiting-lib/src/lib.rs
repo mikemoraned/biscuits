@@ -16,6 +16,204 @@ use wasm_bindgen::Clamped;
 static ALLOC: wee_alloc::WeeAlloc = wee_alloc::WeeAlloc::INIT;
 
 #[wasm_bindgen]
+pub struct ContourFinder {
+    contour: Option<Vec<u32>>,
+}
+
+#[wasm_bindgen]
+impl ContourFinder {
+    pub fn new() -> ContourFinder {
+        console_error_panic_hook::set_once();
+        ContourFinder { contour: None }
+    }
+
+    pub fn find(
+        &mut self,
+        width: u32,
+        height: u32,
+        input: Clamped<Vec<u8>>,
+    ) -> Result<String, JsValue> {
+        use web_sys::console;
+
+        let input_foreground_color = Rgba([255u8; 4]);
+
+        console::time_with_label("from raw input");
+        match RgbaImage::from_raw(width, height, input.0) {
+            Some(image) => {
+                console::time_end_with_label("from raw input");
+                match self.find_first_foreground_pixel(&input_foreground_color, &image) {
+                    Some(start) => {
+                        console::time_with_label("trace contour");
+                        let mut contour = Vec::new();
+                        contour.push((start.0, start.0));
+                        self.trace_contour(
+                            Turtle::new(start.0, start.1),
+                            &image,
+                            &input_foreground_color,
+                            &mut contour,
+                        );
+                        console::time_end_with_label("trace contour");
+                        console::time_with_label("save contour");
+                        self.contour = Some(
+                            contour
+                                .into_iter()
+                                .map(|(x, y)| vec![x, y])
+                                .flatten()
+                                .collect::<Vec<u32>>(),
+                        );
+                        console::time_end_with_label("save contour");
+
+                        Ok("found contours".into())
+                    }
+                    None => {
+                        self.contour = Some(Vec::new());
+                        Ok("no contours present".into())
+                    }
+                }
+            }
+            None => Err("couldn't read from raw".into()),
+        }
+    }
+
+    pub fn num_contour_points(&self) -> usize {
+        match &self.contour {
+            Some(vec) => vec.len() / 2,
+            None => panic!("no contour"),
+        }
+    }
+
+    pub fn contour_ptr(&self) -> *const u32 {
+        match &self.contour {
+            Some(vec) => vec.as_ptr(),
+            None => panic!("no contour"),
+        }
+    }
+}
+
+#[derive(PartialEq, Debug)]
+enum Direction {
+    North,
+    West,
+    South,
+    East,
+}
+
+#[derive(PartialEq, Debug)]
+struct Turtle {
+    x: i32,
+    y: i32,
+    direction: Direction,
+}
+
+impl Turtle {
+    pub fn new(x: u32, y: u32) -> Turtle {
+        Turtle {
+            x: x as i32,
+            y: y as i32,
+            direction: Direction::East,
+        }
+    }
+
+    pub fn left(&self) -> Turtle {
+        use Direction::*;
+        match self.direction {
+            North => Turtle {
+                x: self.x - 1,
+                y: self.y,
+                direction: West,
+            },
+            East => Turtle {
+                x: self.x,
+                y: self.y - 1,
+                direction: North,
+            },
+            South => Turtle {
+                x: self.x + 1,
+                y: self.y,
+                direction: East,
+            },
+            West => Turtle {
+                x: self.x,
+                y: self.y + 1,
+                direction: South,
+            },
+        }
+    }
+
+    pub fn right(&self) -> Turtle {
+        use Direction::*;
+        match self.direction {
+            North => Turtle {
+                x: self.x + 1,
+                y: self.y,
+                direction: East,
+            },
+            East => Turtle {
+                x: self.x,
+                y: self.y + 1,
+                direction: South,
+            },
+            South => Turtle {
+                x: self.x - 1,
+                y: self.y,
+                direction: West,
+            },
+            West => Turtle {
+                x: self.x,
+                y: self.y - 1,
+                direction: North,
+            },
+        }
+    }
+}
+
+impl ContourFinder {
+    pub fn contour(&self) -> Result<Vec<u32>, String> {
+        match &self.contour {
+            Some(vec) => Ok(vec.clone()),
+            None => Err("no output".into()),
+        }
+    }
+
+    fn find_first_foreground_pixel(
+        &self,
+        color: &Rgba<u8>,
+        image: &RgbaImage,
+    ) -> Option<(u32, u32)> {
+        for (x, y, p) in image.enumerate_pixels() {
+            if p == color {
+                return Some((x, y));
+            }
+        }
+        None
+    }
+
+    fn trace_contour(
+        &self,
+        start: Turtle,
+        image: &RgbaImage,
+        foreground_color: &Rgba<u8>,
+        points: &mut Vec<(u32, u32)>,
+    ) {
+        let mut next = start.left();
+        while next != start {
+            if self.is_in_bounds(next.x, next.y, &image)
+                && image.get_pixel(next.x as u32, next.y as u32) == foreground_color
+            {
+                points.push((next.x as u32, next.y as u32));
+                next = next.left();
+            } else {
+                next = next.right();
+            }
+        }
+    }
+
+    fn is_in_bounds(&self, x: i32, y: i32, image: &RgbaImage) -> bool {
+        (x >= 0 && x < image.width() as i32) && (y >= 0 && y < image.height() as i32)
+    }
+}
+
+#[wasm_bindgen]
 pub struct BiscuitFinder {
     colored_areas: Option<Vec<u8>>,
     bounding_boxes: Option<Vec<u32>>,
@@ -183,6 +381,7 @@ impl BiscuitFinder {
         };
         self.color_map.as_ref().unwrap()
     }
+
     pub fn output(&self) -> Result<Vec<u8>, String> {
         match &self.colored_areas {
             Some(buffer) => Ok(buffer.clone()),
@@ -203,6 +402,26 @@ mod tests {
     extern crate wasm_bindgen_test;
     use super::*;
     use wasm_bindgen_test::*;
+
+    #[wasm_bindgen_test]
+    fn test_contour_finding_with_centered_square() {
+        let mut contour_finder = ContourFinder::new();
+
+        let image = rgba_image!(
+            [0,   0,   0,   255], [0,   0,   0,   255], [0,   0,   0,   255], [0,   0,   0,   255];
+            [0,   0,   0,   255], [255, 255, 255, 255], [255, 255, 255, 255], [0,   0,   0,   255];
+            [0,   0,   0,   255], [255, 255, 255, 255], [255, 255, 255, 255], [0,   0,   0,   255];
+            [0,   0,   0,   255], [0,   0,   0,   255], [0,   0,   0,   255], [0,   0,   0,   255]);
+
+        let input = Clamped(image.to_vec());
+        let result = contour_finder.find(4, 4, input);
+
+        assert_eq!(Ok("found contours".into()), result);
+
+        assert_eq!(4, contour_finder.num_contour_points());
+        let contour = contour_finder.contour();
+        assert_eq!(Ok(vec![1, 1, 2, 1, 2, 2, 1, 2]), contour);
+    }
 
     #[wasm_bindgen_test]
     fn test_when_only_background_pixels_provided() {
