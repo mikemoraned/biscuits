@@ -2,21 +2,12 @@ import React from "react";
 import { useMemo } from "react";
 import random from "random";
 import seedrandom from "seedrandom";
+import ContourFinder from "./ContourFinder";
 
 const width = 400;
 const height = 400;
 const circleCount = 10;
 const circleRadius = 40;
-
-function directDraw(ctx, circleRadius) {
-  ctx.clearRect(0, 0, width, height);
-  ctx.fillStyle = "black";
-  circleRadius.forEach(circle => {
-    ctx.beginPath();
-    ctx.arc(circle.x, circle.y, circle.radius, 0, 2 * Math.PI, false);
-    ctx.fill();
-  });
-}
 
 const seed = "1";
 
@@ -36,24 +27,7 @@ function App() {
     return circles;
   }, []);
 
-  const canvasRef = React.useRef(null);
-
-  React.useEffect(() => {
-    const canvas = canvasRef.current;
-    const ctx = canvas.getContext("2d");
-    directDraw(ctx, circles);
-  });
-
-  return (
-    <>
-      <canvas
-        ref={canvasRef}
-        width={width}
-        height={height}
-        style={{ border: "1px solid red" }}
-      />
-    </>
-  );
+  return <ContourFinder circles={circles} width={width} height={height} />;
 }
 
 export default App;
