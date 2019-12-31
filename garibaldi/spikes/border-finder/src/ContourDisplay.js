@@ -33,7 +33,7 @@ function bindContourDisplay({ biscuiting_lib, biscuiting_lib_bg }) {
       const numContourPoints = contourFinder.num_contour_points();
 
       const contourPointer = contourFinder.contour_ptr();
-      const pointArray = new Uint8ClampedArray(
+      const pointArray = new Uint32Array(
         memory.buffer,
         contourPointer,
         2 * numContourPoints
@@ -47,7 +47,7 @@ function bindContourDisplay({ biscuiting_lib, biscuiting_lib_bg }) {
         ref={canvasRef}
         width={width}
         height={height}
-        style={{ border: "1px solid red" }}
+        style={{ border: "1px solid green" }}
       />
     );
   };
@@ -71,6 +71,11 @@ function drawContour(ctx, pointArray) {
 function drawCircles(ctx, circles, width, height) {
   ctx.clearRect(0, 0, width, height);
   ctx.fillStyle = "black";
+  ctx.beginPath();
+  ctx.rect(0, 0, width, height);
+  ctx.fill();
+
+  ctx.fillStyle = "white";
   circles.forEach(circle => {
     ctx.beginPath();
     ctx.arc(circle.x, circle.y, circle.radius, 0, 2 * Math.PI, false);

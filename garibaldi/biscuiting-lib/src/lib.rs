@@ -17,7 +17,7 @@ static ALLOC: wee_alloc::WeeAlloc = wee_alloc::WeeAlloc::INIT;
 
 #[wasm_bindgen]
 pub struct ContourFinder {
-    contour: Option<Vec<u8>>,
+    contour: Option<Vec<u32>>,
 }
 
 #[wasm_bindgen]
@@ -35,14 +35,26 @@ impl ContourFinder {
     ) -> Result<String, JsValue> {
         use web_sys::console;
 
-        let input_background_color = Rgba([0u8; 4]);
+        let input_foreground_color = Rgba([255u8; 4]);
 
         console::time_with_label("from raw input");
         match RgbaImage::from_raw(width, height, input.0) {
             Some(image) => {
                 console::time_end_with_label("from raw input");
-                self.contour = Some(vec![0, 0, 100, 100]);
-                Ok("found contours".into())
+                match self.find_first_foreground_pixel(&input_foreground_color, &image) {
+                    Some(start) => {
+                        console::log_1(&format!("start: {:?}", start).into());
+
+                        self.contour = Some(vec![start.0, start.1, 100, 100]);
+                        console::log_1(&format!("contour: {:?}", self.contour).into());
+
+                        Ok("found contours".into())
+                    }
+                    None => {
+                        self.contour = Some(Vec::new());
+                        Ok("no contours present".into())
+                    }
+                }
             }
             None => Err("couldn't read from raw".into()),
         }
@@ -55,11 +67,28 @@ impl ContourFinder {
         }
     }
 
-    pub fn contour_ptr(&self) -> *const u8 {
+    pub fn contour_ptr(&self) -> *const u32 {
         match &self.contour {
             Some(vec) => vec.as_ptr(),
             None => panic!("no contour"),
         }
+    }
+}
+
+impl ContourFinder {
+    fn find_first_foreground_pixel(
+        &self,
+        color: &Rgba<u8>,
+        image: &RgbaImage,
+    ) -> Option<(u32, u32)> {
+        use web_sys::console;
+        for (x, y, p) in image.enumerate_pixels() {
+            // console::log_1(&format!("({},{}): {:?}", x, y, p).into());
+            if p == color {
+                return Some((x, y));
+            }
+        }
+        None
     }
 }
 
