@@ -1,6 +1,6 @@
 [package]
 name = "biscuiting-lib"
-version = "0.7.2"
+version = "0.7.3"
 authors = ["Mike Moran <mike@houseofmoran.com>"]
 edition = "2018"
 
