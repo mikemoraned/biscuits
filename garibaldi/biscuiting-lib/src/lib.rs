@@ -16,12 +16,15 @@ use wasm_bindgen::Clamped;
 static ALLOC: wee_alloc::WeeAlloc = wee_alloc::WeeAlloc::INIT;
 
 mod border;
+use border::BorderFinder;
 
 #[wasm_bindgen]
 pub struct BiscuitFinder {
     colored_areas: Option<Vec<u8>>,
     bounding_boxes: Option<Vec<u32>>,
     bounding_boxes_color_map: Option<Vec<u8>>,
+    border_indexes: Option<Vec<usize>>,
+    border_points: Option<Vec<u32>>,
     color_map: Option<Vec<Rgba<u8>>>,
 }
 
@@ -58,6 +61,8 @@ impl BiscuitFinder {
             colored_areas: None,
             bounding_boxes: None,
             bounding_boxes_color_map: None,
+            border_indexes: None,
+            border_points: None,
             color_map: Some(random_color_map(100)),
         }
     }
@@ -69,6 +74,7 @@ impl BiscuitFinder {
         input: Clamped<Vec<u8>>,
     ) -> Result<String, JsValue> {
         use image::{GrayImage, Luma};
+        use imageproc::definitions::Image;
         use imageproc::map::map_colors;
         use imageproc::region_labelling::{connected_components, Connectivity};
         use std::cmp::{max, min};
@@ -93,7 +99,7 @@ impl BiscuitFinder {
                     }
                 });
 
-                let labelled_image =
+                let labelled_image: Image<Luma<u32>> =
                     connected_components(&gray_image, Connectivity::Four, background_color);
                 let num_labels = (labelled_image.pixels().map(|p| p[0]).max().unwrap()) as usize;
                 let required_color_map_size = num_labels + 1;
@@ -128,6 +134,25 @@ impl BiscuitFinder {
                 self.bounding_boxes = Some(flattened_bounding_boxes);
                 self.bounding_boxes_color_map = Some(flattened_bounding_boxes_color_map);
                 console::time_end_with_label("finding bounding boxes");
+
+                console::time_with_label("finding borders");
+                let mut border_indexes = Vec::with_capacity(num_labels);
+                let mut border_points = Vec::new();
+                let mut start_index: usize = 0;
+                for index in 1..=num_labels {
+                    let input_foreground_color = Luma([index as u32]);
+                    let mut border =
+                        BorderFinder::find_in_image(&input_foreground_color, &labelled_image)
+                            .unwrap();
+                    border_indexes.push(start_index + border.len());
+                    start_index += border.len();
+                    border_points.append(&mut border);
+                    // console::log_1(&format!("start_index: {:?}", start_index).into());
+                }
+                // console::log_1(&format!("border indexes: {:?}", border_indexes).into());
+                self.border_indexes = Some(border_indexes);
+                self.border_points = Some(border_points);
+                console::time_end_with_label("finding borders");
 
                 console::time_end_with_label("process image");
 
@@ -167,6 +192,34 @@ impl BiscuitFinder {
         match &self.bounding_boxes {
             Some(vec) => vec.len() / 4,
             None => panic!("no bounding boxes"),
+        }
+    }
+
+    pub fn border_indexes_ptr(&self) -> *const usize {
+        match &self.border_indexes {
+            Some(vec) => vec.as_ptr(),
+            None => panic!("no border indexes"),
+        }
+    }
+
+    pub fn num_borders(&self) -> usize {
+        match &self.border_indexes {
+            Some(vec) => vec.len(),
+            None => panic!("no borders"),
+        }
+    }
+
+    pub fn border_points_ptr(&self) -> *const u32 {
+        match &self.border_points {
+            Some(vec) => vec.as_ptr(),
+            None => panic!("no border points"),
+        }
+    }
+
+    pub fn num_border_points(&self) -> usize {
+        match &self.border_points {
+            Some(vec) => vec.len() / 2,
+            None => panic!("no border points"),
         }
     }
 }

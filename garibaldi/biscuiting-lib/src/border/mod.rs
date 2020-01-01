@@ -1,11 +1,14 @@
-use image::{GrayImage, Luma};
+use image::{ImageBuffer, Luma};
 
 mod turtle;
 
 pub struct BorderFinder {}
 
 impl BorderFinder {
-    pub fn find_in_image(input_foreground_color: &Luma<u8>, image: &GrayImage) -> Option<Vec<u32>> {
+    pub fn find_in_image(
+        input_foreground_color: &Luma<u32>,
+        image: &ImageBuffer<Luma<u32>, Vec<u32>>,
+    ) -> Option<Vec<u32>> {
         match BorderFinder::find_first_foreground_pixel(input_foreground_color, image) {
             Some(start) => {
                 let mut border = Vec::new();
@@ -27,7 +30,10 @@ impl BorderFinder {
         }
     }
 
-    fn find_first_foreground_pixel(color: &Luma<u8>, image: &GrayImage) -> Option<(u32, u32)> {
+    fn find_first_foreground_pixel(
+        color: &Luma<u32>,
+        image: &ImageBuffer<Luma<u32>, Vec<u32>>,
+    ) -> Option<(u32, u32)> {
         for (x, y, p) in image.enumerate_pixels() {
             if p == color {
                 return Some((x, y));
@@ -38,8 +44,8 @@ impl BorderFinder {
 
     fn trace_border(
         start: turtle::Turtle,
-        image: &GrayImage,
-        foreground_color: &Luma<u8>,
+        image: &ImageBuffer<Luma<u32>, Vec<u32>>,
+        foreground_color: &Luma<u32>,
         points: &mut Vec<(u32, u32)>,
     ) {
         let mut next = start.left();
@@ -55,7 +61,7 @@ impl BorderFinder {
         }
     }
 
-    fn is_in_bounds(x: i32, y: i32, image: &GrayImage) -> bool {
+    fn is_in_bounds(x: i32, y: i32, image: &ImageBuffer<Luma<u32>, Vec<u32>>) -> bool {
         (x >= 0 && x < image.width() as i32) && (y >= 0 && y < image.height() as i32)
     }
 }
@@ -68,13 +74,13 @@ mod tests {
 
     #[wasm_bindgen_test]
     fn test_border_finding_with_centered_square_in_luma_image() {
-        let image = gray_image!(
+        let image = gray_image!(type: u32,
             0,   0,   0, 0;
             0, 255, 255, 0;
             0, 255, 255, 0;
             0,   0,   0, 0);
 
-        let input_foreground_color = Luma([255u8; 1]);
+        let input_foreground_color = Luma([255u32; 1]);
 
         let border = BorderFinder::find_in_image(&input_foreground_color, &image);
 

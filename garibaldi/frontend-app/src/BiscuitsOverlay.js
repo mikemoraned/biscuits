@@ -45,7 +45,6 @@ function bindBiscuitsOverlay({ biscuiting_lib, biscuiting_lib_bg }) {
   const { memory } = biscuiting_lib_bg;
 
   const BiscuitsOverlay = ({ boundingBox, featureLoader }) => {
-    const biscuitFinder = BiscuitFinder.new();
     function redraw({ width, height, ctx, isDragging, project, unproject }) {
       ctx.clearRect(0, 0, width, height);
 
@@ -63,6 +62,7 @@ function bindBiscuitsOverlay({ biscuiting_lib, biscuiting_lib_bg }) {
         .context(ctx);
 
       if (!isDragging) {
+        const biscuitFinder = BiscuitFinder.new();
         console.time("redraw: biscuits");
 
         // FIXME: logically, I want to get top left / bottom right of bounding box
@@ -159,8 +159,27 @@ function bindBiscuitsOverlay({ biscuiting_lib, biscuiting_lib_bg }) {
           biscuitBoundingBoxesColorMapPointer,
           4 * numBiscuits
         );
-        console.dir(biscuitBoundingBoxesColorMap);
-        console.timeEnd("get bounding boxes back");
+        // console.dir(biscuitBoundingBoxesColorMap);
+        console.timeEnd("get bounding boxes color map back");
+
+        console.time("get borders back");
+        const numBorders = biscuitFinder.num_borders();
+        const borderIndexesPointer = biscuitFinder.border_indexes_ptr();
+        const borderIndexes = new Uint32Array(
+          memory.buffer,
+          borderIndexesPointer,
+          numBorders
+        );
+        const numBorderPoints = biscuitFinder.num_border_points();
+        const borderPointsPointer = biscuitFinder.border_points_ptr();
+        const borderPoints = new Uint32Array(
+          memory.buffer,
+          borderPointsPointer,
+          2 * numBorderPoints
+        );
+        console.dir(borderIndexes);
+        console.dir(borderPoints);
+        console.timeEnd("get borders back");
 
         console.time("draw biscuits");
         ctx.beginPath();
@@ -174,50 +193,90 @@ function bindBiscuitsOverlay({ biscuiting_lib, biscuiting_lib_bg }) {
         ctx.fill();
 
         const sampleEvery = 1;
-        for (let biscuitNum = 0; biscuitNum < numBiscuits; biscuitNum++) {
-          if (biscuitNum % sampleEvery === 0) {
-            const offset = biscuitNum * 4;
-            const [minX, minY, maxX, maxY] = [
-              biscuitBoundingBoxes[offset + 0],
-              biscuitBoundingBoxes[offset + 1],
-              biscuitBoundingBoxes[offset + 2],
-              biscuitBoundingBoxes[offset + 3]
-            ];
-            const width = maxX - minX;
-            const height = maxY - minY;
+        // for (let biscuitNum = 0; biscuitNum < numBiscuits; biscuitNum++) {
+        //   if (biscuitNum % sampleEvery === 0) {
+        //     const offset = biscuitNum * 4;
+        //     const [minX, minY, maxX, maxY] = [
+        //       biscuitBoundingBoxes[offset + 0],
+        //       biscuitBoundingBoxes[offset + 1],
+        //       biscuitBoundingBoxes[offset + 2],
+        //       biscuitBoundingBoxes[offset + 3]
+        //     ];
+        //     const width = maxX - minX;
+        //     const height = maxY - minY;
 
-            ctx.putImageData(
-              outputImageData,
-              boundingBoxMinX * window.devicePixelRatio,
-              boundingBoxMinY * window.devicePixelRatio,
-              minX,
-              minY,
-              width,
-              height
-            );
-          }
-        }
-        for (let biscuitNum = 0; biscuitNum < numBiscuits; biscuitNum++) {
-          if (biscuitNum % sampleEvery === 0) {
-            const offset = biscuitNum * 4;
-            const [minX, minY, maxX, maxY] = [
-              biscuitBoundingBoxes[offset + 0],
-              biscuitBoundingBoxes[offset + 1],
-              biscuitBoundingBoxes[offset + 2],
-              biscuitBoundingBoxes[offset + 3]
-            ];
-            const width = maxX - minX;
-            const height = maxY - minY;
+        //     ctx.putImageData(
+        //       outputImageData,
+        //       boundingBoxMinX * window.devicePixelRatio,
+        //       boundingBoxMinY * window.devicePixelRatio,
+        //       minX,
+        //       minY,
+        //       width,
+        //       height
+        //     );
+        //   }
+        // }
+        // for (let biscuitNum = 0; biscuitNum < numBiscuits; biscuitNum++) {
+        //   if (biscuitNum % sampleEvery === 0) {
+        //     const offset = biscuitNum * 4;
+        //     const [minX, minY, maxX, maxY] = [
+        //       biscuitBoundingBoxes[offset + 0],
+        //       biscuitBoundingBoxes[offset + 1],
+        //       biscuitBoundingBoxes[offset + 2],
+        //       biscuitBoundingBoxes[offset + 3]
+        //     ];
+        //     const width = maxX - minX;
+        //     const height = maxY - minY;
+
+        //     ctx.beginPath();
+        //     ctx.strokeStyle = "red";
+        //     ctx.rect(
+        //       boundingBoxMinX + minX / window.devicePixelRatio,
+        //       boundingBoxMinY + minY / window.devicePixelRatio,
+        //       width / window.devicePixelRatio,
+        //       height / window.devicePixelRatio
+        //     );
+        //     ctx.stroke();
+        //   }
+        // }
+        for (let borderNum = 0; borderNum < numBorders; borderNum++) {
+          if (borderNum % sampleEvery === 0) {
+            let borderPointStartIndex =
+              borderNum === 0 ? 0 : borderIndexes[borderNum - 1];
+            let borderPountEndIndex = borderIndexes[borderNum];
+            // console.log(
+            //   "border num:",
+            //   borderNum,
+            //   borderPointStartIndex,
+            //   "->",
+            //   borderPountEndIndex
+            // );
+
+            let borderPointIndex = borderPointStartIndex;
+            let x =
+              boundingBoxMinX +
+              borderPoints[borderPointIndex] / window.devicePixelRatio;
+            let y =
+              boundingBoxMinY +
+              borderPoints[borderPointIndex + 1] / window.devicePixelRatio;
+            ctx.moveTo(x, y);
+            borderPointIndex += 2;
 
             ctx.beginPath();
-            ctx.strokeStyle = "red";
-            ctx.rect(
-              boundingBoxMinX + minX / window.devicePixelRatio,
-              boundingBoxMinY + minY / window.devicePixelRatio,
-              width / window.devicePixelRatio,
-              height / window.devicePixelRatio
-            );
-            ctx.stroke();
+            ctx.fillStyle = "green";
+            while (borderPointIndex < borderPountEndIndex) {
+              const x =
+                boundingBoxMinX +
+                borderPoints[borderPointIndex] / window.devicePixelRatio;
+              const y =
+                boundingBoxMinY +
+                borderPoints[borderPointIndex + 1] / window.devicePixelRatio;
+              ctx.lineTo(x, y);
+              borderPointIndex += 2;
+            }
+            ctx.fill();
+
+            borderPointStartIndex = borderPountEndIndex;
           }
         }
         console.timeEnd("draw biscuits");
