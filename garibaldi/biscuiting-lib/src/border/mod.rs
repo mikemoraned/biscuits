@@ -1,14 +1,15 @@
-use image::{ImageBuffer, Luma};
+use image::GenericImage;
 
 mod turtle;
 
 pub struct BorderFinder {}
 
 impl BorderFinder {
-    pub fn find_in_image(
-        input_foreground_color: &Luma<u32>,
-        image: &ImageBuffer<Luma<u32>, Vec<u32>>,
-    ) -> Option<Vec<u32>> {
+    pub fn find_in_image<I>(input_foreground_color: I::Pixel, image: &I) -> Option<Vec<u32>>
+    where
+        I: GenericImage,
+        I::Pixel: std::cmp::Eq,
+    {
         match BorderFinder::find_first_foreground_pixel(input_foreground_color, image) {
             Some(start) => {
                 let mut border = Vec::new();
@@ -30,27 +31,34 @@ impl BorderFinder {
         }
     }
 
-    fn find_first_foreground_pixel(
-        color: &Luma<u32>,
-        image: &ImageBuffer<Luma<u32>, Vec<u32>>,
-    ) -> Option<(u32, u32)> {
-        for (x, y, p) in image.enumerate_pixels() {
-            if p == color {
-                return Some((x, y));
+    fn find_first_foreground_pixel<I>(color: I::Pixel, image: &I) -> Option<(u32, u32)>
+    where
+        I: GenericImage,
+        I::Pixel: std::cmp::Eq,
+    {
+        for y in 0..image.width() {
+            for x in 0..image.height() {
+                let p = image.get_pixel(x, y);
+                if p == color {
+                    return Some((x, y));
+                }
             }
         }
         None
     }
 
-    fn trace_border(
+    fn trace_border<I>(
         start: turtle::Turtle,
-        image: &ImageBuffer<Luma<u32>, Vec<u32>>,
-        foreground_color: &Luma<u32>,
+        image: &I,
+        foreground_color: I::Pixel,
         points: &mut Vec<(u32, u32)>,
-    ) {
+    ) where
+        I: GenericImage,
+        I::Pixel: std::cmp::Eq,
+    {
         let mut next = start.left();
         while next != start {
-            if BorderFinder::is_in_bounds(next.x, next.y, &image)
+            if BorderFinder::is_in_bounds(next.x, next.y, image)
                 && image.get_pixel(next.x as u32, next.y as u32) == foreground_color
             {
                 points.push((next.x as u32, next.y as u32));
@@ -61,7 +69,10 @@ impl BorderFinder {
         }
     }
 
-    fn is_in_bounds(x: i32, y: i32, image: &ImageBuffer<Luma<u32>, Vec<u32>>) -> bool {
+    fn is_in_bounds<I>(x: i32, y: i32, image: &I) -> bool
+    where
+        I: GenericImage,
+    {
         (x >= 0 && x < image.width() as i32) && (y >= 0 && y < image.height() as i32)
     }
 }
@@ -70,11 +81,12 @@ impl BorderFinder {
 mod tests {
     extern crate wasm_bindgen_test;
     use super::*;
+    use image::Luma;
     use wasm_bindgen_test::*;
 
     #[wasm_bindgen_test]
     fn test_with_centered_squaree() {
-        let image = gray_image!(type: u32,
+        let mut image = gray_image!(type: u32,
             0,   0,   0, 0;
             0, 255, 255, 0;
             0, 255, 255, 0;
@@ -82,20 +94,24 @@ mod tests {
 
         let input_foreground_color = Luma([255u32; 1]);
 
-        let border = BorderFinder::find_in_image(&input_foreground_color, &image);
+        let sub_image = image.sub_image(0, 0, image.width(), image.height());
+
+        let border = BorderFinder::find_in_image(input_foreground_color, &sub_image);
 
         assert_eq!(Some(vec![1, 1, 2, 1, 2, 2, 1, 2]), border);
     }
 
     #[wasm_bindgen_test]
     fn test_with_single_pixel_in_top_left_corner() {
-        let image = gray_image!(type: u32,
-            255, 0;  
+        let mut image = gray_image!(type: u32,
+            255, 0;
               0, 0);
 
         let input_foreground_color = Luma([255u32; 1]);
 
-        let border = BorderFinder::find_in_image(&input_foreground_color, &image);
+        let sub_image = image.sub_image(0, 0, image.width(), image.height());
+
+        let border = BorderFinder::find_in_image(input_foreground_color, &sub_image);
 
         assert_eq!(Some(vec![0, 0, 0, 0]), border);
     }

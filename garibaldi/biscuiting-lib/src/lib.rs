@@ -42,7 +42,7 @@ impl BiscuitFinder {
         height: u32,
         input: Clamped<Vec<u8>>,
     ) -> Result<String, JsValue> {
-        use image::{GrayImage, Luma, SubImage};
+        use image::{GenericImage, GrayImage, Luma};
         use imageproc::definitions::Image;
         use imageproc::map::map_colors;
         use imageproc::region_labelling::{connected_components, Connectivity};
@@ -68,7 +68,7 @@ impl BiscuitFinder {
                     }
                 });
 
-                let labelled_image: Image<Luma<u32>> =
+                let mut labelled_image: Image<Luma<u32>> =
                     connected_components(&gray_image, Connectivity::Four, background_color);
                 let num_labels = (labelled_image.pixels().map(|p| p[0]).max().unwrap()) as usize;
                 console::time_end_with_label("find components");
@@ -100,10 +100,8 @@ impl BiscuitFinder {
                         bounding_box[3],
                     );
                     let sub_image =
-                        SubImage::new(&labelled_image, min_x, min_y, max_x - min_x, max_y - min_y);
-                    let border =
-                        BorderFinder::find_in_image(&foreground_color, &sub_image.to_image())
-                            .unwrap();
+                        labelled_image.sub_image(min_x, min_y, max_x - min_x, max_y - min_y);
+                    let border = BorderFinder::find_in_image(foreground_color, &sub_image).unwrap();
                     border_indexes.push(start_index + border.len());
                     start_index += border.len();
                     for chunk in border.chunks(2) {
