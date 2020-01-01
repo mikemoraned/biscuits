@@ -2,6 +2,7 @@ import React from "react";
 import { CanvasOverlay } from "react-map-gl";
 import { LngLat } from "mapbox-gl";
 import { geoPath, geoTransform } from "d3-geo";
+import { interpolateRainbow } from "d3-scale-chromatic";
 
 function geoJsonBoundsFromLngLatBounds(bounds) {
   return {
@@ -169,7 +170,8 @@ function bindBiscuitsOverlay({ biscuiting_lib, biscuiting_lib_bg }) {
             borderPointIndex += 2;
 
             ctx.beginPath();
-            ctx.fillStyle = "green";
+            const t = Math.random();
+            ctx.fillStyle = interpolateRainbow(t);
             while (borderPointIndex < borderPountEndIndex) {
               const x =
                 boundingBoxMinX +
