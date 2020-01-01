@@ -51,15 +51,11 @@ impl BiscuitFinder {
 
         let input_background_color = Rgba([255u8; 4]);
 
-        console::time_with_label("from raw input");
         match RgbaImage::from_raw(width, height, input.0) {
             Some(image) => {
-                console::time_end_with_label("from raw input");
-
                 let foreground_color = Luma([255u8; 1]);
                 let background_color = Luma([0u8; 1]);
 
-                console::time_with_label("find components");
                 let gray_image: GrayImage = map_colors(&image, |p| {
                     if p == input_background_color {
                         background_color
@@ -71,9 +67,6 @@ impl BiscuitFinder {
                 let mut labelled_image: Image<Luma<u32>> =
                     connected_components(&gray_image, Connectivity::Four, background_color);
                 let num_labels = (labelled_image.pixels().map(|p| p[0]).max().unwrap()) as usize;
-                console::time_end_with_label("find components");
-
-                console::time_with_label("finding bounding boxes");
                 let mut bounding_boxes = Vec::new();
                 bounding_boxes.resize_with(num_labels + 1, || vec![width, height, 0, 0]);
                 for (x, y, p) in labelled_image.enumerate_pixels() {
@@ -84,9 +77,6 @@ impl BiscuitFinder {
                     current_bounding_box[2] = max(x + 1, current_bounding_box[2]);
                     current_bounding_box[3] = max(y + 1, current_bounding_box[3]);
                 }
-                console::time_end_with_label("finding bounding boxes");
-
-                console::time_with_label("finding borders");
                 let mut border_indexes = Vec::with_capacity(num_labels);
                 let mut border_points = Vec::new();
                 let mut start_index: usize = 0;
@@ -113,8 +103,6 @@ impl BiscuitFinder {
                 }
                 self.border_indexes = Some(border_indexes);
                 self.border_points = Some(border_points);
-                console::time_end_with_label("finding borders");
-
                 return Ok("processed image".into());
             }
             None => {
