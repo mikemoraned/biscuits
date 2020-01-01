@@ -123,45 +123,6 @@ function bindBiscuitsOverlay({ biscuiting_lib, biscuiting_lib_bg }) {
         );
         console.timeEnd("find_biscuits");
 
-        console.time("get biscuits back");
-        const outputPointer = biscuitFinder.output_ptr();
-        const outputArray = new Uint8ClampedArray(
-          memory.buffer,
-          outputPointer,
-          4 *
-            boundingBoxWidth *
-            window.devicePixelRatio *
-            boundingBoxHeight *
-            window.devicePixelRatio
-        );
-
-        const outputImageData = new ImageData(
-          outputArray,
-          boundingBoxWidth * window.devicePixelRatio,
-          boundingBoxHeight * window.devicePixelRatio
-        );
-        console.timeEnd("get biscuits back");
-
-        console.time("get bounding boxes back");
-        const numBiscuits = biscuitFinder.num_bounding_boxes();
-        const biscuitBoundingBoxesPointer = biscuitFinder.bounding_boxes_ptr();
-        const biscuitBoundingBoxes = new Uint32Array(
-          memory.buffer,
-          biscuitBoundingBoxesPointer,
-          4 * numBiscuits
-        );
-        console.timeEnd("get bounding boxes back");
-
-        console.time("get bounding boxes color map back");
-        const biscuitBoundingBoxesColorMapPointer = biscuitFinder.bounding_boxes_color_map_ptr();
-        const biscuitBoundingBoxesColorMap = new Uint8Array(
-          memory.buffer,
-          biscuitBoundingBoxesColorMapPointer,
-          4 * numBiscuits
-        );
-        // console.dir(biscuitBoundingBoxesColorMap);
-        console.timeEnd("get bounding boxes color map back");
-
         console.time("get borders back");
         const numBorders = biscuitFinder.num_borders();
         const borderIndexesPointer = biscuitFinder.border_indexes_ptr();
@@ -177,8 +138,6 @@ function bindBiscuitsOverlay({ biscuiting_lib, biscuiting_lib_bg }) {
           borderPointsPointer,
           2 * numBorderPoints
         );
-        console.dir(borderIndexes);
-        console.dir(borderPoints);
         console.timeEnd("get borders back");
 
         console.time("draw biscuits");
@@ -193,64 +152,11 @@ function bindBiscuitsOverlay({ biscuiting_lib, biscuiting_lib_bg }) {
         ctx.fill();
 
         const sampleEvery = 1;
-        // for (let biscuitNum = 0; biscuitNum < numBiscuits; biscuitNum++) {
-        //   if (biscuitNum % sampleEvery === 0) {
-        //     const offset = biscuitNum * 4;
-        //     const [minX, minY, maxX, maxY] = [
-        //       biscuitBoundingBoxes[offset + 0],
-        //       biscuitBoundingBoxes[offset + 1],
-        //       biscuitBoundingBoxes[offset + 2],
-        //       biscuitBoundingBoxes[offset + 3]
-        //     ];
-        //     const width = maxX - minX;
-        //     const height = maxY - minY;
-
-        //     ctx.putImageData(
-        //       outputImageData,
-        //       boundingBoxMinX * window.devicePixelRatio,
-        //       boundingBoxMinY * window.devicePixelRatio,
-        //       minX,
-        //       minY,
-        //       width,
-        //       height
-        //     );
-        //   }
-        // }
-        // for (let biscuitNum = 0; biscuitNum < numBiscuits; biscuitNum++) {
-        //   if (biscuitNum % sampleEvery === 0) {
-        //     const offset = biscuitNum * 4;
-        //     const [minX, minY, maxX, maxY] = [
-        //       biscuitBoundingBoxes[offset + 0],
-        //       biscuitBoundingBoxes[offset + 1],
-        //       biscuitBoundingBoxes[offset + 2],
-        //       biscuitBoundingBoxes[offset + 3]
-        //     ];
-        //     const width = maxX - minX;
-        //     const height = maxY - minY;
-
-        //     ctx.beginPath();
-        //     ctx.strokeStyle = "red";
-        //     ctx.rect(
-        //       boundingBoxMinX + minX / window.devicePixelRatio,
-        //       boundingBoxMinY + minY / window.devicePixelRatio,
-        //       width / window.devicePixelRatio,
-        //       height / window.devicePixelRatio
-        //     );
-        //     ctx.stroke();
-        //   }
-        // }
         for (let borderNum = 0; borderNum < numBorders; borderNum++) {
           if (borderNum % sampleEvery === 0) {
             let borderPointStartIndex =
               borderNum === 0 ? 0 : borderIndexes[borderNum - 1];
             let borderPountEndIndex = borderIndexes[borderNum];
-            // console.log(
-            //   "border num:",
-            //   borderNum,
-            //   borderPointStartIndex,
-            //   "->",
-            //   borderPountEndIndex
-            // );
 
             let borderPointIndex = borderPointStartIndex;
             let x =

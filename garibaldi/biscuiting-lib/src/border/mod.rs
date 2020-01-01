@@ -73,7 +73,7 @@ mod tests {
     use wasm_bindgen_test::*;
 
     #[wasm_bindgen_test]
-    fn test_border_finding_with_centered_square_in_luma_image() {
+    fn test_with_centered_squaree() {
         let image = gray_image!(type: u32,
             0,   0,   0, 0;
             0, 255, 255, 0;
@@ -85,5 +85,18 @@ mod tests {
         let border = BorderFinder::find_in_image(&input_foreground_color, &image);
 
         assert_eq!(Some(vec![1, 1, 2, 1, 2, 2, 1, 2]), border);
+    }
+
+    #[wasm_bindgen_test]
+    fn test_with_single_pixel_in_top_left_corner() {
+        let image = gray_image!(type: u32,
+            255, 0;  
+              0, 0);
+
+        let input_foreground_color = Luma([255u32; 1]);
+
+        let border = BorderFinder::find_in_image(&input_foreground_color, &image);
+
+        assert_eq!(Some(vec![0, 0, 0, 0]), border);
     }
 }
