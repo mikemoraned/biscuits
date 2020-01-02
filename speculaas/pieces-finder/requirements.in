@@ -1,0 +1,10 @@
+Flask
+Flask-Cors
+Flask-GraphQL
+graphene
+Pillow
+rectpack
+unittest2
+honeycomb-beeline
+python-dotenv
+
