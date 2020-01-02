@@ -41,6 +41,7 @@ impl BiscuitFinder {
         width: u32,
         height: u32,
         input: Clamped<Vec<u8>>,
+        clip_borders: bool,
     ) -> Result<String, JsValue> {
         use image::{GenericImage, GrayImage, Luma};
         use imageproc::definitions::Image;
@@ -89,16 +90,21 @@ impl BiscuitFinder {
                         bounding_box[2],
                         bounding_box[3],
                     );
-                    let sub_image =
-                        labelled_image.sub_image(min_x, min_y, max_x - min_x, max_y - min_y);
-                    let border = BorderFinder::find_in_image(foreground_color, &sub_image).unwrap();
-                    border_indexes.push(start_index + border.len());
-                    start_index += border.len();
-                    for chunk in border.chunks(2) {
-                        let x = chunk[0] + min_x;
-                        let y = chunk[1] + min_y;
-                        border_points.push(x);
-                        border_points.push(y);
+                    if !(clip_borders
+                        && self.on_image_border(&labelled_image, &(min_x, min_y, max_x, max_y)))
+                    {
+                        let sub_image =
+                            labelled_image.sub_image(min_x, min_y, max_x - min_x, max_y - min_y);
+                        let border =
+                            BorderFinder::find_in_image(foreground_color, &sub_image).unwrap();
+                        border_indexes.push(start_index + border.len());
+                        start_index += border.len();
+                        for chunk in border.chunks(2) {
+                            let x = chunk[0] + min_x;
+                            let y = chunk[1] + min_y;
+                            border_points.push(x);
+                            border_points.push(y);
+                        }
                     }
                 }
                 self.border_indexes = Some(border_indexes);
@@ -140,7 +146,19 @@ impl BiscuitFinder {
     }
 }
 
+use image::Luma;
+use imageproc::definitions::Image;
 impl BiscuitFinder {
+    pub fn on_image_border(
+        &self,
+        image: &Image<Luma<u32>>,
+        bounding_box: &(u32, u32, u32, u32),
+    ) -> bool {
+        let (min_x, min_y, max_x, max_y) = *bounding_box;
+
+        min_x == 0 || min_y == 0 || max_x == image.width() - 1 || max_y == image.height() - 1
+    }
+
     pub fn border_points(&self) -> Result<Vec<u32>, String> {
         match &self.border_points {
             Some(vec) => Ok(vec.clone()),
@@ -164,7 +182,7 @@ mod tests {
             [255, 255, 255, 255], [255, 255, 255, 255]);
 
         let input = Clamped(image.to_vec());
-        let result = biscuit_finder.find_biscuits(2, 2, input);
+        let result = biscuit_finder.find_biscuits(2, 2, input, false);
 
         assert_eq!(Ok("processed image".into()), result);
 
@@ -182,7 +200,7 @@ mod tests {
             [255, 255, 255, 255], [255, 255, 255, 255]);
 
         let input = Clamped(image.to_vec());
-        let result = biscuit_finder.find_biscuits(2, 2, input);
+        let result = biscuit_finder.find_biscuits(2, 2, input, false);
 
         assert_eq!(Ok("processed image".into()), result);
 
@@ -202,7 +220,7 @@ mod tests {
             [255, 255, 255, 255], [255, 255, 255, 255], [255, 255, 255, 255], [255, 255, 255, 255]);
 
         let input = Clamped(image.to_vec());
-        let result = biscuit_finder.find_biscuits(4, 4, input);
+        let result = biscuit_finder.find_biscuits(4, 4, input, false);
 
         assert_eq!(Ok("processed image".into()), result);
 
@@ -223,7 +241,7 @@ mod tests {
             [255, 255, 255, 255], [255, 255, 255, 255], [255, 255, 255, 255], [255, 255, 255, 255], [255, 255, 255, 255]);
 
         let input = Clamped(image.to_vec());
-        let result = biscuit_finder.find_biscuits(5, 5, input);
+        let result = biscuit_finder.find_biscuits(5, 5, input, false);
 
         assert_eq!(Ok("processed image".into()), result);
 
@@ -238,5 +256,24 @@ mod tests {
             ]),
             border_points
         );
+    }
+
+    #[wasm_bindgen_test]
+    fn test_clips_bordering_biscuits() {
+        let mut biscuit_finder = BiscuitFinder::new();
+
+        let image = rgba_image!(
+            [0,     0,   0, 255], [255, 255, 255, 255], [0,     0,   0, 255];
+            [255, 255, 255, 255], [0,     0,   0, 255], [255, 255, 255, 255];
+            [0,     0,   0, 255], [255, 255, 255, 255], [0,     0,   0, 255]);
+
+        let input = Clamped(image.to_vec());
+        let result = biscuit_finder.find_biscuits(3, 3, input, true);
+
+        assert_eq!(Ok("processed image".into()), result);
+
+        assert_eq!(1, biscuit_finder.num_borders());
+        let border_points = biscuit_finder.border_points();
+        assert_eq!(Ok(vec![1, 1, 1, 1]), border_points);
     }
 }

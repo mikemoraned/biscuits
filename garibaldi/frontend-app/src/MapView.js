@@ -5,6 +5,7 @@ import { useRef, useLayoutEffect, useState } from "react";
 import ReactMapGL from "react-map-gl";
 import { LngLatBounds } from "mapbox-gl";
 import { lazyLoader } from "./BiscuitsOverlay";
+import { FeatureOverlay } from "./FeatureOverlay";
 
 const BiscuitsOverlay = React.lazy(lazyLoader);
 
@@ -106,14 +107,22 @@ export function MapView({ city }) {
         mapboxApiAccessToken={mapbox.access_token}
         onLoad={onLoad}
       >
-        <Suspense fallback={<div></div>}>
+        <>
           {reticuleBounds && featureLoader != null && (
-            <BiscuitsOverlay
+            <FeatureOverlay
               boundingBox={reticuleBounds}
               featureLoader={featureLoader}
             />
           )}
-        </Suspense>
+          <Suspense fallback={<div></div>}>
+            {reticuleBounds && featureLoader != null && (
+              <BiscuitsOverlay
+                boundingBox={reticuleBounds}
+                featureLoader={featureLoader}
+              />
+            )}
+          </Suspense>
+        </>
       </ReactMapGL>
     </div>
   );

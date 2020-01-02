@@ -120,7 +120,8 @@ function bindBiscuitsOverlay({ biscuiting_lib, biscuiting_lib_bg }) {
         biscuitFinder.find_biscuits(
           boundingBoxWidth * window.devicePixelRatio,
           boundingBoxHeight * window.devicePixelRatio,
-          inputImageData.data
+          inputImageData.data,
+          true
         );
         console.timeEnd("find_biscuits");
 
@@ -144,7 +145,7 @@ function bindBiscuitsOverlay({ biscuiting_lib, biscuiting_lib_bg }) {
         console.time("draw biscuits");
         ctx.beginPath();
         ctx.fillStyle = "black";
-        ctx.rect(
+        ctx.clearRect(
           boundingBoxMinX,
           boundingBoxMinY,
           boundingBoxWidth,
