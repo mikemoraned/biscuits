@@ -41,6 +41,9 @@ impl BiscuitFinder {
         width: u32,
         height: u32,
         input: Clamped<Vec<u8>>,
+        x_offset: u32,
+        y_offset: u32,
+        scale_down: u32,
     ) -> Result<String, JsValue> {
         use image::{GenericImage, GrayImage, Luma};
         use imageproc::definitions::Image;
@@ -95,8 +98,8 @@ impl BiscuitFinder {
                     border_indexes.push(start_index + border.len());
                     start_index += border.len();
                     for chunk in border.chunks(2) {
-                        let x = chunk[0] + min_x;
-                        let y = chunk[1] + min_y;
+                        let x = x_offset + ((chunk[0] + min_x) / scale_down);
+                        let y = y_offset + ((chunk[1] + min_y) / scale_down);
                         border_points.push(x);
                         border_points.push(y);
                     }
@@ -164,7 +167,7 @@ mod tests {
             [255, 255, 255, 255], [255, 255, 255, 255]);
 
         let input = Clamped(image.to_vec());
-        let result = biscuit_finder.find_biscuits(2, 2, input);
+        let result = biscuit_finder.find_biscuits(2, 2, input, 0, 0, 1);
 
         assert_eq!(Ok("processed image".into()), result);
 
@@ -182,7 +185,7 @@ mod tests {
             [255, 255, 255, 255], [255, 255, 255, 255]);
 
         let input = Clamped(image.to_vec());
-        let result = biscuit_finder.find_biscuits(2, 2, input);
+        let result = biscuit_finder.find_biscuits(2, 2, input, 0, 0, 1);
 
         assert_eq!(Ok("processed image".into()), result);
 
@@ -202,7 +205,7 @@ mod tests {
             [255, 255, 255, 255], [255, 255, 255, 255], [255, 255, 255, 255], [255, 255, 255, 255]);
 
         let input = Clamped(image.to_vec());
-        let result = biscuit_finder.find_biscuits(4, 4, input);
+        let result = biscuit_finder.find_biscuits(4, 4, input, 0, 0, 1);
 
         assert_eq!(Ok("processed image".into()), result);
 
@@ -223,7 +226,7 @@ mod tests {
             [255, 255, 255, 255], [255, 255, 255, 255], [255, 255, 255, 255], [255, 255, 255, 255], [255, 255, 255, 255]);
 
         let input = Clamped(image.to_vec());
-        let result = biscuit_finder.find_biscuits(5, 5, input);
+        let result = biscuit_finder.find_biscuits(5, 5, input, 0, 0, 1);
 
         assert_eq!(Ok("processed image".into()), result);
 
