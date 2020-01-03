@@ -105,7 +105,7 @@ function bindBiscuitsOverlay({ biscuiting_lib, biscuiting_lib_bg }) {
         );
         const numBorderPoints = biscuitFinder.num_border_points();
         const borderPointsPointer = biscuitFinder.border_points_ptr();
-        const borderPoints = new Uint32Array(
+        const borderPoints = new Float32Array(
           memory.buffer,
           borderPointsPointer,
           2 * numBorderPoints

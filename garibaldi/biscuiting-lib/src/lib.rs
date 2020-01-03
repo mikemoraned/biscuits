@@ -21,7 +21,7 @@ use border::BorderFinder;
 #[wasm_bindgen]
 pub struct BiscuitFinder {
     border_indexes: Option<Vec<usize>>,
-    border_points: Option<Vec<u32>>,
+    border_points: Option<Vec<f32>>,
 }
 
 use image::{Rgba, RgbaImage};
@@ -41,9 +41,9 @@ impl BiscuitFinder {
         width: u32,
         height: u32,
         input: Clamped<Vec<u8>>,
-        x_offset: u32,
-        y_offset: u32,
-        scale_down: u32,
+        x_offset: f32,
+        y_offset: f32,
+        scale_down: f32,
     ) -> Result<String, JsValue> {
         use image::{GenericImage, GrayImage, Luma};
         use imageproc::definitions::Image;
@@ -98,8 +98,8 @@ impl BiscuitFinder {
                     border_indexes.push(start_index + border.len());
                     start_index += border.len();
                     for chunk in border.chunks(2) {
-                        let x = x_offset + ((chunk[0] + min_x) / scale_down);
-                        let y = y_offset + ((chunk[1] + min_y) / scale_down);
+                        let x = x_offset + ((chunk[0] + min_x) as f32 / scale_down);
+                        let y = y_offset + ((chunk[1] + min_y) as f32 / scale_down);
                         border_points.push(x);
                         border_points.push(y);
                     }
@@ -128,7 +128,7 @@ impl BiscuitFinder {
         }
     }
 
-    pub fn border_points_ptr(&self) -> *const u32 {
+    pub fn border_points_ptr(&self) -> *const f32 {
         match &self.border_points {
             Some(vec) => vec.as_ptr(),
             None => panic!("no border points"),
@@ -144,7 +144,7 @@ impl BiscuitFinder {
 }
 
 impl BiscuitFinder {
-    pub fn border_points(&self) -> Result<Vec<u32>, String> {
+    pub fn border_points(&self) -> Result<Vec<f32>, String> {
         match &self.border_points {
             Some(vec) => Ok(vec.clone()),
             None => panic!("no border points"),
@@ -167,7 +167,7 @@ mod tests {
             [255, 255, 255, 255], [255, 255, 255, 255]);
 
         let input = Clamped(image.to_vec());
-        let result = biscuit_finder.find_biscuits(2, 2, input, 0, 0, 1);
+        let result = biscuit_finder.find_biscuits(2, 2, input, 0.0, 0.0, 1.0);
 
         assert_eq!(Ok("processed image".into()), result);
 
@@ -185,13 +185,13 @@ mod tests {
             [255, 255, 255, 255], [255, 255, 255, 255]);
 
         let input = Clamped(image.to_vec());
-        let result = biscuit_finder.find_biscuits(2, 2, input, 0, 0, 1);
+        let result = biscuit_finder.find_biscuits(2, 2, input, 0.0, 0.0, 1.0);
 
         assert_eq!(Ok("processed image".into()), result);
 
         assert_eq!(1, biscuit_finder.num_borders());
         let border_points = biscuit_finder.border_points();
-        assert_eq!(Ok(vec![0, 0, 0, 0]), border_points);
+        assert_eq!(Ok(vec![0.0, 0.0, 0.0, 0.0]), border_points);
     }
 
     #[wasm_bindgen_test]
@@ -205,13 +205,16 @@ mod tests {
             [255, 255, 255, 255], [255, 255, 255, 255], [255, 255, 255, 255], [255, 255, 255, 255]);
 
         let input = Clamped(image.to_vec());
-        let result = biscuit_finder.find_biscuits(4, 4, input, 0, 0, 1);
+        let result = biscuit_finder.find_biscuits(4, 4, input, 0.0, 0.0, 1.0);
 
         assert_eq!(Ok("processed image".into()), result);
 
         assert_eq!(1, biscuit_finder.num_borders());
         let border_points = biscuit_finder.border_points();
-        assert_eq!(Ok(vec![1, 1, 2, 1, 2, 2, 1, 2]), border_points);
+        assert_eq!(
+            Ok(vec![1.0, 1.0, 2.0, 1.0, 2.0, 2.0, 1.0, 2.0]),
+            border_points
+        );
     }
 
     #[wasm_bindgen_test]
@@ -226,7 +229,7 @@ mod tests {
             [255, 255, 255, 255], [255, 255, 255, 255], [255, 255, 255, 255], [255, 255, 255, 255], [255, 255, 255, 255]);
 
         let input = Clamped(image.to_vec());
-        let result = biscuit_finder.find_biscuits(5, 5, input, 0, 0, 1);
+        let result = biscuit_finder.find_biscuits(5, 5, input, 0.0, 0.0, 1.0);
 
         assert_eq!(Ok("processed image".into()), result);
 
@@ -234,10 +237,10 @@ mod tests {
         let border_points = biscuit_finder.border_points();
         assert_eq!(
             Ok(vec![
-                1, 1, 1, 1, //
-                3, 1, 3, 1, //
-                1, 3, 1, 3, //
-                3, 3, 3, 3, //
+                1.0, 1.0, 1.0, 1.0, //
+                3.0, 1.0, 3.0, 1.0, //
+                1.0, 3.0, 1.0, 3.0, //
+                3.0, 3.0, 3.0, 3.0, //
             ]),
             border_points
         );
