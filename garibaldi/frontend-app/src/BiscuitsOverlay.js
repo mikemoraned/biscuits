@@ -31,8 +31,8 @@ function bindBiscuitsOverlay({ biscuiting_lib, biscuiting_lib_bg }) {
       const featureRenderer = createFeatureRenderer(project, ctx);
 
       if (!isDragging) {
-        const biscuitFinder = BiscuitFinder.new();
         console.time("redraw: biscuits");
+        const biscuitFinder = BiscuitFinder.new();
 
         // FIXME: logically, I want to get top left / bottom right of bounding box
         // by asking for north west / south east points. however, that doesn't seem to
