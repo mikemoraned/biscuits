@@ -31,7 +31,7 @@ function bindBiscuitsOverlay({ biscuiting_lib, biscuiting_lib_bg }) {
       const featureRenderer = createFeatureRenderer(project, ctx);
 
       if (!isDragging) {
-        console.time("redraw: biscuits");
+        console.time("- redraw: biscuits");
         const biscuitFinder = BiscuitFinder.new();
 
         // FIXME: logically, I want to get top left / bottom right of bounding box
@@ -55,7 +55,7 @@ function bindBiscuitsOverlay({ biscuiting_lib, biscuiting_lib_bg }) {
         const boundingBoxWidth = boundingBoxMaxX - boundingBoxMinX;
         const boundingBoxHeight = boundingBoxMaxY - boundingBoxMinY;
 
-        console.time("drawing map");
+        console.time("-- drawing map");
         ctx.fillStyle = "black";
         ctx.fillRect(
           boundingBoxMinX,
@@ -73,26 +73,26 @@ function bindBiscuitsOverlay({ biscuiting_lib, biscuiting_lib_bg }) {
         featureRenderer(geoJson);
         ctx.stroke();
 
-        console.timeEnd("drawing map");
+        console.timeEnd("-- drawing map");
 
-        console.time("getImageData");
+        console.time("-- getImageData");
         const inputImageData = ctx.getImageData(
           boundingBoxMinX * window.devicePixelRatio,
           boundingBoxMinY * window.devicePixelRatio,
           boundingBoxWidth * window.devicePixelRatio,
           boundingBoxHeight * window.devicePixelRatio
         );
-        console.timeEnd("getImageData");
+        console.timeEnd("-- getImageData");
 
-        console.time("find_biscuits");
+        console.time("-- find_biscuits");
         biscuitFinder.find_biscuits(
           boundingBoxWidth * window.devicePixelRatio,
           boundingBoxHeight * window.devicePixelRatio,
           inputImageData.data
         );
-        console.timeEnd("find_biscuits");
+        console.timeEnd("-- find_biscuits");
 
-        console.time("get borders back");
+        console.time("-- get borders back");
         const numBorders = biscuitFinder.num_borders();
         const borderIndexesPointer = biscuitFinder.border_indexes_ptr();
         const borderIndexes = new Uint32Array(
@@ -107,9 +107,9 @@ function bindBiscuitsOverlay({ biscuiting_lib, biscuiting_lib_bg }) {
           borderPointsPointer,
           2 * numBorderPoints
         );
-        console.timeEnd("get borders back");
+        console.timeEnd("-- get borders back");
 
-        console.time("draw biscuits");
+        console.time("-- draw biscuits");
         ctx.beginPath();
         ctx.fillStyle = "black";
         ctx.rect(
@@ -155,9 +155,9 @@ function bindBiscuitsOverlay({ biscuiting_lib, biscuiting_lib_bg }) {
             borderPointStartIndex = borderPountEndIndex;
           }
         }
-        console.timeEnd("draw biscuits");
+        console.timeEnd("-- draw biscuits");
 
-        console.timeEnd("redraw: biscuits");
+        console.timeEnd("- redraw: biscuits");
       }
 
       ctx.lineWidth = 2;
