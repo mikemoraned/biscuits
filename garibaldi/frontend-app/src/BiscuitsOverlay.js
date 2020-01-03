@@ -1,31 +1,8 @@
 import React from "react";
 import { CanvasOverlay } from "react-map-gl";
-import { LngLat } from "mapbox-gl";
-import { geoPath, geoTransform } from "d3-geo";
 import { interpolateRainbow } from "d3-scale-chromatic";
-
-function geoJsonBoundsFromLngLatBounds(bounds) {
-  return {
-    type: "FeatureCollection",
-    features: [
-      {
-        type: "Feature",
-        geometry: {
-          type: "Polygon",
-          coordinates: [
-            [
-              bounds.getNorthEast().toArray(),
-              bounds.getSouthEast().toArray(),
-              bounds.getSouthWest().toArray(),
-              bounds.getNorthWest().toArray(),
-              bounds.getNorthEast().toArray()
-            ]
-          ]
-        }
-      }
-    ]
-  };
-}
+import { geoJsonBoundsFromLngLatBounds } from "./overlayHelpers";
+import { createFeatureRenderer } from "./featureRenderer";
 
 export function lazyLoader() {
   console.time("loading biscuiting libs");
@@ -51,20 +28,11 @@ function bindBiscuitsOverlay({ biscuiting_lib, biscuiting_lib_bg }) {
 
       const geoJsonBounds = geoJsonBoundsFromLngLatBounds(boundingBox);
 
-      const reticuleProjection = geoTransform({
-        point: function(lon, lat) {
-          const point = project(new LngLat(lon, lat).toArray());
-          this.stream.point(point[0], point[1]);
-        }
-      });
-
-      const generator = geoPath()
-        .projection(reticuleProjection)
-        .context(ctx);
+      const featureRenderer = createFeatureRenderer(project, ctx);
 
       if (!isDragging) {
+        console.time("- redraw: biscuits");
         const biscuitFinder = BiscuitFinder.new();
-        console.time("redraw: biscuits");
 
         // FIXME: logically, I want to get top left / bottom right of bounding box
         // by asking for north west / south east points. however, that doesn't seem to
@@ -87,7 +55,7 @@ function bindBiscuitsOverlay({ biscuiting_lib, biscuiting_lib_bg }) {
         const boundingBoxWidth = boundingBoxMaxX - boundingBoxMinX;
         const boundingBoxHeight = boundingBoxMaxY - boundingBoxMinY;
 
-        console.time("drawing map");
+        console.time("-- drawing map");
         ctx.fillStyle = "black";
         ctx.fillRect(
           boundingBoxMinX,
@@ -102,29 +70,29 @@ function bindBiscuitsOverlay({ biscuiting_lib, biscuiting_lib_bg }) {
         ctx.lineWidth = 1;
         ctx.beginPath();
         ctx.strokeStyle = "white";
-        generator(geoJson);
+        featureRenderer(geoJson);
         ctx.stroke();
 
-        console.timeEnd("drawing map");
+        console.timeEnd("-- drawing map");
 
-        console.time("getImageData");
+        console.time("-- getImageData");
         const inputImageData = ctx.getImageData(
           boundingBoxMinX * window.devicePixelRatio,
           boundingBoxMinY * window.devicePixelRatio,
           boundingBoxWidth * window.devicePixelRatio,
           boundingBoxHeight * window.devicePixelRatio
         );
-        console.timeEnd("getImageData");
+        console.timeEnd("-- getImageData");
 
-        console.time("find_biscuits");
+        console.time("-- find_biscuits");
         biscuitFinder.find_biscuits(
           boundingBoxWidth * window.devicePixelRatio,
           boundingBoxHeight * window.devicePixelRatio,
           inputImageData.data
         );
-        console.timeEnd("find_biscuits");
+        console.timeEnd("-- find_biscuits");
 
-        console.time("get borders back");
+        console.time("-- get borders back");
         const numBorders = biscuitFinder.num_borders();
         const borderIndexesPointer = biscuitFinder.border_indexes_ptr();
         const borderIndexes = new Uint32Array(
@@ -139,9 +107,9 @@ function bindBiscuitsOverlay({ biscuiting_lib, biscuiting_lib_bg }) {
           borderPointsPointer,
           2 * numBorderPoints
         );
-        console.timeEnd("get borders back");
+        console.timeEnd("-- get borders back");
 
-        console.time("draw biscuits");
+        console.time("-- draw biscuits");
         ctx.beginPath();
         ctx.fillStyle = "black";
         ctx.rect(
@@ -187,16 +155,16 @@ function bindBiscuitsOverlay({ biscuiting_lib, biscuiting_lib_bg }) {
             borderPointStartIndex = borderPountEndIndex;
           }
         }
-        console.timeEnd("draw biscuits");
+        console.timeEnd("-- draw biscuits");
 
-        console.timeEnd("redraw: biscuits");
+        console.timeEnd("- redraw: biscuits");
       }
 
       ctx.lineWidth = 2;
       ctx.beginPath();
       ctx.setLineDash([15, 15]);
       ctx.strokeStyle = "green";
-      generator(geoJsonBounds);
+      featureRenderer(geoJsonBounds);
       ctx.stroke();
     }
 

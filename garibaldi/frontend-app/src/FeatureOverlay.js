@@ -1,30 +1,7 @@
 import React from "react";
 import { CanvasOverlay } from "react-map-gl";
-import { LngLat } from "mapbox-gl";
-import { geoPath, geoTransform } from "d3-geo";
-
-function geoJsonBoundsFromLngLatBounds(bounds) {
-  return {
-    type: "FeatureCollection",
-    features: [
-      {
-        type: "Feature",
-        geometry: {
-          type: "Polygon",
-          coordinates: [
-            [
-              bounds.getNorthEast().toArray(),
-              bounds.getSouthEast().toArray(),
-              bounds.getSouthWest().toArray(),
-              bounds.getNorthWest().toArray(),
-              bounds.getNorthEast().toArray()
-            ]
-          ]
-        }
-      }
-    ]
-  };
-}
+import { geoJsonBoundsFromLngLatBounds } from "./overlayHelpers";
+import { createFeatureRenderer } from "./featureRenderer";
 
 export function FeatureOverlay({ boundingBox, featureLoader }) {
   function redraw({ width, height, ctx, isDragging, project, unproject }) {
@@ -37,16 +14,7 @@ export function FeatureOverlay({ boundingBox, featureLoader }) {
 
     const geoJsonBounds = geoJsonBoundsFromLngLatBounds(boundingBox);
 
-    const reticuleProjection = geoTransform({
-      point: function(lon, lat) {
-        const point = project(new LngLat(lon, lat).toArray());
-        this.stream.point(point[0], point[1]);
-      }
-    });
-
-    const generator = geoPath()
-      .projection(reticuleProjection)
-      .context(ctx);
+    const featureRenderer = createFeatureRenderer(project, ctx);
 
     if (!isDragging) {
       console.time("redraw: all");
@@ -56,7 +24,7 @@ export function FeatureOverlay({ boundingBox, featureLoader }) {
       ctx.lineWidth = 1;
       ctx.beginPath();
       ctx.strokeStyle = "blue";
-      generator(geoJson);
+      featureRenderer(geoJson);
       ctx.stroke();
       console.timeEnd("redraw: all");
     }
@@ -64,7 +32,7 @@ export function FeatureOverlay({ boundingBox, featureLoader }) {
     ctx.lineWidth = 2;
     ctx.beginPath();
     ctx.strokeStyle = "red";
-    generator(geoJsonBounds);
+    featureRenderer(geoJsonBounds);
     ctx.stroke();
   }
 
