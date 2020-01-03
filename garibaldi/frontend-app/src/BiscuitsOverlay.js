@@ -4,28 +4,7 @@ import { LngLat } from "mapbox-gl";
 import { geoPath, geoTransform } from "d3-geo";
 import { interpolateRainbow } from "d3-scale-chromatic";
 
-function geoJsonBoundsFromLngLatBounds(bounds) {
-  return {
-    type: "FeatureCollection",
-    features: [
-      {
-        type: "Feature",
-        geometry: {
-          type: "Polygon",
-          coordinates: [
-            [
-              bounds.getNorthEast().toArray(),
-              bounds.getSouthEast().toArray(),
-              bounds.getSouthWest().toArray(),
-              bounds.getNorthWest().toArray(),
-              bounds.getNorthEast().toArray()
-            ]
-          ]
-        }
-      }
-    ]
-  };
-}
+import { geoJsonBoundsFromLngLatBounds } from "./overlayHelpers";
 
 export function lazyLoader() {
   console.time("loading biscuiting libs");
