@@ -5,6 +5,7 @@ import { useRef, useLayoutEffect, useState } from "react";
 import ReactMapGL from "react-map-gl";
 import { LngLatBounds } from "mapbox-gl";
 import { lazyLoader } from "./BiscuitsOverlay";
+import { FeatureOverlay } from "./FeatureOverlay";
 
 const BiscuitsOverlay = React.lazy(lazyLoader);
 
@@ -36,6 +37,15 @@ export function MapView({ city }) {
     height: 800
   });
   const [reticuleBounds, setReticuleBounds] = useState(null);
+
+  const [
+    reticuleBoundsWaterFeatureLoader,
+    setReticuleBoundsWaterFeatureLoader
+  ] = useState(null);
+  const [
+    reticuleBoundsFeatureLoader,
+    setReticuleBoundsFeatureLoader
+  ] = useState(null);
   const [featureLoader, setFeatureLoader] = useState(null);
 
   useLayoutEffect(() => {
@@ -55,9 +65,32 @@ export function MapView({ city }) {
   }
 
   function onBoundsChanged(map) {
+    const filter = [
+      "in",
+      "class",
+      "street",
+      "pedestrian",
+      "motorway",
+      "motorway_link",
+      "path",
+      "primary",
+      "primary_link",
+      "secondary",
+      "secondary_link",
+      "tertiary",
+      "tertiary_link",
+      "track"
+    ];
     const reticule = reticuleFromMapBounds(map.getBounds());
-    setReticuleBounds(reticule);
     setFeatureLoader(() => {
+      return () => {
+        return map.queryRenderedFeatures({
+          filter
+        });
+      };
+    });
+    setReticuleBounds(reticule);
+    setReticuleBoundsWaterFeatureLoader(() => {
       return () => {
         return map.queryRenderedFeatures(
           [
@@ -65,22 +98,20 @@ export function MapView({ city }) {
             map.project(reticule.getSouthWest().toArray())
           ],
           {
-            filter: [
-              "in",
-              "class",
-              "street",
-              "pedestrian",
-              "motorway",
-              "motorway_link",
-              "path",
-              "primary",
-              "primary_link",
-              "secondary",
-              "secondary_link",
-              "tertiary",
-              "tertiary_link",
-              "track"
-            ]
+            layers: ["water"]
+          }
+        );
+      };
+    });
+    setReticuleBoundsFeatureLoader(() => {
+      return () => {
+        return map.queryRenderedFeatures(
+          [
+            map.project(reticule.getNorthEast().toArray()),
+            map.project(reticule.getSouthWest().toArray())
+          ],
+          {
+            filter
           }
         );
       };
@@ -106,14 +137,25 @@ export function MapView({ city }) {
         mapboxApiAccessToken={mapbox.access_token}
         onLoad={onLoad}
       >
-        <Suspense fallback={<div></div>}>
+        <>
+          <Suspense fallback={<div></div>}>
+            {reticuleBounds &&
+              reticuleBoundsFeatureLoader != null &&
+              reticuleBoundsWaterFeatureLoader != null && (
+                <BiscuitsOverlay
+                  boundingBox={reticuleBounds}
+                  featureLoader={reticuleBoundsFeatureLoader}
+                  waterFeatureLoader={reticuleBoundsWaterFeatureLoader}
+                />
+              )}
+          </Suspense>
           {reticuleBounds && featureLoader != null && (
-            <BiscuitsOverlay
+            <FeatureOverlay
               boundingBox={reticuleBounds}
               featureLoader={featureLoader}
             />
           )}
-        </Suspense>
+        </>
       </ReactMapGL>
     </div>
   );

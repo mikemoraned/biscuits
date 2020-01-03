@@ -21,7 +21,7 @@ export function FeatureOverlay({ boundingBox, featureLoader }) {
       const features = featureLoader();
       const geoJson = { type: "FeatureCollection", features };
 
-      ctx.lineWidth = 1;
+      ctx.lineWidth = 0.5;
       ctx.beginPath();
       ctx.strokeStyle = "blue";
       featureRenderer(geoJson);
@@ -29,7 +29,7 @@ export function FeatureOverlay({ boundingBox, featureLoader }) {
       console.timeEnd("redraw: all");
     }
 
-    ctx.lineWidth = 2;
+    ctx.lineWidth = 1;
     ctx.beginPath();
     ctx.strokeStyle = "red";
     featureRenderer(geoJsonBounds);
