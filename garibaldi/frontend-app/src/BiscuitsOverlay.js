@@ -1,10 +1,8 @@
 import React from "react";
 import { CanvasOverlay } from "react-map-gl";
-import { LngLat } from "mapbox-gl";
-import { geoPath, geoTransform } from "d3-geo";
 import { interpolateRainbow } from "d3-scale-chromatic";
-
 import { geoJsonBoundsFromLngLatBounds } from "./overlayHelpers";
+import { createFeatureRenderer } from "./featureRenderer";
 
 export function lazyLoader() {
   console.time("loading biscuiting libs");
@@ -30,16 +28,7 @@ function bindBiscuitsOverlay({ biscuiting_lib, biscuiting_lib_bg }) {
 
       const geoJsonBounds = geoJsonBoundsFromLngLatBounds(boundingBox);
 
-      const reticuleProjection = geoTransform({
-        point: function(lon, lat) {
-          const point = project(new LngLat(lon, lat).toArray());
-          this.stream.point(point[0], point[1]);
-        }
-      });
-
-      const generator = geoPath()
-        .projection(reticuleProjection)
-        .context(ctx);
+      const featureRenderer = createFeatureRenderer(project, ctx);
 
       if (!isDragging) {
         const biscuitFinder = BiscuitFinder.new();
@@ -81,7 +70,7 @@ function bindBiscuitsOverlay({ biscuiting_lib, biscuiting_lib_bg }) {
         ctx.lineWidth = 1;
         ctx.beginPath();
         ctx.strokeStyle = "white";
-        generator(geoJson);
+        featureRenderer(geoJson);
         ctx.stroke();
 
         console.timeEnd("drawing map");
@@ -175,7 +164,7 @@ function bindBiscuitsOverlay({ biscuiting_lib, biscuiting_lib_bg }) {
       ctx.beginPath();
       ctx.setLineDash([15, 15]);
       ctx.strokeStyle = "green";
-      generator(geoJsonBounds);
+      featureRenderer(geoJsonBounds);
       ctx.stroke();
     }
 
