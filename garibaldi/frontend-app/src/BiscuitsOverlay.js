@@ -88,7 +88,10 @@ function bindBiscuitsOverlay({ biscuiting_lib, biscuiting_lib_bg }) {
         biscuitFinder.find_biscuits(
           boundingBoxWidth * window.devicePixelRatio,
           boundingBoxHeight * window.devicePixelRatio,
-          inputImageData.data
+          inputImageData.data,
+          boundingBoxMinX,
+          boundingBoxMinY,
+          window.devicePixelRatio
         );
         console.timeEnd("-- find_biscuits");
 
@@ -102,7 +105,7 @@ function bindBiscuitsOverlay({ biscuiting_lib, biscuiting_lib_bg }) {
         );
         const numBorderPoints = biscuitFinder.num_border_points();
         const borderPointsPointer = biscuitFinder.border_points_ptr();
-        const borderPoints = new Uint32Array(
+        const borderPoints = new Float32Array(
           memory.buffer,
           borderPointsPointer,
           2 * numBorderPoints
@@ -128,12 +131,8 @@ function bindBiscuitsOverlay({ biscuiting_lib, biscuiting_lib_bg }) {
             let borderPountEndIndex = borderIndexes[borderNum];
 
             let borderPointIndex = borderPointStartIndex;
-            let x =
-              boundingBoxMinX +
-              borderPoints[borderPointIndex] / window.devicePixelRatio;
-            let y =
-              boundingBoxMinY +
-              borderPoints[borderPointIndex + 1] / window.devicePixelRatio;
+            let x = borderPoints[borderPointIndex];
+            let y = borderPoints[borderPointIndex + 1];
             ctx.moveTo(x, y);
             borderPointIndex += 2;
 
@@ -141,12 +140,8 @@ function bindBiscuitsOverlay({ biscuiting_lib, biscuiting_lib_bg }) {
             const t = Math.random();
             ctx.fillStyle = interpolateRainbow(t);
             while (borderPointIndex < borderPountEndIndex) {
-              const x =
-                boundingBoxMinX +
-                borderPoints[borderPointIndex] / window.devicePixelRatio;
-              const y =
-                boundingBoxMinY +
-                borderPoints[borderPointIndex + 1] / window.devicePixelRatio;
+              const x = borderPoints[borderPointIndex];
+              const y = borderPoints[borderPointIndex + 1];
               ctx.lineTo(x, y);
               borderPointIndex += 2;
             }

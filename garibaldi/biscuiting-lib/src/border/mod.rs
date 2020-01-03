@@ -13,7 +13,7 @@ impl BorderFinder {
         match BorderFinder::find_first_foreground_pixel(input_foreground_color, image) {
             Some(start) => {
                 let mut border = Vec::new();
-                border.push((start.0, start.0));
+                border.push((start.0, start.1));
                 BorderFinder::trace_border(
                     turtle::Turtle::new(start.0, start.1),
                     image,
@@ -99,6 +99,40 @@ mod tests {
         let border = BorderFinder::find_in_image(input_foreground_color, &sub_image);
 
         assert_eq!(Some(vec![1, 1, 2, 1, 2, 2, 1, 2]), border);
+    }
+
+    #[wasm_bindgen_test]
+    fn test_with_x_offset_square() {
+        let mut image = gray_image!(type: u32,
+            0,   0,   0,   0;
+            0,   0, 255, 255;
+            0,   0, 255, 255;
+            0,   0,   0,   0);
+
+        let input_foreground_color = Luma([255u32; 1]);
+
+        let sub_image = image.sub_image(0, 0, image.width(), image.height());
+
+        let border = BorderFinder::find_in_image(input_foreground_color, &sub_image);
+
+        assert_eq!(Some(vec![2, 1, 3, 1, 3, 2, 2, 2]), border);
+    }
+
+    #[wasm_bindgen_test]
+    fn test_with_y_offset_square() {
+        let mut image = gray_image!(type: u32,
+            0,   0,   0, 0;
+            0,   0,   0, 0;
+            0, 255, 255, 0;
+            0, 255, 255, 0);
+
+        let input_foreground_color = Luma([255u32; 1]);
+
+        let sub_image = image.sub_image(0, 0, image.width(), image.height());
+
+        let border = BorderFinder::find_in_image(input_foreground_color, &sub_image);
+
+        assert_eq!(Some(vec![1, 2, 2, 2, 2, 3, 1, 3]), border);
     }
 
     #[wasm_bindgen_test]
