@@ -22,7 +22,11 @@ function bindBiscuitsOverlay({ biscuiting_lib, biscuiting_lib_bg }) {
   const { BiscuitFinder } = biscuiting_lib;
   const { memory } = biscuiting_lib_bg;
 
-  const BiscuitsOverlay = ({ boundingBox, featureLoader }) => {
+  const BiscuitsOverlay = ({
+    boundingBox,
+    featureLoader,
+    waterFeatureLoader
+  }) => {
     function redraw({ width, height, ctx, isDragging, project, unproject }) {
       ctx.clearRect(0, 0, width, height);
 
@@ -64,9 +68,26 @@ function bindBiscuitsOverlay({ biscuiting_lib, biscuiting_lib_bg }) {
           boundingBoxHeight
         );
 
+        const waterFeatures = waterFeatureLoader();
+        const waterGeoJson = {
+          type: "FeatureCollection",
+          features: waterFeatures
+        };
         const features = featureLoader();
         const geoJson = { type: "FeatureCollection", features };
 
+        ctx.beginPath();
+        let clip = new Path2D();
+        clip.rect(
+          boundingBoxMinX,
+          boundingBoxMinY,
+          boundingBoxWidth,
+          boundingBoxHeight
+        );
+        ctx.clip(clip);
+        ctx.fillStyle = "white";
+        featureRenderer(waterGeoJson);
+        ctx.fill();
         ctx.lineWidth = 1;
         ctx.beginPath();
         ctx.strokeStyle = "white";
@@ -113,15 +134,12 @@ function bindBiscuitsOverlay({ biscuiting_lib, biscuiting_lib_bg }) {
         console.timeEnd("-- get borders back");
 
         console.time("-- draw biscuits");
-        ctx.beginPath();
-        ctx.fillStyle = "black";
-        ctx.rect(
+        ctx.clearRect(
           boundingBoxMinX,
           boundingBoxMinY,
           boundingBoxWidth,
           boundingBoxHeight
         );
-        ctx.fill();
 
         const sampleEvery = 1;
         for (let borderNum = 0; borderNum < numBorders; borderNum++) {
