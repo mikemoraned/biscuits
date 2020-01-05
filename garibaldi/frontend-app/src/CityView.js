@@ -10,6 +10,17 @@ export function CityView({ service }) {
   if (city) {
     return <MapView city={city} />;
   } else {
-    return <div>Loading {name}</div>;
+    return (
+      <div
+        style={{
+          height: "100vh",
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center"
+        }}
+      >
+        Loading {name}
+      </div>
+    );
   }
 }
