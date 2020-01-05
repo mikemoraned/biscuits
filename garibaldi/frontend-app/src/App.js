@@ -24,11 +24,19 @@ function App() {
     <MapBoxContextProviderFromEnvironment>
       <div className="App container is-fluid">
         <div className="columns">
-          <div className="column is-one-quarter ">
-            <CitySelector />
-          </div>
           <div className="column city-view">
-            {cityService && <CityView service={cityService} />}
+            <>
+              {cityService && <CityView service={cityService} />}
+              <div
+                style={{
+                  position: "fixed",
+                  top: "0px",
+                  padding: "10px"
+                }}
+              >
+                <CitySelector initiallyOpen={true} />
+              </div>
+            </>
           </div>
         </div>
       </div>

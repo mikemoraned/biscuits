@@ -1,77 +1,59 @@
 import React from "react";
+import { useState } from "react";
 import { useService } from "@xstate/react";
-import { CityItem } from "./CityItem";
 import { service } from "./Machine";
-import styles from "./CitySelector.module.scss";
 
-function LoadingCityNames() {
-  return (
-    <select>
-      <option>Loading cities</option>
-    </select>
-  );
+function useToggle(initialValue) {
+  const [value, setValue] = useState(initialValue);
+
+  function toggle() {
+    setValue(!value);
+  }
+
+  return [value, toggle];
 }
 
-function CityNames({ cities, selectedName }) {
-  // eslint-disable-next-line no-unused-vars
+export function CitySelector({ initiallyOpen }) {
   const [current, send] = useService(service);
-  return (
-    <select
-      value={selectedName}
-      onChange={e => {
-        send("SELECT", { name: e.target.value });
-      }}
-    >
-      <option disabled selected>
-        Select city
-      </option>
-      <>
-        {cities.map(({ name }) => {
-          return (
-            <option value={name} key={name}>
-              {name}
-            </option>
-          );
-        })}
-      </>
-    </select>
-  );
-}
+  const { cities } = current.context;
 
-function CityItems({ cities, send }) {
+  const [active, toggleActive] = useToggle(initiallyOpen);
   return (
-    <div className="is-hidden-mobile location-list">
-      {cities.map(city => {
-        return (
-          <CityItem
-            city={city}
-            key={city.name}
-            className={styles.item}
-            loadCallback={() => {
-              send("SELECT", { name: city.name });
-            }}
-          />
-        );
-      })}
-    </div>
-  );
-}
-
-export function CitySelector() {
-  const [current, send] = useService(service);
-  const loading = current.matches("loading");
-  const { selectedName, cities } = current.context;
-
-  return (
-    <div className="columns location-selector">
-      <div className="column">
-        <div className={`select is-medium ${loading ? "is-loading" : ""}`}>
-          {loading && <LoadingCityNames />}
-          {!loading && (
-            <CityNames cities={cities} selectedName={selectedName} />
-          )}
-        </div>
-        {!loading && <CityItems cities={cities} send={send} />}
+    <div className={`dropdown ${active ? "is-active" : ""}`}>
+      <div className="dropdown-trigger">
+        <button
+          className={`button ${cities.length === 0 ? "is-loading" : ""}`}
+          onClick={toggleActive}
+        >
+          <span>Select City</span>
+          <span className="icon is-small">
+            <i className="fas fa-angle-down" aria-hidden="true"></i>
+          </span>
+        </button>
+      </div>
+      <div className="dropdown-menu" id="dropdown-menu" role="menu">
+        {cities.length > 0 && (
+          <div
+            className="dropdown-content"
+            style={{ maxHeight: "12.1em", overflow: "auto" }}
+          >
+            {cities.map(city => {
+              function onClick() {
+                toggleActive();
+                send("SELECT", { name: city.name });
+              }
+              return (
+                <button
+                  className="button dropdown-item"
+                  onClick={onClick}
+                  key={city.name}
+                >
+                  <span>{city.name}</span>
+                </button>
+              );
+            })}
+          </div>
+        )}
       </div>
     </div>
   );

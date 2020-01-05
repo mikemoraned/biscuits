@@ -35,8 +35,7 @@ function invokeFetchCities() {
   return new Promise(function(resolve, reject) {
     setTimeout(() => {
       resolve(cities);
-      // }, 2000);
-    }, 0);
+    }, 2000);
   });
 }
 
