@@ -1,4 +1,0 @@
-[build]
-  base    = "garibaldi/frontend-app/"
-  publish = "garibaldi/frontend-app/build"
-  command = "npm run build"
