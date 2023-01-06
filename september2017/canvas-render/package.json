@@ -6,7 +6,7 @@
     "d3-interpolate": "^1.1.5",
     "react": "^15.6.1",
     "react-dom": "^15.6.1",
-    "react-scripts": "1.0.13",
+    "react-scripts": "5.0.1",
     "underscore": "^1.8.3"
   },
   "scripts": {
