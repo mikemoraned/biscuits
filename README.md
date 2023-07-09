@@ -4,6 +4,29 @@ This is a side project for playing with automatically destructuring
 cities in a similarish way to that done by the artist Armelle Caron,
 see http://www.armellecaron.fr/works/les-villes-rangees/.
 
+The following is what you could probably a "dev blog".
+
+## Summer 2023
+
+(following written in press-release style ahead of time)
+
+It's now six years I've been working on this, on-and-off. Wow.
+
+This is one of those projects that I keep coming back to but never quite "completing". Partly this is because such a project can't really ever be completed; it's not that simple. However it's also because I keep on getting distracted by other things, or I leave something done in a half-assed state such that it can't be built-upon further.
+
+Take the example of the map decomposition code I wrote. This works by turning a map of a city into an image, then applying image algorithms to find connected components, and finally turning those components back into geo objects again.
+
+This works in _my_ browser, but is dependent in subtle ways on details of how a map is rendered on different screen resolutions. What happens is that on lower resolutions the connected components end up blurring into each other, and joining together, so leading to one big chunk for the entire map.
+
+If I want to depend on these building blocks for other more interesting things, I need to make them more robust.
+
+This summer, I've taken a different tack. I still needed to be realistic about how much time I can spend on this; it's not my main job after all. However, I wanted to leave things in a state I can build on later.
+
+So, I focussed on:
+
+- (x) rewriting the core map decomposition code, so that it works in a way which is not dependent on details of screen resolutions
+- (x) re-integrating this into the Garibaldi website, and testing it works on different screen resolutions
+
 ## August 2019: Garibaldi
 
 Where I got to with Speculaas was great to get an idea with what can be done with automatic layouts based
